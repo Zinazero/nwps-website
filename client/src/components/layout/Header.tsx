@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export const Header = () => {
 	const location = useLocation();
@@ -58,7 +59,7 @@ export const Header = () => {
 								>
 									{link.label}
 									<FontAwesomeIcon
-										icon='chevron-down'
+										icon={faChevronDown}
 										className='text-lg ml-2'
 									/>
 									{location.pathname.includes(link.to) && (

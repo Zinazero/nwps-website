@@ -3,6 +3,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 
 import { imageArray } from '../../../../assets/distributors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 export const AuthorizedDistributor = () => {
 	console.log(imageArray);
@@ -23,10 +24,10 @@ export const AuthorizedDistributor = () => {
 					className='w-full max-w-400 h-50 rounded-2xl shadow-lg'
 				>
 					<div className='custom-prev absolute left-0 top-0 z-10 text-3xl text-brand-orange cursor-pointer bg-transparent-grey/30 h-full flex items-center group'>
-						<FontAwesomeIcon icon='chevron-left' className='group-hover:scale-120 active:scale-100 transition' />
+						<FontAwesomeIcon icon={faChevronLeft} className='group-hover:scale-120 active:scale-100 transition' />
 					</div>
 					<div className='custom-next absolute right-0 top-0 z-10 text-3xl text-brand-orange cursor-pointer bg-transparent-grey/30 h-full flex items-center group'>
-						<FontAwesomeIcon icon='chevron-right' className='group-hover:scale-120 active:scale-100 transition' />
+						<FontAwesomeIcon icon={faChevronRight} className='group-hover:scale-120 active:scale-100 transition' />
 					</div>
 
 					{imageArray.map((src, i) => (
