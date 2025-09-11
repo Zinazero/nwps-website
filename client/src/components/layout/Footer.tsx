@@ -31,7 +31,7 @@ export const Footer = () => {
 	return (
 		<footer className='text-white'>
 			<div
-				className='relative bg-center bg-black/85 p-2 min-h-150'
+				className='relative bg-center bg-black/85 p-2 flex flex-col items-center'
 				style={{ backgroundImage: `url(${footerBackground})` }}
 			>
 				{/* Top Border */}
@@ -42,9 +42,9 @@ export const Footer = () => {
 				</div>
 
 				{/* Footer Content */}
-				<div className='flex mt-6'>
+				<div className='flex my-6'>
 					{/* Section 1 */}
-					<div className='flex flex-col px-8 space-y-10 w-1/4'>
+					<div className='flex flex-col px-8 pb-20 space-y-10 w-1/4'>
 						<img src={nwpsVerticalLogo} alt='NWPS Logo' className='h-42' />
 						<div className='flex flex-col space-y-6'>
 							<span>
@@ -158,6 +158,7 @@ export const Footer = () => {
 						</form>
 					</div>
 				</div>
+                <span className='text-brand-orange'>© 2025 | New World Park Solutions | All Rights Reserved</span>
 			</div>
 		</footer>
 	);
