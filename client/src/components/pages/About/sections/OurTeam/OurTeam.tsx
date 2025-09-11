@@ -42,7 +42,7 @@ export const OurTeam = () => {
 				<div className='grid grid-cols-2'>
 					{profiles.map((profile, i) => (
 						<div
-							className={`flex flex-col items-center text-center p-4 ${
+							className={`max-w-200 flex flex-col items-center text-center p-4 ${
 								i % 2 !== 0 ? 'border-l border-transparent-grey' : ''
 							}`}
 						>
