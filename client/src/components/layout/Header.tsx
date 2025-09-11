@@ -2,15 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import type { LinkType } from './types';
 
 export const Header = () => {
 	const location = useLocation();
-
-	type LinkType = {
-		label: string;
-		to: string;
-		isDropdown?: boolean;
-	};
 
 	const links: LinkType[] = [
 		{ label: 'Home', to: '/' },
@@ -95,7 +90,7 @@ export const Header = () => {
 
 					<Link
 						to='/quote'
-						className='p-4 rounded-lg cursor-pointer bg-brand-orange text-white hover:bg-brand-blue transition'
+						className='p-4 rounded-lg cursor-pointer bg-brand-orange text-white font-bold hover:bg-brand-blue transition'
 					>
 						Request a Quote
 					</Link>
