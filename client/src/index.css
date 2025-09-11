@@ -22,11 +22,34 @@
 
   --color-light: #f6f6f6;
 	--color-dark: #282c31;
-  --brand: rgb(241, 91, 49);
-  --brand-contrast: rgb(196, 226, 252);
-  --brand-hover: #00589c;
+  --color-brand-orange: rgb(241, 91, 49);
+  --color-brand-green: rgb(186, 183, 13);
+  --color-brand-blue: #00589c;
+  --color-brand-blue-light: rgb(196, 226, 252);
 
 
 	--font-inter: 'Inter', sans-serif;
 	--font-source: 'Source Serif 4', serif;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	user-select: text;
+}
+
+img {
+	user-select: none;
+}
+
+p {
+	font-family: 'Source Serif 4', serif;
 }
