@@ -13,7 +13,7 @@ export const PlayworldSection = () => {
 					</h3>
 					<Link
 						to='/playworld'
-						className='rounded-lg p-2 bg-brand-orange text-light w-1/4 text-center hover:bg-brand-blue transition'
+						className='rounded-lg p-2 bg-brand-orange text-light font-semibold w-1/4 text-center hover:bg-brand-blue transition'
 					>
 						Learn More
 					</Link>

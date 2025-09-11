@@ -68,7 +68,7 @@ export const RecentProjects = () => {
 					</Link>
 				</div>
 			</div>
-			<div className='max-w-300 xl:mx-auto mx-20 rounded-2xl shadow-2xl bg-brand-blue-light mb-10 p-12 flex items-center'>
+			<div className='max-w-300 xl:mx-auto mx-20  mb-20 rounded-2xl shadow-2xl bg-brand-blue-light p-12 flex items-center'>
 				<img
 					src={nwpsVerticalLogo}
 					alt='NWPS Logo'

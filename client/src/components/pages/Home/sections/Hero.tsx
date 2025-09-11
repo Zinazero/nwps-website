@@ -18,7 +18,7 @@ export const Hero = () => {
 					<h4 className='text-2xl'>Building Worlds of Fun</h4>
 					<Link
 						to='products'
-						className='rounded-lg p-2 bg-brand-blue text-light w-3/4 text-center hover:bg-brand-orange transition'
+						className='rounded-lg p-2 bg-brand-blue text-light font-semibold w-3/4 text-center hover:bg-brand-orange transition'
 					>
 						See Our Products
 					</Link>
