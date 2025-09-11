@@ -5,14 +5,15 @@ import { About } from './components/pages/About';
 import { Portfolio } from './components/pages/Portfolio';
 import { Products } from './components/pages/Products';
 import { Testimonials } from './components/pages/Testimonials';
-import { Playgrounds } from './components/pages/products/Playgrounds';
-import { SafetySurfacing } from './components/pages/products/SafetySurfacing';
-import { SportsAndOutdoorFitness } from './components/pages/products/SportsAndOutdoorFitness';
-import { ParkAmenities } from './components/pages/products/ParkAmenities';
-import { ParkShelters } from './components/pages/products/ParkShelters';
-import { ElectronicPlay } from './components/pages/products/ElectronicPlay';
-import { WaterPlay } from './components/pages/products/WaterPlay';
+import { Playgrounds } from './components/pages/Products/Playgrounds';
+import { SafetySurfacing } from './components/pages/Products/SafetySurfacing';
+import { SportsAndOutdoorFitness } from './components/pages/Products/SportsAndOutdoorFitness';
+import { ParkAmenities } from './components/pages/Products/ParkAmenities';
+import { ParkShelters } from './components/pages/Products/ParkShelters';
+import { ElectronicPlay } from './components/pages/Products/ElectronicPlay';
+import { WaterPlay } from './components/pages/Products/WaterPlay';
 import { Playworld } from './components/pages/Playworld';
+import { Footer } from './components/layout/Footer';
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 				<Route path='/testimonials' element={<Testimonials />} />
 				<Route path='/playworld' element={<Playworld />} />
 			</Routes>
+			<Footer />
 		</>
 	);
 }
