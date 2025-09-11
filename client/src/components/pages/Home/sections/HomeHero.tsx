@@ -3,7 +3,7 @@ import videoThumbnail from '@/assets/images/generic/video-thumbnail.jpg';
 
 export const Hero = () => {
 	return (
-		<section id='hero'>
+		<section id='home-hero'>
 			<div className='flex items-center justify-evenly p-20'>
 				<img
 					decoding='async'
