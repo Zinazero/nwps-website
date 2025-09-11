@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
+import nwpsLogo from '@/assets/logos/nwps-logo.svg';
+
 export const Header = () => {
 	const location = useLocation();
 
@@ -35,20 +37,20 @@ export const Header = () => {
 			<div className='mx-auto px-4 flex items-center justify-between'>
 				<Link to='/'>
 					<img
-						src='nwps-logo.svg'
+						src={nwpsLogo}
 						alt='NWPS Logo'
 						className='h-16 cursor-pointer'
 						draggable={false}
 					/>
 				</Link>
 
-				<nav className='hidden md:flex items-center xl:space-x-20 space-x-10 text-2xl font-medium'>
+				<nav className='hidden md:flex items-center xl:space-x-20 space-x-10 text-xl font-medium'>
 					{links.map((link: LinkType) =>
 						link.isDropdown ? (
 							<div key={link.label} className='relative group'>
 								<Link
 									to={link.to}
-									className={`hover:text-brand-orange transition relative bg-transparent border-none outline-none cursor-pointer flex items-center ${
+									className={`hover:text-brand-orange transition relative bg-transparent border-none outline-none cursor-pointer flex items-center font-bold ${
 										location.pathname.includes(link.to)
 											? 'text-brand-orange'
 											: ''
@@ -78,7 +80,7 @@ export const Header = () => {
 							<Link
 								key={link.label}
 								to={link.to}
-								className={`hover:text-brand-orange transition bg-transparent border-none outline-none cursor-pointer relative ${
+								className={`hover:text-brand-orange transition bg-transparent border-none outline-none cursor-pointer relative font-bold ${
 									location.pathname === link.to ? 'text-brand-orange' : ''
 								}`}
 							>
@@ -89,86 +91,13 @@ export const Header = () => {
 							</Link>
 						)
 					)}
-					{/*
-					<Link
-						to="/"
-						className='hover:text-brand-orange transition relative bg-transparent border-none outline-none cursor-pointer flex items-center'
-					>
-						Home
-						<hr className='absolute w-full top-full mt-2 text-orange' />
-					</Link>
 
 					<Link
-						to="/about"
-						className='hover:text-brand-orange transition bg-transparent border-none outline-none cursor-pointer'
-					>
-						About
-					</Link>
-
-					<Link
-						to="/portfolio"
-						className='hover:text-brand-orange transition bg-transparent border-none outline-none cursor-pointer'
-					>
-						Portfolio
-					</Link>
-
-					<div className='relative group'>
-						<Link
-							to="/products"
-							className='hover:text-brand-orange transition relative bg-transparent border-none outline-none cursor-pointer flex items-center'
-						>
-							Products
-							<FontAwesomeIcon icon='chevron-down' className='text-lg ml-2' />
-						</Link>
-						<ul className='absolute w-60 left-0 my-2 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity overflow-hidden'>
-							<li className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'>
-								Playgrounds
-							</li>
-
-							<li className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'>
-								Safety Surfacing
-							</li>
-
-							<li className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'>
-								Sports and Outdoor Fitness
-							</li>
-
-							<li className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'>
-								Park Amenities
-							</li>
-
-							<li className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'>
-								Park Shelters
-							</li>
-
-							<li className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'>
-								Electronic Play
-							</li>
-
-							<li className='px-4 py-2 cursor-pointer hover:text-brand-orange transition'>
-								Water Play
-							</li>
-						</ul>
-					</div>
-
-					<Link
-						to="#testimonials"
-						className='hover:text-brand-orange transition bg-transparent border-none outline-none cursor-pointer'
-						onClick={e => {
-							e.preventDefault();
-							document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' });
-						}}
-					>
-						Testimonials
-					</Link>
-
-					<Link
-						to="/quote"
+						to='/quote'
 						className='p-4 rounded-lg cursor-pointer bg-brand-orange text-white hover:bg-brand-blue transition'
 					>
 						Request a Quote
-					</Link> 
-                    */}
+					</Link>
 				</nav>
 			</div>
 		</header>
