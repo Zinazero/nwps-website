@@ -8,19 +8,21 @@ export const RecentProjects = () => {
 	return (
 		<section id='recent-projects'>
 			<div className='flex flex-col max-w-400 mx-auto px-20 py-14 space-y-10'>
-				<div className='flex items-center w-full'>
-					<h2 className='text-5xl font-bold text-nowrap mr-6'>
-						Recent Projects
-					</h2>
-					<hr className='w-full text-brand-orange' />
-				</div>
+				<Link to='/projects'>
+					<div className='flex items-center w-full group'>
+						<h2 className='text-5xl font-bold text-nowrap mr-6 group-hover:translate-x-4 transition'>
+							Recent Projects
+						</h2>
+						<hr className='w-full text-brand-orange group-hover:translate-x-4 transition' />
+					</div>
+				</Link>
 				<div className='grid grid-cols-3 gap-10 text-center'>
 					<Link to='/portfolio'>
-						<div className='flex flex-col'>
+						<div className='flex flex-col group'>
 							<img
 								src={goreMeadows}
 								alt='Gore Meadows Park Playground'
-								className='rounded-lg shadow-md'
+								className='rounded-lg shadow-md group-hover:scale-110 transition'
 							/>
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Gore Meadows Park
@@ -33,11 +35,11 @@ export const RecentProjects = () => {
 						</div>
 					</Link>
 					<Link to='/portfolio'>
-						<div className='flex flex-col'>
+						<div className='flex flex-col group'>
 							<img
 								src={captainCornelius}
 								alt='Captain Cornelius Park Playground'
-								className='rounded-lg shadow-md'
+								className='rounded-lg shadow-md group-hover:scale-110 transition'
 							/>
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Captain Cornelius Park
@@ -50,11 +52,11 @@ export const RecentProjects = () => {
 						</div>
 					</Link>
 					<Link to='/portfolio'>
-						<div className='flex flex-col'>
+						<div className='flex flex-col group'>
 							<img
 								src={happyRolphs}
 								alt='Happy Rolphs Animal Farm Playground'
-								className='rounded-lg shadow-md'
+								className='rounded-lg shadow-md group-hover:scale-110 transition'
 							/>
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Happy Rolph's Animal Farm
@@ -76,10 +78,17 @@ export const RecentProjects = () => {
 					draggable={false}
 				/>
 				<div className='flex-1 flex flex-col items-center gap-6'>
-					<p className='text-4xl text-brand-orange'>Not sure which product to choose?</p>
+					<p className='text-4xl text-brand-orange'>
+						Not sure which product to choose?
+					</p>
 					<div className='flex gap-2 text-4xl font-bold'>
 						<h3 className='text-brand-blue'>{'Call Us (519) 304-3437 or'}</h3>
-						<Link to='/contact' className='text-white hover:text-brand-orange transition'>Get In Touch</Link>
+						<Link
+							to='/contact'
+							className='text-white hover:text-brand-orange transition'
+						>
+							Get In Touch
+						</Link>
 					</div>
 				</div>
 			</div>
