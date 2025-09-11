@@ -22,7 +22,7 @@ export const SquigglyFrame: React.FC<SquigglyFrameProps> = ({
 				backgroundColor: '#fff',
 				mask: `url(${maskUrl})`,
 				WebkitMask: `url(${maskUrl})`,
-                WebkitMaskComposite: 'destination-in',
+				WebkitMaskComposite: 'destination-in',
 				maskRepeat: 'no-repeat',
 				WebkitMaskRepeat: 'no-repeat',
 				maskSize: 'contain',

@@ -5,12 +5,12 @@ import wendy from '@/assets/images/team/wendy-hudgins.jpg';
 import mark from '@/assets/images/team/mark-jones.jpg';
 
 export const OurTeam = () => {
-	type Profile = {
+	interface Profile {
 		image: string;
 		name: string;
 		title: string;
 		blurb: string;
-	};
+	}
 
 	const profiles: Profile[] = [
 		{ image: mike, name: 'Mike Hexamer', title: 'President', blurb: MikeBlurb },
@@ -41,7 +41,11 @@ export const OurTeam = () => {
 				<h2 className='text-5xl font-bold p-10'>Our Team</h2>
 				<div className='grid grid-cols-2'>
 					{profiles.map((profile, i) => (
-						<div className={`flex flex-col items-center text-center p-4 ${i % 2 !== 0 ? 'border-l border-transparent-grey' : ''}`}>
+						<div
+							className={`flex flex-col items-center text-center p-4 ${
+								i % 2 !== 0 ? 'border-l border-transparent-grey' : ''
+							}`}
+						>
 							<div className='w-64 h-64 overflow-hidden relative rounded-lg'>
 								<img
 									src={profile.image}
