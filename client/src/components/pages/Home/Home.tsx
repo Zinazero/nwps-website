@@ -1,4 +1,5 @@
 import { Hero } from './sections/Hero';
+import { PlaygroundStats } from './sections/PlaygroundStats';
 import { PlayworldSection } from './sections/PlayworldSection';
 import { RecentProjects } from './sections/RecentProjects';
 import { TestimonialSection } from './sections/TestimonialSection';
@@ -13,6 +14,8 @@ export const Home = () => {
 			<RecentProjects />
 
 			<TestimonialSection />
+
+			<PlaygroundStats />
 		</main>
 	);
 };

@@ -3,7 +3,7 @@ import testimonialImage from '@/assets/images/generic/testimonial-image.jpg';
 
 export const TestimonialSection = () => {
 	return (
-		<section id='testimonial'>
+		<section id='testimonial' className='shadow-md'>
 			<div
 				className='relative bg-cover bg-center px-[40px]'
 				style={{ backgroundImage: `url(${testimonialImage})` }}
