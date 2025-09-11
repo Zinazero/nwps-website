@@ -42,7 +42,7 @@ export const Playworld = () => {
 						</div>
 					</a>
 					<Link
-						to='/products'
+						to='/contact'
 						className='w-1/2 p-6 bg-brand-blue text-light rounded-lg text-xl font-semibold'
 					>
 						I'M INTERESTED IN THIS PRODUCT

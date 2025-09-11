@@ -89,7 +89,7 @@ export const Header = () => {
 					)}
 
 					<Link
-						to='/quote'
+						to='/contact'
 						className='p-4 rounded-lg cursor-pointer bg-brand-orange text-white font-bold hover:bg-brand-blue transition'
 					>
 						Request a Quote

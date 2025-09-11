@@ -128,7 +128,7 @@ export const Footer = () => {
 							<div className='w-10 border-b-2 border-brand-orange border-dotted mt-3'></div>
 						</div>
 						<Link
-							to='/quote'
+							to='/contact'
 							className='p-3 rounded-lg cursor-pointer bg-brand-orange text-xl text-white font-bold hover:bg-brand-blue transition text-center'
 						>
 							Request a Quote
