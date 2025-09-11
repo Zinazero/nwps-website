@@ -23,9 +23,10 @@
 
 	--color-light: #f6f6f6;
 	--color-dark: #282c31;
-	--color-brand-orange: rgb(241, 91, 49);
-	--color-brand-green: rgb(186, 183, 13);
+	--color-brand-orange: #f15b31;
+	--color-brand-green: #cdda29;
 	--color-brand-blue: #00589c;
+	--color-brand-red: #ee3972;
 	--color-brand-blue-light: rgb(196, 226, 252);
 
 	--font-nunito: 'Nunito', sans-serif;

@@ -4,7 +4,7 @@ import playworldLogo from '@/assets/logos/pw-logo.svg';
 
 export const PlayworldSection = () => {
 	return (
-		<section id='playworld' className='bg-brand-blue-light'>
+		<section id='playworld' className='bg-brand-blue-light shadow-md'>
 			<div className='flex justify-center p-10'>
 				<div className='w-140 flex flex-col justify-between'>
 					<img src={playworldLogo} alt='Playworld Logo' className='w-70' />
