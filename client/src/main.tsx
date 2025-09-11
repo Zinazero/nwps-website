@@ -3,10 +3,10 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { faChevronUp, faChevronRight, faChevronDown, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { BrowserRouter } from 'react-router-dom';
 
-library.add(faChevronDown);
+library.add(faChevronUp, faChevronRight, faChevronDown, faChevronLeft);
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>

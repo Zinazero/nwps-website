@@ -1,3 +1,4 @@
+import { AuthorizedDistributor } from './sections/AuthorizedDistributor';
 import { Hero } from './sections/Hero';
 import { PlaygroundStats } from './sections/PlaygroundStats';
 import { PlayworldSection } from './sections/PlayworldSection';
@@ -16,6 +17,8 @@ export const Home = () => {
 			<TestimonialSection />
 
 			<PlaygroundStats />
+
+			<AuthorizedDistributor />
 		</main>
 	);
 };

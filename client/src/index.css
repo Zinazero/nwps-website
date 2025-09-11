@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import '@fontsource/nunito';
 @import '@fontsource/archivo';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 
 @theme {
 	--color-blue: #1485ff;
