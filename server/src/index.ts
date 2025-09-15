@@ -1,20 +1,21 @@
-import express from "express";
-import path from "path";
+import express from 'express';
+import path from 'path';
+import parksRouter from './routes/parks';
 
 const app = express();
 const PORT = process.env.PORT || 3004;
 
-// API route example
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
-});
+if (process.env.NODE_ENV === "production") {
+  const clientDistPath = path.join(__dirname, "../../client/dist");
+  app.use(express.static(clientDistPath));
 
-// In production, serve the built client
-app.use(express.static(path.join(__dirname, "../../client/dist")));
-app.get(/^\/(?!api\/).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-});
+  app.get(/^\/(?!api\/).*/, (req, res) => {
+    res.sendFile(path.join(clientDistPath, "index.html"));
+  });
+}
+
+app.use('/api/parks', parksRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+	console.log(`Server running on http://localhost:${PORT}`);
 });

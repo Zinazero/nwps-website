@@ -1,76 +1,88 @@
+import { Link } from 'react-router-dom';
 import { UnderlineHeader } from '../../ui/UnderlineHeader';
-import farrowRiverside from '/images/playgrounds/farrow-riverside-miracle-league-park/farrow-riverside-miracle-league-park-1.jpg';
-import goreMeadows from '/images/playgrounds/gore-meadows-park/gore-meadows-park-1.jpg';
-import rbjSchlegel from '/images/playgrounds/rbj-schlegel-park/rbj-schlegel-park-1.jpg';
-import churchillPark from '/images/playgrounds/churchill-park/churchill-park-1.jpg';
-import happyRolphs from '/images/playgrounds/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg';
-import johnMcGivney from '/images/playgrounds/john-mcgivney-childrens-centre/john-mcgivney-childrens-centre-1.jpg';
-import captainCornelius from '/images/playgrounds/captain-cornelius-park/captain-cornelius-park-1.jpg';
-import mohawkPark from '/images/playgrounds/mohawk-park/mohawk-park-1.jpg';
-import kiwanisPark from '/images/playgrounds/kiwanis-park/kiwanis-park-1.jpg';
-import delcrestPark from '/images/playgrounds/delcrest-park/delcrest-park-1.jpg';
-import johnGamble from '/images/playgrounds/john-gamble-park/john-gamble-park-1.jpg';
-import duncanFerguson from '/images/playgrounds/duncan-ferguson-park/duncan-ferguson-park-1.jpg';
 
 export const Portfolio = () => {
 	interface PortfolioItem {
 		name: string;
 		location: string;
 		image: string;
+		itemUrl: string;
 	}
 
 	const portfolioItems: PortfolioItem[] = [
 		{
 			name: 'Farrow Riverside Miracle League Park',
 			location: 'Windsor, Ontario',
-			image: farrowRiverside,
+			image:
+				'/farrow-riverside-miracle-league-park/farrow-riverside-miracle-league-park-1.jpg',
+			itemUrl: 'farrow-riverside-miracle-league-park',
 		},
 		{
 			name: 'Gore Meadows Park',
 			location: 'Brampton, Ontario',
-			image: goreMeadows,
+			image: '/gore-meadows-park/gore-meadows-park-1.jpg',
+			itemUrl: 'gore-meadows-park',
 		},
 		{
 			name: 'RBJ Schlegel Park',
 			location: 'Kitchener, Ontario',
-			image: rbjSchlegel,
+			image: '/rbj-schlegel-park/rbj-schlegel-park-1.jpg',
+			itemUrl: 'rbj-schlegel-park',
 		},
 		{
 			name: 'Churchill Park',
 			location: 'Hamilton, Ontario',
-			image: churchillPark,
+			image: '/churchill-park/churchill-park-1.jpg',
+			itemUrl: 'churchill-park',
 		},
 		{
 			name: 'Happy Rolph’s Animal Farm',
 			location: 'St. Catherines, Ontario',
-			image: happyRolphs,
+			image: '/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg',
+			itemUrl: 'happy-rolphs-animal-farm',
 		},
 		{
 			name: 'John McGivney Children’s Centre',
 			location: 'Windsor, Ontario',
-			image: johnMcGivney,
+			image:
+				'/john-mcgivney-childrens-centre/john-mcgivney-childrens-centre-1.jpg',
+			itemUrl: 'john-mcgivney-childrens-centre',
 		},
 		{
 			name: 'Captain Cornelius Park',
 			location: 'Hamilton, Ontario',
-			image: captainCornelius,
+			image: '/captain-cornelius-park/captain-cornelius-park-1.jpg',
+			itemUrl: 'captain-corneliuys-park',
 		},
-		{ name: 'Mohawk Park', location: 'Brantford, Ontario', image: mohawkPark },
+		{
+			name: 'Mohawk Park',
+			location: 'Brantford, Ontario',
+			image: '/mohawk-park/mohawk-park-1.jpg',
+			itemUrl: 'mohawk-park',
+		},
 		{
 			name: 'Kiwanis Park',
 			location: 'Kitchener, Ontario',
-			image: kiwanisPark,
+			image: '/kiwanis-park/kiwanis-park-1.jpg',
+			itemUrl: 'kiwanis-park',
 		},
-		{ name: 'Delcrest Park', location: 'Delhi, Ontario', image: delcrestPark },
+		{
+			name: 'Delcrest Park',
+			location: 'Delhi, Ontario',
+			image: '/delcrest-park/delcrest-park-1.jpg',
+			itemUrl: 'delcrest-park',
+		},
 		{
 			name: 'John Gamble Park',
 			location: 'Guelph, Ontario',
-			image: johnGamble,
+			image: '/john-gamble-park/john-gamble-park-1.jpg',
+			itemUrl: 'john-gamble-park',
 		},
 		{
 			name: 'Duncan Ferguson Park',
 			location: 'Cambridge, Ontario',
-			image: duncanFerguson,
+			image: '/duncan-ferguson-park/duncan-ferguson-park-1.jpg',
+			itemUrl: 'duncan-ferguson-park',
 		},
 	];
 
@@ -83,21 +95,23 @@ export const Portfolio = () => {
 				</h2>
 				<div className='grid grid-cols-4 max-w-350'>
 					{portfolioItems.map((park) => (
-						<div className='mx-5 mb-30 relative h-50 hover:scale-105 transition'>
-							<img
-								src={park.image}
-								alt={`${park.name} Image`}
-								className='rounded-xl w-full h-full object-cover z-0 relative'
-							/>
-							<div className='rounded-lg p-3 bg-white flex flex-col text-center w-9/10 mx-auto -mt-12 z-1 relative'>
-								<div className='border-b-1 border-dotted p-2'>
-									<h3 className='text-2xl font-bold text-brand-orange'>
-										{park.name}
-									</h3>
-									<p className='lg text-grey'>{park.location}</p>
+						<Link key={park.name} to={`/portfolio/${park.itemUrl}`} state={{ park }}>
+							<div className='mx-5 mb-30 relative h-50 hover:scale-105 transition'>
+								<img
+									src={`/images/playgrounds/${park.image}`}
+									alt={`${park.name} Image`}
+									className='rounded-xl w-full h-full object-cover z-0 relative'
+								/>
+								<div className='rounded-lg p-3 bg-white flex flex-col text-center w-9/10 mx-auto -mt-12 z-1 relative'>
+									<div className='border-b-1 border-dotted p-2'>
+										<h3 className='text-2xl font-bold text-brand-orange'>
+											{park.name}
+										</h3>
+										<p className='lg text-grey'>{park.location}</p>
+									</div>
 								</div>
 							</div>
-						</div>
+						</Link>
 					))}
 				</div>
 			</div>
