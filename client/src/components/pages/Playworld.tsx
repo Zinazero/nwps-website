@@ -4,7 +4,7 @@ import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 export const Playworld = () => {
 	return (
-		<main className='min-h-screen flex flex-col items-center justify-center'>
+		<main className=' flex flex-col items-center justify-center'>
 			<div className='flex flex-col p-8 space-y-16 max-w-350'>
 				{/* Hero */}
 				<div className='flex justify-center space-x-12'>

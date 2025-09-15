@@ -1,17 +1,25 @@
 import express from 'express';
 import path from 'path';
 import parksRouter from './routes/parks';
+import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 5004;
 
-if (process.env.NODE_ENV === "production") {
-  const clientDistPath = path.join(__dirname, "../../client/dist");
-  app.use(express.static(clientDistPath));
+if (process.env.NODE_ENV !== 'production') {
+	app.use(
+		cors({
+			origin: 'http://localhost:5173',
+		})
+	);
+}
+if (process.env.NODE_ENV === 'production') {
+	const clientDistPath = path.join(__dirname, '../../client/dist');
+	app.use(express.static(clientDistPath));
 
-  app.get(/^\/(?!api\/).*/, (req, res) => {
-    res.sendFile(path.join(clientDistPath, "index.html"));
-  });
+	app.get(/^\/(?!api\/).*/, (req, res) => {
+		res.sendFile(path.join(clientDistPath, 'index.html'));
+	});
 }
 
 app.use('/api/parks', parksRouter);

@@ -7,7 +7,7 @@ import { TestimonialSection } from './sections/TestimonialSection';
 
 export const Home = () => {
 	return (
-		<main className='min-h-screen'>
+		<main className=''>
 			<Hero />
 
 			<PlayworldSection />
