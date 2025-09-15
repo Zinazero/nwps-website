@@ -159,6 +159,7 @@ export const Footer = () => {
 					</div>
 				</div>
                 <span className='text-brand-orange'>© 2025 | New World Park Solutions | All Rights Reserved</span>
+				<Link to='/login' className='text-sm text-transparent-grey hover:text-brand-green transition'>Admin Login</Link>
 			</div>
 		</footer>
 	);

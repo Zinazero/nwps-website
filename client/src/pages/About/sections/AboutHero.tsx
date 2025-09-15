@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { SquigglyFrame } from '../../../ui/SquigglyFrame';
+import { SquigglyFrame } from '../../../components/ui/SquigglyFrame';
 import aboutImage from '@/assets/images/generic/about-image.jpg';
-import { UnderlineHeader } from '../../../ui/UnderlineHeader';
+import { UnderlineHeader } from '../../../components/ui/UnderlineHeader';
 
 export const AboutHero = () => {
 	return (

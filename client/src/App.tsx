@@ -1,26 +1,29 @@
 import { Header } from './components/layout/Header';
 import { Routes, Route } from 'react-router-dom';
-import { Home } from './components/pages/Home/Home';
-import { About } from './components/pages/About/About';
-import { Portfolio } from './components/pages/Portfolio/Portfolio';
-import { PortfolioItem } from './components/pages/Portfolio/PortfolioItem';
-import { Products } from './components/pages/Products';
-import { Testimonials } from './components/pages/Testimonials';
-import { Playgrounds } from './components/pages/Products/Playgrounds';
-import { SafetySurfacing } from './components/pages/Products/SafetySurfacing';
-import { SportsAndOutdoorFitness } from './components/pages/Products/SportsAndOutdoorFitness';
-import { ParkAmenities } from './components/pages/Products/ParkAmenities';
-import { ParkShelters } from './components/pages/Products/ParkShelters';
-import { ElectronicPlay } from './components/pages/Products/ElectronicPlay';
-import { WaterPlay } from './components/pages/Products/WaterPlay';
-import { Playworld } from './components/pages/Playworld';
+import { Home } from './pages/Home/Home';
+import { About } from './pages/About/About';
+import { Portfolio } from './pages/Portfolio/Portfolio';
+import { PortfolioItem } from './pages/Portfolio/PortfolioItem';
+import { Products } from './pages/Products';
+import { Testimonials } from './pages/Testimonials';
+import { Playgrounds } from './pages/Products/Playgrounds';
+import { SafetySurfacing } from './pages/Products/SafetySurfacing';
+import { SportsAndOutdoorFitness } from './pages/Products/SportsAndOutdoorFitness';
+import { ParkAmenities } from './pages/Products/ParkAmenities';
+import { ParkShelters } from './pages/Products/ParkShelters';
+import { ElectronicPlay } from './pages/Products/ElectronicPlay';
+import { WaterPlay } from './pages/Products/WaterPlay';
+import { Playworld } from './pages/Playworld';
 import { Footer } from './components/layout/Footer';
+import { Login } from './pages/Login';
+import ScrollToTop from './components/ui/ScrollToTop';
 
 function App() {
 	return (
 		<div>
 			<Header />
 			<div className='min-h-screen'>
+				<ScrollToTop />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/about' element={<About />} />
@@ -40,6 +43,7 @@ function App() {
 					</Route>
 					<Route path='/testimonials' element={<Testimonials />} />
 					<Route path='/playworld' element={<Playworld />} />
+					<Route path='/login' element={<Login />} />
 				</Routes>
 			</div>
 			<Footer />

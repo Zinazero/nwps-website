@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { UnderlineHeader } from '../../ui/UnderlineHeader';
-import api from '../../../api/axios';
+import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
+import api from '../../api/axios';
 import { useEffect, useState } from 'react';
-import { parkNavConverter } from '../../../modules/parkNavConverter';
-import { Loading } from '../../ui/Loading';
+import { parkNavConverter } from '../../utils/parkNavConverter';
+import { Loading } from '../../components/ui/Loading';
 
 interface Park {
 	id: number;

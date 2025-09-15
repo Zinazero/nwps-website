@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import api from '../../../api/axios';
-import { Loading } from '../../ui/Loading';
+import api from '../../api/axios';
+import { Loading } from '../../components/ui/Loading';
 
 interface Section {
 	id: number;
