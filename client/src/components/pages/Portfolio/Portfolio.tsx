@@ -1,16 +1,16 @@
 import { UnderlineHeader } from '../../ui/UnderlineHeader';
-import farrowRiverside from '@/assets/images/playgrounds/farrow-riverside-miracle-league-park/farrow-riverside-miracle-league-park-1.jpg';
-import goreMeadows from '@/assets/images/playgrounds/gore-meadows-park/gore-meadows-park-1.jpg';
-import rbjSchlegel from '@/assets/images/playgrounds/rbj-schlegel-park/rbj-schlegel-park-1.jpg';
-import churchillPark from '@/assets/images/playgrounds/churchill-park/churchill-park-1.jpg';
-import happyRolphs from '@/assets/images/playgrounds/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg';
-import johnMcGivney from '@/assets/images/playgrounds/john-mcgivney-childrens-centre/john-mcgivney-childrens-centre-1.jpg';
-import captainCornelius from '@/assets/images/playgrounds/captain-cornelius-park/captain-cornelius-park-1.jpg';
-import mohawkPark from '@/assets/images/playgrounds/mohawk-park/mohawk-park-1.jpg';
-import kiwanisPark from '@/assets/images/playgrounds/kiwanis-park/kiwanis-park-1.jpg';
-import delcrestPark from '@/assets/images/playgrounds/delcrest-park/delcrest-park-1.jpg';
-import johnGamble from '@/assets/images/playgrounds/john-gamble-park/john-gamble-park-1.jpg';
-import duncanFerguson from '@/assets/images/playgrounds/duncan-ferguson-park/duncan-ferguson-park-1.jpg';
+import farrowRiverside from '/images/playgrounds/farrow-riverside-miracle-league-park/farrow-riverside-miracle-league-park-1.jpg';
+import goreMeadows from '/images/playgrounds/gore-meadows-park/gore-meadows-park-1.jpg';
+import rbjSchlegel from '/images/playgrounds/rbj-schlegel-park/rbj-schlegel-park-1.jpg';
+import churchillPark from '/images/playgrounds/churchill-park/churchill-park-1.jpg';
+import happyRolphs from '/images/playgrounds/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg';
+import johnMcGivney from '/images/playgrounds/john-mcgivney-childrens-centre/john-mcgivney-childrens-centre-1.jpg';
+import captainCornelius from '/images/playgrounds/captain-cornelius-park/captain-cornelius-park-1.jpg';
+import mohawkPark from '/images/playgrounds/mohawk-park/mohawk-park-1.jpg';
+import kiwanisPark from '/images/playgrounds/kiwanis-park/kiwanis-park-1.jpg';
+import delcrestPark from '/images/playgrounds/delcrest-park/delcrest-park-1.jpg';
+import johnGamble from '/images/playgrounds/john-gamble-park/john-gamble-park-1.jpg';
+import duncanFerguson from '/images/playgrounds/duncan-ferguson-park/duncan-ferguson-park-1.jpg';
 
 export const Portfolio = () => {
 	interface PortfolioItem {

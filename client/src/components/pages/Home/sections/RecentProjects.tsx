@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import goreMeadows from '@/assets/images/playgrounds/gore-meadows-park/gore-meadows-park-1.jpg';
-import captainCornelius from '@/assets/images/playgrounds/captain-cornelius-park/captain-cornelius-park-1.jpg';
-import happyRolphs from '@/assets/images/playgrounds/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg';
+import goreMeadows from '/images/playgrounds/gore-meadows-park/gore-meadows-park-1.jpg';
+import captainCornelius from '/images/playgrounds/captain-cornelius-park/captain-cornelius-park-1.jpg';
+import happyRolphs from '/images/playgrounds/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg';
 import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 
 export const RecentProjects = () => {
