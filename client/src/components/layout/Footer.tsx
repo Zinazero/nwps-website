@@ -17,7 +17,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { LogoutButton } from './LogoutButton';
 
 export const Footer = () => {
-	const { user, logout } = useAuth();
+	const { user } = useAuth();
 
 	const productsLinks: LinkType[] = [
 		{ label: 'Playgrounds', to: '/products/playgrounds' },

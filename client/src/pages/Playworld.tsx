@@ -20,7 +20,7 @@ export const Playworld = () => {
 							</span>
 							<h1 className='text-6xl font-bold'>Playworld</h1>
 						</div>
-						<p className='text-2xl text-grey'>
+						<p className='text-2xl '>
 							Uniting communities through innovative and inclusive play.
 							High-quality playground equipment for all, creating a positive
 							future through play.
@@ -52,7 +52,7 @@ export const Playworld = () => {
 				{/* Blurb */}
 				<div className='flex flex-col space-y-4 mt-30'>
 					<h3 className='text-4xl font-bold'>Playworld</h3>
-					<p className='text-xl/relaxed text-grey'>
+					<p className='text-xl/relaxed '>
 						A leading force in the playground industry, uniting communities
 						through innovative and inclusive play. They offer high-quality
 						playground equipment designed to enrich lives and create a positive

@@ -55,10 +55,11 @@ img {
 }
 
 p {
-	font-family: var(--font-archivo);
+	@apply font-archivo;
+	@apply text-grey;
 }
 
-input {
+input, textarea {
 	@apply bg-white;
 	@apply rounded-lg;
 	@apply border;
@@ -73,16 +74,16 @@ input {
 }
 
 .underline-header + svg path {
-  stroke: #ff3e00;
-  stroke-width: 8;
-  fill: transparent;
-  stroke-dasharray: 500;
-  stroke-dashoffset: 500;
-  animation: draw 1s forwards;
+	stroke: #ff3e00;
+	stroke-width: 8;
+	fill: transparent;
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw 1s forwards;
 }
 
 @keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+	to {
+		stroke-dashoffset: 0;
+	}
 }

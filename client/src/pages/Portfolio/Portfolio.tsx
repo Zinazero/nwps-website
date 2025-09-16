@@ -127,7 +127,7 @@ export const Portfolio = () => {
 							<button
 								type='button'
 								onClick={() => navigate('/admin/add-park')}
-								className='border-1 border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
+								className='border-1 border-dashed border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
 							>
 								+
 							</button>
@@ -154,7 +154,7 @@ export const Portfolio = () => {
 												<h3 className='text-2xl font-bold text-brand-orange'>
 													{park.name}
 												</h3>
-												<p className='lg text-grey'>{park.location}</p>
+												<p className='lg '>{park.location}</p>
 											</div>
 										</div>
 									</div>

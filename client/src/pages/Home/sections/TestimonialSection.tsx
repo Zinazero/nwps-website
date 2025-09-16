@@ -16,7 +16,7 @@ export const TestimonialSection = () => {
 								'Faith Hale, Executive Director (Ska:na Family Learning Centre, Windsor)'
 							}
 						</h4>
-						<p className='text-xl text-grey'>
+						<p className='text-xl '>
 							It is a pleasure to recommend Mark Jones and New World Park
 							Solutions as a service provider to our community members. Also
 							important is the ability to deliver the product on time and at the

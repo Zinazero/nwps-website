@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-brand-orange: #f15b31;
+	--color-brand-blue: #00589c;
+	--color-brand-green: #cdda29;
+	--color-brand-red: #ee3972;
+	--color-grey: #6c757d;
+}
+
+#item-form input,
+#item-form .file-input,
+#item-form textarea {
+	@apply bg-transparent;
+	@apply border;
+	@apply rounded-xl;
+	@apply resize-none;
+	@apply border-dashed;
+	@apply border-brand-orange;
+	@apply text-center;
+}
+
+#item-form .file-input {
+	@apply flex;
+	@apply items-center;
+	@apply justify-center;
+	@apply text-4xl;
+	@apply text-brand-orange;
+	@apply hover:text-brand-green;
+    @apply hover:border-brand-green;
+    @apply transition;
+    @apply active:scale-95;
+}
+
+#item-form input[type='text'] {
+	@apply font-bold;
+}
+
+#item-form textarea {
+	@apply text-grey;
+	@apply h-50;
+	@apply py-4;
+}
+
+#item-form .text-container {
+	@apply flex;
+	@apply flex-col;
+	@apply space-y-4;
+}
+
+.hero-section {
+	@apply flex;
+	@apply flex-col;
+	@apply p-6;
+	@apply items-center;
+	@apply space-y-12;
+}
+
+.hero-section .file-input {
+	@apply w-250;
+	@apply h-140;
+}
+
+.hero-section .text-container {
+	@apply w-300;
+}
+
+.hero-section input[type='text'] {
+	@apply text-5xl;
+}
+
+.hero-section textarea {
+	@apply text-xl;
+}
+
+.info-section {
+	@apply flex;
+	@apply items-center;
+	@apply justify-center;
+	@apply max-w-300;
+}
+
+.info-section .file-input {
+	@apply mx-12;
+	@apply w-150;
+	@apply h-80;
+}
+
+.info-section input[type='text'] {
+	@apply text-3xl;
+}
+
+.info-section textarea {
+	@apply text-lg;
+}

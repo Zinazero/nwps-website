@@ -53,7 +53,7 @@ export const PortfolioItem = () => {
 						/>
 						<div className='text-center max-w-300 space-y-4'>
 							<h1 className='text-5xl font-bold'>{park.name}</h1>
-							<p className='text-xl text-grey'>{park.description}</p>
+							<p className='text-xl '>{park.description}</p>
 						</div>
 					</div>
 
@@ -71,7 +71,7 @@ export const PortfolioItem = () => {
 							/>
 							<div className='flex flex-col space-y-4'>
 								<h2 className='text-3xl font-bold'>{section.title}</h2>
-								<p className='text-lg text-grey'>{section.description}</p>
+								<p className='text-lg '>{section.description}</p>
 							</div>
 						</div>
 					))}

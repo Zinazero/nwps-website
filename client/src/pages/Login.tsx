@@ -5,13 +5,13 @@ import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-interface LoginForm {
+export interface LoginFormValues {
 	username: string;
 	password: string;
 }
 
 export const Login = () => {
-	const [form, setForm] = useState<LoginForm>({
+	const [form, setForm] = useState<LoginFormValues>({
 		username: '',
 		password: '',
 	});

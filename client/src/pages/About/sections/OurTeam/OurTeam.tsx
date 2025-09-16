@@ -57,7 +57,7 @@ export const OurTeam = () => {
 								<h4 className='text-2xl font-bold'>{profile.name}</h4>
 								<h5 className='text-xl text-brand-orange'>{profile.title}</h5>
 							</div>
-							<p className='text-left text-grey text-lg/relaxed indent-8'>
+							<p className='text-left  text-lg/relaxed indent-8'>
 								{profile.blurb}
 							</p>
 						</div>

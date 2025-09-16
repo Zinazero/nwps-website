@@ -27,7 +27,7 @@ export const RecentProjects = () => {
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Gore Meadows Park
 							</h4>
-							<p className='text-grey text-lg'>
+							<p className=' text-lg'>
 								The power of a thunderclap, the brilliance of a rainbow, the
 								gentle tapping of the rain; we’ve harnessed the power of the
 								elements for Sky Towers, our modern take on a Playworld classic.
@@ -44,7 +44,7 @@ export const RecentProjects = () => {
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Captain Cornelius Park
 							</h4>
-							<p className='text-grey text-lg'>
+							<p className=' text-lg'>
 								Explore, Imagine, and Play in a World of Adventure. Discover a
 								Safe and Exciting Haven for Children of All Ages, Where Memories
 								Are Made and Fun Never Ends.
@@ -61,7 +61,7 @@ export const RecentProjects = () => {
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Happy Rolph's Animal Farm
 							</h4>
-							<p className='text-grey text-lg'>
+							<p className=' text-lg'>
 								Discover the Wonder of Nature and the Joy of Play. Experience
 								Fun-Filled Adventures and Create Lasting Memories at Our Park,
 								Where Every Visit is a New Adventure.
