@@ -82,6 +82,22 @@ input, textarea {
 	animation: draw 1s forwards;
 }
 
+.trash {
+	@apply text-red;
+	@apply hover:text-brand-red;
+	@apply active:scale-95;
+	@apply transition;
+	@apply bg-white;
+	@apply rounded-lg;
+	@apply p-1;
+	@apply shadow-sm;
+}
+
+.hover-vis {
+	@apply opacity-0;
+	@apply group-hover:opacity-100;
+}
+
 @keyframes draw {
 	to {
 		stroke-dashoffset: 0;

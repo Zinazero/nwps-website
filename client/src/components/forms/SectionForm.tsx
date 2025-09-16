@@ -5,14 +5,16 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface SectionFormProps {
 	section: Section;
-	setSection: (section: Section) => void;
 	index: number;
+	setSection: (section: Section) => void;
+	dropSection: (index: number, section: Section) => void;
 }
 
 export const SectionForm: React.FC<SectionFormProps> = ({
 	section,
 	index,
 	setSection,
+	dropSection,
 }) => {
 	const [preview, setPreview] = useState<string | null>(null);
 
@@ -27,6 +29,13 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 			// create new preview URL
 			setPreview(URL.createObjectURL(file));
 		}
+	};
+
+	const handleTextChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const { name, value } = e.target;
+		setSection({ ...section, [name]: value });
 	};
 
 	useEffect(() => {
@@ -44,8 +53,11 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 
 	return (
 		<section
-			className={index === 0 ? 'hero-section' : `info-section ${isReverse}`}
+			className={`relative ${
+				index === 0 ? 'hero-section' : `info-section ${isReverse}`
+			}`}
 		>
+			{/* Image */}
 			{preview ? (
 				<div className='relative group'>
 					{/* Image Preview */}
@@ -59,7 +71,7 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 					<button
 						type='button'
 						onClick={removeImage}
-						className='absolute top-0 right-0 p-4 text-red hover:text-brand-red active:scale-95 opacity-0 group-hover:opacity-100 transition'
+						className='absolute top-0 right-0 m-2 trash hover-vis'
 					>
 						<FontAwesomeIcon icon={faTrash} />
 					</button>
@@ -76,10 +88,34 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 				name='image'
 				className='hidden'
 			/>
+
+			{/* Text */}
 			<div className='text-container'>
-				<input type='text' name='title' placeholder='Title' />
-				<textarea name='description' placeholder='Description' />
+				<input
+					type='text'
+					name='title'
+					placeholder='Title'
+					value={section.title}
+					onChange={handleTextChange}
+				/>
+				<textarea
+					name='description'
+					placeholder='Description'
+					value={section.description}
+					onChange={handleTextChange}
+				/>
 			</div>
+
+			{/* Remove Section Button */}
+			{index !== 0 && (
+				<button
+					type='button'
+					onClick={() => dropSection(index, section)}
+					className='absolute top-1/2 -translate-1/2 -right-50 text-2xl p-4 trash'
+				>
+					<FontAwesomeIcon icon={faTrash} />
+				</button>
+			)}
 		</section>
 	);
 };
