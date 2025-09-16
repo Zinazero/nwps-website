@@ -109,7 +109,7 @@ export const Portfolio = () => {
 	//];
 
 	return (
-		<main className=' flex flex-col items-center p-6 space-y-16'>
+		<main className='flex flex-col items-center p-6 space-y-16'>
 			{loading ? (
 				<Loading />
 			) : (

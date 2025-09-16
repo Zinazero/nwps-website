@@ -58,6 +58,20 @@ p {
 	font-family: var(--font-archivo);
 }
 
+input {
+	@apply bg-white;
+	@apply rounded-lg;
+	@apply border;
+	@apply p-2;
+	@apply focus:outline-0;
+	@apply border-transparent-grey;
+	@apply focus:border-brand-orange;
+	@apply focus:scale-105;
+	@apply shadow-sm;
+	@apply transition;
+	caret-color: var(--color-brand-orange);
+}
+
 .underline-header + svg path {
   stroke: #ff3e00;
   stroke-width: 8;

@@ -13,8 +13,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import type { LinkType } from './types';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { LogoutButton } from './LogoutButton';
 
 export const Footer = () => {
+	const { user, logout } = useAuth();
+
 	const productsLinks: LinkType[] = [
 		{ label: 'Playgrounds', to: '/products/playgrounds' },
 		{ label: 'Safety Surfacing', to: '/products/safety-surfacing' },
@@ -27,6 +31,9 @@ export const Footer = () => {
 		{ label: 'Electronic Play', to: '/products/electronic-play' },
 		{ label: 'Water Play', to: '/products/water-play' },
 	];
+
+	const adminButtonClasses =
+		'text-sm text-transparent-grey hover:text-brand-green transition cursor-pointer';
 
 	return (
 		<footer className='text-white'>
@@ -158,8 +165,16 @@ export const Footer = () => {
 						</form>
 					</div>
 				</div>
-                <span className='text-brand-orange'>© 2025 | New World Park Solutions | All Rights Reserved</span>
-				<Link to='/login' className='text-sm text-transparent-grey hover:text-brand-green transition'>Admin Login</Link>
+				<span className='text-brand-orange'>
+					© 2025 | New World Park Solutions | All Rights Reserved
+				</span>
+				{user ? (
+					<LogoutButton classes={adminButtonClasses} />
+				) : (
+					<Link to='/login' className={adminButtonClasses}>
+						Admin Login
+					</Link>
+				)}
 			</div>
 		</footer>
 	);

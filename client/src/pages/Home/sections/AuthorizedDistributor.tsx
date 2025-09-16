@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 export const AuthorizedDistributor = () => {
-	console.log(imageArray);
 	return (
 		<section id='authorized-distributor'>
 			<div className='flex flex-col items-center justify-center bg-white mt-10 p-8'>

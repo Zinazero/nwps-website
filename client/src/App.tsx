@@ -16,7 +16,7 @@ import { WaterPlay } from './pages/Products/WaterPlay';
 import { Playworld } from './pages/Playworld';
 import { Footer } from './components/layout/Footer';
 import { Login } from './pages/Login';
-import ScrollToTop from './components/ui/ScrollToTop';
+import { ScrollToTop } from './components/ui/ScrollToTop';
 
 function App() {
 	return (
