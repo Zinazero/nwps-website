@@ -61,6 +61,10 @@
 	@apply h-140;
 }
 
+.hero-section img {
+    @apply max-w-250;
+}
+
 .hero-section .text-container {
 	@apply w-300;
 }
@@ -84,6 +88,11 @@
 	@apply mx-12;
 	@apply w-150;
 	@apply h-80;
+}
+
+.info-section img {
+    @apply mx-12;
+    @apply w-150;
 }
 
 .info-section input[type='text'] {

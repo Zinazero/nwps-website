@@ -7,7 +7,7 @@ export const AddPark = () => {
 		{
 			title: '',
 			description: '',
-			image: [],
+			image: null,
 		},
 	]);
 	const [error, setError] = useState<string | null>(null);

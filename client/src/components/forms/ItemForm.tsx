@@ -14,7 +14,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 	handleSubmit,
 }) => {
 	const addSection = () => {
-		setForm((prev) => [...prev, { title: '', description: '', image: [] }]);
+		setForm((prev) => [...prev, { title: '', description: '', image: null }]);
 	};
 
 	return (
@@ -25,9 +25,10 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 		>
 			{form.map((section, index) => (
 				<SectionForm
-					form={section}
+					key={index}
+					section={section}
 					index={index}
-					setForm={(updatedSection) =>
+					setSection={(updatedSection) =>
 						setForm((prev) =>
 							prev.map((s, i) => (i === index ? updatedSection : s))
 						)
