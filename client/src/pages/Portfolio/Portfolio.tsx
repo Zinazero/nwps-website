@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import api from '../../api/axios';
 import { useEffect, useState } from 'react';
 import { parkNavConverter } from '../../utils/parkNavConverter';
 import { Loading } from '../../components/ui/Loading';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface Park {
 	id: number;
@@ -15,6 +16,8 @@ interface Park {
 export const Portfolio = () => {
 	const [parks, setParks] = useState<Park[]>([]);
 	const [loading, setLoading] = useState(true);
+	const { user } = useAuth();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchParks = async () => {
@@ -109,7 +112,7 @@ export const Portfolio = () => {
 	//];
 
 	return (
-		<main className='flex flex-col items-center p-6 space-y-16'>
+		<main className='min-h-screen flex flex-col items-center p-6 space-y-16'>
 			{loading ? (
 				<Loading />
 			) : (
@@ -119,6 +122,18 @@ export const Portfolio = () => {
 						Designing Playgrounds That Inspire Imagination and Outdoor Play
 					</h2>
 					<div className='grid grid-cols-4 max-w-350'>
+						{/* ADMIN ONLY --- Add Portfolio Item */}
+						{user && (
+							<button
+								type='button'
+								onClick={() => navigate('/admin/add-park')}
+								className='border-1 border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
+							>
+								+
+							</button>
+						)}
+
+						{/* Portfolio Items */}
 						{parks.map((park) => {
 							const slug = parkNavConverter(park.name);
 
@@ -128,7 +143,7 @@ export const Portfolio = () => {
 									to={`/portfolio/${slug}`}
 									state={{ park, slug }}
 								>
-									<div className='mx-5 mb-30 relative h-50 hover:scale-105 transition'>
+									<div className='mx-5 mb-30 relative h-50 hover:scale-105 active:scale-100 transition'>
 										<img
 											src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 											alt={`${park.name} Image`}

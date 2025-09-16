@@ -17,6 +17,9 @@ import { Playworld } from './pages/Playworld';
 import { Footer } from './components/layout/Footer';
 import { Login } from './pages/Login';
 import { ScrollToTop } from './components/ui/ScrollToTop';
+import { ProtectedRoute } from './routes/ProtectedRoute';
+import { Admin } from './pages/Admin/Admin';
+import { AddPark } from './pages/Admin/Portfolio/AddPark';
 
 function App() {
 	return (
@@ -44,6 +47,16 @@ function App() {
 					<Route path='/testimonials' element={<Testimonials />} />
 					<Route path='/playworld' element={<Playworld />} />
 					<Route path='/login' element={<Login />} />
+					<Route
+						path='/admin'
+						element={
+							<ProtectedRoute>
+								<Admin />
+							</ProtectedRoute>
+						}
+					>
+						<Route path='add-park' element={<AddPark />} />
+					</Route>
 				</Routes>
 			</div>
 			<Footer />

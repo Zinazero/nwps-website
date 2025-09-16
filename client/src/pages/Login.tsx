@@ -30,7 +30,7 @@ export const Login = () => {
 			console.log('Login successful', res.data.username);
 
 			login(res.data.username);
-			navigate('/');
+			navigate('/portfolio');
 		} catch (err: any) {
 			console.error(err);
 			setError(err.response?.data?.error || 'Something went wrong');

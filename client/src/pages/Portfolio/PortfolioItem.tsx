@@ -39,7 +39,7 @@ export const PortfolioItem = () => {
 	}, [sections]);
 
 	return (
-		<main className='flex flex-col items-center justify-center space-y-12 bg-white p-16'>
+		<main className='min-h-screen flex flex-col items-center justify-center space-y-12 bg-white p-16'>
 			{loading ? (
 				<Loading />
 			) : (
