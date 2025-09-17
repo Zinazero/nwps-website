@@ -48,11 +48,14 @@ export const PortfolioItem = () => {
 					<div className='p-6 flex flex-col items-center space-y-12'>
 						<img
 							src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
-							alt={`${park.name} Image 1`}
+							alt={`${park.title} Image 1`}
 							className='w-full max-w-250 rounded-xl'
 						/>
 						<div className='text-center max-w-300 space-y-4'>
-							<h1 className='text-5xl font-bold'>{park.name}</h1>
+							<div>
+								<h1 className='text-5xl font-bold'>{park.title}</h1>
+								<h3 className='text-lg text-grey'>{park.location}</h3>
+							</div>
 							<p className='text-xl '>{park.description}</p>
 						</div>
 					</div>

@@ -97,12 +97,14 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 					placeholder='Title'
 					value={section.title}
 					onChange={handleTextChange}
+                    required
 				/>
 				<textarea
 					name='description'
 					placeholder='Description'
 					value={section.description}
 					onChange={handleTextChange}
+                    required
 				/>
 			</div>
 

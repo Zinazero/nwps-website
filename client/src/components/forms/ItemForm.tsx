@@ -3,17 +3,20 @@ import type { Section } from './types';
 import './sections.css';
 import { useState } from 'react';
 import { ConfirmModal } from '../ui/ConfirmModal';
+import { Loading } from '../ui/Loading';
 
 interface ItemFormProps {
 	form: Section[];
 	setForm: React.Dispatch<React.SetStateAction<Section[]>>;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+	loading: boolean;
 }
 
 export const ItemForm: React.FC<ItemFormProps> = ({
 	form,
 	setForm,
 	handleSubmit,
+	loading,
 }) => {
 	const [confirmOpen, setConfirmOpen] = useState(false);
 	const [dropIndex, setDropIndex] = useState<number | null>(null);
@@ -66,21 +69,25 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 				))}
 
 				{/* Buttons */}
-				<div className='flex flex-col items-center space-y-6 w-full'>
-					<button
-						type='button'
-						onClick={addSection}
-						className='w-full max-w-300 border-1 border-dashed border-brand-orange text-brand-orange hover:border-brand-green hover:text-brand-green active:scale-95 rounded-xl text-2xl transition'
-					>
-						+
-					</button>
-					<button
-						type='submit'
-						className='rounded-lg p-2 bg-brand-blue hover:bg-brand-orange active:scale-95 transition text-white text-xl w-100'
-					>
-						Save
-					</button>
-				</div>
+				{loading ? (
+					<Loading />
+				) : (
+					<div className='flex flex-col items-center space-y-6 w-full'>
+						<button
+							type='button'
+							onClick={addSection}
+							className='w-full max-w-300 border-1 border-dashed border-brand-orange text-brand-orange hover:border-brand-green hover:text-brand-green active:scale-95 rounded-xl text-2xl transition'
+						>
+							+
+						</button>
+						<button
+							type='submit'
+							className='rounded-lg p-2 bg-brand-blue hover:bg-brand-orange active:scale-95 transition text-white text-xl w-100'
+						>
+							Save
+						</button>
+					</div>
+				)}
 			</form>
 
 			{/* Confirm Modal */}

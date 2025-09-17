@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import parksRouter from './routes/parks';
+import parksRouter from './routes/parks.routes';
 import authRoutes from './routes/auth.routes';
 import cookieParser from 'cookie-parser';
 
