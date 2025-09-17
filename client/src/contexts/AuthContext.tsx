@@ -6,12 +6,14 @@ interface AuthContextType {
 	user: { username: string } | null;
 	login: (usename: string) => void;
 	logout: () => void;
+	loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [user, setUser] = useState<{ username: string } | null>(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const checkAuth = async () => {
@@ -22,6 +24,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				}
 			} catch {
 				setUser(null);
+			} finally {
+				setLoading(false);
 			}
 		};
 		checkAuth();
@@ -31,7 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const logout = () => setUser(null);
 
 	return (
-		<AuthContext.Provider value={{ user, login, logout }}>
+		<AuthContext.Provider value={{ user, login, logout, loading }}>
 			{children}
 		</AuthContext.Provider>
 	);
