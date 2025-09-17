@@ -59,17 +59,14 @@ p {
 	@apply text-grey;
 }
 
-input, textarea {
-	@apply bg-white;
-	@apply rounded-lg;
-	@apply border;
-	@apply p-2;
-	@apply focus:outline-0;
-	@apply border-transparent-grey;
-	@apply focus:border-brand-orange;
-	@apply focus:scale-105;
-	@apply shadow-sm;
-	@apply transition;
+button {
+	@apply cursor-pointer;
+}
+
+input,
+textarea {
+	@apply bg-white rounded-lg border p-2 focus:outline-0 border-transparent-grey;
+	@apply focus:border-brand-orange focus:scale-105 shadow-sm transition;
 	caret-color: var(--color-brand-orange);
 }
 
@@ -83,19 +80,12 @@ input, textarea {
 }
 
 .trash {
-	@apply text-red;
-	@apply hover:text-brand-red;
-	@apply active:scale-95;
-	@apply transition;
-	@apply bg-white;
-	@apply rounded-lg;
-	@apply p-1;
-	@apply shadow-sm;
+	@apply text-red hover:text-brand-red active:scale-95 transition bg-white;
+	@apply rounded-lg p-1 shadow-sm;
 }
 
 .hover-vis {
-	@apply opacity-0;
-	@apply group-hover:opacity-100;
+	@apply opacity-0 grou-hover:opacity-100;
 }
 
 @keyframes draw {

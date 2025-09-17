@@ -11,24 +11,13 @@
 #item-form input,
 #item-form .file-input,
 #item-form textarea {
-	@apply bg-transparent;
-	@apply border;
-	@apply rounded-xl;
-	@apply resize-none;
-	@apply border-dashed;
-	@apply border-brand-orange;
-	@apply text-center;
+	@apply bg-transparent border rounded-xl resize-none border-dashed;
+	@apply border-brand-orange text-center;
 }
 
 #item-form .file-input {
-	@apply flex;
-	@apply items-center;
-	@apply justify-center;
-	@apply text-4xl;
-	@apply text-brand-orange;
-	@apply hover:text-brand-green;
-    @apply hover:border-brand-green;
-    @apply transition;
+	@apply flex items-center justify-center text-4xl text-brand-orange;
+	@apply hover:text-brand-green hover:border-brand-green transition;
     @apply active:scale-95;
 }
 
@@ -37,28 +26,19 @@
 }
 
 #item-form textarea {
-	@apply text-grey;
-	@apply h-50;
-	@apply py-4;
+	@apply text-grey h-50 py-4;
 }
 
 #item-form .text-container {
-	@apply flex;
-	@apply flex-col;
-	@apply space-y-4;
+	@apply flex flex-col space-y-4;
 }
 
 .hero-section {
-	@apply flex;
-	@apply flex-col;
-	@apply p-6;
-	@apply items-center;
-	@apply space-y-12;
+	@apply flex flex-col p-6 items-center space-y-12;
 }
 
 .hero-section .file-input {
-	@apply w-250;
-	@apply h-140;
+	@apply w-250 h-140;
 }
 
 .hero-section img {
@@ -78,21 +58,15 @@
 }
 
 .info-section {
-	@apply flex;
-	@apply items-center;
-	@apply justify-center;
-	@apply max-w-300;
+	@apply flex items-center justify-center max-w-300;
 }
 
 .info-section .file-input {
-	@apply mx-12;
-	@apply w-150;
-	@apply h-80;
+	@apply mx-12 w-150 h-80;
 }
 
 .info-section img {
-    @apply mx-12;
-    @apply w-150;
+    @apply mx-12 w-150;
 }
 
 .info-section input[type='text'] {
