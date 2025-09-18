@@ -1,14 +1,34 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import goreMeadows from '/images/playgrounds/gore-meadows-park/gore-meadows-park-1.jpg';
-import captainCornelius from '/images/playgrounds/captain-cornelius-park/captain-cornelius-park-1.jpg';
-import happyRolphs from '/images/playgrounds/happy-rolphs-animal-farm/happy-rolphs-animal-farm-1.jpg';
 import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
+import type { Park } from '../../types';
+import api from '../../../api/axios';
+import { ParkCard } from '../../../components/ui/ParkCard';
+import { Loading } from '../../../components/ui/Loading';
 
 export const RecentProjects = () => {
+	const [recentProjects, setRecentProjects] = useState<Park[]>([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchRecentParks = async () => {
+			try {
+				const res = await api.get<Park[]>('/parks/recent');
+				setRecentProjects(res.data);
+			} catch (err) {
+				console.error('Error fetching parks:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchRecentParks();
+	}, []);
+
 	return (
 		<section id='recent-projects'>
 			<div className='flex flex-col max-w-400 mx-auto px-20 py-14 space-y-10'>
-				<Link to='/projects'>
+				<Link to='/portfolio'>
 					<div className='flex items-center w-full group'>
 						<h2 className='text-5xl font-bold text-nowrap mr-6 group-hover:translate-x-4 transition'>
 							Recent Projects
@@ -16,62 +36,18 @@ export const RecentProjects = () => {
 						<hr className='w-full text-brand-orange group-hover:translate-x-4 transition' />
 					</div>
 				</Link>
-				<div className='grid grid-cols-3 gap-10 text-center'>
-					<Link to='/portfolio'>
-						<div className='flex flex-col group'>
-							<img
-								src={goreMeadows}
-								alt='Gore Meadows Park Playground'
-								className='rounded-lg shadow-md group-hover:scale-110 transition'
-								draggable={false}
-							/>
-							<h4 className='text-2xl font-semibold mt-5 mb-2'>
-								Gore Meadows Park
-							</h4>
-							<p className=' text-lg'>
-								The power of a thunderclap, the brilliance of a rainbow, the
-								gentle tapping of the rain; we’ve harnessed the power of the
-								elements for Sky Towers, our modern take on a Playworld classic.
-							</p>
-						</div>
-					</Link>
-					<Link to='/portfolio'>
-						<div className='flex flex-col group'>
-							<img
-								src={captainCornelius}
-								alt='Captain Cornelius Park Playground'
-								className='rounded-lg shadow-md group-hover:scale-110 transition'
-								draggable={false}
-							/>
-							<h4 className='text-2xl font-semibold mt-5 mb-2'>
-								Captain Cornelius Park
-							</h4>
-							<p className=' text-lg'>
-								Explore, Imagine, and Play in a World of Adventure. Discover a
-								Safe and Exciting Haven for Children of All Ages, Where Memories
-								Are Made and Fun Never Ends.
-							</p>
-						</div>
-					</Link>
-					<Link to='/portfolio'>
-						<div className='flex flex-col group'>
-							<img
-								src={happyRolphs}
-								alt='Happy Rolphs Animal Farm Playground'
-								className='rounded-lg shadow-md group-hover:scale-110 transition'
-								draggable={false}
-							/>
-							<h4 className='text-2xl font-semibold mt-5 mb-2'>
-								Happy Rolph's Animal Farm
-							</h4>
-							<p className=' text-lg'>
-								Discover the Wonder of Nature and the Joy of Play. Experience
-								Fun-Filled Adventures and Create Lasting Memories at Our Park,
-								Where Every Visit is a New Adventure.
-							</p>
-						</div>
-					</Link>
-				</div>
+				{loading ? (
+					<Loading />
+				) : (
+					<div className='grid grid-cols-3 gap-10 text-center'>
+						{recentProjects.map((park) => (
+							<div>
+								<ParkCard key={park.id} park={park} />
+								<p>{park.description}</p>
+							</div>
+						))}
+					</div>
+				)}
 			</div>
 			<div className='max-w-300 xl:mx-auto mx-20 mb-20 rounded-2xl shadow-2xl bg-brand-blue-light p-12 flex items-center'>
 				<img

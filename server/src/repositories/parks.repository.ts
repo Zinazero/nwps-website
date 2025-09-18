@@ -9,6 +9,14 @@ export const getAllParks = async (): Promise<Park[]> => {
 	return res.rows;
 };
 
+export const getRecentParks = async (): Promise<Park[]> => {
+	const res: QueryResult<Park> = await pool.query(
+		'SELECT id, title, location, description FROM parks ORDER BY sort_order ASC LIMIT 3'	
+	);
+	console.log(res.rows)
+	return res.rows;
+};
+
 export const postPark = async (park: Park): Promise<number> => {
 	const { title, location, description } = park;
 

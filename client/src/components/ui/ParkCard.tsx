@@ -1,21 +1,20 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Link } from 'react-router-dom';
-import type { Park } from './types';
-import { Trash } from '../../components/ui/Trash';
+import type { Park } from '../../pages/types';
+import { Trash } from './Trash';
+import { parkNavConverter } from '../../utils/parkNavConverter';
 
-export const PortfolioItem = ({
+export const ParkCard = ({
 	park,
-	slug,
 	disabled,
 	isEditMode,
 	deleteItem
 }: {
 	park: Park;
-	slug: string;
 	disabled?: boolean;
 	isEditMode?: boolean;
-	deleteItem: (park: Park) => void;
+	deleteItem?: (park: Park) => void;
 }) => {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id: park.id, disabled });
@@ -24,6 +23,8 @@ export const PortfolioItem = ({
 		transform: CSS.Transform.toString(transform),
 		transition,
 	};
+
+	const slug = parkNavConverter(park.title);
 
 	return (
 		<div
@@ -58,7 +59,7 @@ export const PortfolioItem = ({
 			</Link>
 
 			{/* Delete Button */}
-			{isEditMode && (
+			{isEditMode && deleteItem && (
 				<Trash
 					onClick={() => deleteItem(park)}
 					className='absolute top-1 right-6'

@@ -2,10 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import api from '../../api/axios';
 import { useEffect, useState } from 'react';
-import { parkNavConverter } from '../../utils/parkNavConverter';
 import { Loading } from '../../components/ui/Loading';
 import { useAuth } from '../../contexts/AuthContext';
-import type { Park } from './types';
+import type { Park } from '../types';
 import {
 	DndContext,
 	PointerSensor,
@@ -17,7 +16,7 @@ import {
 	rectSortingStrategy,
 	SortableContext,
 } from '@dnd-kit/sortable';
-import { PortfolioItem } from './PortfolioItem';
+import { ParkCard } from '../../components/ui/ParkCard';
 import { Check } from '../../components/ui/Check';
 import { Pen } from '../../components/ui/Pen';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
@@ -76,7 +75,7 @@ export const Portfolio = () => {
 		try {
 			await api.post(
 				'/parks/reorder',
-				ordered.map((p, i) => ({ id: p.id, order: i }))
+				ordered.map((p, i) => ({ id: p.id, sort_order: i }))
 			);
 		} catch (err) {
 			console.error('Failed to persist parks order:', err);
@@ -145,10 +144,9 @@ export const Portfolio = () => {
 
 								{/* Portfolio Items */}
 								{parks.map((park) => (
-									<PortfolioItem
+									<ParkCard
 										key={park.id}
 										park={park}
-										slug={parkNavConverter(park.title)}
 										disabled={!isEditMode}
 										isEditMode={isEditMode}
 										deleteItem={handleDeleteClick}

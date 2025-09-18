@@ -2,6 +2,7 @@ import express from 'express';
 import {
 	deletePark,
 	getAllParks,
+	getRecentParks,
 	postPark,
 	reorderParks,
 } from '../repositories/parks.repository';
@@ -28,6 +29,16 @@ router.get('/', async (req, res) => {
 	try {
 		const parks = await getAllParks();
 		res.json(parks);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal server error.' });
+	}
+});
+
+router.get('/recent', async (req, res) => {
+	try {
+		const recentProjects = await getRecentParks();
+		res.json(recentProjects);
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ error: 'Internal server error.' });
