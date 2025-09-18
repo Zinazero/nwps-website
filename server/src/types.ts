@@ -11,6 +11,11 @@ export interface Park {
 	description: string;
 }
 
+export interface ParkOrder {
+	id: number;
+	sort_order: number;
+}
+
 export interface PortfolioSection {
 	id: number;
 	park_id: number;

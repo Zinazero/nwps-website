@@ -79,13 +79,30 @@ textarea {
 	animation: draw 1s forwards;
 }
 
+.trash,
+.pen,
+.check {
+	@apply rounded-lg p-1 shadow-sm hover:scale-105 active:scale-95 transition;
+}
+
 .trash {
-	@apply text-red hover:text-brand-red active:scale-95 transition bg-white;
-	@apply rounded-lg p-1 shadow-sm;
+	@apply text-red bg-white;
+}
+
+.pen {
+	@apply text-brand-green;
+}
+
+.check {
+	@apply text-brand-blue font-bold;
 }
 
 .hover-vis {
-	@apply opacity-0 grou-hover:opacity-100;
+	@apply opacity-0 group-hover:opacity-100;
+}
+
+.draggable {
+	@apply cursor-grab hover:scale-105;
 }
 
 @keyframes draw {

@@ -5,17 +5,26 @@ import { useEffect, useState } from 'react';
 import { parkNavConverter } from '../../utils/parkNavConverter';
 import { Loading } from '../../components/ui/Loading';
 import { useAuth } from '../../contexts/AuthContext';
-
-interface Park {
-	id: number;
-	title: string;
-	location: string;
-	description: string;
-}
+import type { Park } from './types';
+import {
+	DndContext,
+	PointerSensor,
+	useSensor,
+	useSensors,
+} from '@dnd-kit/core';
+import {
+	arrayMove,
+	rectSortingStrategy,
+	SortableContext,
+} from '@dnd-kit/sortable';
+import { PortfolioItem } from './PortfolioItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faPen } from '@fortawesome/free-solid-svg-icons';
 
 export const Portfolio = () => {
 	const [parks, setParks] = useState<Park[]>([]);
 	const [loading, setLoading] = useState(true);
+	const [isEditMode, setIsEditMode] = useState(false);
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
@@ -34,6 +43,39 @@ export const Portfolio = () => {
 		fetchParks();
 	}, []);
 
+	const sensors = useSensors(
+		useSensor(PointerSensor, {
+			activationConstraint: { distance: 5 },
+		})
+	);
+
+	const persistOrder = async (ordered: Park[]) => {
+		try {
+			await api.post(
+				'/parks/reorder',
+				ordered.map((p, i) => ({ id: p.id, order: i }))
+			);
+		} catch (err) {
+			console.error('Failed to persist parks order:', err);
+		}
+	};
+
+	const handleDragEnd = ({ active, over }: { active: any; over: any }) => {
+		if (!over || active.id === over.id) return;
+
+		setParks((prev) => {
+			const oldIndex = prev.findIndex((p) => p.id === active.id);
+			const newIndex = prev.findIndex((p) => p.id === over.id);
+			if (oldIndex === -1 || newIndex === -1) return prev;
+
+			const next = arrayMove(prev, oldIndex, newIndex);
+
+			persistOrder(next);
+
+			return next;
+		});
+	};
+
 	return (
 		<main className='min-h-screen flex flex-col items-center p-6 space-y-16'>
 			{loading ? (
@@ -41,50 +83,54 @@ export const Portfolio = () => {
 			) : (
 				<>
 					<UnderlineHeader text='Portfolio' withArrow />
-					<h2 className='text-4xl font-semibold'>
-						Designing Playgrounds That Inspire Imagination and Outdoor Play
-					</h2>
-					<div className='grid grid-cols-2 lg:grid-cols-4 max-w-350'>
-						{/* ADMIN ONLY --- Add Portfolio Item */}
+					<div className='flex items-center space-x-4'>
+						<h2 className='text-4xl font-semibold'>
+							Designing Playgrounds That Inspire Imagination and Outdoor Play
+						</h2>
 						{user && (
 							<button
 								type='button'
-								onClick={() => navigate('/admin/add-park')}
-								className='border-1 min-w-30 border-dashed border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
+								onClick={() => setIsEditMode(!isEditMode)}
+								className={`text-xl ${isEditMode ? 'check' : 'pen'}`}
 							>
-								+
+								{isEditMode ? (
+									<FontAwesomeIcon icon={faCheck} />
+								) : (
+									<FontAwesomeIcon icon={faPen} />
+								)}
 							</button>
 						)}
-
-						{/* Portfolio Items */}
-						{parks.map((park) => {
-							const slug = parkNavConverter(park.title);
-
-							return (
-								<Link
-									key={park.title}
-									to={`/portfolio/${slug}`}
-									state={{ park, slug }}
-								>
-									<div className='mx-5 mb-30 relative h-50 hover:scale-105 active:scale-100 transition'>
-										<img
-											src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
-											alt={`${park.title} Image`}
-											className='rounded-xl w-full h-full object-cover z-0 relative'
-										/>
-										<div className='rounded-lg p-3 bg-white flex flex-col text-center w-9/10 mx-auto -mt-12 z-1 relative'>
-											<div className='border-b-1 border-dotted p-2'>
-												<h3 className='text-2xl font-bold text-brand-orange'>
-													{park.title}
-												</h3>
-												<p className='lg '>{park.location}</p>
-											</div>
-										</div>
-									</div>
-								</Link>
-							);
-						})}
 					</div>
+					<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+						<SortableContext
+							items={parks.map((p) => p.id)}
+							strategy={rectSortingStrategy}
+						>
+							<div className='grid grid-cols-2 lg:grid-cols-4 max-w-350'>
+								{/* ADMIN ONLY --- Add Portfolio Item */}
+								{isEditMode && (
+									<button
+										type='button'
+										onClick={() => navigate('/admin/add-park')}
+										className='border-1 min-w-30 border-dashed border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
+									>
+										+
+									</button>
+								)}
+
+								{/* Portfolio Items */}
+								{parks.map((park) => (
+									<PortfolioItem
+										key={park.id}
+										park={park}
+										slug={parkNavConverter(park.title)}
+										disabled={!isEditMode}
+										isEditMode={isEditMode}
+									/>
+								))}
+							</div>
+						</SortableContext>
+					</DndContext>
 				</>
 			)}
 		</main>

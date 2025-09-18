@@ -1,5 +1,9 @@
 import express from 'express';
-import { getAllParks, postPark } from '../repositories/parks.repository';
+import {
+	getAllParks,
+	postPark,
+	reorderParks,
+} from '../repositories/parks.repository';
 import {
 	getParkPortfolio,
 	postPortfolioSections,
@@ -8,6 +12,7 @@ import path from 'path';
 import fs from 'fs';
 import { slugConverter } from '../utils/slugConverter';
 import { upload } from '../utils/multer';
+import { ParkOrder } from '../types';
 
 interface Section {
 	park_id: number;
@@ -91,6 +96,19 @@ router.post('/post-park', upload.any(), async (req, res) => {
 	}
 });
 
-router.post;
+router.post('/reorder', async (req, res) => {
+	const updates = req.body;
+
+	try {
+		await Promise.all(
+			updates.map((parkOrder: ParkOrder) => reorderParks(parkOrder))
+		);
+
+		res.sendStatus(200);
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Error saving order');
+	}
+});
 
 export default router;
