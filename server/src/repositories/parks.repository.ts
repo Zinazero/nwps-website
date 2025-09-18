@@ -18,10 +18,11 @@ export const getRecentParks = async (): Promise<Park[]> => {
 
 export const getParkById = async (parkId: number): Promise<Park> => {
 	const res: QueryResult<Park> = await pool.query(
-		'SELECT id, title, location, description, blurb FROM parks WHERE id = $1', [parkId]	
+		'SELECT id, title, location, description, blurb FROM parks WHERE id = $1',
+		[parkId]
 	);
 	return res.rows[0];
-}
+};
 
 export const postPark = async (park: Park): Promise<number> => {
 	const { title, location, description, blurb } = park;
@@ -33,7 +34,7 @@ export const postPark = async (park: Park): Promise<number> => {
 
 		await client.query('UPDATE parks SET sort_order = sort_order + 1');
 
-		const res: QueryResult<{ id: number }> = await pool.query(
+		const res: QueryResult<{ id: number }> = await client.query(
 			'INSERT INTO parks (title, location, description, blurb) VALUES ($1, $2, $3, $4) RETURNING id',
 			[title, location, description, blurb]
 		);
@@ -41,8 +42,11 @@ export const postPark = async (park: Park): Promise<number> => {
 		await client.query('COMMIT');
 
 		return res.rows[0].id;
-	} catch (err) {
+	} catch (err: any) {
 		await client.query('ROLLBACK');
+
+		if (err.code === '23505') throw new Error('Title already exists.');
+
 		throw err;
 	} finally {
 		client.release();

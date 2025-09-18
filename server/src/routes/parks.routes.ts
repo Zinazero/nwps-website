@@ -105,8 +105,13 @@ router.post('/post-park', upload.any(), async (req, res) => {
 		}
 
 		res.json({ message: 'Park saved' });
-	} catch (err) {
+	} catch (err: any) {
 		console.error(err);
+
+		if (err.message === 'Title already exists.') {
+			return res.status(400).json({ error: err.message });
+		}
+
 		res.status(500).json({ error: 'Internal server error.' });
 	}
 });
