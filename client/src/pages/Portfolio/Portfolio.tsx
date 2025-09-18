@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import api from '../../api/axios';
 import { useEffect, useState } from 'react';
@@ -18,8 +18,8 @@ import {
 	SortableContext,
 } from '@dnd-kit/sortable';
 import { PortfolioItem } from './PortfolioItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPen } from '@fortawesome/free-solid-svg-icons';
+import { Check } from '../../components/ui/Check';
+import { Pen } from '../../components/ui/Pen';
 
 export const Portfolio = () => {
 	const [parks, setParks] = useState<Park[]>([]);
@@ -88,17 +88,19 @@ export const Portfolio = () => {
 							Designing Playgrounds That Inspire Imagination and Outdoor Play
 						</h2>
 						{user && (
-							<button
-								type='button'
-								onClick={() => setIsEditMode(!isEditMode)}
-								className={`text-xl ${isEditMode ? 'check' : 'pen'}`}
-							>
+							<>
 								{isEditMode ? (
-									<FontAwesomeIcon icon={faCheck} />
+									<Check
+										onClick={() => setIsEditMode(false)}
+										className='text-xl'
+									/>
 								) : (
-									<FontAwesomeIcon icon={faPen} />
+									<Pen
+										onClick={() => setIsEditMode(true)}
+										className='text-xl'
+									/>
 								)}
-							</button>
+							</>
 						)}
 					</div>
 					<DndContext sensors={sensors} onDragEnd={handleDragEnd}>

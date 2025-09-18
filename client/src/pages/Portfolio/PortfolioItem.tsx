@@ -2,6 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Link } from 'react-router-dom';
 import type { Park } from './types';
+import { Trash } from '../../components/ui/Trash';
 
 export const PortfolioItem = ({
 	park,
@@ -28,8 +29,9 @@ export const PortfolioItem = ({
 			style={style}
 			{...attributes}
 			{...listeners}
-			className={isEditMode ? 'draggable' : ''}
+			className={`relative ${isEditMode ? 'draggable' : ''}`}
 		>
+			{/* Item Card */}
 			<Link
 				to={`/portfolio/${slug}`}
 				state={{ park, slug }}
@@ -52,6 +54,14 @@ export const PortfolioItem = ({
 					</div>
 				</div>
 			</Link>
+
+			{/* Delete Button */}
+			<Trash
+				onClick={() => {
+					console.log('empty');
+				}}
+				className='absolute top-1 right-6'
+			/>
 		</div>
 	);
 };

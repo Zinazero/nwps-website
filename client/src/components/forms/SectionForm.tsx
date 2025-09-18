@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Section } from './types';
 import { useEffect, useState } from 'react';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Trash } from '../ui/Trash';
 
 interface SectionFormProps {
 	section: Section;
@@ -69,13 +68,10 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 					/>
 
 					{/* Remove Preview Button  */}
-					<button
-						type='button'
+					<Trash
 						onClick={removeImage}
-						className='absolute top-0 right-0 m-2 trash hover-vis'
-					>
-						<FontAwesomeIcon icon={faTrash} />
-					</button>
+						className='absolute top-0 right-0 m-2 hover-vis'
+					/>
 				</div>
 			) : (
 				<label htmlFor={`image-upload-${index}`} className='file-input'>
@@ -98,26 +94,23 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 					placeholder='Title'
 					value={section.title}
 					onChange={handleTextChange}
-                    required
+					required
 				/>
 				<textarea
 					name='description'
 					placeholder='Description'
 					value={section.description}
 					onChange={handleTextChange}
-                    required
+					required
 				/>
 			</div>
 
 			{/* Remove Section Button */}
 			{index !== 0 && (
-				<button
-					type='button'
+				<Trash
 					onClick={() => dropSection(index, section)}
-					className='absolute top-1/2 -translate-1/2 -right-50 text-2xl p-4 trash'
-				>
-					<FontAwesomeIcon icon={faTrash} />
-				</button>
+					className='absolute top-1/2 -translate-1/2 -right-50 text-2xl'
+				/>
 			)}
 		</section>
 	);
