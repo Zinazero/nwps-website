@@ -54,7 +54,7 @@ export const Portfolio = () => {
 		if (deletePark === null) return;
 
 		try {
-			await api.delete(`/parks/${deletePark}`);
+			await api.delete(`/parks/${deletePark.id}`);
 			setParks((prev) => prev.filter((park) => park.id !== deletePark.id));
 			console.log('Deleted park:', deletePark);
 		} catch (err) {
