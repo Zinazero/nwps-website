@@ -66,7 +66,7 @@ button {
 input,
 textarea {
 	@apply bg-white rounded-lg border p-2 focus:outline-0 border-transparent-grey;
-	@apply focus:border-brand-orange focus:scale-105 shadow-sm transition;
+	@apply focus:border-brand-orange focus:scale-105 shadow-sm transition resize-none;
 	caret-color: var(--color-brand-orange);
 }
 

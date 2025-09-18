@@ -11,7 +11,7 @@
 #item-form input,
 #item-form .file-input,
 #item-form textarea {
-	@apply bg-transparent border rounded-xl resize-none border-dashed;
+	@apply bg-transparent border rounded-xl border-dashed;
 	@apply border-brand-orange text-center;
 }
 
