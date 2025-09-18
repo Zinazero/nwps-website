@@ -56,12 +56,14 @@ export const PortfolioItem = ({
 			</Link>
 
 			{/* Delete Button */}
-			<Trash
-				onClick={() => {
-					console.log('empty');
-				}}
-				className='absolute top-1 right-6'
-			/>
+			{isEditMode && (
+				<Trash
+					onClick={() => {
+						console.log('empty');
+					}}
+					className='absolute top-1 right-6'
+				/>
+			)}
 		</div>
 	);
 };
