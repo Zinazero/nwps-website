@@ -2,6 +2,7 @@ import express from 'express';
 import {
 	deletePark,
 	getAllParks,
+	getParkById,
 	getRecentParks,
 	postPark,
 	reorderParks,
@@ -11,7 +12,7 @@ import {
 	postPortfolioSections,
 } from '../repositories/portfolioSections.repository';
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { slugConverter } from '../utils/slugConverter';
 import { upload } from '../utils/multer';
 import { ParkOrder } from '../types';
@@ -91,15 +92,17 @@ router.post('/post-park', upload.any(), async (req, res) => {
 			slug
 		);
 
-		fs.mkdirSync(folder, { recursive: true });
+		// 1. Create folder
+		await fs.mkdir(folder, { recursive: true });
 
-		files.forEach((file) => {
+		// 2. Write each file
+		for (const file of files) {
 			const index = Number(file.fieldname);
 			const title = `${slug}-${index + 1}`;
 			const ext = path.extname(file.originalname);
 
-			fs.writeFileSync(path.join(folder, `${title}${ext}`), file.buffer);
-		});
+			await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
+		}
 
 		res.json({ message: 'Park saved' });
 	} catch (err) {
@@ -125,23 +128,31 @@ router.post('/reorder', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
 	try {
-		const { id } = req.params;
-		const parkId = Number(id);
-
-		if (isNaN(parkId)) {
+		const parkId = Number(req.params.id);
+		if (isNaN(parkId))
 			return res.status(400).json({ error: 'Invalid park id' });
-		}
+
+		const park = await getParkById(parkId);
+		if (!park) return res.status(404).json({ error: 'Park not found' });
+
+		const slug = slugConverter(park.title);
+		const folderPath = path.join(
+			__dirname,
+			'../../../client/public/images/playgrounds',
+			slug
+		);
+
+		// Delete images folder
+		await fs.rm(folderPath, { recursive: true, force: true });
 
 		const deletedCount = await deletePark(parkId);
-
-		if (deletedCount === 0) {
+		if (deletedCount === 0)
 			return res.status(404).json({ error: 'Park not found' });
-		}
 
 		res.sendStatus(204);
 	} catch (err) {
 		console.error(err);
-		res.status(500).send('Error deleting park');
+		res.status(500).json({ error: 'Internal server error' });
 	}
 });
 

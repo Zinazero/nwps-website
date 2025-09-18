@@ -16,6 +16,13 @@ export const getRecentParks = async (): Promise<Park[]> => {
 	return res.rows;
 };
 
+export const getParkById = async (parkId: number): Promise<Park> => {
+	const res: QueryResult<Park> = await pool.query(
+		'SELECT id, title, location, description, blurb FROM parks WHERE id = $1', [parkId]	
+	);
+	return res.rows[0];
+}
+
 export const postPark = async (park: Park): Promise<number> => {
 	const { title, location, description, blurb } = park;
 
