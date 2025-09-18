@@ -46,7 +46,7 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 	}, [section.image]);
 
 	const removeImage = () => setSection({ ...section, image: null });
-	const isReverse = index % 2 !== 0 ? 'flex-row-reverse' : '';
+	const isReverse = index % 2 === 0 ? 'flex-row-reverse' : '';
 
 	return (
 		<section
