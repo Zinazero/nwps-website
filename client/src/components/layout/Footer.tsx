@@ -52,7 +52,12 @@ export const Footer = () => {
 				<div className='flex my-6'>
 					{/* Section 1 */}
 					<div className='flex flex-col px-8 pb-20 space-y-10 w-1/4'>
-						<img src={nwpsVerticalLogo} alt='NWPS Logo' className='h-42' />
+						<img
+							src={nwpsVerticalLogo}
+							alt='NWPS Logo'
+							className='h-42'
+							draggable={false}
+						/>
 						<div className='flex flex-col space-y-6'>
 							<span>
 								<FontAwesomeIcon icon={faLocationArrow} /> Brantford, ON

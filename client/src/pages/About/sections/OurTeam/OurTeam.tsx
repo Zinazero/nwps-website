@@ -51,6 +51,7 @@ export const OurTeam = () => {
 									src={profile.image}
 									alt={`${profile.name} Image`}
 									className='w-full h-full object-cover object-top'
+									draggable={false}
 								/>
 							</div>
 							<div className='min-h-24'>

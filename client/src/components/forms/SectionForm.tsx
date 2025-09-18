@@ -65,6 +65,7 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 						src={preview}
 						alt='Image Preview'
 						className='w-full rounded-xl'
+						draggable={false}
 					/>
 
 					{/* Remove Preview Button  */}

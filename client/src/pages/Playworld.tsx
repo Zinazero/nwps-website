@@ -12,6 +12,7 @@ export const Playworld = () => {
 						src={playworldPageImage}
 						alt='Children playing in play structure'
 						className='rounded-lg h-120'
+						draggable={false}
 					/>
 					<div className='flex flex-col space-y-24'>
 						<div className='flex flex-col space-y-2'>

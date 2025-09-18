@@ -36,7 +36,7 @@ export const SquigglyFrame: React.FC<SquigglyFrameProps> = ({
 				src={src}
 				alt={alt}
 				className='w-full h-full object-cover relative z-10'
-				loading='lazy'
+				draggable={false}
 			/>
 		</div>
 	);

@@ -40,6 +40,7 @@ export const PortfolioItem = ({
 						src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 						alt={`${park.title} Image`}
 						className='rounded-xl w-full h-full object-cover z-0 relative'
+						draggable={false}
 					/>
 					<div className='rounded-lg p-3 bg-white flex flex-col text-center w-9/10 mx-auto -mt-12 z-1 relative'>
 						<div className='border-b-1 border-dotted p-2'>

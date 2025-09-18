@@ -27,7 +27,7 @@ export const UnderlineHeader: React.FC<UnderlineHeaderProps> = ({
 				</svg>
 			</div>
             {withArrow && (
-                <img src={innerPageHeaderArrow} alt='Spiral Arrow' />
+                <img src={innerPageHeaderArrow} alt='Spiral Arrow' draggable={false} />
             )}
 		</div>
 	);

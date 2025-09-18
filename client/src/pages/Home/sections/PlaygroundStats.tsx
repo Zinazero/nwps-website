@@ -23,22 +23,42 @@ export const PlaygroundStats = () => {
 				</h2>
 				<div className='flex items-center justify-evenly w-full max-w-350'>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img src={slideIcon} alt='Slide Icon' className='h-40' />
+						<img
+							src={slideIcon}
+							alt='Slide Icon'
+							className='h-40'
+							draggable={false}
+						/>
 						<h4 className='text-4xl mt-6 mb-3'>300,000+</h4>
 						<span className='text-xl text-gray-600'>Slide Rides</span>
 					</div>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img src={seesawIcon} alt='Slide Icon' className='h-40' />
+						<img
+							src={seesawIcon}
+							alt='Slide Icon'
+							className='h-40'
+							draggable={false}
+						/>
 						<h4 className='text-4xl mt-6 mb-3'>100,000+</h4>
 						<span className='text-xl text-gray-600'>See-Saws</span>
 					</div>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img src={swingIcon} alt='Slide Icon' className='h-40' />
+						<img
+							src={swingIcon}
+							alt='Slide Icon'
+							className='h-40'
+							draggable={false}
+						/>
 						<h4 className='text-4xl mt-6 mb-3'>500,000+</h4>
 						<span className='text-xl text-gray-600'>Underducks</span>
 					</div>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img src={smileIcon} alt='Slide Icon' className='h-40' />
+						<img
+							src={smileIcon}
+							alt='Slide Icon'
+							className='h-40'
+							draggable={false}
+						/>
 						<h4 className='text-4xl mt-6 mb-3'>1,000,000+</h4>
 						<span className='text-xl text-gray-600'>Happy Kids</span>
 					</div>

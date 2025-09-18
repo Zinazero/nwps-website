@@ -23,6 +23,7 @@ export const RecentProjects = () => {
 								src={goreMeadows}
 								alt='Gore Meadows Park Playground'
 								className='rounded-lg shadow-md group-hover:scale-110 transition'
+								draggable={false}
 							/>
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Gore Meadows Park
@@ -40,6 +41,7 @@ export const RecentProjects = () => {
 								src={captainCornelius}
 								alt='Captain Cornelius Park Playground'
 								className='rounded-lg shadow-md group-hover:scale-110 transition'
+								draggable={false}
 							/>
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Captain Cornelius Park
@@ -57,6 +59,7 @@ export const RecentProjects = () => {
 								src={happyRolphs}
 								alt='Happy Rolphs Animal Farm Playground'
 								className='rounded-lg shadow-md group-hover:scale-110 transition'
+								draggable={false}
 							/>
 							<h4 className='text-2xl font-semibold mt-5 mb-2'>
 								Happy Rolph's Animal Farm

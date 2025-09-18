@@ -7,7 +7,12 @@ export const PlayworldSection = () => {
 		<section id='playworld' className='bg-brand-blue-light shadow-md'>
 			<div className='flex justify-center p-10'>
 				<div className='w-140 flex flex-col justify-between'>
-					<img src={playworldLogo} alt='Playworld Logo' className='w-70' />
+					<img
+						src={playworldLogo}
+						alt='Playworld Logo'
+						className='w-70'
+						draggable={false}
+					/>
 					<h3 className='text-4xl font-bold'>
 						EXCLUSIVE ONTARIO DISTRIBUTOR FOR PLAYWORLD PRODUCTS
 					</h3>
@@ -22,6 +27,7 @@ export const PlayworldSection = () => {
 					className='w-140 rounded-lg shadow-md'
 					src={playworldImage}
 					alt='Children on Playground Image'
+					draggable={false}
 				/>
 			</div>
 		</section>

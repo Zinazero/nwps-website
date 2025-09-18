@@ -42,7 +42,7 @@ export const Login = () => {
 	return (
 		<main className='min-h-screen flex items-center justify-center'>
 			<div className='flex flex-col items-center space-y-24'>
-				<img src={nwpsVerticalLogo} alt='NWPS Logo' className='h-42' />
+				<img src={nwpsVerticalLogo} alt='NWPS Logo' className='h-42' draggable={false} />
 				<LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} />
 				{error && <span className='text-[red]'>{error}</span>}
 			</div>
