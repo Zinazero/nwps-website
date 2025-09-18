@@ -43,7 +43,7 @@ export const RecentProjects = () => {
 						{recentProjects.map((park) => (
 							<div>
 								<ParkCard key={park.id} park={park} />
-								<p>{park.description}</p>
+								<p>{park.blurb || park.description}</p>
 							</div>
 						))}
 					</div>

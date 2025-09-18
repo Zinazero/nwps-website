@@ -4,25 +4,24 @@ import type { QueryResult } from 'pg';
 
 export const getAllParks = async (): Promise<Park[]> => {
 	const res: QueryResult<Park> = await pool.query(
-		'SELECT id, title, location, description FROM parks ORDER BY sort_order ASC'
+		'SELECT id, title, location, description, blurb FROM parks ORDER BY sort_order ASC'
 	);
 	return res.rows;
 };
 
 export const getRecentParks = async (): Promise<Park[]> => {
 	const res: QueryResult<Park> = await pool.query(
-		'SELECT id, title, location, description FROM parks ORDER BY sort_order ASC LIMIT 3'	
+		'SELECT id, title, location, description, blurb FROM parks ORDER BY sort_order ASC LIMIT 3'	
 	);
-	console.log(res.rows)
 	return res.rows;
 };
 
 export const postPark = async (park: Park): Promise<number> => {
-	const { title, location, description } = park;
+	const { title, location, description, blurb } = park;
 
 	const res: QueryResult<{ id: number }> = await pool.query(
-		'INSERT INTO parks (title, location, description) VALUES ($1, $2, $3) RETURNING id',
-		[title, location, description]
+		'INSERT INTO parks (title, location, description, blurb) VALUES ($1, $2, $3, $4) RETURNING id',
+		[title, location, description, blurb]
 	);
 
 	return res.rows[0].id;

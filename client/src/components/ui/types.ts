@@ -4,3 +4,8 @@ export interface ButtonProps {
 	onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 	className?: string;
 }
+
+export interface TooltipProps {
+	message: string;
+	className?: string;
+}

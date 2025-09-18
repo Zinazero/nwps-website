@@ -4,8 +4,9 @@ import type { Section } from '../../../components/forms/types';
 import api from '../../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { Tooltip } from '../../../components/ui/Tooltip';
 
 export const AddPark = () => {
 	const [form, setForm] = useState<Section[]>([
@@ -16,6 +17,7 @@ export const AddPark = () => {
 		},
 	]);
 	const [city, setCity] = useState<string>('');
+	const [blurb, setBlurb] = useState<string>('');
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
@@ -45,7 +47,7 @@ export const AddPark = () => {
 			// Create a JSON object for all non-file data
 			const jsonData = form.map((section, index) => {
 				const { image, ...rest } = section; // remove image
-				return index === 0 ? { ...rest, location } : rest;
+				return index === 0 ? { ...rest, location, blurb } : rest;
 			});
 			formData.append('data', JSON.stringify(jsonData));
 
@@ -73,15 +75,30 @@ export const AddPark = () => {
 	return (
 		<main className='min-h-screen flex flex-col items-center space-y-12 bg-white p-16 relative'>
 			<div className='flex flex-col items-center'>
-				<div className='flex items-center space-x-4'>
-					<input
-						type='text'
-						name='city'
-						placeholder='City'
-						value={city}
-						onChange={(e) => setCity(e.target.value)}
-					/>
-					<span>Ontario</span>
+				<div className='flex flex-col items-center space-y-4'>
+					<div className='flex items-center space-x-4'>
+						<input
+							type='text'
+							name='city'
+							placeholder='City'
+							value={city}
+							onChange={(e) => setCity(e.target.value)}
+						/>
+						<span>Ontario</span>
+					</div>
+					<div className='flex items-center space-x-4'>
+						<textarea
+							name='blurb'
+							placeholder='Blurb (optional)'
+							value={blurb}
+							onChange={(e) => setBlurb(e.target.value)}
+							className='w-100 h-30 text-center'
+						/>
+						<div className='relative group'>
+							<FontAwesomeIcon icon={faCircleInfo} className='text-grey' />
+							<Tooltip message='This text will appear under the park if it is in the Recent Projects section.' className='absolute bottom-full left-full w-80' />
+						</div>
+					</div>
 				</div>
 				<ItemForm
 					form={form}

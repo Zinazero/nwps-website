@@ -3,4 +3,5 @@ export interface Park {
 	title: string;
 	location: string;
 	description: string;
+	blurb: string;
 }
