@@ -23,9 +23,6 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 			const file = e.target.files[0];
 			setSection({ ...section, image: file });
 
-			// revoke previous preview if any
-			if (preview) URL.revokeObjectURL(preview);
-
 			// create new preview URL
 			setPreview(URL.createObjectURL(file));
 		}
@@ -74,7 +71,7 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 					/>
 				</div>
 			) : (
-				<label htmlFor={`image-upload-${index}`} className='file-input'>
+				<label htmlFor={`image-upload-${index}`} className='file-input cursor-pointer'>
 					+
 				</label>
 			)}
