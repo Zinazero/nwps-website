@@ -5,7 +5,3 @@ export interface ButtonProps {
 	className?: string;
 }
 
-export interface TooltipProps {
-	message: string;
-	className?: string;
-}

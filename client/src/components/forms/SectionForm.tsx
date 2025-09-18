@@ -1,6 +1,7 @@
 import type { Section } from './types';
 import { useEffect, useState } from 'react';
 import { Trash } from '../ui/Trash';
+import { Image } from '../ui/Image';
 
 interface SectionFormProps {
 	section: Section;
@@ -60,11 +61,10 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 			{preview ? (
 				<div className='relative group'>
 					{/* Image Preview */}
-					<img
+					<Image
 						src={preview}
 						alt='Image Preview'
 						className='w-full rounded-xl'
-						draggable={false}
 					/>
 
 					{/* Remove Preview Button  */}

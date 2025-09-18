@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import type { Park } from '../../pages/types';
 import { Trash } from './Trash';
 import { parkNavConverter } from '../../utils/parkNavConverter';
+import { Image } from './Image';
 
 export const ParkCard = ({
 	park,
@@ -41,11 +42,10 @@ export const ParkCard = ({
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
 				<div className='mx-5 mb-30 relative h-50 hover:scale-105 active:scale-100 transition'>
-					<img
+					<Image
 						src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 						alt={`${park.title} Image`}
 						className='rounded-xl w-full h-full object-cover z-0 relative'
-						draggable={false}
 					/>
 					<div className='rounded-lg p-3 bg-white flex flex-col text-center w-9/10 mx-auto -mt-12 z-1 relative'>
 						<div className='border-b-1 border-dotted p-2'>

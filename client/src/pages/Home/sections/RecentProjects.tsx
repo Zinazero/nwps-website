@@ -5,6 +5,7 @@ import type { Park } from '../../types';
 import api from '../../../api/axios';
 import { ParkCard } from '../../../components/ui/ParkCard';
 import { Loading } from '../../../components/ui/Loading';
+import { Image } from '../../../components/ui/Image';
 
 export const RecentProjects = () => {
 	const [recentProjects, setRecentProjects] = useState<Park[]>([]);
@@ -50,11 +51,10 @@ export const RecentProjects = () => {
 				)}
 			</div>
 			<div className='max-w-300 xl:mx-auto mx-20 mb-20 rounded-2xl shadow-2xl bg-brand-blue-light p-12 flex items-center'>
-				<img
+				<Image
 					src={nwpsVerticalLogo}
 					alt='NWPS Logo'
 					className='h-48'
-					draggable={false}
 				/>
 				<div className='flex-1 flex flex-col items-center gap-6'>
 					<p className='text-4xl text-brand-orange'>

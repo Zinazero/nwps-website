@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import type { LinkType } from './types';
+import { Image } from '../ui/Image';
 
 export const Header = () => {
 	const location = useLocation();
@@ -32,11 +33,10 @@ export const Header = () => {
 		<header className='sticky top-0 z-50 w-full shadow-md bg-white p-4'>
 			<div className='mx-auto px-4 flex items-center justify-between'>
 				<Link to='/'>
-					<img
+					<Image
 						src={nwpsLogo}
 						alt='NWPS Logo'
 						className='h-16 cursor-pointer'
-						draggable={false}
 					/>
 				</Link>
 

@@ -4,6 +4,7 @@ import { LoginForm } from '../components/forms/LoginForm';
 import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Image } from '../components/ui/Image';
 
 export interface LoginFormValues {
 	username: string;
@@ -42,11 +43,10 @@ export const Login = () => {
 	return (
 		<main className='min-h-screen flex items-center justify-center'>
 			<div className='flex flex-col items-center space-y-24'>
-				<img
+				<Image
 					src={nwpsVerticalLogo}
 					alt='NWPS Logo'
 					className='h-42'
-					draggable={false}
 				/>
 				<LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
 				{error && <span className='text-[red]'>{error}</span>}

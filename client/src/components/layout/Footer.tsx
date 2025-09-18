@@ -15,6 +15,7 @@ import type { LinkType } from './types';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { LogoutButton } from './LogoutButton';
+import { Image } from '../ui/Image';
 
 export const Footer = () => {
 	const { user } = useAuth();
@@ -52,11 +53,10 @@ export const Footer = () => {
 				<div className='flex my-6'>
 					{/* Section 1 */}
 					<div className='flex flex-col px-8 pb-20 space-y-10 w-1/4'>
-						<img
+						<Image
 							src={nwpsVerticalLogo}
 							alt='NWPS Logo'
 							className='h-42'
-							draggable={false}
 						/>
 						<div className='flex flex-col space-y-6'>
 							<span>

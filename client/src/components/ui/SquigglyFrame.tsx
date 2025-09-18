@@ -1,3 +1,5 @@
+import { Image } from "./Image";
+
 interface SquigglyFrameProps {
 	src: string;
 	alt: string;
@@ -32,11 +34,10 @@ export const SquigglyFrame: React.FC<SquigglyFrameProps> = ({
 				maskMode: 'alpha',
 			}}
 		>
-			<img
+			<Image
 				src={src}
 				alt={alt}
 				className='w-full h-full object-cover relative z-10'
-				draggable={false}
 			/>
 		</div>
 	);

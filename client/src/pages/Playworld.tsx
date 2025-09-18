@@ -2,17 +2,17 @@ import playworldPageImage from '@/assets/images/generic/playworld-page-image.jpg
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { Image } from '../components/ui/Image';
 export const Playworld = () => {
 	return (
 		<main className=' flex flex-col items-center justify-center'>
 			<div className='flex flex-col p-8 space-y-16 max-w-350'>
 				{/* Hero */}
 				<div className='flex justify-center space-x-12'>
-					<img
+					<Image
 						src={playworldPageImage}
 						alt='Children playing in play structure'
 						className='rounded-lg h-120'
-						draggable={false}
 					/>
 					<div className='flex flex-col space-y-24'>
 						<div className='flex flex-col space-y-2'>

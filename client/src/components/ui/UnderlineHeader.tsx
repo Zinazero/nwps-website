@@ -1,4 +1,5 @@
 import innerPageHeaderArrow from '@/assets/icons/inner-page-header-arrow.png';
+import { Image } from './Image';
 
 interface UnderlineHeaderProps {
     text: string;
@@ -27,7 +28,7 @@ export const UnderlineHeader: React.FC<UnderlineHeaderProps> = ({
 				</svg>
 			</div>
             {withArrow && (
-                <img src={innerPageHeaderArrow} alt='Spiral Arrow' draggable={false} />
+                <Image src={innerPageHeaderArrow} alt='Spiral Arrow' />
             )}
 		</div>
 	);

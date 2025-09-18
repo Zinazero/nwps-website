@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import api from '../../api/axios';
 import { Loading } from '../../components/ui/Loading';
+import { Image } from '../../components/ui/Image';
 
 interface Section {
 	id: number;
@@ -46,11 +47,10 @@ export const ParkPage = () => {
 				<>
 					{/* Hero */}
 					<div className='p-6 flex flex-col items-center space-y-12'>
-						<img
+						<Image
 							src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 							alt={`${park.title} Image 1`}
 							className='w-full max-w-250 rounded-xl'
-							draggable={false}
 						/>
 						<div className='text-center max-w-300 space-y-4'>
 							<div>
@@ -68,11 +68,10 @@ export const ParkPage = () => {
 								index % 2 !== 0 ? 'flex-row-reverse' : ''
 							}`}
 						>
-							<img
+							<Image
 								src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg`}
 								alt={`${section.title} Image`}
 								className='w-150 rounded-xl'
-								draggable={false}
 							/>
 							<div className='flex flex-col space-y-4'>
 								<h2 className='text-3xl font-bold'>{section.title}</h2>

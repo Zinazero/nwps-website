@@ -7,6 +7,7 @@ import {
 	faChevronLeft,
 	faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
+import { Image } from '../../../components/ui/Image';
 
 export const AuthorizedDistributor = () => {
 	return (
@@ -43,11 +44,10 @@ export const AuthorizedDistributor = () => {
 					{imageArray.map((src, i) => (
 						<SwiperSlide key={i}>
 							<div className='flex items-center justify-center h-full'>
-								<img
+								<Image
 									src={src}
 									alt={`Distributor ${i}`}
 									className='object-contain max-w-full'
-									draggable={false}
 								/>
 							</div>
 						</SwiperSlide>

@@ -2,6 +2,7 @@ import slideIcon from '@/assets/icons/slide-icon.png';
 import seesawIcon from '@/assets/icons/seesaw-icon.png';
 import swingIcon from '@/assets/icons/swing-icon.png';
 import smileIcon from '@/assets/icons/smile-icon.png';
+import { Image } from '../../../components/ui/Image';
 
 export const PlaygroundStats = () => {
 	return (
@@ -23,41 +24,37 @@ export const PlaygroundStats = () => {
 				</h2>
 				<div className='flex items-center justify-evenly w-full max-w-350'>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img
+						<Image
 							src={slideIcon}
 							alt='Slide Icon'
 							className='h-40'
-							draggable={false}
 						/>
 						<h4 className='text-4xl mt-6 mb-3'>300,000+</h4>
 						<span className='text-xl text-gray-600'>Slide Rides</span>
 					</div>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img
+						<Image
 							src={seesawIcon}
 							alt='Slide Icon'
 							className='h-40'
-							draggable={false}
 						/>
 						<h4 className='text-4xl mt-6 mb-3'>100,000+</h4>
 						<span className='text-xl text-gray-600'>See-Saws</span>
 					</div>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img
+						<Image
 							src={swingIcon}
 							alt='Slide Icon'
 							className='h-40'
-							draggable={false}
 						/>
 						<h4 className='text-4xl mt-6 mb-3'>500,000+</h4>
 						<span className='text-xl text-gray-600'>Underducks</span>
 					</div>
 					<div className='flex flex-col items-center justify-center text-center'>
-						<img
+						<Image
 							src={smileIcon}
 							alt='Slide Icon'
 							className='h-40'
-							draggable={false}
 						/>
 						<h4 className='text-4xl mt-6 mb-3'>1,000,000+</h4>
 						<span className='text-xl text-gray-600'>Happy Kids</span>

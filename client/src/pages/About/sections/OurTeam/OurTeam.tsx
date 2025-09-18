@@ -3,6 +3,7 @@ import { MikeBlurb, BrianBlurb, WendyBlurb, MarkBlurb } from './Blurbs.ts';
 import brian from '@/assets/images/team/brian-salter.jpg';
 import wendy from '@/assets/images/team/wendy-hudgins.jpg';
 import mark from '@/assets/images/team/mark-jones.jpg';
+import { Image } from '../../../../components/ui/Image.tsx';
 
 export const OurTeam = () => {
 	interface Profile {
@@ -47,11 +48,10 @@ export const OurTeam = () => {
 							}`}
 						>
 							<div className='w-64 h-64 overflow-hidden relative rounded-lg'>
-								<img
+								<Image
 									src={profile.image}
 									alt={`${profile.name} Image`}
 									className='w-full h-full object-cover object-top'
-									draggable={false}
 								/>
 							</div>
 							<div className='min-h-24'>

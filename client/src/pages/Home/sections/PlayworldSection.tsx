@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import playworldImage from '@/assets/images/generic/playworld-image.jpg';
 import playworldLogo from '@/assets/logos/pw-logo.svg';
+import { Image } from '../../../components/ui/Image';
 
 export const PlayworldSection = () => {
 	return (
 		<section id='playworld' className='bg-brand-blue-light shadow-md'>
 			<div className='flex justify-center p-10'>
 				<div className='w-140 flex flex-col justify-between'>
-					<img
+					<Image
 						src={playworldLogo}
 						alt='Playworld Logo'
 						className='w-70'
-						draggable={false}
 					/>
 					<h3 className='text-4xl font-bold'>
 						EXCLUSIVE ONTARIO DISTRIBUTOR FOR PLAYWORLD PRODUCTS
@@ -23,11 +23,10 @@ export const PlayworldSection = () => {
 						Learn More
 					</Link>
 				</div>
-				<img
+				<Image
 					className='w-140 rounded-lg shadow-md'
 					src={playworldImage}
 					alt='Children on Playground Image'
-					draggable={false}
 				/>
 			</div>
 		</section>
