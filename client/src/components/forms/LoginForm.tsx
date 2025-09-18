@@ -1,15 +1,19 @@
+import { Loading } from '../ui/Loading';
+
 interface LoginFormProps {
 	form: { username: string; password: string };
 	setForm: React.Dispatch<
 		React.SetStateAction<{ username: string; password: string }>
 	>;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+	loading: boolean;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({
 	form,
 	setForm,
 	handleSubmit,
+	loading,
 }) => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,12 +37,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 				onChange={(e) => handleChange(e)}
 				required
 			/>
-			<button
-				type='submit'
-				className='p-2 bg-brand-orange hover:bg-brand-blue transition text-light font-bold rounded-lg active:scale-95 cursor-pointer'
-			>
-				Submit
-			</button>
+			{loading ? (
+				<Loading />
+			) : (
+				<button
+					type='submit'
+					className='p-2 bg-brand-orange hover:bg-brand-blue transition text-light font-bold rounded-lg active:scale-95 cursor-pointer'
+				>
+					Submit
+				</button>
+			)}
 		</form>
 	);
 };
