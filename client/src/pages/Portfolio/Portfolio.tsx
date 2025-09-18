@@ -20,11 +20,14 @@ import {
 import { PortfolioItem } from './PortfolioItem';
 import { Check } from '../../components/ui/Check';
 import { Pen } from '../../components/ui/Pen';
+import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
 export const Portfolio = () => {
 	const [parks, setParks] = useState<Park[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [isEditMode, setIsEditMode] = useState(false);
+	const [confirmOpen, setConfirmOpen] = useState(false);
+	const [deletePark, setDeletePark] = useState<Park | null>(null);
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
@@ -42,6 +45,26 @@ export const Portfolio = () => {
 
 		fetchParks();
 	}, []);
+
+	const handleDeleteClick = (park: Park) => {
+		setDeletePark(park);
+		setConfirmOpen(true);
+	};
+
+	const handleDelete = async () => {
+		if (deletePark === null) return;
+
+		try {
+			await api.delete(`/parks/${deletePark}`);
+			setParks((prev) => prev.filter((park) => park.id !== deletePark.id));
+			console.log('Deleted park:', deletePark);
+		} catch (err) {
+			console.error('Error deleting park:', err);
+		} finally {
+			setDeletePark(null);
+			setConfirmOpen(false);
+		}
+	};
 
 	const sensors = useSensors(
 		useSensor(PointerSensor, {
@@ -128,6 +151,7 @@ export const Portfolio = () => {
 										slug={parkNavConverter(park.title)}
 										disabled={!isEditMode}
 										isEditMode={isEditMode}
+										deleteItem={handleDeleteClick}
 									/>
 								))}
 							</div>
@@ -135,6 +159,14 @@ export const Portfolio = () => {
 					</DndContext>
 				</>
 			)}
+
+			{/* Confirm Modal */}
+			<ConfirmModal
+				isOpen={confirmOpen}
+				message={`Are you sure you want to delete ${deletePark?.title}?`}
+				onConfirm={handleDelete}
+				onCancel={() => setConfirmOpen(false)}
+			/>
 		</main>
 	);
 };

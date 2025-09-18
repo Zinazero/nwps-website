@@ -9,11 +9,13 @@ export const PortfolioItem = ({
 	slug,
 	disabled,
 	isEditMode,
+	deleteItem
 }: {
 	park: Park;
 	slug: string;
 	disabled?: boolean;
 	isEditMode?: boolean;
+	deleteItem: (park: Park) => void;
 }) => {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id: park.id, disabled });
@@ -58,9 +60,7 @@ export const PortfolioItem = ({
 			{/* Delete Button */}
 			{isEditMode && (
 				<Trash
-					onClick={() => {
-						console.log('empty');
-					}}
+					onClick={() => deleteItem(park)}
 					className='absolute top-1 right-6'
 				/>
 			)}

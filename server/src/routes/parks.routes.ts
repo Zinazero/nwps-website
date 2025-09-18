@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+	deletePark,
 	getAllParks,
 	postPark,
 	reorderParks,
@@ -108,6 +109,28 @@ router.post('/reorder', async (req, res) => {
 	} catch (err) {
 		console.error(err);
 		res.status(500).send('Error saving order');
+	}
+});
+
+router.delete('/:id', async (req, res) => {
+	try {
+		const { id } = req.params;
+		const parkId = Number(id);
+
+		if (isNaN(parkId)) {
+			return res.status(400).json({ error: 'Invalid park id' });
+		}
+
+		const deletedCount = await deletePark(parkId);
+
+		if (deletedCount === 0) {
+			return res.status(404).json({ error: 'Park not found' });
+		}
+
+		res.sendStatus(204);
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Error deleting park');
 	}
 });
 

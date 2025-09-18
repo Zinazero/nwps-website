@@ -1,9 +1,3 @@
-export interface Section {
-  title: string;
-  description: string;
-  location: string;
-}
-
 export interface Park {
 	id: number;
 	title: string;
@@ -14,6 +8,12 @@ export interface Park {
 export interface ParkOrder {
 	id: number;
 	sort_order: number;
+}
+
+export interface Section {
+  title: string;
+  description: string;
+  location: string;
 }
 
 export interface PortfolioSection {
