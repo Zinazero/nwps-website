@@ -43,8 +43,8 @@ export const RecentProjects = () => {
 					<div className='grid grid-cols-3 gap-10 text-center'>
 						{recentProjects.map((park) => (
 							<div>
-								<ParkCard key={park.id} park={park} />
-								<p>{park.blurb || park.description}</p>
+								<ParkCard key={park.id} park={park} className='mb-20' />
+								<p className='text-lg/loose'>{park.blurb || park.description}</p>
 							</div>
 						))}
 					</div>

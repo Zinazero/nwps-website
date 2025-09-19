@@ -150,6 +150,7 @@ export const Portfolio = () => {
 										disabled={!isEditMode}
 										isEditMode={isEditMode}
 										deleteItem={handleDeleteClick}
+										className='mb-30'
 									/>
 								))}
 							</div>

@@ -10,12 +10,14 @@ export const ParkCard = ({
 	park,
 	disabled,
 	isEditMode,
-	deleteItem
+	deleteItem,
+	className,
 }: {
 	park: Park;
 	disabled?: boolean;
 	isEditMode?: boolean;
 	deleteItem?: (park: Park) => void;
+	className?: string;
 }) => {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id: park.id, disabled });
@@ -41,7 +43,7 @@ export const ParkCard = ({
 				state={{ park, slug }}
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
-				<div className='mx-5 mb-30 relative h-50 hover:scale-105 active:scale-100 transition'>
+				<div className={`${className} mx-5 relative h-50 hover:scale-105 active:scale-100 transition`}>
 					<Image
 						src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 						alt={`${park.title} Image`}
