@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import playworldImage from '@/assets/images/generic/playworld-image.jpg';
 import playworldLogo from '@/assets/logos/pw-logo.svg';
-import { Image } from '../../../components/ui/Image';
+import { Image } from './Image';
 
-export const PlayworldSection = () => {
+export const PlayworldBanner = () => {
 	return (
-		<section id='playworld' className='bg-brand-blue-light shadow-md'>
+		<div id='playworld' className='bg-brand-blue-light shadow-md'>
 			<div className='flex justify-center p-10'>
 				<div className='w-140 flex flex-col justify-between'>
 					<Image
@@ -29,6 +29,6 @@ export const PlayworldSection = () => {
 					alt='Children on Playground Image'
 				/>
 			</div>
-		</section>
+		</div>
 	);
 };

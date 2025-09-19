@@ -1,7 +1,7 @@
 import { AuthorizedDistributor } from './sections/AuthorizedDistributor';
 import { Hero } from './sections/HomeHero';
 import { PlaygroundStats } from './sections/PlaygroundStats';
-import { PlayworldSection } from './sections/PlayworldSection';
+import { PlayworldBanner } from '../../components/ui/PlayworldBanner';
 import { RecentProjects } from './sections/RecentProjects';
 import { TestimonialSection } from './sections/TestimonialSection';
 
@@ -10,7 +10,7 @@ export const Home = () => {
 		<main className=''>
 			<Hero />
 
-			<PlayworldSection />
+			<PlayworldBanner />
 
 			<RecentProjects />
 
