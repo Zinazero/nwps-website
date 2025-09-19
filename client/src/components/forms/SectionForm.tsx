@@ -22,8 +22,6 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 		if (e.target.files && e.target.files[0]) {
 			const file = e.target.files[0];
 			setSection({ ...section, image: file });
-
-			// create new preview URL
 			setPreview(URL.createObjectURL(file));
 		}
 	};
@@ -36,13 +34,21 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 	};
 
 	useEffect(() => {
-		if (section.image) {
-			const url = URL.createObjectURL(section.image);
-			setPreview(url);
-			return () => URL.revokeObjectURL(url);
-		} else {
+		if (!section.image) {
 			setPreview(null);
+			return;
 		}
+
+		if (section.image instanceof File) {
+			const objectUrl = URL.createObjectURL(section.image);
+			setPreview(objectUrl);
+
+			return () => {
+				URL.revokeObjectURL(objectUrl);
+			};
+		}
+
+		setPreview(section.image);
 	}, [section.image]);
 
 	const removeImage = () => setSection({ ...section, image: null });
@@ -71,7 +77,10 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 					/>
 				</div>
 			) : (
-				<label htmlFor={`image-upload-${index}`} className='file-input cursor-pointer'>
+				<label
+					htmlFor={`image-upload-${index}`}
+					className='file-input cursor-pointer'
+				>
 					+
 				</label>
 			)}

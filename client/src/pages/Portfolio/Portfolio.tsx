@@ -135,7 +135,7 @@ export const Portfolio = () => {
 								{isEditMode && (
 									<button
 										type='button'
-										onClick={() => navigate('/admin/add-park')}
+										onClick={() => navigate('/admin/add-edit-park')}
 										className='border-1 min-w-30 border-dashed border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
 									>
 										+

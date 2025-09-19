@@ -1,8 +1,9 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import api from '../../api/axios';
 import { Loading } from '../../components/ui/Loading';
 import { Image } from '../../components/ui/Image';
+import { Pen } from '../../components/ui/Pen';
 
 interface Section {
 	id: number;
@@ -15,6 +16,7 @@ export const ParkPage = () => {
 	const [loading, setLoading] = useState(true);
 
 	const { state } = useLocation();
+	const navigate = useNavigate();
 	const park = state?.park;
 	const slug = state?.slug;
 
@@ -35,12 +37,22 @@ export const ParkPage = () => {
 		fetchSections();
 	}, []);
 
-	useEffect(() => {
-		console.log(sections);
-	}, [sections]);
+	const handleEditPark = () => {
+		const parkId = park.id;
+		const parkCity = park.location.replace(', Ontario', '');
+		const parkBlurb = park.blurb;
+		const parkSections = [park, ...sections].map((section, index) => ({
+			...section,
+			image: `/images/playgrounds/${slug}/${slug}-${index + 1}.jpg`,
+		}));
+		console.log(parkSections)
+		navigate('/admin/add-edit-park', {
+			state: { parkId, parkCity, parkBlurb, parkSections },
+		});
+	};
 
 	return (
-		<main className='min-h-screen flex flex-col items-center justify-center space-y-12 bg-white p-16'>
+		<main className='relative min-h-screen flex flex-col items-center justify-center space-y-12 bg-white p-16'>
 			{loading ? (
 				<Loading />
 			) : (
@@ -81,6 +93,12 @@ export const ParkPage = () => {
 					))}
 				</>
 			)}
+
+			{/* Edit Button */}
+			<Pen
+				onClick={handleEditPark}
+				className='absolute top-10 right-10 text-2xl'
+			/>
 		</main>
 	);
 };

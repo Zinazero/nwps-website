@@ -2,22 +2,32 @@ import { ItemForm } from '../../../components/forms/ItemForm';
 import { useState } from 'react';
 import type { Section } from '../../../components/forms/types';
 import api from '../../../api/axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '../../../components/ui/Tooltip';
 
-export const AddPark = () => {
-	const [form, setForm] = useState<Section[]>([
-		{
-			title: '',
-			description: '',
-			image: null,
-		},
-	]);
-	const [city, setCity] = useState<string>('');
-	const [blurb, setBlurb] = useState<string>('');
+export const AddEditPark = () => {
+	const location = useLocation();
+	const {
+		parkId,
+		parkCity,
+		parkBlurb,
+		parkSections = [],
+	} = (location.state as {
+		parkId: number;
+		parkCity: string;
+		parkBlurb: string;
+		parkSections?: Section[];
+	}) || {};
+	const [form, setForm] = useState<Section[]>(
+		parkSections.length > 0
+			? parkSections
+			: [{ title: '', description: '', image: null }]
+	);
+	const [city, setCity] = useState<string>(parkCity || '');
+	const [blurb, setBlurb] = useState<string>(parkBlurb || '');
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
@@ -41,13 +51,14 @@ export const AddPark = () => {
 		setLoading(true);
 
 		try {
+			const id = parkId || null;
 			const formData = new FormData();
 			const location = `${city}, Ontario`;
 
 			// Create a JSON object for all non-file data
 			const jsonData = form.map((section, index) => {
 				const { image, ...rest } = section; // remove image
-				return index === 0 ? { ...rest, location, blurb } : rest;
+				return index === 0 ? { ...rest, location, blurb, id } : rest;
 			});
 			formData.append('data', JSON.stringify(jsonData));
 
@@ -96,7 +107,10 @@ export const AddPark = () => {
 						/>
 						<div className='relative group'>
 							<FontAwesomeIcon icon={faCircleInfo} className='text-grey' />
-							<Tooltip message='This text will appear under the park if it is in the Recent Projects section.' className='absolute bottom-full left-full w-80' />
+							<Tooltip
+								message='This text will appear under the park if it is in the Recent Projects section.'
+								className='absolute bottom-full left-full w-80'
+							/>
 						</div>
 					</div>
 				</div>

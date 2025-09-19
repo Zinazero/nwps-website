@@ -19,7 +19,7 @@ import { Login } from './pages/Login';
 import { ScrollToTop } from './components/ui/ScrollToTop';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { Admin } from './pages/Admin/Admin';
-import { AddPark } from './pages/Admin/Portfolio/AddPark';
+import { AddEditPark } from './pages/Admin/Portfolio/AddEditPark';
 import { GlobalSmartQuotes } from './components/global/GlobalSmartQuotes';
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
 								</ProtectedRoute>
 							}
 						>
-							<Route path='add-park' element={<AddPark />} />
+							<Route path='add-edit-park' element={<AddEditPark />} />
 						</Route>
 					</Routes>
 				</div>

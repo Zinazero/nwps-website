@@ -6,22 +6,14 @@ import {
 	getRecentParks,
 	postPark,
 	reorderParks,
+	updatePark,
 } from '../repositories/parks.repository';
-import {
-	getParkPortfolio,
-	postPortfolioSections,
-} from '../repositories/portfolioSections.repository';
+import { getParkPortfolio } from '../repositories/portfolioSections.repository';
 import path from 'path';
 import fs from 'fs/promises';
 import { slugConverter } from '../utils/slugConverter';
 import { upload } from '../utils/multer';
 import { ParkOrder } from '../types';
-
-interface Section {
-	park_id: number;
-	title: string;
-	description: string;
-}
 
 const router = express.Router();
 
@@ -59,52 +51,52 @@ router.get('/:id', async (req, res) => {
 });
 
 //POST ROUTES
+// POST /parks/post-park
 router.post('/post-park', upload.any(), async (req, res) => {
 	try {
-		// Parse JSON
-		const sections = JSON.parse(req.body.data);
-		const park = sections[0];
+		const parkInfo = JSON.parse(req.body.data);
+		const park = parkInfo[0];
+		const sections = parkInfo.slice(1);
 		const slug = slugConverter(park.title);
 
-		// Save park
-		const parkId = await postPark(park);
-
-		// Save portfolio sections
-		if (sections.length > 1) {
-			const portfolioSections = sections.slice(1).map((section: Section) => ({
-				...section,
-				park_id: parkId,
-			}));
-			await postPortfolioSections(portfolioSections);
+		if (park.id) {
+			// Update existing park
+			await updatePark(park, sections);
+		} else {
+			// Insert new park
+			await postPark(park, sections);
 		}
 
-		// Save images
+		// Save/overwrite images if any files are provided
 		const files = req.files as Express.Multer.File[] | undefined;
-		if (!files || files.length === 0) {
-			return res
-				.status(400)
-				.json({ error: 'At least one image file is required' });
+		if (files && files.length > 0) {
+			const folder = path.join(
+				__dirname,
+				'../../../client/public/images/playgrounds',
+				slug
+			);
+
+			// Delete old images first if updating
+			if (park.id) {
+				try {
+					await fs.rm(folder, { recursive: true, force: true });
+				} catch (err) {
+					console.warn(`Failed to delete folder ${folder}:`, err);
+				}
+			}
+
+			// Recreate folder and write new files
+			await fs.mkdir(folder, { recursive: true });
+			for (const file of files) {
+				const index = Number(file.fieldname);
+				const title = `${slug}-${index + 1}`;
+				const ext = path.extname(file.originalname);
+
+				await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
+			}
 		}
 
-		const folder = path.join(
-			__dirname,
-			'../../../client/public/images/playgrounds',
-			slug
-		);
-
-		// 1. Create folder
-		await fs.mkdir(folder, { recursive: true });
-
-		// 2. Write each file
-		for (const file of files) {
-			const index = Number(file.fieldname);
-			const title = `${slug}-${index + 1}`;
-			const ext = path.extname(file.originalname);
-
-			await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
-		}
-
-		res.json({ message: 'Park saved' });
+		res.json({ message: park.id ? 'Park updated' : 'Park created' });
 	} catch (err: any) {
 		console.error(err);
 

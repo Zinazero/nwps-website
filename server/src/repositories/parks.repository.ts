@@ -1,6 +1,10 @@
 import pool from '../db';
-import { Park, ParkOrder } from '../types';
+import { Park, ParkOrder, PortfolioSection } from '../types';
 import type { QueryResult } from 'pg';
+import {
+	postPortfolioSections,
+	updatePortolioSections,
+} from './portfolioSections.repository';
 
 export const getAllParks = async (): Promise<Park[]> => {
 	const res: QueryResult<Park> = await pool.query(
@@ -24,7 +28,7 @@ export const getParkById = async (parkId: number): Promise<Park> => {
 	return res.rows[0];
 };
 
-export const postPark = async (park: Park): Promise<number> => {
+export const postPark = async (park: Park, sections: PortfolioSection[]) => {
 	const { title, location, description, blurb } = park;
 
 	const client = await pool.connect();
@@ -39,14 +43,50 @@ export const postPark = async (park: Park): Promise<number> => {
 			[title, location, description, blurb]
 		);
 
-		await client.query('COMMIT');
+		if (sections.length > 0) {
+			const portfolioSections = sections.map((section) => ({
+				...section,
+				park_id: res.rows[0].id,
+			}));
+			await postPortfolioSections(portfolioSections);
+		}
 
-		return res.rows[0].id;
+		await client.query('COMMIT');
 	} catch (err: any) {
 		await client.query('ROLLBACK');
 
 		if (err.code === '23505') throw new Error('Title already exists.');
 
+		throw err;
+	} finally {
+		client.release();
+	}
+};
+
+export const updatePark = async (park: Park, sections: PortfolioSection[]) => {
+	const { id, title, location, description, blurb } = park;
+
+	const client = await pool.connect();
+
+	try {
+		await client.query('BEGIN');
+
+		await client.query(
+			'UPDATE parks SET title = $1, location = $2, description = $3, blurb = $4 WHERE id = $5',
+			[title, location, description, blurb, id]
+		);
+
+		if (sections.length > 0) {
+			const portfolioSections = sections.map((section) => ({
+				...section,
+				park_id: park.id,
+			}));
+			await updatePortolioSections(portfolioSections);
+		}
+
+		await client.query('COMMIT');
+	} catch (err: any) {
+		await client.query('ROLLBACK');
 		throw err;
 	} finally {
 		client.release();

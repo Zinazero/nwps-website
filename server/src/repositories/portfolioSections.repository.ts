@@ -2,37 +2,42 @@ import pool from '../db';
 import { PortfolioSection } from '../types';
 
 export const getParkPortfolio = async (
-  parkId: number
+	parkId: number
 ): Promise<PortfolioSection[]> => {
-  const res = await pool.query<PortfolioSection>(
-    `
+	const res = await pool.query<PortfolioSection>(
+		`
     SELECT id, title, description
     FROM portfolio_sections
     WHERE park_id = $1
     ORDER BY id
   `,
-    [parkId]
-  );
+		[parkId]
+	);
 
-  return res.rows;
+	return res.rows;
 };
 
-export const postPortfolioSections = async (
-  sections: PortfolioSection[]
-): Promise<PortfolioSection[]> => {
-  const insertedSections: PortfolioSection[] = [];
+export const postPortfolioSections = async (sections: PortfolioSection[]) => {
+	for (const section of sections) {
+		const { park_id, title, description } = section;
 
-  for (const section of sections) {
-    const result = await pool.query<PortfolioSection>(
-      `
+		await pool.query(
+			`
       INSERT INTO portfolio_sections (park_id, title, description)
       VALUES ($1, $2, $3)
-      RETURNING *
-    `,
-      [section.park_id, section.title, section.description]
-    );
-    insertedSections.push(result.rows[0]);
-  }
+      `,
+			[park_id, title, description]
+		);
+	}
+};
 
-  return insertedSections;
+export const updatePortolioSections = async (sections: PortfolioSection[]) => {
+	for (const section of sections) {
+		const { park_id, title, description } = section;
+
+		await pool.query(
+			'UPDATE portfolio_sections SET title = $1, description = $2 WHERE park_id = $3',
+			[title, description, park_id]
+		);
+	}
 };

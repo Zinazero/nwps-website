@@ -11,12 +11,6 @@ export interface ParkOrder {
 	sort_order: number;
 }
 
-export interface Section {
-  title: string;
-  description: string;
-  location: string;
-}
-
 export interface PortfolioSection {
 	id: number;
 	park_id: number;
