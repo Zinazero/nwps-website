@@ -4,7 +4,6 @@ import type { Park } from '../../types';
 import api from '../../../api/axios';
 import { ParkCard } from '../../../components/ui/ParkCard';
 import { Loading } from '../../../components/ui/Loading';
-import { Image } from '../../../components/ui/Image';
 import { CallToAction } from '../../../components/ui/CallToAction';
 
 export const RecentProjects = () => {
