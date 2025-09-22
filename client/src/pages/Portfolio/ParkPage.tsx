@@ -20,7 +20,7 @@ export const ParkPage = () => {
 	const park = state?.park;
 	const slug = state?.slug;
 
-	if (!park) return <p>No park data found.</p>;
+	if (!park) navigate('/portfolio');
 
 	useEffect(() => {
 		const fetchSections = async () => {
