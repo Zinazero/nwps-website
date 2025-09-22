@@ -18,26 +18,19 @@ export const getParkPortfolio = async (
 };
 
 export const postPortfolioSections = async (sections: PortfolioSection[]) => {
-	for (const section of sections) {
+	for (const [i, section] of sections.entries()) {
 		const { park_id, title, description } = section;
 
 		await pool.query(
 			`
-      INSERT INTO portfolio_sections (park_id, title, description)
-      VALUES ($1, $2, $3)
-      `,
-			[park_id, title, description]
-		);
-	}
-};
-
-export const updatePortolioSections = async (sections: PortfolioSection[]) => {
-	for (const section of sections) {
-		const { park_id, title, description } = section;
-
-		await pool.query(
-			'UPDATE portfolio_sections SET title = $1, description = $2 WHERE park_id = $3',
-			[title, description, park_id]
+      			INSERT INTO portfolio_sections (park_id, section_index, title, description)
+      			VALUES ($1, $2, $3, $4)
+				ON CONFLICT (park_id, section_index)
+				DO UPDATE SET
+					title = EXCLUDED.title,
+					description = EXCLUDED.description
+      		`,
+			[park_id, i, title, description]
 		);
 	}
 };

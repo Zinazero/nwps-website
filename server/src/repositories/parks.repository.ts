@@ -3,7 +3,6 @@ import { Park, ParkOrder, PortfolioSection } from '../types';
 import type { QueryResult } from 'pg';
 import {
 	postPortfolioSections,
-	updatePortolioSections,
 } from './portfolioSections.repository';
 
 export const getAllParks = async (): Promise<Park[]> => {
@@ -81,7 +80,7 @@ export const updatePark = async (park: Park, sections: PortfolioSection[]) => {
 				...section,
 				park_id: park.id,
 			}));
-			await updatePortolioSections(portfolioSections);
+			await postPortfolioSections(portfolioSections);
 		}
 
 		await client.query('COMMIT');
