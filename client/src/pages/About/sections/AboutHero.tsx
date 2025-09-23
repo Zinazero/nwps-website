@@ -20,7 +20,7 @@ export const AboutHero = () => {
 						</p>
 						<Link
 							to='/portfolio'
-							className='rounded-lg bg-brand-blue text-light font-bold w-1/2 p-4 text-center'
+							className='rounded-lg bg-brand-blue hover:bg-brand-orange transition text-light font-bold w-1/2 p-4 text-center'
 						>
 							Check Out Some of Our Work
 						</Link>
