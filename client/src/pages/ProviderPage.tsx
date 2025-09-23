@@ -3,7 +3,6 @@ import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
 import { Image } from '../components/ui/Image';
 export const ProviderPage = () => {
-
 	const { state } = useLocation();
 	const provider = state?.provider;
 	const slug = provider.logo.slug;
@@ -23,27 +22,23 @@ export const ProviderPage = () => {
 							<span className='text-brand-blue'>
 								We can help make your playground dreams a reality.
 							</span>
-							<h1 className='text-6xl font-bold'>Playworld</h1>
+							<h1 className='text-6xl font-bold'>{provider.title}</h1>
 						</div>
-						<p className='text-2xl '>
-							Uniting communities through innovative and inclusive play.
-							High-quality playground equipment for all, creating a positive
-							future through play.
-						</p>
+						<p className='text-2xl '>{provider.blurb}</p>
 					</div>
 				</div>
 
 				{/* Links */}
 				<div className='flex items-center justify-between space-x-8 text-center'>
 					<a
-						href='https://playworld.com/'
+						href={provider.externalLink}
 						target='_blank'
 						rel='noopener noreferrer'
 						className='w-1/2'
 					>
 						<div className='p-6 border rounded-lg space-x-2 text-xl font-semibold'>
 							<FontAwesomeIcon icon={faUpRightFromSquare} />
-							<span>Visit Playworld's Website</span>
+							<span>Visit Website</span>
 						</div>
 					</a>
 					<Link
@@ -56,16 +51,8 @@ export const ProviderPage = () => {
 
 				{/* Blurb */}
 				<div className='flex flex-col space-y-4 mt-30'>
-					<h3 className='text-4xl font-bold'>Playworld</h3>
-					<p className='text-xl/relaxed '>
-						A leading force in the playground industry, uniting communities
-						through innovative and inclusive play. They offer high-quality
-						playground equipment designed to enrich lives and create a positive
-						future through outdoor, unstructured play. With a focus on inclusive
-						design and craftsmanship, Playworld continues to lead with
-						innovative solutions that reinvent and redefine play experiences for
-						children of all abilities.
-					</p>
+					<h3 className='text-4xl font-bold'>{provider.title}</h3>
+					<p className='text-xl/relaxed '>{provider.description}</p>
 				</div>
 			</div>
 		</main>
