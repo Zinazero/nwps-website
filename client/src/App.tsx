@@ -13,7 +13,7 @@ import { ParkAmenities } from './pages/Products/ParkAmenities';
 import { ParkShelters } from './pages/Products/ParkShelters';
 import { ElectronicPlay } from './pages/Products/ElectronicPlay';
 import { WaterPlay } from './pages/Products/WaterPlay';
-import { Playworld } from './pages/Playworld';
+import { ProviderPage } from './pages/ProviderPage';
 import { Footer } from './components/layout/Footer';
 import { Login } from './pages/Login';
 import { ScrollToTop } from './components/ui/ScrollToTop';
@@ -21,6 +21,7 @@ import { ProtectedRoute } from './routes/ProtectedRoute';
 import { Admin } from './pages/Admin/Admin';
 import { AddEditPark } from './pages/Admin/Portfolio/AddEditPark';
 import { GlobalSmartQuotes } from './components/global/GlobalSmartQuotes';
+import { AddProvider } from './pages/Admin/AddProvider';
 
 function App() {
 	return (
@@ -34,7 +35,7 @@ function App() {
 						<Route path='/' element={<Home />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/portfolio' element={<Portfolio />} />
-						<Route path='/portfolio/:parkId' element={<ParkPage />} />
+						<Route path='/portfolio/:park' element={<ParkPage />} />
 						<Route path='/products' element={<Products />}>
 							<Route path='playgrounds' element={<Playgrounds />} />
 							<Route path='safety-surfacing' element={<SafetySurfacing />} />
@@ -48,8 +49,9 @@ function App() {
 							<Route path='water-play' element={<WaterPlay />} />
 						</Route>
 						<Route path='/testimonials' element={<Testimonials />} />
-						<Route path='/playworld' element={<Playworld />} />
+						<Route path='/playworld' element={<ProviderPage />} />
 						<Route path='/login' element={<Login />} />
+						<Route path='/providers/:provider' element={<ProviderPage />} />
 						<Route
 							path='/admin'
 							element={
@@ -59,6 +61,7 @@ function App() {
 							}
 						>
 							<Route path='add-edit-park' element={<AddEditPark />} />
+							<Route path='add-provider' element={<AddProvider />} />
 						</Route>
 					</Routes>
 				</div>

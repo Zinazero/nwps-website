@@ -1,16 +1,19 @@
-import playworldPageImage from '@/assets/images/generic/playworld-page-image.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Image } from '../components/ui/Image';
-export const Playworld = () => {
+export const ProviderPage = () => {
+
+	const { state } = useLocation();
+	const name = state?.name;
+
 	return (
 		<main className=' flex flex-col items-center justify-center'>
 			<div className='flex flex-col p-8 space-y-16 max-w-350'>
 				{/* Hero */}
 				<div className='flex justify-center space-x-12'>
 					<Image
-						src={playworldPageImage}
+						src={`/images/distributors/${name}/${name}-1.jpg`}
 						alt='Children playing in play structure'
 						className='rounded-lg h-120'
 					/>
