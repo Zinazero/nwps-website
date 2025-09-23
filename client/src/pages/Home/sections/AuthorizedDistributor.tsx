@@ -35,7 +35,6 @@ export const AuthorizedDistributor = () => {
 					providerArray.push(provider);
 				}
 
-				console.log(providerArray)
 				setProviders(providerArray);
 			} catch (err) {
 				console.error('Error fetching providers:', err);
