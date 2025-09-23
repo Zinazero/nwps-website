@@ -26,13 +26,17 @@ export const login = async (req: Request, res: Response) => {
 	const { username, password } = req.body;
 
 	try {
-		const user = await findUserByUsername(username); // <-- must await
+		const user = await findUserByUsername(username);
 		if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
 		const match = await bcrypt.compare(password, user.password_hash);
 		if (!match) return res.status(401).json({ error: 'Invalid credentials' });
 
-		const token = signToken({ userId: user.id });
+		const token = signToken({
+			userId: user.id,
+			username: user.username,
+			isSu: user.is_su,
+		});
 
 		res
 			.cookie('sessionToken', token, {
@@ -41,7 +45,7 @@ export const login = async (req: Request, res: Response) => {
 				sameSite: 'lax',
 				maxAge: 60 * 60 * 1000, // 1 hour
 			})
-			.json({ username: user.username });
+			.json({ username: user.username, isSu: user.is_su });
 	} catch {
 		res.status(500).json({ error: 'Server error' });
 	}
@@ -54,7 +58,12 @@ export const checkAuth = (req: Request, res: Response) => {
 	const decoded = verifyToken(token);
 	if (!decoded) return res.status(401).json({ authenticated: false });
 
-	res.json({ authenticated: true, userId: decoded.userId });
+	res.json({
+		authenticated: true,
+		userId: decoded.userId,
+		username: decoded.username,
+		isSu: decoded.isSu,
+	});
 };
 
 export const logout = (req: Request, res: Response) => {

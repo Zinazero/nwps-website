@@ -30,7 +30,7 @@ export const Login = () => {
 			const res = await api.post('/auth/login', form);
 			console.log('Login successful', res.data.username);
 
-			login(res.data.username);
+			login(res.data.username, res.data.isSu);
 			navigate('/portfolio');
 		} catch (err: any) {
 			console.error(err);

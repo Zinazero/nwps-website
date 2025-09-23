@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import api from '../api/axios';
 
 interface AuthContextType {
-	user: { username: string } | null;
-	login: (usename: string) => void;
+	user: { username: string; isSu: boolean } | null;
+	login: (usename: string, isSu: boolean) => void;
 	logout: () => void;
 	loading: boolean;
 }
@@ -12,7 +12,9 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-	const [user, setUser] = useState<{ username: string } | null>(null);
+	const [user, setUser] = useState<{ username: string; isSu: boolean } | null>(
+		null
+	);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -20,7 +22,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 			try {
 				const res = await api.get('/auth/check-auth');
 				if (res.data.authenticated) {
-					setUser({ username: res.data.username });
+					setUser({ username: res.data.username, isSu: res.data.isSu });
 				}
 			} catch {
 				setUser(null);
@@ -28,10 +30,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				setLoading(false);
 			}
 		};
+
 		checkAuth();
 	}, []);
 
-	const login = (username: string) => setUser({ username });
+	const login = (username: string, isSu: boolean) =>
+		setUser({ username, isSu });
 	const logout = () => setUser(null);
 
 	return (
