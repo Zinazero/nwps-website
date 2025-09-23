@@ -9,7 +9,7 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
 	return (
 		<div className='flex items-center justify-center h-full hover:scale-110 transition'>
 			<Image
-				src={provider.logo.src}
+				src={provider.logoSrc}
 				alt={`${provider.title} Logo`}
 				className='object-contain max-w-full'
 			/>

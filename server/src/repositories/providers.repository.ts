@@ -15,6 +15,14 @@ export const getAllProviders = async (): Promise<Provider[]> => {
 	return res.rows;
 };
 
+export const getProviderByTitle = async (title: string): Promise<Provider> => {
+    const res: QueryResult<Provider> = await pool.query(
+        'SELECT title, blurb, description, external_link AS "externalLink" FROM providers WHERE title = $1',
+        [title]  
+    );
+    return res.rows[0];
+};
+
 export const postProvider = async (provider: Provider) => {
 	const { title, blurb, description, externalLink } = provider;
 

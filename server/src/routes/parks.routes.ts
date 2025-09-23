@@ -3,6 +3,7 @@ import {
 	deletePark,
 	getAllParks,
 	getParkById,
+	getParkByTitle,
 	getRecentParks,
 	postPark,
 	reorderParks,
@@ -11,7 +12,10 @@ import {
 import { getParkPortfolio } from '../repositories/portfolioSections.repository';
 import path from 'path';
 import fs from 'fs/promises';
-import { slugConverter } from '../utils/slugConverter';
+import {
+	slugToTitleConverter,
+	titleToSlugConverter,
+} from '../utils/slugConverter';
 import { upload } from '../utils/multer';
 import { ParkOrder } from '../types';
 
@@ -38,12 +42,26 @@ router.get('/recent', async (req, res) => {
 	}
 });
 
+router.get('/get-park/:park', async (req, res) => {
+	const slug = req.params.park;
+	const title = slugToTitleConverter(slug);
+
+	try {
+		const park = await getParkByTitle(title);
+		const sections = await getParkPortfolio(park.id);
+		res.json({ park, sections });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal server error.' });
+	}
+});
+
 router.get('/:id', async (req, res) => {
 	const id = Number(req.params.id);
 
 	try {
-		const portfolioSections = await getParkPortfolio(id);
-		res.json(portfolioSections);
+		const sections = await getParkPortfolio(id);
+		res.json(sections);
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ error: 'Internal server error.' });
@@ -56,7 +74,7 @@ router.post('/post-park', upload.any(), async (req, res) => {
 		const parkInfo = JSON.parse(req.body.data);
 		const park = parkInfo[0];
 		const sections = parkInfo.slice(1);
-		const slug = slugConverter(park.title);
+		const slug = titleToSlugConverter(park.title);
 
 		if (park.id) {
 			// Update existing park
@@ -131,7 +149,7 @@ router.delete('/:id', async (req, res) => {
 		const park = await getParkById(parkId);
 		if (!park) return res.status(404).json({ error: 'Park not found' });
 
-		const slug = slugConverter(park.title);
+		const slug = titleToSlugConverter(park.title);
 		const folderPath = path.join(
 			__dirname,
 			'../../../client/public/images/playgrounds',

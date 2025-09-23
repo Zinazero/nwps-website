@@ -27,11 +27,10 @@ export const AuthorizedDistributor = () => {
 				const providerArray = [];
 				for (const provider of res.data) {
 					const slug = slugConverter(provider.title);
-					const logo = {
-						src: `/images/providers/${slug}/${slug}-logo.jpg`,
-						slug,
-					};
-					provider.logo = logo;
+					const logo = `/images/providers/${slug}/${slug}-logo.jpg`;
+
+					provider.logoSrc = logo;
+					provider.slug = slug;
 					providerArray.push(provider);
 				}
 
@@ -100,7 +99,7 @@ export const AuthorizedDistributor = () => {
 								</a>
 							) : (
 								<Link
-									to={`/providers/${provider.logo.slug}`}
+									to={`/providers/${provider.slug}`}
 									state={{ provider }}
 								>
 									<ProviderCard provider={provider} />

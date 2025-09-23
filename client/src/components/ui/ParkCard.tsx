@@ -42,7 +42,7 @@ export const ParkCard = ({
 			{/* Item Card */}
 			<Link
 				to={`/portfolio/${slug}`}
-				state={{ park, slug }}
+				state={{ park }}
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
 				<div

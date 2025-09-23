@@ -49,7 +49,6 @@ function App() {
 							<Route path='water-play' element={<WaterPlay />} />
 						</Route>
 						<Route path='/testimonials' element={<Testimonials />} />
-						<Route path='/playworld' element={<ProviderPage />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/providers/:provider' element={<ProviderPage />} />
 						<Route

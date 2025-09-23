@@ -2,9 +2,13 @@ import express from 'express';
 import { upload } from '../utils/multer';
 import {
 	getAllProviders,
+	getProviderByTitle,
 	postProvider,
 } from '../repositories/providers.repository';
-import { slugConverter } from '../utils/slugConverter';
+import {
+	titleToSlugConverter,
+	slugToTitleConverter,
+} from '../utils/slugConverter';
 import path from 'path';
 import fs from 'fs/promises';
 
@@ -21,11 +25,24 @@ router.get('/', async (req, res) => {
 	}
 });
 
+router.get('/:provider', async (req, res) => {
+	const slug = req.params.provider;
+	const title = slugToTitleConverter(slug);
+
+	try {
+		const provider = await getProviderByTitle(title);
+		res.json(provider);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal server error.' });
+	}
+});
+
 //POST ROUTES
 router.post('/post-provider', upload.any(), async (req, res) => {
 	try {
 		const provider = JSON.parse(req.body.data);
-		const slug = slugConverter(provider.title);
+		const slug = titleToSlugConverter(provider.title);
 
 		await postProvider(provider);
 

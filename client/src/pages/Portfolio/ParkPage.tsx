@@ -1,9 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import api from '../../api/axios';
 import { Loading } from '../../components/ui/Loading';
 import { Image } from '../../components/ui/Image';
 import { Pen } from '../../components/ui/Pen';
+import type { Park } from '../types';
 
 interface Section {
 	id: number;
@@ -12,30 +13,42 @@ interface Section {
 }
 
 export const ParkPage = () => {
+	const { state } = useLocation();
+	const [park, setPark] = useState<Park>(state?.park);
 	const [sections, setSections] = useState<Section[]>([]);
 	const [loading, setLoading] = useState(true);
 
-	const { state } = useLocation();
+	const { park: slug } = useParams<{ park: string }>();
 	const navigate = useNavigate();
-	const park = state?.park;
-	const slug = state?.slug;
-
-	if (!park) navigate('/portfolio');
 
 	useEffect(() => {
-		const fetchSections = async () => {
-			try {
-				const res = await api.get<Section[]>(`/parks/${park.id}`);
-				setSections(res.data);
-			} catch (err) {
-				console.error('Error fetching portfolio sections:', err);
-			} finally {
-				setLoading(false);
+		const fetchData = async () => {
+			if (!park) {
+				// Fetch park by slug
+				try {
+					const res = await api.get(`/parks/by-park/${slug}`);
+					setPark(res.data.park);
+					setSections(res.data.sections || []);
+				} catch (err) {
+					console.error('Error fetching park:', err);
+				} finally {
+					setLoading(false);
+				}
+			} else {
+				// Fetch sections for existing park
+				try {
+					const res = await api.get<Section[]>(`/parks/${park.id}`);
+					setSections(res.data);
+				} catch (err) {
+					console.error('Error fetching portfolio sections:', err);
+				} finally {
+					setLoading(false);
+				}
 			}
 		};
 
-		fetchSections();
-	}, []);
+		fetchData();
+	}, [park, slug]);
 
 	const handleEditPark = () => {
 		const parkId = park.id;
@@ -45,7 +58,6 @@ export const ParkPage = () => {
 			...section,
 			image: `/images/playgrounds/${slug}/${slug}-${index + 1}.jpg`,
 		}));
-		console.log(parkSections)
 		navigate('/admin/add-edit-park', {
 			state: { parkId, parkCity, parkBlurb, parkSections },
 		});
@@ -59,11 +71,13 @@ export const ParkPage = () => {
 				<>
 					{/* Hero */}
 					<div className='p-6 flex flex-col items-center space-y-12'>
-						<Image
-							src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
-							alt={`${park.title} Image 1`}
-							className='w-full max-w-250 rounded-xl'
-						/>
+						{park && (
+							<Image
+								src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
+								alt={`${park.title} Image 1`}
+								className='w-full max-w-250 rounded-xl'
+							/>
+						)}
 						<div className='text-center max-w-300 space-y-4'>
 							<div>
 								<h1 className='text-5xl font-bold'>{park.title}</h1>
@@ -76,15 +90,18 @@ export const ParkPage = () => {
 					{/* Other Sections */}
 					{sections.map((section, index) => (
 						<div
+							key={`Section ${index}`}
 							className={`flex items-center justify-center max-w-300 space-x-12 ${
 								index % 2 !== 0 ? 'flex-row-reverse' : ''
 							}`}
 						>
-							<Image
-								src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg`}
-								alt={`${section.title} Image`}
-								className='w-150 rounded-xl'
-							/>
+							{park && (
+								<Image
+									src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg`}
+									alt={`${section.title} Image`}
+									className='w-150 rounded-xl'
+								/>
+							)}
 							<div className='flex flex-col space-y-4'>
 								<h2 className='text-3xl font-bold'>{section.title}</h2>
 								<p className='text-lg '>{section.description}</p>
