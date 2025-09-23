@@ -10,7 +10,7 @@ interface Provider {
 
 export const getAllProviders = async (): Promise<Provider[]> => {
 	const res: QueryResult<Provider> = await pool.query(
-		'SELECT title, blurb, description, external_link FROM providers ORDER BY title'
+		'SELECT title, blurb, description, external_link AS "externalLink" FROM providers ORDER BY title'
 	);
 	return res.rows;
 };

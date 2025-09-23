@@ -3,8 +3,16 @@ import { CSS } from '@dnd-kit/utilities';
 import { Link } from 'react-router-dom';
 import type { Park } from '../../pages/types';
 import { Trash } from './Trash';
-import { parkNavConverter } from '../../utils/parkNavConverter';
+import { slugConverter } from '../../utils/parkNavConverter';
 import { Image } from './Image';
+
+interface ParkCardProps {
+	park: Park;
+	disabled?: boolean;
+	isEditMode?: boolean;
+	deleteItem?: (park: Park) => void;
+	className?: string;
+}
 
 export const ParkCard = ({
 	park,
@@ -12,13 +20,7 @@ export const ParkCard = ({
 	isEditMode,
 	deleteItem,
 	className,
-}: {
-	park: Park;
-	disabled?: boolean;
-	isEditMode?: boolean;
-	deleteItem?: (park: Park) => void;
-	className?: string;
-}) => {
+}: ParkCardProps) => {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id: park.id, disabled });
 
@@ -27,7 +29,7 @@ export const ParkCard = ({
 		transition,
 	};
 
-	const slug = parkNavConverter(park.title);
+	const slug = slugConverter(park.title);
 
 	return (
 		<div
@@ -43,7 +45,9 @@ export const ParkCard = ({
 				state={{ park, slug }}
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
-				<div className={`${className} mx-5 relative h-50 hover:scale-105 active:scale-100 transition`}>
+				<div
+					className={`${className} mx-5 relative h-50 hover:scale-105 active:scale-100 transition`}
+				>
 					<Image
 						src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 						alt={`${park.title} Image`}

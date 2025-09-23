@@ -1,4 +1,4 @@
-export const parkNavConverter = (title: string): string => {
+export const slugConverter = (title: string): string => {
 	if (!title) return '';
 	
 	return title

@@ -1,20 +1,57 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
-
-import { imageArray } from '../../../assets/providers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faChevronLeft,
 	faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { Image } from '../../../components/ui/Image';
 import { Link, useNavigate } from 'react-router-dom';
 import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useState, useEffect } from 'react';
+import api from '../../../api/axios';
+import type { Provider } from '../../types';
+import { slugConverter } from '../../../utils/parkNavConverter';
+import { ProviderCard } from '../../../components/ui/ProviderCard';
 
 export const AuthorizedDistributor = () => {
+	const [providers, setProviders] = useState<Provider[]>([]);
 	const navigate = useNavigate();
 	const { user } = useAuth();
+
+	useEffect(() => {
+		const fetchProviders = async () => {
+			try {
+				const res = await api.get<Provider[]>('/providers');
+
+				const providerArray = [];
+				for (const provider of res.data) {
+					const slug = slugConverter(provider.title);
+					const logo = {
+						src: `/images/providers/${slug}/${slug}-logo.jpg`,
+						slug,
+					};
+					provider.logo = logo;
+					providerArray.push(provider);
+				}
+
+				console.log(providerArray)
+				setProviders(providerArray);
+			} catch (err) {
+				console.error('Error fetching providers:', err);
+			}
+		};
+
+		fetchProviders();
+	}, []);
+
+	const checkDirectLink = (provider: Provider) => {
+		if (!provider || !provider.blurb || !provider.description) {
+			return true;
+		}
+
+		return false;
+	};
 
 	return (
 		<section id='authorized-distributor'>
@@ -52,20 +89,24 @@ export const AuthorizedDistributor = () => {
 						/>
 					</div>
 
-					{imageArray.map((image, i) => (
+					{providers.map((provider, i) => (
 						<SwiperSlide key={i}>
-							<Link
-								to={`/providers/${image.name}`}
-								state={{ name: image.name }}
-							>
-								<div className='flex items-center justify-center h-full hover:scale-110 transition'>
-									<Image
-										src={image.src}
-										alt={`${image.name} image`}
-										className='object-contain max-w-full'
-									/>
-								</div>
-							</Link>
+							{checkDirectLink(provider) ? (
+								<a
+									href={provider.externalLink}
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<ProviderCard provider={provider} />
+								</a>
+							) : (
+								<Link
+									to={`/providers/${provider.logo.slug}`}
+									state={{ provider }}
+								>
+									<ProviderCard provider={provider} />
+								</Link>
+							)}
 						</SwiperSlide>
 					))}
 				</Swiper>

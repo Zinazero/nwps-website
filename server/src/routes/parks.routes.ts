@@ -51,7 +51,6 @@ router.get('/:id', async (req, res) => {
 });
 
 //POST ROUTES
-// POST /parks/post-park
 router.post('/post-park', upload.any(), async (req, res) => {
 	try {
 		const parkInfo = JSON.parse(req.body.data);

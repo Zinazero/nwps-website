@@ -5,7 +5,8 @@ import { Image } from '../components/ui/Image';
 export const ProviderPage = () => {
 
 	const { state } = useLocation();
-	const name = state?.name;
+	const provider = state?.provider;
+	const slug = provider.logo.slug;
 
 	return (
 		<main className=' flex flex-col items-center justify-center'>
@@ -13,7 +14,7 @@ export const ProviderPage = () => {
 				{/* Hero */}
 				<div className='flex justify-center space-x-12'>
 					<Image
-						src={`/images/distributors/${name}/${name}-1.jpg`}
+						src={`/images/providers/${slug}/${slug}-1.jpg`}
 						alt='Children playing in play structure'
 						className='rounded-lg h-120'
 					/>
