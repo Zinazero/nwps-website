@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home/Home';
 import { About } from './pages/About/About';
 import { Portfolio } from './pages/Portfolio/Portfolio';
-import { ParkPage } from './pages/Portfolio/ParkPage';
+import { ParkPage } from './pages/Portfolio/Parks/ParkPage';
 import { Products } from './pages/Products/Products';
 import { Testimonials } from './pages/Testimonials/Testimonials';
 import { ProviderPage } from './pages/Providers/ProviderPage';
@@ -14,7 +14,7 @@ import { ProtectedRoute } from './routes/ProtectedRoute';
 import { Admin } from './pages/Admin/Admin';
 import { AddEditPark } from './pages/Admin/Portfolio/AddEditPark';
 import { GlobalSmartQuotes } from './components/global/GlobalSmartQuotes';
-import { AddProvider } from './pages/Admin/AddProvider';
+import { AddProvider } from './pages/Admin/Providers/AddProvider';
 
 function App() {
 	return (

@@ -1,10 +1,10 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import api from '../../api/axios';
-import { Loading } from '../../components/ui/Loading';
-import { Image } from '../../components/ui/Image';
-import { Pen } from '../../components/ui/Pen';
-import type { Park } from '../types';
+import api from '../../../api/axios';
+import { Loading } from '../../../components/ui/Loading';
+import { Image } from '../../../components/ui/Image';
+import { Pen } from '../../../components/ui/Pen';
+import type { Park } from '../../types';
 
 interface Section {
 	id: number;
