@@ -31,7 +31,6 @@ router.post('/post-provider', upload.any(), async (req, res) => {
 
 		const files = req.files as Express.Multer.File[] | undefined;
 		if (files && files.length > 0) {
-			const file = files[0];
 			const folder = path.join(
 				__dirname,
 				'../../../client/public/images/providers',
@@ -39,10 +38,12 @@ router.post('/post-provider', upload.any(), async (req, res) => {
 			);
 
 			await fs.mkdir(folder, { recursive: true });
-			const title = `${slug}-1`;
-			const ext = '.jpg'; //Currently enforcing .jpg
+			for (const file of files) {
+				const title = file.fieldname === 'logo' ? `${slug}-logo` : `${slug}-1`;
+				const ext = '.jpg'; //Currently enforcing .jpg
 
-			await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
+				await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
+			}
 		}
 
 		res.json({ message: 'Provider added' });
