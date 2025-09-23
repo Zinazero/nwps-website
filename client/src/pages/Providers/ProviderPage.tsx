@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { Image } from '../components/ui/Image';
-import { Loading } from '../components/ui/Loading';
+import { Image } from '../../components/ui/Image';
+import { Loading } from '../../components/ui/Loading';
 import { useState, useEffect } from 'react';
-import type { Provider } from './types';
-import api from '../api/axios';
+import type { Provider } from '../types';
+import api from '../../api/axios';
 
 export const ProviderPage = () => {
 	const { state } = useLocation();

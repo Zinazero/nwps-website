@@ -4,18 +4,11 @@ import { Home } from './pages/Home/Home';
 import { About } from './pages/About/About';
 import { Portfolio } from './pages/Portfolio/Portfolio';
 import { ParkPage } from './pages/Portfolio/ParkPage';
-import { Products } from './pages/Products';
-import { Testimonials } from './pages/Testimonials';
-import { Playgrounds } from './pages/Products/Playgrounds';
-import { SafetySurfacing } from './pages/Products/SafetySurfacing';
-import { SportsAndOutdoorFitness } from './pages/Products/SportsAndOutdoorFitness';
-import { ParkAmenities } from './pages/Products/ParkAmenities';
-import { ParkShelters } from './pages/Products/ParkShelters';
-import { ElectronicPlay } from './pages/Products/ElectronicPlay';
-import { WaterPlay } from './pages/Products/WaterPlay';
-import { ProviderPage } from './pages/ProviderPage';
+import { Products } from './pages/Products/Products';
+import { Testimonials } from './pages/Testimonials/Testimonials';
+import { ProviderPage } from './pages/Providers/ProviderPage';
 import { Footer } from './components/layout/Footer';
-import { Login } from './pages/Login';
+import { Login } from './pages/Account/Login';
 import { ScrollToTop } from './components/ui/ScrollToTop';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { Admin } from './pages/Admin/Admin';
@@ -36,18 +29,7 @@ function App() {
 						<Route path='/about' element={<About />} />
 						<Route path='/portfolio' element={<Portfolio />} />
 						<Route path='/portfolio/:park' element={<ParkPage />} />
-						<Route path='/products' element={<Products />}>
-							<Route path='playgrounds' element={<Playgrounds />} />
-							<Route path='safety-surfacing' element={<SafetySurfacing />} />
-							<Route
-								path='sports-and-outdoor-fitness'
-								element={<SportsAndOutdoorFitness />}
-							/>
-							<Route path='park-amenities' element={<ParkAmenities />} />
-							<Route path='park-shelters' element={<ParkShelters />} />
-							<Route path='electronic-play' element={<ElectronicPlay />} />
-							<Route path='water-play' element={<WaterPlay />} />
-						</Route>
+						<Route path='/products' element={<Products />} />
 						<Route path='/testimonials' element={<Testimonials />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/providers/:provider' element={<ProviderPage />} />
