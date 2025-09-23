@@ -14,3 +14,10 @@ export interface Provider {
 	logoSrc: string;
 	slug: string;
 }
+
+export interface Testimonial {
+	title: string;
+	blurb: string;
+	imageSrc: string;
+	skipMask?: boolean;
+}

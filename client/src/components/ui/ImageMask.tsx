@@ -1,6 +1,6 @@
 import { Image } from "./Image";
 
-interface SquigglyFrameProps {
+interface ImageMaskProps {
 	src: string;
 	alt: string;
 	maskUrl: string;
@@ -8,7 +8,7 @@ interface SquigglyFrameProps {
 	height?: string | number;
 }
 
-export const SquigglyFrame: React.FC<SquigglyFrameProps> = ({
+export const ImageMask: React.FC<ImageMaskProps> = ({
 	src,
 	alt,
 	maskUrl,

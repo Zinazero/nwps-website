@@ -1,5 +1,5 @@
 import mike from '@/assets/images/team/mike-hexamer.jpg';
-import { MikeBlurb, BrianBlurb, WendyBlurb, MarkBlurb } from './Blurbs.ts';
+import { MikeBlurb, BrianBlurb, WendyBlurb, MarkBlurb } from './ProfileBlurbs.ts';
 import brian from '@/assets/images/team/brian-salter.jpg';
 import wendy from '@/assets/images/team/wendy-hudgins.jpg';
 import mark from '@/assets/images/team/mark-jones.jpg';

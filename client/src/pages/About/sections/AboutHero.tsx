@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { SquigglyFrame } from '../../../components/ui/SquigglyFrame';
+import { ImageMask } from '../../../components/ui/ImageMask';
 import aboutImage from '@/assets/images/generic/about-image.jpg';
 import { UnderlineHeader } from '../../../components/ui/UnderlineHeader';
 
@@ -25,7 +25,7 @@ export const AboutHero = () => {
 							Check Out Some of Our Work
 						</Link>
 					</div>
-					<SquigglyFrame
+					<ImageMask
 						src={aboutImage}
 						alt='Accessible Surfacing Playground'
 						maskUrl='/masks/squiggly-mask.svg'
