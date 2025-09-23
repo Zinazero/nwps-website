@@ -65,14 +65,14 @@ export const ProviderPage = () => {
 							rel='noopener noreferrer'
 							className='w-1/2'
 						>
-							<div className='p-6 border rounded-lg space-x-2 text-xl font-semibold'>
+							<div className='p-6 border rounded-lg space-x-2 text-xl font-semibold hover:scale-105 active:scale-100 transition'>
 								<FontAwesomeIcon icon={faUpRightFromSquare} />
 								<span>Visit Website</span>
 							</div>
 						</a>
 						<Link
 							to='/contact'
-							className='w-1/2 p-6 bg-brand-blue text-light rounded-lg text-xl font-semibold'
+							className='w-1/2 p-6 bg-brand-blue hover:bg-brand-orange transition text-light rounded-lg text-xl font-semibold'
 						>
 							I'M INTERESTED IN THIS PRODUCT
 						</Link>
