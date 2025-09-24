@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import api from '../../api/axios';
 import { useEffect, useState } from 'react';

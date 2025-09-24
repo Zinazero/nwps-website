@@ -1,4 +1,4 @@
-import { Image } from "./Image";
+import { Image } from './Image';
 
 interface ImageMaskProps {
 	src: string;
@@ -17,7 +17,7 @@ export const ImageMask: React.FC<ImageMaskProps> = ({
 }) => {
 	return (
 		<div
-			className='inline-block relative'
+			className='inline-block relative overflow-hidden'
 			style={{
 				width,
 				height,

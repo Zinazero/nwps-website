@@ -1,24 +1,32 @@
 import { Link } from 'react-router-dom';
 import { Image } from './Image';
+import type { ProductCategory } from '../../pages/types';
+import { slugConverter } from '../../utils/parkNavConverter';
 
 interface ProductsCardProps {
-    className?: string;
+	category: ProductCategory;
+	className?: string;
 }
 
-export const ProductsCard = ({ className }: ProductsCardProps) => {
+export const ProductsCard = ({ category, className }: ProductsCardProps) => {
+	const slug = slugConverter(category.title);
+
 	return (
-		<Link to='/' className={`flex items-center space-x-8 hover:scale-105 transition ${className}`}>
+		<Link
+			to={`/products/${slug}`}
+			state={{ category }}
+			className={`flex items-center space-x-8 hover:scale-105 transition ${className}`}
+		>
 			<Image
 				src='/images/playgrounds/mohawk-park/mohawk-park-1.jpg'
 				alt='test-image'
-                className='w-54 h-44 rounded-lg object-cover shadow-sm'
+				className='w-54 h-44 rounded-lg object-cover shadow-sm'
 			/>
 			<div className='flex flex-col space-y-2'>
-				<h3 className='text-2xl font-bold text-brand-orange'>Playgrounds</h3>
-				<p className='text-lg/relaxed'>
-					From Toddlers to Tweens, our playgrounds are designed for fun and
-					accessibility for all!
-				</p>
+				<h3 className='text-2xl font-bold text-brand-orange'>
+					{category.title}
+				</h3>
+				<p className='text-lg/relaxed'>{category.description}</p>
 			</div>
 		</Link>
 	);

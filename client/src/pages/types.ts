@@ -6,6 +6,12 @@ export interface Park {
 	blurb: string;
 }
 
+export interface ProductCategory {
+	id: number;
+	title: string;
+	description: string;
+}
+
 export interface Provider {
 	title: string;
 	blurb?: string;

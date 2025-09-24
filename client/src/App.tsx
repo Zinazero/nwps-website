@@ -15,6 +15,8 @@ import { Admin } from './pages/Admin/Admin';
 import { AddEditPark } from './pages/Admin/Portfolio/AddEditPark';
 import { GlobalSmartQuotes } from './components/global/GlobalSmartQuotes';
 import { AddProvider } from './pages/Admin/Providers/AddProvider';
+import { ProductsPage } from './pages/Products/Categories/ProductsPage';
+import { AddEditProducts } from './pages/Admin/Products/AddEditProducts';
 
 function App() {
 	return (
@@ -30,6 +32,7 @@ function App() {
 						<Route path='/portfolio' element={<Portfolio />} />
 						<Route path='/portfolio/:park' element={<ParkPage />} />
 						<Route path='/products' element={<Products />} />
+						<Route path='/products/:category' element={<ProductsPage />} />
 						<Route path='/testimonials' element={<Testimonials />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/providers/:provider' element={<ProviderPage />} />
@@ -43,6 +46,7 @@ function App() {
 						>
 							<Route path='add-edit-park' element={<AddEditPark />} />
 							<Route path='add-provider' element={<AddProvider />} />
+							<Route path='add-edit-products' element={<AddEditProducts />} />
 						</Route>
 					</Routes>
 				</div>
