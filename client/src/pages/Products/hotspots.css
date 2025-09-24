@@ -1,0 +1,35 @@
+.hotspot {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hotspot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-brand-orange);
+  opacity: 0.3;
+  z-index: -1;
+  animation: pulseBox 1.5s ease-out infinite;
+}
+
+.hotspot:hover::after {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes pulseBox {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot::after { animation: none; opacity: 0; }
+}
