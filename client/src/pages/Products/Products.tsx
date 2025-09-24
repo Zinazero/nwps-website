@@ -8,9 +8,15 @@ import { useState, useEffect } from 'react';
 import { Loading } from '../../components/ui/Loading';
 import { Pen } from '../../components/ui/Pen';
 import { ProductsCard } from '../../components/ui/ProductsCard';
+import { AddCardButton } from '../../components/ui/AddCardButton';
+import { Check } from '../../components/ui/Check';
+import { useAuth } from '../../contexts/AuthContext';
 
 export const Products = () => {
 	const [loading, setLoading] = useState(false);
+	const [isEditMode, setIsEditMode] = useState(false);
+
+    const { user } = useAuth();
 
 	const hotspotClasses =
 		'absolute z-11 bg-brand-orange hover:bg-white hover:text-brand-orange transition p-2 rounded-4xl text-white';
@@ -66,18 +72,32 @@ export const Products = () => {
 						</h2>
 						<div className='flex items-center space-x-4'>
 							<h1 className='text-6xl font-bold'>Product Categories</h1>
-							<Pen
-								onClick={() => {
-									console.log('clicked!');
-								}}
-								className='text-xl'
-							/>
+							{user && (
+								<>
+									{isEditMode ? (
+										<Check
+											onClick={() => setIsEditMode(false)}
+											className='text-xl'
+										/>
+									) : (
+										<Pen
+											onClick={() => setIsEditMode(true)}
+											className='text-xl'
+										/>
+									)}
+								</>
+							)}
 						</div>
 					</div>
 
 					{/* Categories */}
-					<div className='grid grid-cols-2 max-w-350'>
-						{[1, 1, 1, 1, 1, 1, 1].map((card) => (
+					<div className='grid grid-cols-2 gap-10 max-w-350'>
+						{/* ADMIN ONLY --- Add Products Page */}
+						{isEditMode && (
+							<AddCardButton navigationRoute='/admin/add-edit-products' />
+						)}
+
+						{[1, 1, 1, 1, 1, 1, 1].map(() => (
 							<ProductsCard className='last:odd:col-span-2 last:odd:justify-self-center last:odd:w-1/2' />
 						))}
 					</div>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Image } from './Image';
 
 interface ProductsCardProps {
@@ -6,7 +7,7 @@ interface ProductsCardProps {
 
 export const ProductsCard = ({ className }: ProductsCardProps) => {
 	return (
-		<div className={`flex items-center space-x-8 mb-10 pr-20 ${className}`}>
+		<Link to='/' className={`flex items-center space-x-8 hover:scale-105 transition ${className}`}>
 			<Image
 				src='/images/playgrounds/mohawk-park/mohawk-park-1.jpg'
 				alt='test-image'
@@ -19,6 +20,6 @@ export const ProductsCard = ({ className }: ProductsCardProps) => {
 					accessibility for all!
 				</p>
 			</div>
-		</div>
+		</Link>
 	);
 };

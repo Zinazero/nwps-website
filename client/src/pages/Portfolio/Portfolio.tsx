@@ -20,6 +20,7 @@ import { ParkCard } from '../../components/ui/ParkCard';
 import { Check } from '../../components/ui/Check';
 import { Pen } from '../../components/ui/Pen';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
+import { AddCardButton } from '../../components/ui/AddCardButton';
 
 export const Portfolio = () => {
 	const [parks, setParks] = useState<Park[]>([]);
@@ -28,7 +29,6 @@ export const Portfolio = () => {
 	const [confirmOpen, setConfirmOpen] = useState(false);
 	const [deletePark, setDeletePark] = useState<Park | null>(null);
 	const { user } = useAuth();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchParks = async () => {
@@ -133,13 +133,10 @@ export const Portfolio = () => {
 							<div className='grid grid-cols-2 lg:grid-cols-4 max-w-350'>
 								{/* ADMIN ONLY --- Add Portfolio Item */}
 								{isEditMode && (
-									<button
-										type='button'
-										onClick={() => navigate('/admin/add-edit-park')}
-										className='border-1 min-w-30 border-dashed border-brand-green text-brand-green hover:scale-105 active:scale-100 h-50 rounded-xl text-4xl transition'
-									>
-										+
-									</button>
+									<AddCardButton
+										navigationRoute='/admin/add-edit-park'
+										className='min-w-30 h-50'
+									/>
 								)}
 
 								{/* Portfolio Items */}
