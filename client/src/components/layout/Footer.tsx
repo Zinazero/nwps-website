@@ -12,13 +12,14 @@ import {
 	faPhoneFlip,
 } from '@fortawesome/free-solid-svg-icons';
 import type { LinkType } from './types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { LogoutButton } from './LogoutButton';
 import { Image } from '../ui/Image';
 
 export const Footer = () => {
 	const { user } = useAuth();
+	const location = useLocation();
 
 	const productsLinks: LinkType[] = [
 		{ label: 'Playgrounds', to: '/products/playgrounds' },
@@ -176,7 +177,7 @@ export const Footer = () => {
 				{user ? (
 					<LogoutButton classes={adminButtonClasses} />
 				) : (
-					<Link to='/login' className={adminButtonClasses}>
+					<Link to='/login' state={{ from: location }} replace className={adminButtonClasses}>
 						Admin Login
 					</Link>
 				)}

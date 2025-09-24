@@ -3,7 +3,7 @@ import api from '../../api/axios';
 import { LoginForm } from '../../components/forms/LoginForm';
 import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../components/ui/Image';
 
 export interface LoginFormValues {
@@ -20,6 +20,8 @@ export const Login = () => {
 	const [loading, setLoading] = useState(false);
 	const { login } = useAuth();
 	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location.state?.from?.pathname || '/';
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -31,7 +33,7 @@ export const Login = () => {
 			console.log('Login successful', res.data.username);
 
 			login(res.data.username, res.data.isSu);
-			navigate('/portfolio');
+			navigate(from, { replace: true });
 		} catch (err: any) {
 			console.error(err);
 			setError(err.response?.data?.error || 'Something went wrong');
