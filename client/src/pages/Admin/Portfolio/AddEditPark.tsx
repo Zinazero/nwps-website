@@ -1,6 +1,6 @@
 import { ItemForm } from '../../../components/forms/ItemForm';
 import { useState } from 'react';
-import type { Section } from '../../../components/forms/types';
+import type { ParkSection } from '../../../components/forms/types';
 import api from '../../../api/axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,9 +19,9 @@ export const AddEditPark = () => {
 		parkId: number;
 		parkCity: string;
 		parkBlurb: string;
-		parkSections?: Section[];
+		parkSections?: ParkSection[];
 	}) || {};
-	const [form, setForm] = useState<Section[]>(
+	const [form, setForm] = useState<ParkSection[]>(
 		parkSections.length > 0
 			? parkSections
 			: [{ title: '', description: '', image: null }]
@@ -115,6 +115,7 @@ export const AddEditPark = () => {
 					</div>
 				</div>
 				<ItemForm
+					formType='park'
 					form={form}
 					setForm={setForm}
 					handleSubmit={handleSubmit}

@@ -1,16 +1,11 @@
-import type { Section } from './types';
+import type { SectionFormProps } from './types';
 import { useEffect, useState } from 'react';
 import { Trash } from '../ui/Trash';
 import { Image } from '../ui/Image';
-
-interface SectionFormProps {
-	section: Section;
-	index: number;
-	setSection: (section: Section) => void;
-	dropSection: (index: number, section: Section) => void;
-}
+import { ImageMask } from '../ui/ImageMask';
 
 export const SectionForm: React.FC<SectionFormProps> = ({
+	formType,
 	section,
 	index,
 	setSection,
@@ -52,72 +47,101 @@ export const SectionForm: React.FC<SectionFormProps> = ({
 	}, [section.image]);
 
 	const removeImage = () => setSection({ ...section, image: null });
-	const isReverse = index % 2 === 0 ? 'flex-row-reverse' : '';
+	const isReverse = index % 2 !== 0 ? 'flex-row-reverse' : '';
 
 	return (
-		<section
-			className={`relative ${
-				index === 0 ? 'hero-section' : `info-section ${isReverse}`
-			}`}
-		>
-			{/* Image */}
-			{preview ? (
-				<div className='relative group'>
-					{/* Image Preview */}
-					<Image
-						src={preview}
-						alt='Image Preview'
-						className='w-full rounded-xl'
-					/>
+		<div id={formType}>
+			<section
+				className={`relative ${
+					index === 0 ? 'hero-section' : `info-section ${isReverse}`
+				}`}
+			>
+				{/* Image */}
+				{preview ? (
+					<div className='relative group'>
+						{/* Image Preview */}
+						{formType === 'products' && index === 0 ? (
+							<ImageMask 
+								src={preview}
+								alt='Image Preview'
+								maskUrl='/masks/rock-mask.svg'
+							/>
+						) : (
+							<Image
+							src={preview}
+							alt='Image Preview'
+							className='w-full rounded-xl'
+							/>
+						)}
 
-					{/* Remove Preview Button  */}
-					<Trash
-						onClick={removeImage}
-						className='absolute top-0 right-0 m-2 hover-vis'
-					/>
-				</div>
-			) : (
-				<label
-					htmlFor={`image-upload-${index}`}
-					className='file-input cursor-pointer'
-				>
-					+
-				</label>
-			)}
-			<input
-				id={`image-upload-${index}`}
-				onChange={handleFileChange}
-				type='file'
-				name='image'
-				className='hidden'
-			/>
-
-			{/* Text */}
-			<div className='text-container'>
+						{/* Remove Preview Button  */}
+						<Trash
+							onClick={removeImage}
+							className='absolute top-0 right-0 m-2 hover-vis'
+						/>
+					</div>
+				) : (
+					<label
+						htmlFor={`image-upload-${index}`}
+						className='file-input cursor-pointer'
+					>
+						+
+					</label>
+				)}
 				<input
-					type='text'
-					name='title'
-					placeholder='Title'
-					value={section.title}
-					onChange={handleTextChange}
-					required
+					id={`image-upload-${index}`}
+					onChange={handleFileChange}
+					type='file'
+					name='image'
+					className='hidden'
 				/>
-				<textarea
-					name='description'
-					placeholder='Description'
-					value={section.description}
-					onChange={handleTextChange}
-					required
-				/>
-			</div>
 
-			{/* Remove Section Button */}
-			{index !== 0 && (
-				<Trash
-					onClick={() => dropSection(index, section)}
-					className='absolute top-1/2 -translate-1/2 -right-50 text-2xl'
-				/>
-			)}
-		</section>
+				{/* Text */}
+				<div className='text-container'>
+					<input
+						type='text'
+						name='title'
+						placeholder='Title'
+						value={section.title}
+						onChange={handleTextChange}
+						required
+					/>
+					{formType === 'products' && (
+						<input
+							type='text'
+							name='subheading'
+							placeholder='Subheading (optional)'
+							value={section.subheading}
+							onChange={handleTextChange}
+							className='!text-xl'
+						/>
+					)}
+					<textarea
+						name='description'
+						placeholder='Description'
+						value={section.description}
+						onChange={handleTextChange}
+						required
+					/>
+					{formType === 'products' && index !== 0 && (
+						<input 
+							type='url'
+							name='externalLink'
+							placeholder='Link URL (optional)'
+							value={section.externalLink}
+							onChange={handleTextChange}
+						/>
+					)}
+				</div>
+
+				{/* Remove Section Button */}
+				{index !== 0 && (
+					<Trash
+						onClick={() => dropSection(index, section)}
+						className={`absolute top-0 text-2xl ${index % 2 !== 0 ? 'right-0' : 'left-0'}`}
+					/>
+				)}
+			</section>
+		</div>
 	);
 };

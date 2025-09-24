@@ -34,18 +34,30 @@
 }
 
 .hero-section {
-	@apply flex flex-col p-6 items-center space-y-12;
+	@apply flex p-6 items-center;
 }
 
-.hero-section .file-input {
+#park .hero-section {
+	@apply flex-col space-y-12;
+}
+
+#products .hero-section {
+	@apply space-x-12 border-b-3 border-dashed border-brand-orange pb-16;
+}
+
+#park .hero-section .file-input {
 	@apply w-250 h-140;
+}
+
+#products .hero-section .file-input {
+	@apply w-100 h-100;
 }
 
 .hero-section img {
     @apply max-w-250;
 }
 
-.hero-section .text-container {
+#park .hero-section .text-container {
 	@apply w-300;
 }
 

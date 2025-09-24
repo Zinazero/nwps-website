@@ -1,11 +1,12 @@
-import { SectionForm } from './SectionForm';
 import type { Section } from './types';
 import './sections.css';
 import { useState } from 'react';
 import { ConfirmModal } from '../ui/ConfirmModal';
 import { Loading } from '../ui/Loading';
+import { SectionForm } from './SectionForm';
 
 interface ItemFormProps {
+	formType: 'park' | 'products';
 	form: Section[];
 	setForm: React.Dispatch<React.SetStateAction<Section[]>>;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
@@ -13,6 +14,7 @@ interface ItemFormProps {
 }
 
 export const ItemForm: React.FC<ItemFormProps> = ({
+	formType,
 	form,
 	setForm,
 	handleSubmit,
@@ -21,8 +23,19 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 	const [confirmOpen, setConfirmOpen] = useState(false);
 	const [dropIndex, setDropIndex] = useState<number | null>(null);
 
+	const emptySection: Section =
+		formType === 'park'
+			? { title: '', description: '', image: null }
+			: {
+					title: '',
+					subheading: '',
+					description: '',
+					externalLink: '',
+					image: null,
+			  };
+
 	const addSection = () => {
-		setForm((prev) => [...prev, { title: '', description: '', image: null }]);
+		setForm((prev) => [...prev, emptySection]);
 	};
 
 	const dropSection = (indexToRemove: number) => {
@@ -46,6 +59,9 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 		setConfirmOpen(false);
 	};
 
+	const updateSection = (index: number, updated: Section) =>
+		setForm((prev) => prev.map((s, i) => (i === index ? updated : s)));
+
 	return (
 		<>
 			<form
@@ -54,19 +70,18 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 				onSubmit={handleSubmit}
 			>
 				{/* Section Map */}
-				{form.map((section, index) => (
-					<SectionForm
-						key={index}
-						section={section}
-						index={index}
-						setSection={(updatedSection) =>
-							setForm((prev) =>
-								prev.map((s, i) => (i === index ? updatedSection : s))
-							)
-						}
-						dropSection={() => handleDropSectionClick(index, section)}
-					/>
-				))}
+				{form.map((section, index) => {
+					return (
+						<SectionForm
+							key={`${section.title} Section ${index}`}
+							formType={formType}
+							section={section}
+							index={index}
+							setSection={(updated: Section) => updateSection(index, updated)}
+							dropSection={() => handleDropSectionClick(index, section)}
+						/>
+					);
+				})}
 
 				{/* Buttons */}
 				{loading ? (
