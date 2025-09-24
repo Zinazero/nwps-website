@@ -11,41 +11,31 @@ import { ProductsCard } from '../../components/ui/ProductsCard';
 import { AddCardButton } from '../../components/ui/AddCardButton';
 import { Check } from '../../components/ui/Check';
 import { useAuth } from '../../contexts/AuthContext';
-import type { ProductCategory } from '../types';
+import type { ProductsCategory } from '../types';
+import api from '../../api/axios';
 
 export const Products = () => {
-	const testCategories: ProductCategory[] = [
-		{
-			id: 1,
-			title: 'Playgrounds',
-			description:
-				'From Toddlers to Tweens, our playgrounds are designed for fun and accessibility for all!',
-		},
-		{
-			id: 2,
-			title: 'Sports and Fitness',
-			description:
-				'Functional, full body and integrated, our outfoor sports and fitness equipment is designed to help people achieve their physical goals.',
-		},
-		{
-			id: 3,
-			title: 'Electronic Play',
-			description:
-				'Outdoor electronic playground equipment combines interactivity and movement, designed for players of all ages and abilities.',
-		},
-		{
-			id: 4,
-			title: 'Water Play',
-			description:
-				'Colourful, durable and environmentally responsible water play equipment that lasts!',
-		},
-	];
 
-	const [categories, setCategories] = useState<ProductCategory[]>(testCategories);
-	const [loading, setLoading] = useState(false);
+
+	const [categories, setCategories] = useState<ProductsCategory[]>([]);
+	const [loading, setLoading] = useState(true);
 	const [isEditMode, setIsEditMode] = useState(false);
-
 	const { user } = useAuth();
+
+    useEffect(() => {
+        const fetchProductsCategories = async () => {
+            try {
+                const res = await api.get<ProductsCategory[]>('/products');
+                setCategories(res.data);
+            } catch (err) {
+                console.error('Error fetching product categories:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProductsCategories();
+    }, []);
 
 	const hotspotClasses =
 		'absolute z-11 bg-brand-orange hover:bg-white hover:text-brand-orange transition p-2 rounded-4xl text-white';
@@ -123,10 +113,10 @@ export const Products = () => {
 					<div className='grid grid-cols-2 gap-10 max-w-350'>
 						{/* ADMIN ONLY --- Add Products Page */}
 						{isEditMode && (
-							<AddCardButton navigationRoute='/admin/add-edit-products' />
+							<AddCardButton navigationRoute='/admin/add-edit-products' className='min-w-100 min-h-40 last:odd:col-span-2 last:odd:justify-self-center' />
 						)}
 
-						{testCategories.map((category) => (
+						{categories.map((category) => (
 							<ProductsCard
 								category={category}
 								className='last:odd:col-span-2 last:odd:justify-self-center last:odd:w-1/2'

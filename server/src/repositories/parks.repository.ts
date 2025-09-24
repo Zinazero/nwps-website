@@ -14,7 +14,7 @@ export const getAllParks = async (): Promise<Park[]> => {
 
 export const getRecentParks = async (): Promise<Park[]> => {
 	const res: QueryResult<Park> = await pool.query(
-		'SELECT id, title, location, description, blurb FROM parks ORDER BY sort_order ASC LIMIT 3'
+	'SELECT id, title, location, description, blurb FROM parks ORDER BY sort_order ASC LIMIT 3'
 	);
 	return res.rows;
 };

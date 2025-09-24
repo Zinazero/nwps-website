@@ -6,7 +6,7 @@ export interface Park {
 	blurb: string;
 }
 
-export interface ProductCategory {
+export interface ProductsCategory {
 	id: number;
 	title: string;
 	description: string;

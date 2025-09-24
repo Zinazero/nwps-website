@@ -1,10 +1,11 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import type { ProductCategory } from '../../types';
-import { useState } from 'react';
+import type { ProductsCategory } from '../../types';
+import { useEffect, useState } from 'react';
 import { ImageMask } from '../../../components/ui/ImageMask';
 import { Image } from '../../../components/ui/Image';
 import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
+import api from '../../../api/axios';
 
 interface ProductsSection {
 	id: number;
@@ -43,11 +44,49 @@ export const ProductsPage = () => {
 	];
 
 	const { state } = useLocation();
-	const [category, setCategory] = useState<ProductCategory>(state?.category);
+	const [category, setCategory] = useState<ProductsCategory>(state?.category);
 	const [sections, setSections] = useState(testSections);
+	const [loading, setLoading] = useState(true);
 
 	const { category: slug } = useParams<{ category: string }>();
 	const navigate = useNavigate();
+
+    // Only fetch product category if we don't have it
+	useEffect(() => {
+		if (!category) {
+			const fetchCategory = async () => {
+				try {
+					const res = await api.get(`/products/by-category/${slug}`);
+					setCategory(res.data.category);
+					setSections(res.data.sections || []);
+				} catch (err) {
+					console.error('Error fetching product category:', err);
+				} finally {
+					setLoading(false);
+				}
+			};
+
+            fetchCategory();
+		}
+	}, [slug]);
+
+    // Only fetch sections if product category already exists on initial render
+    useEffect(() => {
+        if (category) {
+            const fetchSections = async () => {
+                try {
+                    const res = await api.get<ProductsSection[]>(`/products/${category.id}`);
+                    setSections(res.data);
+                } catch (err) {
+                    console.error('Error fetching product category sections:', err);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchSections();
+        }
+    }, []);
 
 	const handleEditCategory = () => {
 		navigate('/admin/add-edit-products', {

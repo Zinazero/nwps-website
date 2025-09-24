@@ -1,16 +1,11 @@
 import pool from '../db';
-import { PortfolioSection } from '../types';
+import type { PortfolioSection } from '../types';
 
 export const getParkPortfolio = async (
 	parkId: number
 ): Promise<PortfolioSection[]> => {
 	const res = await pool.query<PortfolioSection>(
-		`
-    SELECT id, title, description
-    FROM portfolio_sections
-    WHERE park_id = $1
-    ORDER BY id
-  `,
+		`SELECT id, title, description FROM portfolio_sections WHERE park_id = $1 ORDER BY section_index ASC`,
 		[parkId]
 	);
 
