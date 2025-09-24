@@ -23,10 +23,10 @@ export const ParkPage = () => {
 	const { park: slug } = useParams<{ park: string }>();
 	const navigate = useNavigate();
 
+	// Only fetch park if we don’t have it
 	useEffect(() => {
-		const fetchData = async () => {
-			if (!park) {
-				// Fetch park by slug
+		if (!park) {
+			const fetchPark = async () => {
 				try {
 					const res = await api.get(`/parks/by-park/${slug}`);
 					setPark(res.data.park);
@@ -36,8 +36,16 @@ export const ParkPage = () => {
 				} finally {
 					setLoading(false);
 				}
-			} else {
-				// Fetch sections for existing park
+			};
+
+			fetchPark();
+		}
+	}, [slug]);
+
+	// Only fetch sections if park already exists on initial render
+	useEffect(() => {
+		if (park) {
+			const fetchSections = async () => {
 				try {
 					const res = await api.get<ParkSection[]>(`/parks/${park.id}`);
 					setSections(res.data);
@@ -46,11 +54,11 @@ export const ParkPage = () => {
 				} finally {
 					setLoading(false);
 				}
-			}
-		};
+			};
 
-		fetchData();
-	}, [park, slug]);
+			fetchSections();
+		}
+	}, []);
 
 	const handleEditPark = () => {
 		const parkId = park.id;

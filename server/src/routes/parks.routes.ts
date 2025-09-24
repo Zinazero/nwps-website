@@ -42,7 +42,7 @@ router.get('/recent', async (req, res) => {
 	}
 });
 
-router.get('/get-park/:park', async (req, res) => {
+router.get('/by-park/:park', async (req, res) => {
 	const slug = req.params.park;
 	const title = slugToTitleConverter(slug);
 
