@@ -83,10 +83,10 @@ export const Products = () => {
 		try {
 			await api.post(
 				'/products/reorder',
-				ordered.map((c, i) => ({ id: c.id, sourt_order: i }))
+				ordered.map((c, i) => ({ id: c.id, sort_order: i }))
 			);
 		} catch (err) {
-			console.error('Faield to persist products category order:', err);
+			console.error('Failed to persist products category order:', err);
 		}
 	};
 
