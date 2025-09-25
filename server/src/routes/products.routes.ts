@@ -65,6 +65,8 @@ router.post('/post-products', upload.any(), async (req, res) => {
 		const products = productsInfo[0];
 		const sections = productsInfo.slice(1);
 		const isUpdate = !!products.id;
+		const slug = titleToSlugConverter(products.title);
+		products.slug = slug;
 
 		// Insert/update DB
 		if (isUpdate) {
@@ -73,7 +75,6 @@ router.post('/post-products', upload.any(), async (req, res) => {
 			await postProductsCategory(products, sections);
 		}
 
-		const slug = titleToSlugConverter(products.title);
 		const folder = path.join(
 			__dirname,
 			'../../../client/public/images/products',

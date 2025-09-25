@@ -6,6 +6,7 @@ interface Provider {
 	blurb: string;
 	description: string;
 	externalLink: string;
+	slug: string;
 }
 
 export const getAllProviders = async (): Promise<Provider[]> => {
@@ -24,12 +25,12 @@ export const getProviderBySlug = async (slug: string): Promise<Provider> => {
 };
 
 export const postProvider = async (provider: Provider) => {
-	const { title, blurb, description, externalLink } = provider;
+	const { title, blurb, description, externalLink, slug } = provider;
 
 	try {
 		await pool.query(
-			'INSERT INTO providers (title, blurb, description, external_link) VALUES ($1, $2, $3, $4)',
-			[title, blurb, description, externalLink]
+			'INSERT INTO providers (title, blurb, description, external_link, slug) VALUES ($1, $2, $3, $4, $5)',
+			[title, blurb, description, externalLink, slug]
 		);
 	} catch (err) {
 		throw err;

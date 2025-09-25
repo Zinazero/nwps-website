@@ -5,9 +5,7 @@ import {
 	getProviderBySlug,
 	postProvider,
 } from '../repositories/providers.repository';
-import {
-	titleToSlugConverter,
-} from '../utils/slugConverter';
+import { titleToSlugConverter } from '../utils/slugConverter';
 import path from 'path';
 import fs from 'fs/promises';
 
@@ -41,6 +39,7 @@ router.post('/post-provider', upload.any(), async (req, res) => {
 	try {
 		const provider = JSON.parse(req.body.data);
 		const slug = titleToSlugConverter(provider.title);
+		provider.slug = slug;
 
 		await postProvider(provider);
 

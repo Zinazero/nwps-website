@@ -34,7 +34,7 @@ export const getParkById = async (parkId: number): Promise<Park> => {
 };
 
 export const postPark = async (park: Park, sections: PortfolioSection[]) => {
-	const { title, location, description, blurb } = park;
+	const { title, location, description, blurb, slug } = park;
 
 	const client = await pool.connect();
 
@@ -44,8 +44,8 @@ export const postPark = async (park: Park, sections: PortfolioSection[]) => {
 		await client.query('UPDATE parks SET sort_order = sort_order + 1');
 
 		const res: QueryResult<{ id: number }> = await client.query(
-			'INSERT INTO parks (title, location, description, blurb) VALUES ($1, $2, $3, $4) RETURNING id',
-			[title, location, description, blurb]
+			'INSERT INTO parks (title, location, description, blurb, slug) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+			[title, location, description, blurb, slug]
 		);
 
 		if (sections.length > 0) {

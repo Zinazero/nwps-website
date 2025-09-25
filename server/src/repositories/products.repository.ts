@@ -15,7 +15,6 @@ export const getAllProductsCategories = async (): Promise<
 export const getProductsCategoryBySlug = async (
 	slug: string
 ): Promise<ProductsCategory> => {
-	console.log(slug)
 	const res: QueryResult<ProductsCategory> = await pool.query(
 		'SELECT id, title, subheading, description FROM products WHERE slug = $1',
 		[slug]
@@ -37,7 +36,7 @@ export const postProductsCategory = async (
 	products: ProductsCategory,
 	sections: ProductsSection[]
 ) => {
-	const { title, subheading, description } = products;
+	const { title, subheading, description, slug } = products;
 
 	const client = await pool.connect();
 
@@ -47,8 +46,8 @@ export const postProductsCategory = async (
 		await client.query('UPDATE products SET sort_order = sort_order + 1');
 
 		const res: QueryResult<{ id: number }> = await client.query(
-			'INSERT INTO products (title, subheading, description) VALUES ($1, $2, $3) RETURNING id',
-			[title, subheading, description]
+			'INSERT INTO products (title, subheading, description, slug) VALUES ($1, $2, $3, $4) RETURNING id',
+			[title, subheading, description, slug]
 		);
 
 		if (sections.length > 0) {

@@ -4,6 +4,7 @@ export interface Park {
 	location: string;
 	description: string;
 	blurb: string;
+	slug: string;
 }
 
 export interface ParkOrder {
@@ -23,6 +24,7 @@ export interface ProductsCategory {
 	title: string;
 	subheading?: string;
 	description: string;
+	slug: string;
 }
 
 export interface ProductOrder {

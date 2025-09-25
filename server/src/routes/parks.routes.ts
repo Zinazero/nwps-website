@@ -76,6 +76,8 @@ router.post('/post-park', upload.any(), async (req, res) => {
 		const park = parkInfo[0];
 		const sections = parkInfo.slice(1);
 		const isUpdate = !!park.id;
+		const slug = titleToSlugConverter(park.title);
+		park.slug = slug;
 
 		if (isUpdate) {
 			// Update existing park
@@ -85,7 +87,6 @@ router.post('/post-park', upload.any(), async (req, res) => {
 			await postPark(park, sections);
 		}
 
-		const slug = titleToSlugConverter(park.title);
 		const folder = path.join(
 			__dirname,
 			'../../../client/public/images/playgrounds',
