@@ -102,7 +102,7 @@ export const ParkPage = () => {
 						<div
 							key={`Section ${index}`}
 							className={`
-								flex flex-col xl:flex-row items-center justify-center max-w-300
+								flex flex-col xl:flex-row items-center justify-center max-w-400
 								space-y-12 xl:space-y-0 border-b-1 border-transparent-grey pb-8 xl:border-0
 								${index % 2 !== 0 ? 'xl:flex-row-reverse' : ''}`}
 						>

@@ -88,7 +88,7 @@ export const ProductsPage = () => {
 						{/* Hero */}
 						{category && (
 							<div className='flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16'>
-								<div className='flex items-center max-w-500'>
+								<div className='flex items-center max-w-450'>
 									<ImageMask
 										src={`/images/products/${slug}/${slug}-1.jpg`}
 										alt={`${category.title} Image 1`}

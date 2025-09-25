@@ -120,7 +120,7 @@ export const Products = () => {
 						<Image
 							src={playground}
 							alt='Playground with hotspots'
-							className='w-full h-full object-cover relative z-10'
+							className='w-full max-w-350 h-full object-cover relative z-10'
 						/>
 						<Link
 							to='/products/playgrounds'
