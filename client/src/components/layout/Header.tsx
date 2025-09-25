@@ -2,11 +2,46 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import type { LinkType } from './types';
 import { Image } from '../ui/Image';
+import { useEffect, useState } from 'react';
+import type { ProductsCategory } from '../../pages/types';
+import api from '../../api/axios';
+import { slugConverter } from '../../utils/parkNavConverter';
+
+export type LinkType = {
+	label: string;
+	to: string;
+	isDropdown?: boolean;
+};
 
 export const Header = () => {
 	const location = useLocation();
+
+	const [productsDropdownLinks, setProductsDropdownLinks] = useState<LinkType[]>([]);
+
+	useEffect(() => {
+		const fetchProductsCategories = async () => {
+			try {
+				const res = await api.get<ProductsCategory[]>('/products');
+				const productsLinks: LinkType[] = [];
+
+				for (const category of res.data) {
+					const link: LinkType = {
+						label: category.title,
+						to: `/products/${slugConverter(category.title)}`,
+					};
+
+					productsLinks.push(link);
+				}
+
+				setProductsDropdownLinks(productsLinks);
+			} catch (err) {
+				console.error('Error fetching product categories:', err);
+			}
+		};
+
+		fetchProductsCategories();
+	}, []);
 
 	const links: LinkType[] = [
 		{ label: 'Home', to: '/' },
@@ -14,19 +49,6 @@ export const Header = () => {
 		{ label: 'Portfolio', to: '/portfolio' },
 		{ label: 'Products', to: '/products', isDropdown: true },
 		{ label: 'Testimonials', to: '/testimonials' },
-	];
-
-	const productsDropdownLinks: LinkType[] = [
-		{ label: 'Playgrounds', to: '/products/playgrounds' },
-		{ label: 'Safety Surfacing', to: '/products/safety-surfacing' },
-		{
-			label: 'Sports and Outdoor Fitness',
-			to: '/products/sports-and-outdoor-fitness',
-		},
-		{ label: 'Park Amenities', to: '/products/park-amenities' },
-		{ label: 'Park Shelters', to: '/products/park-shelters' },
-		{ label: 'Electronic Play', to: '/products/electronic-play' },
-		{ label: 'Water Play', to: '/products/water-play' },
 	];
 
 	return (
@@ -67,7 +89,9 @@ export const Header = () => {
 											key={sublink.label}
 											className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'
 										>
-											<Link to={sublink.to}>{sublink.label}</Link>
+											<Link to={sublink.to} className={location.pathname.includes(sublink.to)
+											? 'text-brand-orange'
+											: ''}>{sublink.label}</Link>
 										</li>
 									))}
 								</ul>
