@@ -15,10 +15,10 @@ export const getAllProviders = async (): Promise<Provider[]> => {
 	return res.rows;
 };
 
-export const getProviderByTitle = async (title: string): Promise<Provider> => {
+export const getProviderBySlug = async (slug: string): Promise<Provider> => {
     const res: QueryResult<Provider> = await pool.query(
-        'SELECT title, blurb, description, external_link AS "externalLink" FROM providers WHERE title = $1',
-        [title]  
+        'SELECT title, blurb, description, external_link AS "externalLink" FROM providers WHERE slug = $1',
+        [slug]  
     );
     return res.rows[0];
 };

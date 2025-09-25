@@ -2,12 +2,11 @@ import express from 'express';
 import { upload } from '../utils/multer';
 import {
 	getAllProviders,
-	getProviderByTitle,
+	getProviderBySlug,
 	postProvider,
 } from '../repositories/providers.repository';
 import {
 	titleToSlugConverter,
-	slugToTitleConverter,
 } from '../utils/slugConverter';
 import path from 'path';
 import fs from 'fs/promises';
@@ -25,12 +24,11 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/:provider', async (req, res) => {
-	const slug = req.params.provider;
-	const title = slugToTitleConverter(slug);
+router.get('/:slug', async (req, res) => {
+	const slug = req.params.slug;
 
 	try {
-		const provider = await getProviderByTitle(title);
+		const provider = await getProviderBySlug(slug);
 		res.json(provider);
 	} catch (err) {
 		console.error(err);
