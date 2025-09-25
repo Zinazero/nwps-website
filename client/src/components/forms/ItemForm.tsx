@@ -73,7 +73,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 				{form.map((section, index) => {
 					return (
 						<SectionForm
-							key={`${section.title} Section ${index}`}
+							key={`Section ${index}`}
 							formType={formType}
 							section={section}
 							index={index}

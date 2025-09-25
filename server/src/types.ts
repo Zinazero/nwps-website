@@ -21,6 +21,7 @@ export interface PortfolioSection {
 export interface ProductsCategory {
 	id: number;
 	title: string;
+	subheading?: string;
 	description: string;
 }
 

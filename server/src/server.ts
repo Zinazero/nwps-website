@@ -2,9 +2,10 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import parksRouter from './routes/parks.routes';
 import authRoutes from './routes/auth.routes';
 import providersRoutes from './routes/providers.routes';
+import parksRouter from './routes/parks.routes';
+import productsRouter from './routes/products.routes';
 
 const app = express();
 
@@ -22,9 +23,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/api/parks', parksRouter);
 app.use('/api/auth', authRoutes);
 app.use('/api/providers', providersRoutes);
+app.use('/api/parks', parksRouter);
+app.use('/api/products', productsRouter);
 
 if (process.env.NODE_ENV === 'production') {
 	const clientDistPath = path.join(__dirname, '../../client/dist');

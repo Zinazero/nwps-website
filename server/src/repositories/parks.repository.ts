@@ -55,7 +55,7 @@ export const postPark = async (park: Park, sections: PortfolioSection[]) => {
 				...section,
 				park_id: res.rows[0].id,
 			}));
-			await postPortfolioSections(portfolioSections);
+			await postPortfolioSections(portfolioSections, client);
 		}
 
 		await client.query('COMMIT');
@@ -86,9 +86,9 @@ export const updatePark = async (park: Park, sections: PortfolioSection[]) => {
 		if (sections.length > 0) {
 			const portfolioSections = sections.map((section) => ({
 				...section,
-				park_id: park.id,
+				park_id: id,
 			}));
-			await postPortfolioSections(portfolioSections);
+			await postPortfolioSections(portfolioSections, client);
 		}
 
 		await client.query('COMMIT');
