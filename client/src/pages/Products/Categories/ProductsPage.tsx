@@ -79,7 +79,7 @@ export const ProductsPage = () => {
 	};
 
 	return (
-		<main className='relative min-h-screen flex flex-col items-center justify-center bg-white'>
+		<main className='relative min-h-screen flex flex-col items-center justify-center bg-white space-y-20 pb-26'>
 			{loading ? (
 				<Loading />
 			) : (

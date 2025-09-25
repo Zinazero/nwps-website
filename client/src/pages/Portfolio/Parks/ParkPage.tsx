@@ -81,7 +81,7 @@ export const ParkPage = () => {
 				<>
 					{/* Hero */}
 					{park && (
-						<div className='p-6 flex flex-col items-center space-y-12'>
+						<div className='p-6 flex flex-col items-center space-y-12 border-b-1 border-transparent-grey pb-8 xl:border-0'>
 							<Image
 								src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
 								alt={`${park.title} Image 1`}
@@ -101,9 +101,10 @@ export const ParkPage = () => {
 					{sections.map((section, index) => (
 						<div
 							key={`Section ${index}`}
-							className={`flex items-center justify-center max-w-300 space-x-12 ${
-								index % 2 !== 0 ? 'flex-row-reverse' : ''
-							}`}
+							className={`
+								flex flex-col xl:flex-row items-center justify-center max-w-300
+								space-y-12 xl:space-y-0 border-b-1 border-transparent-grey pb-8 xl:border-0
+								${index % 2 !== 0 ? 'xl:flex-row-reverse' : ''}`}
 						>
 							{park && (
 								<Image
@@ -112,7 +113,7 @@ export const ParkPage = () => {
 									className='w-150 rounded-xl'
 								/>
 							)}
-							<div className='flex flex-col space-y-4'>
+							<div className='flex flex-col space-y-4 max-w-200 mx-12'>
 								<h2 className='text-3xl font-bold'>{section.title}</h2>
 								<p className='text-lg '>{section.description}</p>
 							</div>

@@ -184,7 +184,7 @@ export const Products = () => {
 							items={categories.map((c) => c.id)}
 							strategy={rectSortingStrategy}
 						>
-							<div className='grid grid-cols-2 gap-10 max-w-350'>
+							<div className='grid grid-cols-2 gap-y-16 gap-x-32 max-w-350'>
 								{/* ADMIN ONLY --- Add Products Page */}
 								{isEditMode && (
 									<AddCardButton

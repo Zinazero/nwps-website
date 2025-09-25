@@ -44,7 +44,7 @@ export const ProductsCard = ({
 				state={{ category }}
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
-				<div className='flex items-center space-x-8 hover:scale-105 transition'>
+				<div className='flex flex-col lg:flex-row items-center text-center lg:text-left space-x-8 space-y-4 lg:space-y-0 hover:scale-105 transition'>
 					<Image
 						src={`/images/products/${slug}/${slug}-1.jpg`}
 						alt={`${category.title} Image`}
@@ -54,7 +54,9 @@ export const ProductsCard = ({
 						<h3 className='text-2xl font-bold text-brand-orange line-clamp-2'>
 							{category.title}
 						</h3>
-						<p className='text-lg/relaxed line-clamp-4'>{category.description}</p>
+						<p className='text-lg/relaxed line-clamp-4'>
+							{category.description}
+						</p>
 					</div>
 				</div>
 			</Link>
