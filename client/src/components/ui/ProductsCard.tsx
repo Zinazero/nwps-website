@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Image } from './Image';
-import type { ProductCategory } from '../../pages/types';
+import type { ProductsCategory } from '../../pages/types';
 import { slugConverter } from '../../utils/parkNavConverter';
 
 interface ProductsCardProps {
-	category: ProductCategory;
+	category: ProductsCategory;
 	className?: string;
 }
 
