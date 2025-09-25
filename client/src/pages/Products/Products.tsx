@@ -14,6 +14,17 @@ import { useAuth } from '../../contexts/AuthContext';
 import type { ProductsCategory } from '../types';
 import api from '../../api/axios';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
+import {
+	DndContext,
+	PointerSensor,
+	useSensor,
+	useSensors,
+} from '@dnd-kit/core';
+import {
+	arrayMove,
+	rectSortingStrategy,
+	SortableContext,
+} from '@dnd-kit/sortable';
 
 export const Products = () => {
 	const [categories, setCategories] = useState<ProductsCategory[]>([]);
@@ -60,6 +71,39 @@ export const Products = () => {
 			setDeleteCategory(null);
 			setConfirmOpen(false);
 		}
+	};
+
+	const sensors = useSensors(
+		useSensor(PointerSensor, {
+			activationConstraint: { distance: 5 },
+		})
+	);
+
+	const persistOrder = async (ordered: ProductsCategory[]) => {
+		try {
+			await api.post(
+				'/products/reorder',
+				ordered.map((c, i) => ({ id: c.id, sourt_order: i }))
+			);
+		} catch (err) {
+			console.error('Faield to persist products category order:', err);
+		}
+	};
+
+	const handleDragEnd = ({ active, over }: { active: any; over: any }) => {
+		if (!over || active.id === over.id) return;
+
+		setCategories((prev) => {
+			const oldIndex = prev.findIndex((p) => p.id === active.id);
+			const newIndex = prev.findIndex((p) => p.id === over.id);
+			if (oldIndex === -1 || newIndex === -1) return prev;
+
+			const next = arrayMove(prev, oldIndex, newIndex);
+
+			persistOrder(next);
+
+			return next;
+		});
 	};
 
 	const hotspotClasses =
@@ -135,26 +179,33 @@ export const Products = () => {
 					</div>
 
 					{/* Categories */}
-					<div className='grid grid-cols-2 gap-10 max-w-350'>
-						{/* ADMIN ONLY --- Add Products Page */}
-						{isEditMode && (
-							<AddCardButton
-								navigationRoute='/admin/add-edit-products'
-								className='min-w-100 min-h-40 last:odd:col-span-2 last:odd:justify-self-center'
-							/>
-						)}
+					<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+						<SortableContext
+							items={categories.map((c) => c.id)}
+							strategy={rectSortingStrategy}
+						>
+							<div className='grid grid-cols-2 gap-10 max-w-350'>
+								{/* ADMIN ONLY --- Add Products Page */}
+								{isEditMode && (
+									<AddCardButton
+										navigationRoute='/admin/add-edit-products'
+										className='min-w-100 min-h-40 last:odd:col-span-2 last:odd:justify-self-center'
+									/>
+								)}
 
-						{categories.map((category) => (
-							<ProductsCard
-								key={category.id}
-								category={category}
-								disabled={!isEditMode}
-								isEditMode={isEditMode}
-								deleteItem={handleDeleteClick}
-								className='last:odd:col-span-2 last:odd:justify-self-center last:odd:w-1/2'
-							/>
-						))}
-					</div>
+								{categories.map((category) => (
+									<ProductsCard
+										key={category.id}
+										category={category}
+										disabled={!isEditMode}
+										isEditMode={isEditMode}
+										deleteItem={handleDeleteClick}
+										className='last:odd:col-span-2 last:odd:justify-self-center last:odd:w-1/2'
+									/>
+								))}
+							</div>
+						</SortableContext>
+					</DndContext>
 				</div>
 			)}
 

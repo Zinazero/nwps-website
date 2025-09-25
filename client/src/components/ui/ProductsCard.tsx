@@ -39,11 +39,15 @@ export const ProductsCard = ({
 			{...listeners}
 			className={`relative ${isEditMode ? 'draggable' : ''} ${className}`}
 		>
-			<Link to={`/products/${slug}`} state={{ category }}>
+			<Link
+				to={`/products/${slug}`}
+				state={{ category }}
+				className={isEditMode ? 'pointer-events-none' : ''}
+			>
 				<div className='flex items-center space-x-8 hover:scale-105 transition'>
 					<Image
-						src='/images/playgrounds/mohawk-park/mohawk-park-1.jpg'
-						alt='test-image'
+						src={`/images/products/${slug}/${slug}-1.jpg`}
+						alt={`${category.title} Image`}
 						className='w-54 h-44 rounded-lg object-cover shadow-sm'
 					/>
 					<div className='flex flex-col space-y-2'>

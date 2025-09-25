@@ -107,7 +107,7 @@ router.post('/post-park', upload.any(), async (req, res) => {
 			for (const file of files) {
 				const index = Number(file.fieldname);
 				const title = `${slug}-${index + 1}`;
-				const ext = path.extname(file.originalname);
+				const ext = '.jpg'; // Encforcing .jpg for now
 
 				await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
 			}

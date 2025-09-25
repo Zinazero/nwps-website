@@ -1,6 +1,6 @@
 import type { QueryResult } from 'pg';
 import pool from '../db';
-import { ProductsCategory, ProductsSection } from '../types';
+import { ProductOrder, ProductsCategory, ProductsSection } from '../types';
 import { postProductsSections } from './productsSections.repository';
 
 export const getAllProductsCategories = async (): Promise<
@@ -101,7 +101,22 @@ export const updateProductsCategory = async (
 	}
 };
 
-export const deleteProductsCategory = async (productsId: number): Promise<number> => {
+export const reorderProducts = async (
+	productOrder: ProductOrder
+): Promise<number> => {
+	const { id, sort_order } = productOrder;
+
+	const res: QueryResult = await pool.query(
+		'UPDATE products SET sort_order = $1 WHERE id = $2',
+		[sort_order, id]
+	);
+
+	return res.rowCount as number;
+};
+
+export const deleteProductsCategory = async (
+	productsId: number
+): Promise<number> => {
 	const res: QueryResult = await pool.query(
 		'DELETE FROM products WHERE id = $1',
 		[productsId]
