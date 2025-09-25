@@ -8,7 +8,7 @@ export const AboutHero = () => {
 		<section id='about-hero'>
 			<div className='flex flex-col items-center space-y-12 p-8'>
 				<UnderlineHeader text='About Us' withArrow />
-				<div className='max-w-350 mx-auto flex items-center'>
+				<div className='max-w-350 flex items-center space-x-30'>
 					<div className='flex flex-col w-1/2 space-y-6'>
 						<h3 className='text-4xl font-semibold'>Our Approach</h3>
 						<p className='text-xl/relaxed '>
@@ -29,7 +29,6 @@ export const AboutHero = () => {
 						src={aboutImage}
 						alt='Accessible Surfacing Playground'
 						maskUrl='/masks/squiggly-mask.svg'
-                        width={'50%'}
 					/>
 				</div>
 			</div>
