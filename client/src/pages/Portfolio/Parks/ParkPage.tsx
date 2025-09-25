@@ -23,42 +23,30 @@ export const ParkPage = () => {
 	const { park: slug } = useParams<{ park: string }>();
 	const navigate = useNavigate();
 
-	// Only fetch park if we don’t have it
 	useEffect(() => {
-		if (!park) {
-			const fetchPark = async () => {
-				try {
-					const res = await api.get(`/parks/by-park/${slug}`);
+		const fetchData = async () => {
+			setLoading(true);
+			try {
+				if (state?.park && state.park.slug === slug) {
+					// Use preloaded park from state, still fetch sections
+					setPark(state.park);
+					const res = await api.get<ParkSection[]>(`/parks/${state.park.id}`);
+					setSections(res.data);
+				} else {
+					// Fallback to full fetch by slug
+					const res = await api.get(`/parks/by-slug/${slug}`);
 					setPark(res.data.park);
 					setSections(res.data.sections || []);
-				} catch (err) {
-					console.error('Error fetching park:', err);
-				} finally {
-					setLoading(false);
 				}
-			};
+			} catch (err) {
+				console.error('Error fetching park:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-			fetchPark();
-		}
-	}, [slug]);
-
-	// Only fetch sections if park already exists on initial render
-	useEffect(() => {
-		if (park) {
-			const fetchSections = async () => {
-				try {
-					const res = await api.get<ParkSection[]>(`/parks/${park.id}`);
-					setSections(res.data);
-				} catch (err) {
-					console.error('Error fetching portfolio sections:', err);
-				} finally {
-					setLoading(false);
-				}
-			};
-
-			fetchSections();
-		}
-	}, []);
+		fetchData();
+	}, [slug, state?.park]);
 
 	const handleEditPark = () => {
 		const parkId = park.id;

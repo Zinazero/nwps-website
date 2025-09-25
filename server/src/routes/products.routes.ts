@@ -3,19 +3,21 @@ import {
 	deleteProductsCategory,
 	getAllProductsCategories,
 	getProductsCategoryById,
-	getProductsCategoryByTitle,
+	getProductsCategoryBySlug,
 	postProductsCategory,
 	reorderProducts,
 	updateProductsCategory,
 } from '../repositories/products.repository';
-import {
-	slugToTitleConverter,
-	titleToSlugConverter,
-} from '../utils/slugConverter';
+import { titleToSlugConverter } from '../utils/slugConverter';
 import { getProductsSections } from '../repositories/productsSections.repository';
 import path from 'path';
 import fs from 'fs/promises';
-import { ensureFolder, upload, writeFiles, renameFilesInFolder } from '../utils/multer';
+import {
+	ensureFolder,
+	upload,
+	writeFiles,
+	renameFilesInFolder,
+} from '../utils/multer';
 import { ProductOrder } from '../types';
 
 const router = express.Router();
@@ -31,12 +33,11 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/by-category/:category', async (req, res) => {
-	const slug = req.params.category;
-	const title = slugToTitleConverter(slug);
+router.get('/by-slug/:slug', async (req, res) => {
+	const slug = req.params.slug;
 
 	try {
-		const category = await getProductsCategoryByTitle(title);
+		const category = await getProductsCategoryBySlug(slug);
 		const sections = await getProductsSections(category.id);
 		res.json({ category, sections });
 	} catch (err) {

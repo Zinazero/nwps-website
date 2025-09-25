@@ -7,17 +7,18 @@ export const getAllProductsCategories = async (): Promise<
 	ProductsCategory[]
 > => {
 	const res: QueryResult<ProductsCategory> = await pool.query(
-		'SELECT id, title, description FROM products ORDER BY sort_order ASC'
+		'SELECT id, title, description, slug FROM products ORDER BY sort_order ASC'
 	);
 	return res.rows;
 };
 
-export const getProductsCategoryByTitle = async (
-	title: string
+export const getProductsCategoryBySlug = async (
+	slug: string
 ): Promise<ProductsCategory> => {
+	console.log(slug)
 	const res: QueryResult<ProductsCategory> = await pool.query(
-		'SELECT id, title, subheading, description FROM products WHERE title = $1',
-		[title]
+		'SELECT id, title, subheading, description FROM products WHERE slug = $1',
+		[slug]
 	);
 	return res.rows[0];
 };

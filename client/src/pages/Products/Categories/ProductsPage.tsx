@@ -27,44 +27,32 @@ export const ProductsPage = () => {
 	const { category: slug } = useParams<{ category: string }>();
 	const navigate = useNavigate();
 
-	// Only fetch product category if we don't have it
 	useEffect(() => {
-		if (!category) {
-			const fetchCategory = async () => {
-				try {
-					const res = await api.get(`/products/by-category/${slug}`);
-					setCategory(res.data.category);
-					setSections(res.data.sections || []);
-				} catch (err) {
-					console.error('Error fetching product category:', err);
-				} finally {
-					setLoading(false);
-				}
-			};
-
-			fetchCategory();
-		}
-	}, [slug]);
-
-	// Only fetch sections if product category already exists on initial render
-	useEffect(() => {
-		if (category) {
-			const fetchSections = async () => {
-				try {
+		const fetchData = async () => {
+			setLoading(true);
+			try {
+				if (state?.category && state.category.slug === slug) {
+					// Use preloaded category from state, still fetch sections
+					setCategory(state.category);
 					const res = await api.get<ProductsSection[]>(
-						`/products/${category.id}`
+						`/products/${state.category.id}`
 					);
 					setSections(res.data);
-				} catch (err) {
-					console.error('Error fetching product category sections:', err);
-				} finally {
-					setLoading(false);
+				} else {
+					// Fallback to full fetch by slug
+					const res = await api.get(`/products/by-slug/${slug}`);
+					setCategory(res.data.category);
+					setSections(res.data.sections || []);
 				}
-			};
+			} catch (err) {
+				console.error('Error fetching product category:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-			fetchSections();
-		}
-	}, []);
+		fetchData();
+	}, [slug, state?.category]);
 
 	const handleEditCategory = () => {
 		const categoryId = category.id;
@@ -153,8 +141,8 @@ export const ProductsPage = () => {
 					{/* Edit Button */}
 					{user && (
 						<Pen
-						onClick={handleEditCategory}
-						className='absolute top-10 right-10 text-2xl'
+							onClick={handleEditCategory}
+							className='absolute top-10 right-10 text-2xl'
 						/>
 					)}
 				</>

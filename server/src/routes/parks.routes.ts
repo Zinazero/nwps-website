@@ -3,7 +3,7 @@ import {
 	deletePark,
 	getAllParks,
 	getParkById,
-	getParkByTitle,
+	getParkBySlug,
 	getRecentParks,
 	postPark,
 	reorderParks,
@@ -12,11 +12,13 @@ import {
 import { getParkPortfolio } from '../repositories/portfolioSections.repository';
 import path from 'path';
 import fs from 'fs/promises';
+import { titleToSlugConverter } from '../utils/slugConverter';
 import {
-	slugToTitleConverter,
-	titleToSlugConverter,
-} from '../utils/slugConverter';
-import { ensureFolder, renameFilesInFolder, upload, writeFiles } from '../utils/multer';
+	ensureFolder,
+	renameFilesInFolder,
+	upload,
+	writeFiles,
+} from '../utils/multer';
 import { ParkOrder } from '../types';
 
 const router = express.Router();
@@ -42,12 +44,11 @@ router.get('/recent', async (req, res) => {
 	}
 });
 
-router.get('/by-park/:park', async (req, res) => {
-	const slug = req.params.park;
-	const title = slugToTitleConverter(slug);
+router.get('/by-slug/:slug', async (req, res) => {
+	const slug = req.params.slug;
 
 	try {
-		const park = await getParkByTitle(title);
+		const park = await getParkBySlug(slug);
 		const sections = await getParkPortfolio(park.id);
 		res.json({ park, sections });
 	} catch (err) {

@@ -17,10 +17,10 @@ export const getRecentParks = async (): Promise<Park[]> => {
 	return res.rows;
 };
 
-export const getParkByTitle = async (title: string): Promise<Park> => {
+export const getParkBySlug = async (slug: string): Promise<Park> => {
 	const res: QueryResult<Park> = await pool.query(
-		'SELECT id, title, location, description, blurb FROM parks WHERE title = $1',
-		[title]
+		'SELECT id, title, location, description, blurb FROM parks WHERE slug = $1',
+		[slug]
 	);
 	return res.rows[0];
 };
