@@ -4,23 +4,19 @@ interface ImageMaskProps {
 	src: string;
 	alt: string;
 	maskUrl: string;
-	width?: string | number;
-	height?: string | number;
+	className?: string;
 }
 
 export const ImageMask: React.FC<ImageMaskProps> = ({
 	src,
 	alt,
 	maskUrl,
-	width = '100%',
-	height = 'auto',
+	className
 }) => {
 	return (
 		<div
-			className='inline-block relative overflow-hidden'
+			className={`inline-block relative overflow-hidden ${className}`}
 			style={{
-				width,
-				height,
 				backgroundColor: '#fff',
 				mask: `url(${maskUrl})`,
 				WebkitMask: `url(${maskUrl})`,
