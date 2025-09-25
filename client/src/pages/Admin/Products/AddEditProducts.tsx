@@ -34,7 +34,6 @@ export const AddEditProducts = () => {
 
     useEffect(() => {
         setOriginalTitle(form[0].title);
-        console.log(form[0].title)
     }, []);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -59,9 +58,7 @@ export const AddEditProducts = () => {
                 return index === 0 ? { ...rest, id, originalTitle } : rest;
             });
             formData.append('data', JSON.stringify(jsonData));
-
-            console.log(form)
-
+			
             // Append images separately
             form.forEach((section, index) => {
                 if (section.image) {

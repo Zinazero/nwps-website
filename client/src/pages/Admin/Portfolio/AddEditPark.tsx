@@ -1,5 +1,5 @@
 import { ItemForm } from '../../../components/forms/ItemForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ParkSection } from '../../../components/forms/types';
 import api from '../../../api/axios';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -28,9 +28,14 @@ export const AddEditPark = () => {
 	);
 	const [city, setCity] = useState<string>(parkCity || '');
 	const [blurb, setBlurb] = useState<string>(parkBlurb || '');
+	const [originalTitle, setOriginalTitle] = useState<string>('');
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		setOriginalTitle(form[0].title);
+	}, []);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -58,7 +63,7 @@ export const AddEditPark = () => {
 			// Create a JSON object for all non-file data
 			const jsonData = form.map((section, index) => {
 				const { image, ...rest } = section; // remove image
-				return index === 0 ? { ...rest, location, blurb, id } : rest;
+				return index === 0 ? { ...rest, location, blurb, id, originalTitle } : rest;
 			});
 			formData.append('data', JSON.stringify(jsonData));
 

@@ -58,7 +58,6 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST ROUTES
-
 router.post('/post-products', upload.any(), async (req, res) => {
 	try {
 		const productsInfo = JSON.parse(req.body.data);
