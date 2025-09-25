@@ -3,45 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Image } from '../ui/Image';
-import { useEffect, useState } from 'react';
-import type { ProductsCategory } from '../../pages/types';
-import api from '../../api/axios';
-import { slugConverter } from '../../utils/parkNavConverter';
-
-export type LinkType = {
-	label: string;
-	to: string;
-	isDropdown?: boolean;
-};
+import { useProducts } from '../../contexts/ProductsContext';
+import { Loading } from '../ui/Loading';
+import type { LinkType } from './types';
 
 export const Header = () => {
 	const location = useLocation();
-
-	const [productsDropdownLinks, setProductsDropdownLinks] = useState<LinkType[]>([]);
-
-	useEffect(() => {
-		const fetchProductsCategories = async () => {
-			try {
-				const res = await api.get<ProductsCategory[]>('/products');
-				const productsLinks: LinkType[] = [];
-
-				for (const category of res.data) {
-					const link: LinkType = {
-						label: category.title,
-						to: `/products/${slugConverter(category.title)}`,
-					};
-
-					productsLinks.push(link);
-				}
-
-				setProductsDropdownLinks(productsLinks);
-			} catch (err) {
-				console.error('Error fetching product categories:', err);
-			}
-		};
-
-		fetchProductsCategories();
-	}, []);
+	const { productsLinks, loading } = useProducts();
 
 	const links: LinkType[] = [
 		{ label: 'Home', to: '/' },
@@ -83,18 +51,29 @@ export const Header = () => {
 										<hr className='absolute w-full top-full mt-2 text-orange' />
 									)}
 								</Link>
-								<ul className='absolute z-50 w-60 left-0 top-full bg-white text-black rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity overflow-hidden'>
-									{productsDropdownLinks.map((sublink) => (
-										<li
-											key={sublink.label}
-											className='px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition'
-										>
-											<Link to={sublink.to} className={location.pathname.includes(sublink.to)
-											? 'text-brand-orange'
-											: ''}>{sublink.label}</Link>
+								<div
+									className='flex flex-col absolute z-50 w-60 left-0 top-full bg-white text-black rounded-lg shadow-lg transition-opacity overflow-hidden
+               									opacity-0 invisible group-hover:opacity-100 group-hover:visible'
+								>
+									{loading ? (
+										<Loading />
+									) : productsLinks.length === 0 ? (
+										<li className='px-4 py-2 text-gray-400'>
+											No products available
 										</li>
-									))}
-								</ul>
+									) : (
+										productsLinks.map((sublink) => (
+											<Link
+												to={sublink.to}
+												className={`
+														px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition
+														${location.pathname.includes(sublink.to) ? 'text-brand-orange' : ''}`}
+											>
+												{sublink.label}
+											</Link>
+										))
+									)}
+								</div>
 							</div>
 						) : (
 							<Link

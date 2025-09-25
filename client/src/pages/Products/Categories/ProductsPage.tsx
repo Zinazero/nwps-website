@@ -76,11 +76,12 @@ export const ProductsPage = () => {
 						{/* Hero */}
 						{category && (
 							<div className='flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16'>
-								<div className='flex items-center max-w-450'>
+								<div className='flex items-center justify-between'>
 									<ImageMask
 										src={`/images/products/${slug}/${slug}-1.jpg`}
 										alt={`${category.title} Image 1`}
 										maskUrl='/masks/rock-mask.svg'
+										className='max-w-250'
 									/>
 									<div className='flex flex-col space-y-6'>
 										<h1 className='text-6xl font-bold'>{category.title}</h1>

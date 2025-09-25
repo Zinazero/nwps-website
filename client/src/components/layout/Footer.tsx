@@ -11,28 +11,16 @@ import {
 	faLocationArrow,
 	faPhoneFlip,
 } from '@fortawesome/free-solid-svg-icons';
-import type { LinkType } from './types';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { LogoutButton } from './LogoutButton';
 import { Image } from '../ui/Image';
+import { useProducts } from '../../contexts/ProductsContext';
 
 export const Footer = () => {
 	const { user } = useAuth();
 	const location = useLocation();
-
-	const productsLinks: LinkType[] = [
-		{ label: 'Playgrounds', to: '/products/playgrounds' },
-		{ label: 'Safety Surfacing', to: '/products/safety-surfacing' },
-		{
-			label: 'Sports and Outdoor Fitness',
-			to: '/products/sports-and-outdoor-fitness',
-		},
-		{ label: 'Park Amenities', to: '/products/park-amenities' },
-		{ label: 'Park Shelters', to: '/products/park-shelters' },
-		{ label: 'Electronic Play', to: '/products/electronic-play' },
-		{ label: 'Water Play', to: '/products/water-play' },
-	];
+	const { productsLinks, loading } = useProducts();
 
 	const adminButtonClasses =
 		'text-sm text-transparent-grey hover:text-brand-green transition cursor-pointer';

@@ -4,7 +4,7 @@ import playground from '@/assets/images/generic/products-image.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import './hotspots.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Loading } from '../../components/ui/Loading';
 import { Pen } from '../../components/ui/Pen';
 import { ProductsCard } from '../../components/ui/ProductsCard';
@@ -25,31 +25,16 @@ import {
 	rectSortingStrategy,
 	SortableContext,
 } from '@dnd-kit/sortable';
+import { useProducts } from '../../contexts/ProductsContext';
 
 export const Products = () => {
-	const [categories, setCategories] = useState<ProductsCategory[]>([]);
-	const [loading, setLoading] = useState(true);
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [confirmOpen, setConfirmOpen] = useState(false);
 	const [deleteCategory, setDeleteCategory] = useState<ProductsCategory | null>(
 		null
 	);
 	const { user } = useAuth();
-
-	useEffect(() => {
-		const fetchProductsCategories = async () => {
-			try {
-				const res = await api.get<ProductsCategory[]>('/products');
-				setCategories(res.data);
-			} catch (err) {
-				console.error('Error fetching product categories:', err);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchProductsCategories();
-	}, []);
+	const { productsCategories, setProductsCategories, loading } = useProducts();
 
 	const handleDeleteClick = (category: ProductsCategory) => {
 		setDeleteCategory(category);
@@ -61,7 +46,7 @@ export const Products = () => {
 
 		try {
 			await api.delete(`/products/${deleteCategory.id}`);
-			setCategories((prev) =>
+			setProductsCategories((prev) =>
 				prev.filter((category) => category.id !== deleteCategory.id)
 			);
 			console.log('Deleted category:', deleteCategory);
@@ -93,7 +78,7 @@ export const Products = () => {
 	const handleDragEnd = ({ active, over }: { active: any; over: any }) => {
 		if (!over || active.id === over.id) return;
 
-		setCategories((prev) => {
+		setProductsCategories((prev) => {
 			const oldIndex = prev.findIndex((p) => p.id === active.id);
 			const newIndex = prev.findIndex((p) => p.id === over.id);
 			if (oldIndex === -1 || newIndex === -1) return prev;
@@ -181,7 +166,7 @@ export const Products = () => {
 					{/* Categories */}
 					<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
 						<SortableContext
-							items={categories.map((c) => c.id)}
+							items={productsCategories.map((c) => c.id)}
 							strategy={rectSortingStrategy}
 						>
 							<div className='grid grid-cols-2 gap-y-16 gap-x-32 max-w-350'>
@@ -193,7 +178,7 @@ export const Products = () => {
 									/>
 								)}
 
-								{categories.map((category) => (
+								{productsCategories.map((category) => (
 									<ProductsCard
 										key={category.id}
 										category={category}
