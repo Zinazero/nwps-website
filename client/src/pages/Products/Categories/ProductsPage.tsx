@@ -123,7 +123,7 @@ export const ProductsPage = () => {
 						{sections.map((section, index) => {
 							const SectionContent = (
 								<div
-									className={`flex items-center justify-center max-w-300 hover:scale-105 transition ${
+									className={`flex items-center justify-center max-w-300 ${
 										index % 2 !== 0 ? 'flex-row-reverse' : ''
 									}`}
 								>
@@ -154,7 +154,7 @@ export const ProductsPage = () => {
 									href={section.externalLink}
 									target='_blank'
 									rel='noopener noreferrer'
-									className='block' // ensure the <a> fills the content
+									className='block hover:scale-105 transition'
 								>
 									{SectionContent}
 								</a>
