@@ -20,7 +20,7 @@ export const OurStory = () => {
 								<path d='M8.1,146.2c0,0,240.6-55.6,479-13.8'></path>
 							</svg>
 						</div>
-						<p className='text-xl/loose w-2/3 text-light'>
+						<p className='text-xl/loose w-2/3 !text-light'>
 							{`New World Park Solutions is in our 18th year of business (est. 2008) 
                         and looking forward to continuing the great relationships we
 						have developed with municipalities, school boards and landscape
