@@ -1,9 +1,7 @@
 import pool from '../db';
 import { Park, ParkOrder, PortfolioSection } from '../types';
 import type { QueryResult } from 'pg';
-import {
-	postPortfolioSections,
-} from './portfolioSections.repository';
+import { postPortfolioSections } from './portfolioSections.repository';
 
 export const getAllParks = async (): Promise<Park[]> => {
 	const res: QueryResult<Park> = await pool.query(
@@ -14,7 +12,7 @@ export const getAllParks = async (): Promise<Park[]> => {
 
 export const getRecentParks = async (): Promise<Park[]> => {
 	const res: QueryResult<Park> = await pool.query(
-	'SELECT id, title, location, description, blurb FROM parks ORDER BY sort_order ASC LIMIT 3'
+		'SELECT id, title, location, description, blurb FROM parks ORDER BY sort_order ASC LIMIT 3'
 	);
 	return res.rows;
 };
@@ -22,7 +20,7 @@ export const getRecentParks = async (): Promise<Park[]> => {
 export const getParkByTitle = async (title: string): Promise<Park> => {
 	const res: QueryResult<Park> = await pool.query(
 		'SELECT id, title, location, description, blurb FROM parks WHERE title = $1',
-		[title]	
+		[title]
 	);
 	return res.rows[0];
 };

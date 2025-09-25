@@ -13,29 +13,54 @@ import { Check } from '../../components/ui/Check';
 import { useAuth } from '../../contexts/AuthContext';
 import type { ProductsCategory } from '../types';
 import api from '../../api/axios';
+import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
 export const Products = () => {
-
-
 	const [categories, setCategories] = useState<ProductsCategory[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [isEditMode, setIsEditMode] = useState(false);
+	const [confirmOpen, setConfirmOpen] = useState(false);
+	const [deleteCategory, setDeleteCategory] = useState<ProductsCategory | null>(
+		null
+	);
 	const { user } = useAuth();
 
-    useEffect(() => {
-        const fetchProductsCategories = async () => {
-            try {
-                const res = await api.get<ProductsCategory[]>('/products');
-                setCategories(res.data);
-            } catch (err) {
-                console.error('Error fetching product categories:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
+	useEffect(() => {
+		const fetchProductsCategories = async () => {
+			try {
+				const res = await api.get<ProductsCategory[]>('/products');
+				setCategories(res.data);
+			} catch (err) {
+				console.error('Error fetching product categories:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-        fetchProductsCategories();
-    }, []);
+		fetchProductsCategories();
+	}, []);
+
+	const handleDeleteClick = (category: ProductsCategory) => {
+		setDeleteCategory(category);
+		setConfirmOpen(true);
+	};
+
+	const handleDelete = async () => {
+		if (deleteCategory === null) return;
+
+		try {
+			await api.delete(`/products/${deleteCategory.id}`);
+			setCategories((prev) =>
+				prev.filter((category) => category.id !== deleteCategory.id)
+			);
+			console.log('Deleted category:', deleteCategory);
+		} catch (err) {
+			console.error('Error deleting category:', err);
+		} finally {
+			setDeleteCategory(null);
+			setConfirmOpen(false);
+		}
+	};
 
 	const hotspotClasses =
 		'absolute z-11 bg-brand-orange hover:bg-white hover:text-brand-orange transition p-2 rounded-4xl text-white';
@@ -113,18 +138,33 @@ export const Products = () => {
 					<div className='grid grid-cols-2 gap-10 max-w-350'>
 						{/* ADMIN ONLY --- Add Products Page */}
 						{isEditMode && (
-							<AddCardButton navigationRoute='/admin/add-edit-products' className='min-w-100 min-h-40 last:odd:col-span-2 last:odd:justify-self-center' />
+							<AddCardButton
+								navigationRoute='/admin/add-edit-products'
+								className='min-w-100 min-h-40 last:odd:col-span-2 last:odd:justify-self-center'
+							/>
 						)}
 
 						{categories.map((category) => (
 							<ProductsCard
+								key={category.id}
 								category={category}
+								disabled={!isEditMode}
+								isEditMode={isEditMode}
+								deleteItem={handleDeleteClick}
 								className='last:odd:col-span-2 last:odd:justify-self-center last:odd:w-1/2'
 							/>
 						))}
 					</div>
 				</div>
 			)}
+
+			{/* Confirm Modal */}
+			<ConfirmModal
+				isOpen={confirmOpen}
+				message={`Are you sure you want to delete ${deleteCategory?.title}?`}
+				onConfirm={handleDelete}
+				onCancel={() => setConfirmOpen(false)}
+			/>
 		</main>
 	);
 };

@@ -100,3 +100,11 @@ export const updateProductsCategory = async (
 		client.release();
 	}
 };
+
+export const deleteProductsCategory = async (productsId: number): Promise<number> => {
+	const res: QueryResult = await pool.query(
+		'DELETE FROM products WHERE id = $1',
+		[productsId]
+	);
+	return res.rowCount as number;
+};

@@ -21,7 +21,7 @@ import { ParkOrder } from '../types';
 
 const router = express.Router();
 
-//GET ROUTES
+// GET ROUTES
 router.get('/', async (req, res) => {
 	try {
 		const parks = await getAllParks();
@@ -68,7 +68,7 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
-//POST ROUTES
+// POST ROUTES
 router.post('/post-park', upload.any(), async (req, res) => {
 	try {
 		const parkInfo = JSON.parse(req.body.data);
@@ -140,6 +140,7 @@ router.post('/reorder', async (req, res) => {
 	}
 });
 
+// DELETE ROUTES
 router.delete('/:id', async (req, res) => {
 	try {
 		const parkId = Number(req.params.id);
