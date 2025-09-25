@@ -34,7 +34,7 @@ export const Products = () => {
 		null
 	);
 	const { user } = useAuth();
-	const { productsCategories, setProductsCategories, loading } = useProducts();
+	const { productsCategories, setProductsCategories, loading, fetchProductsCategories } = useProducts();
 
 	const handleDeleteClick = (category: ProductsCategory) => {
 		setDeleteCategory(category);
@@ -53,6 +53,7 @@ export const Products = () => {
 		} catch (err) {
 			console.error('Error deleting category:', err);
 		} finally {
+			fetchProductsCategories();
 			setDeleteCategory(null);
 			setConfirmOpen(false);
 		}

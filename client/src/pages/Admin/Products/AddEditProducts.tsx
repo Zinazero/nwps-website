@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import api from '../../../api/axios';
+import { useProducts } from '../../../contexts/ProductsContext';
 
 export const AddEditProducts = () => {
 	const location = useLocation();
@@ -30,6 +31,8 @@ export const AddEditProducts = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
     const [originalTitle, setOriginalTitle] = useState<string>('');
+
+	const { fetchProductsCategories } = useProducts();
 	const navigate = useNavigate();
 
     useEffect(() => {
@@ -58,7 +61,7 @@ export const AddEditProducts = () => {
                 return index === 0 ? { ...rest, id, originalTitle } : rest;
             });
             formData.append('data', JSON.stringify(jsonData));
-			
+
             // Append images separately
             form.forEach((section, index) => {
                 if (section.image) {
@@ -76,6 +79,7 @@ export const AddEditProducts = () => {
             console.error(err);
             setError(err.response?.data?.error || 'Something went wrong');
         } finally {
+			fetchProductsCategories();
             setLoading(false);
         }
 	};
