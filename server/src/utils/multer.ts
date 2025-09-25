@@ -65,7 +65,7 @@ export const writeFiles = async (
 ) => {
 	for (const file of files) {
 		const index = Number(file.fieldname);
-		const ext = path.extname(file.originalname) || '.jpg';
+		const ext = '.jpg'; // Enforcing .jpg for now
 		const filePath = path.join(folder, `${slug}-${index + 1}${ext}`);
 
 		try {
