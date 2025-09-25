@@ -41,10 +41,10 @@ export const RecentProjects = () => {
 				{loading ? (
 					<Loading />
 				) : (
-					<div className='grid grid-cols-3 gap-10 text-center'>
+					<div className='grid grid-cols-1 xl:grid-cols-3 gap-10 text-center'>
 						{recentProjects.map((park, i) => (
 							<div key={`Recent Project ${i}`}>
-								<ParkCard key={park.id} park={park} className='mb-20' />
+								<ParkCard key={park.id} park={park} className='mb-24' />
 								<p className='text-lg/loose'>
 									{park.blurb || park.description}
 								</p>

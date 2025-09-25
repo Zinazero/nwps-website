@@ -5,9 +5,9 @@ import { Image } from './Image';
 
 export const PlayworldBanner = () => {
 	return (
-		<div id='playworld' className='bg-brand-blue-light shadow-md'>
-			<div className='flex justify-center p-10'>
-				<div className='w-140 flex flex-col justify-between'>
+		<div id='playworld' className='bg-brand-blue-light shadow-md w-full'>
+			<div className='flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 p-10'>
+				<div className='w-140 flex flex-col lg:items-start items-center lg:text-left text-center space-y-4 justify-between'>
 					<Image
 						src={playworldLogo}
 						alt='Playworld Logo'
@@ -18,7 +18,7 @@ export const PlayworldBanner = () => {
 					</h3>
 					<Link
 						to='/providers/playworld'
-						className='rounded-lg p-2 bg-brand-orange text-light font-semibold w-1/4 text-center hover:bg-brand-blue transition'
+						className='rounded-lg p-2 bg-brand-orange text-light font-semibold text-center hover:bg-brand-blue transition'
 					>
 						Learn More
 					</Link>

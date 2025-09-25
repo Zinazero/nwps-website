@@ -7,7 +7,7 @@ import { TestimonialSection } from './sections/TestimonialSection';
 
 export const Home = () => {
 	return (
-		<main className=''>
+		<main className='flex flex-col space-y-12'>
 			<Hero />
 
 			<PlayworldBanner />

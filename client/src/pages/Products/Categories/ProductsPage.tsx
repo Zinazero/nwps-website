@@ -7,6 +7,7 @@ import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
 import api from '../../../api/axios';
 import { Loading } from '../../../components/ui/Loading';
+import { CallToAction } from '../../../components/ui/CallToAction';
 
 interface ProductsSection {
 	id: number;
@@ -78,23 +79,25 @@ export const ProductsPage = () => {
 	};
 
 	return (
-		<main className='relative min-h-screen flex flex-col items-center justify-center bg-white p-6'>
+		<main className='relative min-h-screen flex flex-col items-center justify-center bg-white'>
 			{loading ? (
 				<Loading />
 			) : (
 				<>
-					<div className='flex flex-col min-h-screen space-y-20'>
+					<div className='flex flex-col items-center w-full min-h-screen space-y-20 p-6'>
 						{/* Hero */}
 						{category && (
-							<div className='flex items-center border-b-3 border-dashed border-brand-orange pb-16'>
-								<ImageMask
-									src={`/images/products/${slug}/${slug}-1.jpg`}
-									alt={`${category.title} Image 1`}
-									maskUrl='/masks/rock-mask.svg'
-								/>
-								<div className='flex flex-col space-y-6'>
-									<h1 className='text-6xl font-bold'>{category.title}</h1>
-									<p className='text-xl/relaxed'>{category.description}</p>
+							<div className='flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16'>
+								<div className='flex items-center max-w-500'>
+									<ImageMask
+										src={`/images/products/${slug}/${slug}-1.jpg`}
+										alt={`${category.title} Image 1`}
+										maskUrl='/masks/rock-mask.svg'
+									/>
+									<div className='flex flex-col space-y-6'>
+										<h1 className='text-6xl font-bold'>{category.title}</h1>
+										<p className='text-xl/relaxed'>{category.description}</p>
+									</div>
 								</div>
 							</div>
 						)}
@@ -103,7 +106,7 @@ export const ProductsPage = () => {
 						{sections.map((section, index) => {
 							const SectionContent = (
 								<div
-									className={`flex items-center justify-center max-w-300 ${
+									className={`flex items-center justify-center max-w-350 ${
 										index % 2 !== 0 ? 'flex-row-reverse' : ''
 									}`}
 								>
@@ -122,7 +125,7 @@ export const ProductsPage = () => {
 										<Image
 											src={`/images/products/${slug}/${slug}-${index + 2}.jpg`}
 											alt={`${section.title} Image`}
-											className='rounded-xl'
+											className='rounded-xl max-w-1/2'
 										/>
 									)}
 								</div>
@@ -144,11 +147,14 @@ export const ProductsPage = () => {
 						})}
 					</div>
 
+					{/* Playworld */}
+					<CallToAction />
+
 					{/* Edit Button */}
 					{user && (
 						<Pen
-							onClick={handleEditCategory}
-							className='absolute top-10 right-10 text-2xl'
+						onClick={handleEditCategory}
+						className='absolute top-10 right-10 text-2xl'
 						/>
 					)}
 				</>
