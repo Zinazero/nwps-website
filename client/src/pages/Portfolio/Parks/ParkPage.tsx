@@ -70,8 +70,9 @@ export const ParkPage = () => {
 					{/* Hero */}
 					{park && (
 						<div className='p-6 flex flex-col items-center space-y-12 border-b-1 border-transparent-grey pb-8 xl:border-0'>
+							{/* src has cache-busting parameter so it changes on update */}
 							<Image
-								src={`/images/playgrounds/${slug}/${slug}-1.jpg`}
+								src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${Date.now()}`}
 								alt={`${park.title} Image 1`}
 								className='w-full max-w-250 rounded-xl'
 							/>
@@ -95,11 +96,16 @@ export const ParkPage = () => {
 								${index % 2 !== 0 ? 'xl:flex-row-reverse' : ''}`}
 						>
 							{park && (
-								<Image
-									src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg`}
-									alt={`${section.title} Image`}
-									className='w-150 rounded-xl'
-								/>
+								<>
+									{/* src has cache-busting parameter so it changes on update */}
+									<Image
+										src={`/images/playgrounds/${slug}/${slug}-${
+											index + 2
+										}.jpg?v=${Date.now()}`}
+										alt={`${section.title} Image`}
+										className='w-150 rounded-xl'
+									/>
+								</>
 							)}
 							<div className='flex flex-col space-y-4 max-w-200 mx-12'>
 								<h2 className='text-3xl font-bold'>{section.title}</h2>

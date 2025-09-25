@@ -77,8 +77,9 @@ export const ProductsPage = () => {
 						{category && (
 							<div className='flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16'>
 								<div className='flex items-center max-w-450 space-x-30'>
+									{/* src has cache-busting parameter so it changes on update */}
 									<ImageMask
-										src={`/images/products/${slug}/${slug}-1.jpg`}
+										src={`/images/products/${slug}/${slug}-1.jpg?v=${Date.now()}`}
 										alt={`${category.title} Image 1`}
 										maskUrl='/masks/rock-mask.svg'
 									/>
@@ -110,11 +111,16 @@ export const ProductsPage = () => {
 										<p className='text-lg/relaxed'>{section.description}</p>
 									</div>
 									{category && (
-										<Image
-											src={`/images/products/${slug}/${slug}-${index + 2}.jpg`}
-											alt={`${section.title} Image`}
-											className='rounded-xl max-w-1/2'
-										/>
+										<>
+											{/* src has cache-busting parameter so it changes on update */}
+											<Image
+												src={`/images/products/${slug}/${slug}-${
+													index + 2
+												}.jpg?v=${Date.now()}`}
+												alt={`${section.title} Image`}
+												className='rounded-xl max-w-1/2'
+											/>
+										</>
 									)}
 								</div>
 							);
