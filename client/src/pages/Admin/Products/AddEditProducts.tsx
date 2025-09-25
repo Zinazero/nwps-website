@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { ProductsSection } from '../../../components/forms/types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ItemForm } from '../../../components/forms/ItemForm';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,14 +9,14 @@ import api from '../../../api/axios';
 
 export const AddEditProducts = () => {
 	const location = useLocation();
-	const { productsId, productsSections = [] } =
+	const { categoryId, categorySections = [] } =
 		(location.state as {
-			productsId: number;
-			productsSections?: ProductsSection[];
+			categoryId: number;
+			categorySections?: ProductsSection[];
 		}) || {};
 	const [form, setForm] = useState<ProductsSection[]>(
-		productsSections.length > 0
-			? productsSections
+		categorySections.length > 0
+			? categorySections
 			: [
 					{
 						title: '',
@@ -29,7 +29,13 @@ export const AddEditProducts = () => {
 	);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+    const [originalTitle, setOriginalTitle] = useState<string>('');
 	const navigate = useNavigate();
+
+    useEffect(() => {
+        setOriginalTitle(form[0].title);
+        console.log(form[0].title)
+    }, []);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -45,14 +51,16 @@ export const AddEditProducts = () => {
         setLoading(true);
 
         try {
-            const id = productsId || null;
+            const id = categoryId || null;
             const formData = new FormData();
             
             const jsonData = form.map((section, index) => {
                 const { image, ...rest } = section; // remove image
-                return index === 0 ? { ...rest, id } : rest;
+                return index === 0 ? { ...rest, id, originalTitle } : rest;
             });
             formData.append('data', JSON.stringify(jsonData));
+
+            console.log(form)
 
             // Append images separately
             form.forEach((section, index) => {

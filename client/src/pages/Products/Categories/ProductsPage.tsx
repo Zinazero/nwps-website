@@ -18,35 +18,9 @@ interface ProductsSection {
 
 export const ProductsPage = () => {
 	const { user } = useAuth();
-	const testSections: ProductsSection[] = [
-		{
-			id: 1,
-			title: 'Early Childhood Playgrounds',
-			subheading: 'Ages 5 and Under',
-			description:
-				'When it comes to developing emotional, sensory, and gross motor skills in preschoolers, and encouraging both co-located and cooperative play, our preschool playground equipment has your needs covered. Explore our playgrounds for toddlers, and find out how our developmentally optimized, sustainable and inclusive play environments will enhance your space.',
-			externalLink: 'https://playworld.com/early-childhood/',
-		},
-		{
-			id: 2,
-			title: 'School-Age Playgrounds',
-			subheading: 'Ages 5 — 12',
-			description:
-				'Older kids have different play needs—that’s why we offer school-age playgrounds specifically designed to entertain, challenge, burn calories, boost brain power, and build relationships. Explore our play equipment for children ages 5-12 to create a brand new structure or enhance your existing playground for kids of all abilities.',
-			externalLink: 'https://playworld.com/school-age/',
-		},
-		{
-			id: 3,
-			title: 'Cre8Play',
-			description:
-				'In partnership with Cre8Play, New World Park Solutions is equipped to meet the unique needs of all projects and landscapes. From sculptures to tailor-made adventures, Cre8Play goes above and beyond to ensure park-goers of all ages enjoy a fantastic and immersive experience.',
-			externalLink: 'https://www.cre8play.com/',
-		},
-	];
-
 	const { state } = useLocation();
 	const [category, setCategory] = useState<ProductsCategory>(state?.category);
-	const [sections, setSections] = useState(testSections);
+	const [sections, setSections] = useState<ProductsSection[]>([]);
 	const [loading, setLoading] = useState(true);
 
 	const { category: slug } = useParams<{ category: string }>();
@@ -92,8 +66,14 @@ export const ProductsPage = () => {
 	}, []);
 
 	const handleEditCategory = () => {
+		const categoryId = category.id;
+		const categorySections = [category, ...sections].map((section, index) => ({
+			...section,
+			image: `/images/products/${slug}/${slug}-${index + 1}.jpg`,
+		}));
+
 		navigate('/admin/add-edit-products', {
-			state: {},
+			state: { categoryId, categorySections },
 		});
 	};
 

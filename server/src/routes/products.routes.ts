@@ -15,7 +15,7 @@ import {
 import { getProductsSections } from '../repositories/productsSections.repository';
 import path from 'path';
 import fs from 'fs/promises';
-import { upload } from '../utils/multer';
+import { ensureFolder, upload, writeFiles, renameFilesInFolder } from '../utils/multer';
 import { ProductOrder } from '../types';
 
 const router = express.Router();
@@ -58,51 +58,71 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST ROUTES
+
 router.post('/post-products', upload.any(), async (req, res) => {
 	try {
 		const productsInfo = JSON.parse(req.body.data);
 		const products = productsInfo[0];
 		const sections = productsInfo.slice(1);
-		const slug = titleToSlugConverter(products.title);
+		const isUpdate = !!products.id;
 
-		if (products.id) {
-			// Update existing park
+		// Insert/update DB
+		if (isUpdate) {
 			await updateProductsCategory(products, sections);
 		} else {
-			// Insert new park
 			await postProductsCategory(products, sections);
 		}
 
-		// Save/overwrite images if any files are provided
-		const files = req.files as Express.Multer.File[] | undefined;
-		if (files && files.length > 0) {
-			const folder = path.join(
+		const slug = titleToSlugConverter(products.title);
+		const folder = path.join(
+			__dirname,
+			'../../../client/public/images/products',
+			slug
+		);
+
+		// Handle title/slug change
+		if (
+			isUpdate &&
+			products.originalTitle &&
+			products.originalTitle !== products.title
+		) {
+			const oldSlug = titleToSlugConverter(products.originalTitle);
+			const oldFolder = path.join(
 				__dirname,
 				'../../../client/public/images/products',
-				slug
+				oldSlug
 			);
 
-			// Delete old images first if updating
-			if (products.id) {
-				try {
-					await fs.rm(folder, { recursive: true, force: true });
-				} catch (err) {
-					console.warn(`Failed to delete folder ${folder}:`, err);
+			try {
+				// Move folder
+				await fs.rename(oldFolder, folder);
+
+				// Rename files inside to match new slug
+				await renameFilesInFolder(folder, oldSlug, slug);
+			} catch (err: any) {
+				if (err.code === 'ENOENT') {
+					// Old folder doesn’t exist, create new one
+					await ensureFolder(folder);
+				} else {
+					console.error(
+						`Failed to rename folder ${oldFolder} -> ${folder}`,
+						err
+					);
+					throw err;
 				}
 			}
-
-			// Recreate folder and write new files
-			await fs.mkdir(folder, { recursive: true });
-			for (const file of files) {
-				const index = Number(file.fieldname);
-				const title = `${slug}-${index + 1}`;
-				const ext = '.jpg'; // Encforcing .jpg for now
-
-				await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
-			}
+		} else {
+			// Ensure folder exists for new products or unchanged slug
+			await ensureFolder(folder);
 		}
 
-		res.json({ message: products.id ? 'Park updated' : 'Park created' });
+		// Write uploaded files (overwrite only uploaded ones)
+		const files = req.files as Express.Multer.File[] | undefined;
+		if (files && files.length > 0) {
+			await writeFiles(folder, files, slug);
+		}
+
+		res.json({ message: isUpdate ? 'Product updated' : 'Product created' });
 	} catch (err: any) {
 		console.error(err);
 
@@ -115,18 +135,18 @@ router.post('/post-products', upload.any(), async (req, res) => {
 });
 
 router.post('/reorder', async (req, res) => {
-    const updates = req.body;
+	const updates = req.body;
 
-    try {
-        await Promise.all(
-            updates.map((productOrder: ProductOrder) => reorderProducts(productOrder))
-        );
+	try {
+		await Promise.all(
+			updates.map((productOrder: ProductOrder) => reorderProducts(productOrder))
+		);
 
-        res.sendStatus(200);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error saving order');
-    }
+		res.sendStatus(200);
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Error saving order');
+	}
 });
 
 // DELETE ROUTES

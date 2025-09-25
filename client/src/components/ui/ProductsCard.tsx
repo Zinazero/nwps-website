@@ -51,10 +51,10 @@ export const ProductsCard = ({
 						className='w-54 h-44 rounded-lg object-cover shadow-sm'
 					/>
 					<div className='flex flex-col space-y-2'>
-						<h3 className='text-2xl font-bold text-brand-orange'>
+						<h3 className='text-2xl font-bold text-brand-orange line-clamp-2'>
 							{category.title}
 						</h3>
-						<p className='text-lg/relaxed'>{category.description}</p>
+						<p className='text-lg/relaxed line-clamp-4'>{category.description}</p>
 					</div>
 				</div>
 			</Link>
