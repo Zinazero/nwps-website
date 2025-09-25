@@ -5,6 +5,7 @@ import {
 	getProductsCategoryById,
 	getProductsCategoryByTitle,
 	postProductsCategory,
+	reorderProducts,
 	updateProductsCategory,
 } from '../repositories/products.repository';
 import {
@@ -15,6 +16,7 @@ import { getProductsSections } from '../repositories/productsSections.repository
 import path from 'path';
 import fs from 'fs/promises';
 import { upload } from '../utils/multer';
+import { ProductOrder } from '../types';
 
 const router = express.Router();
 
@@ -94,7 +96,7 @@ router.post('/post-products', upload.any(), async (req, res) => {
 			for (const file of files) {
 				const index = Number(file.fieldname);
 				const title = `${slug}-${index + 1}`;
-				const ext = path.extname(file.originalname);
+				const ext = '.jpg'; // Encforcing .jpg for now
 
 				await fs.writeFile(path.join(folder, `${title}${ext}`), file.buffer);
 			}
@@ -110,6 +112,21 @@ router.post('/post-products', upload.any(), async (req, res) => {
 
 		res.status(500).json({ error: 'Internal server error.' });
 	}
+});
+
+router.post('/reorder', async (req, res) => {
+    const updates = req.body;
+
+    try {
+        await Promise.all(
+            updates.map((productOrder: ProductOrder) => reorderProducts(productOrder))
+        );
+
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error saving order');
+    }
 });
 
 // DELETE ROUTES
