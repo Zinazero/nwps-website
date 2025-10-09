@@ -24,7 +24,7 @@ export const NavLinks = () => {
 							className='hover:text-brand-orange transition relative bg-transparent border-none outline-none cursor-pointer flex items-center font-bold'
 						>
 							{link.label}
-							<FontAwesomeIcon icon={faChevronDown} className='text-lg ml-2' />
+							<FontAwesomeIcon icon={faChevronDown} className='fa-icon ml-2' />
 						</NavLink>
 						<ProductsDropdown />
 					</div>
