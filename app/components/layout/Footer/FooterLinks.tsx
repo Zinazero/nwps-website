@@ -10,7 +10,7 @@ export const FooterLinks = async () => {
 	}));
 
 	return (
-		<div className='flex flex-col border-l border-transparent-grey px-8 space-y-10 w-1/4'>
+		<div className='flex flex-col border-l border-transparent-grey px-8 space-y-10'>
 			<div>
 				<h5 className='text-2xl font-semibold'>OUR PRODUCTS</h5>
 				<div className='w-10 border-b-2 border-brand-orange border-dotted mt-3'></div>

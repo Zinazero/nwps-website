@@ -67,6 +67,11 @@ textarea {
 	caret-color: var(--color-brand-orange);
 }
 
+svg.fa-icon {
+	height: 1em;
+	width: 1em;
+}
+
 .underline-header + svg path {
 	stroke: #ff3e00;
 	stroke-width: 8;

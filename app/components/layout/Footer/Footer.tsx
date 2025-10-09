@@ -20,7 +20,7 @@ export const Footer = () => {
 		<footer className='text-white'>
 			<div
 				className='relative bg-center bg-black/85 p-2 flex flex-col items-center'
-				style={{ backgroundImage: `url(${footerBackground})` }}
+				style={{ backgroundImage: `url(${footerBackground.src})` }}
 			>
 				{/* Top Border */}
 				<div className='absolute top-0 left-0 w-full h-2 grid grid-cols-3'>
@@ -30,25 +30,25 @@ export const Footer = () => {
 				</div>
 
 				{/* Footer Content */}
-				<div className='flex my-6'>
+				<div className='my-6 grid grid-cols-4 w-full'>
 					{/* Section 1 */}
-					<div className='flex flex-col px-8 pb-20 space-y-10 w-1/4'>
-						<div className='h-42 relative'>
+					<div className='flex flex-col px-8 pb-20 space-y-10'>
 							<Image
 								src='/logos/nwps-vertical-logo.svg'
 								alt='NWPS Logo'
-								fill
+								width={0}
+								height={0}
+								className='w-full'
 							/>
-						</div>
-						<div className='flex flex-col space-y-6'>
-							<span>
-								<FontAwesomeIcon icon={faLocationArrow} /> Brantford, ON
+						<div className='flex flex-col space-y-6 text-lg'>
+							<span className='flex items-center'>
+								<FontAwesomeIcon icon={faLocationArrow} className='fa-icon mr-2' /> Brantford, ON
 							</span>
-							<span>
-								<FontAwesomeIcon icon={faEnvelopeOpen} /> info@nwps.ca
+							<span className='flex items-center'>
+								<FontAwesomeIcon icon={faEnvelopeOpen} className='fa-icon mr-2' /> info@nwps.ca
 							</span>
-							<span>
-								<FontAwesomeIcon icon={faPhoneFlip} /> {'(519) 304-3437'}
+							<span className='flex items-center'>
+								<FontAwesomeIcon icon={faPhoneFlip} className='fa-icon mr-2' /> {'(519) 304-3437'}
 							</span>
 							<div className='flex items-center text-lg space-x-2'>
 								<div className='relative group space-y-3'>
@@ -58,7 +58,7 @@ export const Footer = () => {
 										rel='noopener noreferrer'
 									>
 										<div className='rounded-lg bg-grey/30 p-1 hover:bg-brand-blue transition cursor-pointer'>
-											<FontAwesomeIcon icon={faFacebookF} className='' />
+											<FontAwesomeIcon icon={faFacebookF} className='fa-icon my-1 mx-0.5' />
 										</div>
 									</a>
 									<span className='mt-2 absolute top-full left-1/2 -translate-x-1/2 text-xs text-transparent-grey opacity-0 group-hover:opacity-100 transition'>
@@ -72,7 +72,7 @@ export const Footer = () => {
 										rel='noopener noreferrer'
 									>
 										<div className='rounded-lg bg-grey/30 p-1 hover:bg-brand-blue transition cursor-pointer'>
-											<FontAwesomeIcon icon={faInstagram} className='' />
+											<FontAwesomeIcon icon={faInstagram} className='fa-icon my-1 mx-0.5' />
 										</div>
 									</a>
 									<span className='mt-2 absolute top-full left-1/2 -translate-x-1/2 text-xs text-transparent-grey opacity-0 group-hover:opacity-100 transition'>
@@ -86,7 +86,7 @@ export const Footer = () => {
 										rel='noopener noreferrer'
 									>
 										<div className='rounded-lg bg-grey/30 p-1 hover:bg-brand-blue transition cursor-pointer'>
-											<FontAwesomeIcon icon={faLinkedinIn} className='' />
+											<FontAwesomeIcon icon={faLinkedinIn} className='fa-icon my-1 mx-0.5' />
 										</div>
 									</a>
 									<span className='mt-2 absolute top-full left-1/2 -translate-x-1/2 text-xs text-transparent-grey opacity-0 group-hover:opacity-100 transition'>
@@ -101,7 +101,7 @@ export const Footer = () => {
 					<FooterLinks />
 
 					{/* Section 3 */}
-					<div className='flex flex-col border-l border-transparent-grey px-8 space-y-10 w-1/4'>
+					<div className='flex flex-col border-l border-transparent-grey px-8 space-y-10 '>
 						<div>
 							<h5 className='text-2xl font-semibold'>CONTACT US</h5>
 							<div className='w-10 border-b-2 border-brand-orange border-dotted mt-3'></div>
@@ -115,7 +115,7 @@ export const Footer = () => {
 					</div>
 
 					{/* Section 4 */}
-					<div className='flex flex-col border-l border-transparent-grey px-8 space-y-10 w-1/4'>
+					<div className='flex flex-col border-l border-transparent-grey px-8 space-y-10 '>
 						<div>
 							<h5 className='text-2xl font-semibold'>NEWSLETTER</h5>
 							<div className='w-10 border-b-2 border-brand-orange border-dotted mt-3'></div>
