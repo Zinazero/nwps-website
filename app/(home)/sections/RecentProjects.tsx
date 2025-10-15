@@ -2,7 +2,7 @@ import { ParkCard } from '@/app/components/ui/ParkCard';
 import { CallToAction } from '@/app/components/ui/CallToAction';
 import Link from 'next/link';
 import { getRecentParks } from '@/lib/parks.repository';
-import { Park } from '@/app/types';
+import { Park } from '@/types';
 import { cn } from '@/app/utils/cn';
 
 export const RecentProjects = async () => {

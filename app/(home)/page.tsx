@@ -18,7 +18,7 @@ const Home = () => {
 
 			<PlaygroundStats />
 
-			{/* <AuthorizedDistributor /> */}
+			<AuthorizedDistributor />
 		</main>
 	);
 };

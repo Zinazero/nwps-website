@@ -1,12 +1,3 @@
-export interface Park {
-	id: number;
-	title: string;
-	location: string;
-	description: string;
-	blurb: string;
-	slug: string;
-}
-
 export interface ParkOrder {
 	id: number;
 	sort_order: number;
@@ -17,14 +8,6 @@ export interface PortfolioSection {
 	park_id: number;
 	title: string;
 	description: string;
-}
-
-export interface ProductsCategory {
-	id: number;
-	title: string;
-	subheading?: string;
-	description: string;
-	slug: string;
 }
 
 export interface ProductOrder {

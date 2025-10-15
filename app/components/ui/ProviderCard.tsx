@@ -1,5 +1,7 @@
-import type { Provider } from '../../pages/types';
-import { Image } from './Image';
+import { imagePathGenerator } from '@/app/utils/imagePathGenerator';
+import type { Provider } from '@/types';
+import Image from 'next/image';
+
 
 interface ProviderCardProps {
   provider: Provider;
@@ -7,11 +9,12 @@ interface ProviderCardProps {
 
 export const ProviderCard = ({ provider }: ProviderCardProps) => {
 	return (
-		<div className='flex items-center justify-center h-full hover:scale-110 transition'>
+		<div className='flex items-center justify-center h-50 hover:scale-110 transition relative w-50'>
 			<Image
-				src={provider.logoSrc}
+				src={imagePathGenerator('providers', provider.slug, 'logo')}
 				alt={`${provider.title} Logo`}
-				className='object-contain max-w-full'
+				fill
+				className='object-contain'
 			/>
 		</div>
 	);
