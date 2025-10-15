@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
-import { Image as AppImage } from './Image';
 import { Loading } from './Loading';
+import Image from 'next/image';
 
 interface ImageMaskProps {
 	src: string;
@@ -22,7 +24,7 @@ export const ImageMask: React.FC<ImageMaskProps> = ({
 	} | null>(null);
 
 	useEffect(() => {
-		const img = new Image();
+		const img = new window.Image();
 		img.crossOrigin = 'anonymous';
 		img.src = maskUrl;
 
@@ -80,10 +82,11 @@ export const ImageMask: React.FC<ImageMaskProps> = ({
 				maskMode: 'alpha',
 			}}
 		>
-			<AppImage
+			<Image
 				src={src}
 				alt={alt}
-				className='w-full h-full object-cover relative z-10'
+				fill
+				className='object-cover relative z-10'
 			/>
 		</div>
 	);

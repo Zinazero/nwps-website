@@ -1,5 +1,5 @@
 import innerPageHeaderArrow from '@/app/assets/icons/inner-page-header-arrow.png';
-import { Image } from './Image';
+import Image from 'next/image';
 
 interface UnderlineHeaderProps {
     text: string;
