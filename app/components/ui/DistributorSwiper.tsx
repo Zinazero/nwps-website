@@ -20,7 +20,6 @@ interface DistributorSwiperProps {
 }
 
 export const DistributorSwiper = ({ providers }: DistributorSwiperProps) => {
-	console.log(providers);
 	const { user } = useAuth();
 	const router = useRouter();
 

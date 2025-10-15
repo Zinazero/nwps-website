@@ -19,13 +19,24 @@ export const NavLink = ({
 }: NavLinkProps) => {
 	const pathname = usePathname();
 
+	const homeChecker = (href: string) => {
+		if (href === '/') {
+			if (pathname === href) {
+				return true;
+			}
+
+			return false;
+		} else if (pathname?.includes(href)) {
+			return true;
+		}
+
+		return false;
+	};
+
 	return (
-		<Link
-			href={href}
-			className={cn(className, pathname?.includes(href) ? activeClass : '')}
-		>
+		<Link href={href} className={cn(className, homeChecker(href) ? activeClass : '')}>
 			{children}
-			{pathname?.includes(href) && (
+			{homeChecker(href) && (
 				<hr className='absolute w-full top-full mt-2 text-orange' />
 			)}
 		</Link>
