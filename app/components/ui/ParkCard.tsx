@@ -1,10 +1,12 @@
+'use client';
+
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Link } from 'react-router-dom';
-import type { Park } from '../../pages/types';
+import type { Park } from '../../types';
 import { Trash } from './Trash';
-import { slugConverter } from '../../utils/parkNavConverter';
-import { Image } from './Image';
+import { slugConverter } from '../../utils/slugConverter';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ParkCardProps {
 	park: Park;
@@ -41,8 +43,7 @@ export const ParkCard = ({
 		>
 			{/* Item Card */}
 			<Link
-				to={`/portfolio/${slug}`}
-				state={{ park }}
+				href={`/portfolio/${slug}`}
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
 				<div

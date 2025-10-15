@@ -1,11 +1,10 @@
-import nwpsVerticalLogo from '@/app/assets/logos/nwps-vertical-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export const CallToAction = () => {
 	return (
 		<div className='max-w-300 xl:mx-auto mx-20 rounded-2xl shadow-xl bg-brand-blue-light p-12 flex flex-col xl:flex-row items-center space-y-6 xl:space-y-0'>
-			<Image src={nwpsVerticalLogo} alt='NWPS Logo' className='h-48' />
+			<Image src='/logos/nwps-vertical-logo.svg' alt='NWPS Logo' width={0} height={0} className='w-48' />
 			<div className='flex-1 flex flex-col items-center gap-6 text-center'>
 				<p className='text-4xl text-brand-orange'>
 					Not sure which product to choose?

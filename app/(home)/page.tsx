@@ -12,7 +12,7 @@ const Home = () => {
 
 			<PlayworldBanner />
 
-			{/* <RecentProjects /> */}
+			<RecentProjects />
 
 			<TestimonialSection />
 

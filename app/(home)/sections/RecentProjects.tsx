@@ -1,10 +1,10 @@
+'use client';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Park } from '../../types';
-import api from '../../../api/axios';
-import { ParkCard } from '../../../components/ui/ParkCard';
-import { Loading } from '../../../components/ui/Loading';
-import { CallToAction } from '../../../components/ui/CallToAction';
+import { ParkCard } from '@/app/components/ui/ParkCard';
+import { Loading } from '@/app/components/ui/Loading';
+import { CallToAction } from '@/app/components/ui/CallToAction';
+import Link from 'next/link';
 
 export const RecentProjects = () => {
 	const [recentProjects, setRecentProjects] = useState<Park[]>([]);
@@ -30,7 +30,7 @@ export const RecentProjects = () => {
 
 			{/* Recent Projects */}
 			<div className='flex flex-col max-w-400 mx-auto px-20 py-14 space-y-10'>
-				<Link to='/portfolio'>
+				<Link href='/portfolio'>
 					<div className='flex items-center w-full group'>
 						<h2 className='text-5xl font-bold text-nowrap mr-6 group-hover:translate-x-4 transition'>
 							Recent Projects
