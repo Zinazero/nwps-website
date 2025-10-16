@@ -1,6 +1,7 @@
 import type { QueryResult } from 'pg';
 import pool from './db';
-import { ProductOrder, ProductsCategory, ProductsSection } from './types';
+import { ProductOrder, ProductsSection } from './types';
+import { ProductsCategory } from '@/types';
 import { postProductsSections } from './productsSections.repository';
 
 export const getAllProductsCategories = async (): Promise<

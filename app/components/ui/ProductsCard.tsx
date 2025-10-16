@@ -1,10 +1,9 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Link } from 'react-router-dom';
-import { Image } from './Image';
-import type { ProductsCategory } from '../../pages/types';
-import { slugConverter } from '../../utils/parkNavConverter';
+import type { ProductsCategory } from '@/types';
 import { Trash } from './Trash';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProductsCardProps {
 	category: ProductsCategory;
@@ -29,7 +28,7 @@ export const ProductsCard = ({
 		transition,
 	};
 
-	const slug = slugConverter(category.title);
+	const slug = category.slug;
 
 	return (
 		<div
@@ -40,16 +39,19 @@ export const ProductsCard = ({
 			className={`relative ${isEditMode ? 'draggable' : ''} ${className}`}
 		>
 			<Link
-				to={`/products/${slug}`}
-				state={{ category }}
+				href={`/products/${slug}`}
 				className={isEditMode ? 'pointer-events-none' : ''}
 			>
+				{/* state={{ category }} */}
 				<div className='flex flex-col lg:flex-row items-center text-center lg:text-left space-x-8 space-y-4 lg:space-y-0 hover:scale-105 transition'>
-					<Image
-						src={`/images/products/${slug}/${slug}-1.jpg`}
-						alt={`${category.title} Image`}
-						className='w-54 h-44 rounded-lg object-cover shadow-sm'
-					/>
+					<div className='min-w-54 w-54 h-44 rounded-lg overflow-hidden shadow-sm relative'>
+						<Image
+							src={`/images/products/${slug}/${slug}-1.jpg`}
+							alt={`${category.title} Image`}
+							fill
+							className='object-cover'
+						/>
+					</div>
 					<div className='flex flex-col space-y-2'>
 						<h3 className='text-2xl font-bold text-brand-orange line-clamp-2'>
 							{category.title}
