@@ -22,6 +22,7 @@ export const NavLinks = () => {
 						<NavLink
 							href={link.to}
 							className='hover:text-brand-orange transition relative bg-transparent border-none outline-none cursor-pointer flex items-center font-bold'
+							activeClass='text-brand-orange'
 						>
 							{link.label}
 							<FontAwesomeIcon icon={faChevronDown} className='fa-icon ml-2' />
@@ -33,6 +34,7 @@ export const NavLinks = () => {
 						key={link.label}
 						href={link.to}
 						className='hover:text-brand-orange transition bg-transparent border-none outline-none cursor-pointer relative font-bold'
+						activeClass='text-brand-orange'
 					>
 						{link.label}
 					</NavLink>
