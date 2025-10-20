@@ -64,6 +64,7 @@ export const Header = () => {
 									) : (
 										productsLinks.map((sublink) => (
 											<Link
+												key={sublink.label}
 												to={sublink.to}
 												className={`
 														px-4 py-2 cursor-pointer border-b border-transparent-grey hover:text-brand-orange transition
