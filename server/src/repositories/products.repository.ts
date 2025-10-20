@@ -26,7 +26,7 @@ export const getProductsCategoryById = async (
 	categoryId: number
 ): Promise<ProductsCategory> => {
 	const res: QueryResult<ProductsCategory> = await pool.query(
-		'SELECT id, title, subheading, description FROM products WHERE id = $1',
+		'SELECT id, title, subheading, description, slug FROM products WHERE id = $1',
 		[categoryId]
 	);
 	return res.rows[0];

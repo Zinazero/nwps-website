@@ -8,7 +8,7 @@ import {
 	reorderProducts,
 	updateProductsCategory,
 } from '../repositories/products.repository';
-import { titleToSlugConverter } from '../utils/slugConverter';
+import { titleToSlugConverter } from '../utils/titleToSlugConverter';
 import { getProductsSections } from '../repositories/productsSections.repository';
 import path from 'path';
 import fs from 'fs/promises';

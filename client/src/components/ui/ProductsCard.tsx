@@ -3,7 +3,6 @@ import { CSS } from '@dnd-kit/utilities';
 import { Link } from 'react-router-dom';
 import { Image } from './Image';
 import type { ProductsCategory } from '../../pages/types';
-import { slugConverter } from '../../utils/parkNavConverter';
 import { Trash } from './Trash';
 
 interface ProductsCardProps {
@@ -29,7 +28,7 @@ export const ProductsCard = ({
 		transition,
 	};
 
-	const slug = slugConverter(category.title);
+	const slug = category.slug;
 
 	return (
 		<div

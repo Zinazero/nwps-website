@@ -5,7 +5,7 @@ import {
 	getProviderBySlug,
 	postProvider,
 } from '../repositories/providers.repository';
-import { titleToSlugConverter } from '../utils/slugConverter';
+import { titleToSlugConverter } from '../utils/titleToSlugConverter';
 import path from 'path';
 import fs from 'fs/promises';
 

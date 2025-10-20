@@ -11,7 +11,6 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import api from '../../../api/axios';
 import type { Provider } from '../../types';
-import { slugConverter } from '../../../utils/parkNavConverter';
 import { ProviderCard } from '../../../components/ui/ProviderCard';
 
 export const AuthorizedDistributor = () => {
@@ -26,7 +25,7 @@ export const AuthorizedDistributor = () => {
 
 				const providerArray = [];
 				for (const provider of res.data) {
-					const slug = slugConverter(provider.title);
+					const slug = provider.slug;
 					const logo = `/images/providers/${slug}/${slug}-logo.jpg`;
 
 					provider.logoSrc = logo;

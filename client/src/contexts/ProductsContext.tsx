@@ -3,7 +3,6 @@ import api from '../api/axios';
 import type { ProductsCategory } from '../pages/types';
 import type { ReactNode } from 'react';
 import type { LinkType } from '../components/layout/types';
-import { slugConverter } from '../utils/parkNavConverter';
 
 interface ProductsContextType {
 	productsCategories: ProductsCategory[];
@@ -32,7 +31,7 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
 
 			const productsLinksArray: LinkType[] = res.data.map((category) => ({
 				label: category.title,
-				to: `/products/${slugConverter(category.title)}`,
+				to: `/products/${category.slug}`,
 			}));
 
 			setProductsCategories(res.data);

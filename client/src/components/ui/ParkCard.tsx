@@ -3,7 +3,6 @@ import { CSS } from '@dnd-kit/utilities';
 import { Link } from 'react-router-dom';
 import type { Park } from '../../pages/types';
 import { Trash } from './Trash';
-import { slugConverter } from '../../utils/parkNavConverter';
 import { Image } from './Image';
 
 interface ParkCardProps {
@@ -29,7 +28,7 @@ export const ParkCard = ({
 		transition,
 	};
 
-	const slug = slugConverter(park.title);
+	const slug = park.slug;
 
 	return (
 		<div

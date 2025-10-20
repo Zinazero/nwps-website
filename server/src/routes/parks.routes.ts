@@ -12,7 +12,7 @@ import {
 import { getParkPortfolio } from '../repositories/portfolioSections.repository';
 import path from 'path';
 import fs from 'fs/promises';
-import { titleToSlugConverter } from '../utils/slugConverter';
+import { titleToSlugConverter } from '../utils/titleToSlugConverter';
 import {
 	ensureFolder,
 	renameFilesInFolder,
