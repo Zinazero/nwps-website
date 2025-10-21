@@ -16,6 +16,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { LogoutButton } from './LogoutButton';
 import { Image } from '../ui/Image';
 import { useProducts } from '../../contexts/ProductsContext';
+import { Loading } from '../ui/Loading';
 
 export const Footer = () => {
 	const { user } = useAuth();
@@ -42,11 +43,7 @@ export const Footer = () => {
 				<div className='flex my-6'>
 					{/* Section 1 */}
 					<div className='flex flex-col px-8 pb-20 space-y-10 w-1/4'>
-						<Image
-							src={nwpsVerticalLogo}
-							alt='NWPS Logo'
-							className='h-42'
-						/>
+						<Image src={nwpsVerticalLogo} alt='NWPS Logo' className='h-42' />
 						<div className='flex flex-col space-y-6'>
 							<span>
 								<FontAwesomeIcon icon={faLocationArrow} /> Brantford, ON
@@ -111,14 +108,22 @@ export const Footer = () => {
 							<div className='w-10 border-b-2 border-brand-orange border-dotted mt-3'></div>
 						</div>
 						<ul className='space-y-4'>
-							{productsLinks.map((link) => (
-								<li
-									key={link.label}
-									className='text-xl curser-pointer hover:text-brand-green transition'
-								>
-									<Link to={link.to}>{link.label}</Link>
+							{loading ? (
+								<Loading />
+							) : productsLinks.length === 0 ? (
+								<li className='text-xl text-gray-400'>
+									No products available
 								</li>
-							))}
+							) : (
+								productsLinks.map((link) => (
+									<li
+										key={link.label}
+										className='text-xl curser-pointer hover:text-brand-green transition'
+									>
+										<Link to={link.to}>{link.label}</Link>
+									</li>
+								))
+							)}
 						</ul>
 					</div>
 
@@ -165,7 +170,12 @@ export const Footer = () => {
 				{user ? (
 					<LogoutButton classes={adminButtonClasses} />
 				) : (
-					<Link to='/login' state={{ from: location }} replace className={adminButtonClasses}>
+					<Link
+						to='/login'
+						state={{ from: location }}
+						replace
+						className={adminButtonClasses}
+					>
 						Admin Login
 					</Link>
 				)}
