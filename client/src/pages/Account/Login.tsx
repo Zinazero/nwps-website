@@ -5,11 +5,7 @@ import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../components/ui/Image';
-
-export interface LoginFormValues {
-	username: string;
-	password: string;
-}
+import type { LoginFormValues } from '../../components/forms/types';
 
 export const Login = () => {
 	const [form, setForm] = useState<LoginFormValues>({
@@ -52,6 +48,8 @@ export const Login = () => {
 					handleSubmit={handleSubmit}
 					loading={loading}
 				/>
+
+				{/* Error Message */}
 				{error && <span className='text-[red]'>{error}</span>}
 			</div>
 		</main>

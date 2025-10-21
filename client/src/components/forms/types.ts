@@ -15,18 +15,30 @@ export interface ProductsSection {
 }
 
 export type SectionFormProps =
-  | {
-      formType: 'park';
-      section: ParkSection;
-      index: number;
-      setSection: (section: ParkSection) => void;
-      dropSection: (index: number, section: ParkSection) => void;
-    }
-  | {
-      formType: 'products';
-      section: ProductsSection;
-      index: number;
-      setSection: (section: ProductsSection) => void;
-      dropSection: (index: number, section: ProductsSection) => void;
-    };
+	| {
+			formType: 'park';
+			section: ParkSection;
+			index: number;
+			setSection: (section: ParkSection) => void;
+			dropSection: (index: number, section: ParkSection) => void;
+	  }
+	| {
+			formType: 'products';
+			section: ProductsSection;
+			index: number;
+			setSection: (section: ProductsSection) => void;
+			dropSection: (index: number, section: ProductsSection) => void;
+	  };
 
+export type LoginFormValues = {
+	username: string;
+	password: string;
+};
+
+export type ContactFormValues = {
+	firstName: string;
+	lastName: string;
+	phone: string;
+	email: string;
+	message: string;
+};

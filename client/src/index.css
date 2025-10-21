@@ -31,6 +31,7 @@
 	--color-brand-blue: #00589c;
 	--color-brand-red: #ee3972;
 	--color-brand-blue-light: rgb(196, 226, 252);
+	--color-blue-washed: rgba(126, 171, 205, 0.263);
 
 	--font-nunito: 'Nunito', sans-serif;
 	--font-archivo: 'Archivo', sans-serif;
@@ -66,7 +67,8 @@ button {
 input,
 textarea {
 	@apply bg-white rounded-lg border p-2 focus:outline-0 border-transparent-grey;
-	@apply focus:border-brand-orange focus:scale-105 shadow-sm transition resize-none;
+	@apply focus:border-brand-orange focus:scale-105 shadow-sm transition;
+	@apply placeholder-gray-400;
 	caret-color: var(--color-brand-orange);
 }
 

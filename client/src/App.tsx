@@ -17,6 +17,7 @@ import { GlobalSmartQuotes } from './components/global/GlobalSmartQuotes';
 import { AddProvider } from './pages/Admin/Providers/AddProvider';
 import { ProductsPage } from './pages/Products/Categories/ProductsPage';
 import { AddEditProducts } from './pages/Admin/Products/AddEditProducts';
+import { Contact } from './pages/Contact/Contact';
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 						<Route path='/products' element={<Products />} />
 						<Route path='/products/:category' element={<ProductsPage />} />
 						<Route path='/testimonials' element={<Testimonials />} />
+						<Route path='/contact' element={<Contact />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/providers/:provider' element={<ProviderPage />} />
 						<Route

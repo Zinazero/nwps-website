@@ -1,10 +1,10 @@
+import { cn } from '../../utils/cn';
 import { Loading } from '../ui/Loading';
+import type { LoginFormValues } from './types';
 
 interface LoginFormProps {
-	form: { username: string; password: string };
-	setForm: React.Dispatch<
-		React.SetStateAction<{ username: string; password: string }>
-	>;
+	form: LoginFormValues;
+	setForm: React.Dispatch<React.SetStateAction<LoginFormValues>>;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 	loading: boolean;
 }
@@ -42,7 +42,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 			) : (
 				<button
 					type='submit'
-					className='p-2 bg-brand-orange hover:bg-brand-blue transition text-light font-bold rounded-lg active:scale-95 cursor-pointer'
+					className={cn(
+						'p-2 bg-brand-orange hover:bg-brand-blue transition',
+						'text-light font-bold rounded-lg active:scale-95 cursor-pointer'
+					)}
 				>
 					Submit
 				</button>
