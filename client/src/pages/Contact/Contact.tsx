@@ -4,6 +4,7 @@ import type { ContactFormValues } from '../../components/forms/types';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import { ContactBanner } from './sections/ContactBanner';
 import api from '../../api/axios';
+import { cn } from '../../utils/cn';
 
 export const Contact = () => {
 	const [form, setForm] = useState<ContactFormValues>({
@@ -23,7 +24,6 @@ export const Contact = () => {
 		const formData = new FormData(e.currentTarget);
 
 		if (formData.get('website')) return;
-
 
 		setLoading(true);
 		setError(null);
@@ -46,12 +46,39 @@ export const Contact = () => {
 
 			<ContactBanner />
 
-			<ContactForm
-				form={form}
-				setForm={setForm}
-				handleSubmit={handleSubmit}
-				loading={loading}
-			/>
+			{isContactSent ? (
+				<>
+					{/* Contact Sent */}
+					<div className='flex flex-col items-center space-y-10 mt-40'>
+						<div className='flex flex-col text-center space-y-2'>
+							<span className='text-2xl font-bold text-brand-orange'>
+								Thanks for reaching out!
+							</span>
+							<p className='text-lg'>
+								Your message has been received, and a member of our team will
+								respond shortly.
+							</p>
+						</div>
+						<button
+							type='button'
+							onClick={() => setIsContactSent(false)}
+							className={cn(
+								'p-2 w-1/2 bg-brand-orange hover:bg-brand-blue transition',
+								'text-light font-bold rounded-lg active:scale-95 cursor-pointer'
+							)}
+						>
+							Return
+						</button>
+					</div>
+				</>
+			) : (
+				<ContactForm
+					form={form}
+					setForm={setForm}
+					handleSubmit={handleSubmit}
+					loading={loading}
+				/>
+			)}
 
 			{/* Error Message */}
 			{error && <span className='text-[red]'>{error}</span>}
