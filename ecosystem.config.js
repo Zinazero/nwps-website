@@ -2,8 +2,7 @@ module.exports = {
 	apps: [
 		{
 			name: 'nwps-website',
-			script: 'server/src/index.ts',
-			interpreter: 'node',
+			script: 'server/dist/index.js',
 			env_production: {
 				NODE_ENV: 'production',
 			},
