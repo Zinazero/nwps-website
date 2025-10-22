@@ -2,8 +2,8 @@ module.exports = {
 	apps: [
 		{
 			name: 'nwps-website',
-			script: 'server/dist/index.js',
-            cwd: './server',
+			cwd: './server',
+			script: '/dist/index.js',
 			env_production: {
 				NODE_ENV: 'production',
 			},
