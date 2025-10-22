@@ -14,7 +14,8 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.9",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "web-streams-polyfill": "^4.2.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
