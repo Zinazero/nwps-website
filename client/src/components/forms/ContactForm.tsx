@@ -1,4 +1,5 @@
 import { cn } from '../../utils/cn';
+import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { Loading } from '../ui/Loading';
 import type { ContactFormValues } from './types';
 
@@ -65,11 +66,19 @@ export const ContactForm = ({
 						Phone
 					</label>
 					<input
-						type='phone'
+						type='tel'
 						id='phone'
 						name='phone'
 						value={form.phone}
 						onChange={(e) => handleChange(e)}
+						onBlur={(e) =>
+							setForm({
+								...form,
+								[e.target.name]: phoneNumberFormatter(e.target.value),
+							})
+						}
+						pattern='\(\d{3}\) \d{3}-\d{4}'
+						title='(123) 456-7890'
 						required
 					/>
 				</div>
