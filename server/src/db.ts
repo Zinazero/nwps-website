@@ -1,9 +1,6 @@
 import { Pool } from 'pg';
 import type { Pool as PgPool } from 'pg';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 const pool: PgPool = new Pool({
 	user: process.env.PG_USER,
 	host: process.env.PG_HOST,

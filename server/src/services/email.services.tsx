@@ -2,10 +2,7 @@ import nodemailer from 'nodemailer';
 import { ContactFormValues } from '../types';
 import ContactTemplate from '../emails/templates/ContactTemplate';
 import 'web-streams-polyfill/polyfill'; // Required to support Safari and iOS browsers
-
-import dotenv from 'dotenv';
 import { pretty, render, toPlainText } from '@react-email/render';
-dotenv.config();
 
 const transporter = nodemailer.createTransport({
 	host: process.env.SMTP_HOST,
