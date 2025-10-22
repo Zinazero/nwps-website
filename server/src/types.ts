@@ -40,3 +40,11 @@ export interface ProductsSection {
 	description: string;
 	externalLink?: string;
 }
+
+export type ContactFormValues = {
+	firstName: string;
+	lastName: string;
+	phone: string;
+	email: string;
+	message: string;
+};

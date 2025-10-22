@@ -37,7 +37,7 @@ export const ContactForm = ({
 					<input
 						type='text'
 						id='first-name'
-						name='first_name'
+						name='firstName'
 						placeholder='First'
 						value={form.firstName}
 						onChange={(e) => handleChange(e)}
@@ -49,7 +49,7 @@ export const ContactForm = ({
 					<input
 						type='text'
 						id='last-name'
-						name='last_name'
+						name='lastName'
 						placeholder='Last'
 						value={form.lastName}
 						onChange={(e) => handleChange(e)}

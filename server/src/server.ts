@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes';
 import providersRoutes from './routes/providers.routes';
 import parksRouter from './routes/parks.routes';
 import productsRouter from './routes/products.routes';
+import contactRouter from './routes/contact.routes';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/providers', providersRoutes);
 app.use('/api/parks', parksRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/contact', contactRouter);
 
 if (process.env.NODE_ENV === 'production') {
 	const clientDistPath = path.join(__dirname, '../../client/dist');

@@ -21,8 +21,8 @@ export const Contact = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		// Checking for spam
 		const formData = new FormData(e.currentTarget);
-
 		if (formData.get('website')) return;
 
 		setLoading(true);
