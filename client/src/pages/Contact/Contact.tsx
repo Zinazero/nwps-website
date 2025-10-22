@@ -7,13 +7,15 @@ import api from '../../api/axios';
 import { cn } from '../../utils/cn';
 
 export const Contact = () => {
-	const [form, setForm] = useState<ContactFormValues>({
+	const defaultForm: ContactFormValues = {
 		firstName: '',
 		lastName: '',
 		phone: '',
 		email: '',
 		message: '',
-	});
+	};
+
+	const [form, setForm] = useState<ContactFormValues>(defaultForm);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [isContactSent, setIsContactSent] = useState(false);
@@ -32,9 +34,9 @@ export const Contact = () => {
 			await api.post('/contact', form);
 			console.log('Contact Sent');
 			setIsContactSent(true);
+			setForm(defaultForm);
 		} catch (err: any) {
-			console.error(err);
-			setError(err.response?.data?.error || 'Something went wrong');
+			setError('Something went wrong. Please try again.');
 		} finally {
 			setLoading(false);
 		}
