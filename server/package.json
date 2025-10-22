@@ -13,8 +13,8 @@
     "express": "^4.19.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
-    "nodemailer": "^7.0.9",
     "pg": "^8.16.3",
+    "resend": "^6.2.2",
     "web-streams-polyfill": "^4.2.0"
   },
   "devDependencies": {
@@ -25,7 +25,6 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
     "@types/node": "^20.0.0",
-    "@types/nodemailer": "^7.0.2",
     "@types/pg": "^8.15.5",
     "nodemon": "^3.0.0",
     "ts-node": "^10.9.2",

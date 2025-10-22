@@ -5,6 +5,7 @@ import {
 	createUser,
 	findUserByUsername,
 } from '../repositories/users.repository';
+import env from '../config/env';
 
 export const register = async (req: Request, res: Response) => {
 	const { username, password } = req.body;
@@ -41,7 +42,7 @@ export const login = async (req: Request, res: Response) => {
 		res
 			.cookie('sessionToken', token, {
 				httpOnly: true,
-				secure: process.env.NODE_ENV === 'production',
+				secure: env.NODE_ENV === 'production',
 				sameSite: 'lax',
 				maxAge: 60 * 60 * 1000, // 1 hour
 			})

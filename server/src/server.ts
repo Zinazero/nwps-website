@@ -7,11 +7,12 @@ import providersRoutes from './routes/providers.routes';
 import parksRouter from './routes/parks.routes';
 import productsRouter from './routes/products.routes';
 import contactRouter from './routes/contact.routes';
+import env from './config/env';
 
 const app = express();
 
 // Middleware
-if (process.env.NODE_ENV !== 'production') {
+if (env.NODE_ENV !== 'production') {
 	app.use(
 		cors({
 			origin: 'http://localhost:5173',
@@ -30,7 +31,7 @@ app.use('/api/parks', parksRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/contact', contactRouter);
 
-if (process.env.NODE_ENV === 'production') {
+if (env.NODE_ENV === 'production') {
 	const clientDistPath = path.join(__dirname, '../../client/dist');
 	app.use(express.static(clientDistPath));
 

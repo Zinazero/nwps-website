@@ -1,12 +1,13 @@
 import { Pool } from 'pg';
 import type { Pool as PgPool } from 'pg';
+import env from './config/env';
 
 const pool: PgPool = new Pool({
-	user: process.env.PG_USER,
-	host: process.env.PG_HOST,
-	database: process.env.PG_DATABASE,
-	password: process.env.PG_PASSWORD,
-	port: Number(process.env.PG_PORT) || 5432,
+	user: env.PG_USER,
+	host: env.PG_HOST,
+	database: env.PG_DATABASE,
+	password: env.PG_PASSWORD,
+	port: env.PG_PORT,
 	idleTimeoutMillis: 30000,
 	connectionTimeoutMillis: 2000,
 });

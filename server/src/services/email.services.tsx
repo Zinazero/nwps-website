@@ -1,18 +1,11 @@
-import nodemailer from 'nodemailer';
 import { ContactFormValues } from '../types';
 import ContactTemplate from '../emails/templates/ContactTemplate';
 import 'web-streams-polyfill/polyfill'; // Required to support Safari and iOS browsers
 import { pretty, render, toPlainText } from '@react-email/render';
+import { Resend } from 'resend';
+import env from '../config/env';
 
-const transporter = nodemailer.createTransport({
-	host: process.env.SMTP_HOST,
-	port: Number(process.env.SMTP_PORT),
-	secure: false,
-	auth: {
-		user: process.env.SMTP_USER,
-		pass: process.env.SMTP_PASS,
-	},
-});
+const resend = new Resend(env.RESEND_API_KEY);
 
 export const sendContactEmail = async (form: ContactFormValues) => {
 	const { firstName, lastName, email } = form;
@@ -28,17 +21,17 @@ export const sendContactEmail = async (form: ContactFormValues) => {
 
 	// Send email
 	try {
-		await transporter.sendMail({
-			from: `"NWPS Contact" <${process.env.SMTP_USER}>`,
-			to: process.env.EMAIL_RECEIVER,
+		await resend.emails.send({
+			from: `NWPS Contact <${env.EMAIL_SENDER}>`,
+			to: env.EMAIL_RECEIVER,
 			subject: `New Contact Request from ${firstName} ${lastName}`,
-			text: text,
-			html: html,
+			html,
+			text,
 			replyTo: email,
 		});
 
 		console.log(
-			`Email sent to ${process.env.EMAIL_RECEIVER} at ${new Date().toISOString()}`
+			`Email sent to ${env.EMAIL_RECEIVER} at ${new Date().toISOString()}`
 		);
 	} catch (err) {
 		throw err;
