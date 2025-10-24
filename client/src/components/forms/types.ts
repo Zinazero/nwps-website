@@ -1,3 +1,5 @@
+import type { StoreProduct } from '../../pages/types';
+
 export type Section = ParkSection | ProductsSection;
 
 export interface ParkSection {
@@ -57,8 +59,12 @@ export type ShippingFieldsetValues = {
   postalCode: string;
 };
 
-export type QuantityValue = {
+export interface ProductOrder extends StoreProduct {
   quantity: number;
+}
+
+export type Cart = {
+  cart: ProductOrder[];
 };
 
-export type OrderFormValues = ContactFormValues & ShippingFieldsetValues & QuantityValue;
+export type OrderFormValues = Cart & ContactFormValues & ShippingFieldsetValues;

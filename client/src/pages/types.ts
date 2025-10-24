@@ -29,3 +29,8 @@ export type Testimonial = {
   imageSrc: string;
   skipMask?: boolean;
 };
+
+export type StoreProduct = {
+  id: number;
+  increment: number;
+};

@@ -2,7 +2,6 @@ import { cn } from '../../utils/cn';
 import { Loading } from '../ui/Loading';
 import { Honeypot } from './components/Honeypot';
 import { Message } from './components/Message';
-import { Quantity } from './components/Quantity';
 import { ContactFieldSet } from './fieldsets/ContactFieldset';
 import { ShippingFieldset } from './fieldsets/ShippingFieldset';
 import type { OrderFormValues } from './types';
@@ -26,9 +25,6 @@ export const OrderForm = ({ form, setForm, handleSubmit, loading }: OrderFormPro
 
       {/* Shipping Info */}
       <ShippingFieldset form={form} onChange={handleChange} />
-
-      {/* Quantity */}
-      <Quantity form={form} onChange={handleChange} />
 
       {/* Notes */}
       <Message form={form} onChange={handleChange} />
