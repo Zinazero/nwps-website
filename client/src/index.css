@@ -65,11 +65,17 @@ button {
 }
 
 input,
-textarea {
+textarea,
+select {
 	@apply bg-white rounded-lg border p-2 focus:outline-0 border-transparent-grey;
-	@apply focus:border-brand-orange focus:scale-105 shadow-sm transition;
+	@apply focus:border-brand-orange shadow-sm transition;
 	@apply placeholder-gray-400;
 	caret-color: var(--color-brand-orange);
+}
+
+input,
+textarea {
+	@apply focus:scale-105
 }
 
 .underline-header + svg path {

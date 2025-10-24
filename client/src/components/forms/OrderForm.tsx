@@ -1,43 +1,45 @@
 import { cn } from '../../utils/cn';
 import { Loading } from '../ui/Loading';
-import { Message } from './components/Message';
 import { ContactFieldSet } from './fieldsets/ContactFieldset';
-import type { ContactFormValues } from './types';
+import { ShippingFieldset } from './fieldsets/ShippingFieldset';
+import { Honeypot } from './components/Honeypot';
+import { Message } from './components/Message';
+import type { OrderFormValues } from './types';
+import { Quantity } from './components/Quantity';
 
-interface ContactFormProps {
-	form: ContactFormValues;
-	setForm: React.Dispatch<React.SetStateAction<ContactFormValues>>;
+interface OrderFormProps {
+	form: OrderFormValues;
+	setForm: React.Dispatch<React.SetStateAction<OrderFormValues>>;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 	loading: boolean;
 }
 
-export const ContactForm = ({
+export const OrderForm = ({
 	form,
 	setForm,
 	handleSubmit,
 	loading,
-}: ContactFormProps) => {
-	const handleChange = (name: string, value: string) => {
+}: OrderFormProps) => {
+	const handleChange = (name: string, value: string | number) => {
 		setForm({ ...form, [name]: value });
 	};
 
 	return (
-		<form className='flex flex-col space-y-4' onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className='space-y-6'>
 			{/* Contact Info */}
 			<ContactFieldSet form={form} onChange={handleChange} />
 
-			{/* Message */}
+            {/* Shipping Info */}
+            <ShippingFieldset form={form} onChange={handleChange} />
+
+            {/* Quantity */}
+            <Quantity form={form} onChange={handleChange} />
+
+			{/* Notes */}
 			<Message form={form} onChange={handleChange} />
 
 			{/* Hidden honeypot for spam */}
-			<input
-				type='text'
-				name='website'
-				autoComplete='off'
-				tabIndex={-1}
-				className='sr-only'
-				aria-hidden='true'
-			/>
+			<Honeypot />
 
 			{/* Submit */}
 			{loading ? (

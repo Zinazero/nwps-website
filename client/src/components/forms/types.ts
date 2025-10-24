@@ -35,10 +35,32 @@ export type LoginFormValues = {
 	password: string;
 };
 
-export type ContactFormValues = {
+export type ContactFieldsetValues = {
 	firstName: string;
 	lastName: string;
+	company: string;
 	phone: string;
 	email: string;
+};
+
+export type MessageValue = {
 	message: string;
 };
+
+export type ContactFormValues = ContactFieldsetValues & MessageValue;
+
+export type ShippingFieldsetValues = {
+	address1: string;
+	address2: string;
+	city: string;
+	province: string;
+	postalCode: string;
+};
+
+export type QuantityValue = {
+	quantity: number;
+};
+
+export type OrderFormValues = ContactFormValues &
+	ShippingFieldsetValues &
+	QuantityValue;

@@ -11,6 +11,7 @@ export const Contact = () => {
 	const defaultForm: ContactFormValues = {
 		firstName: '',
 		lastName: '',
+		company: '',
 		phone: '',
 		email: '',
 		message: '',
