@@ -31,5 +31,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hotspot::after { animation: none; opacity: 0; }
+  .hotspot::after {
+    animation: none;
+    opacity: 0;
+  }
 }

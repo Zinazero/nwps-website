@@ -1,57 +1,52 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import api from '../../api/axios';
 import { LoginForm } from '../../components/forms/LoginForm';
-import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
-import { useAuth } from '../../contexts/AuthContext';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Image } from '../../components/ui/Image';
 import type { LoginFormValues } from '../../components/forms/types';
+import { Image } from '../../components/ui/Image';
+import { useAuth } from '../../contexts/AuthContext';
 
 export const Login = () => {
-	const [form, setForm] = useState<LoginFormValues>({
-		username: '',
-		password: '',
-	});
-	const [error, setError] = useState<string | null>(null);
-	const [loading, setLoading] = useState(false);
-	const { login } = useAuth();
-	const navigate = useNavigate();
-	const location = useLocation();
-	const from = location.state?.from?.pathname || '/';
+  const [form, setForm] = useState<LoginFormValues>({
+    username: '',
+    password: '',
+  });
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		setLoading(true);
-		setError(null);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-		try {
-			const res = await api.post('/auth/login', form);
-			console.log('Login successful', res.data.username);
+    try {
+      const res = await api.post('/auth/login', form);
+      console.log('Login successful', res.data.username);
 
-			login(res.data.username, res.data.isSu);
-			navigate(from, { replace: true });
-		} catch (err: any) {
-			console.error(err);
-			setError(err.response?.data?.error || 'Something went wrong');
-		} finally {
-			setLoading(false);
-		}
-	};
+      login(res.data.username, res.data.isSu);
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.error(err);
+      setError('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-	return (
-		<main className='min-h-screen flex items-center justify-center'>
-			<div className='flex flex-col items-center space-y-24'>
-				<Image src={nwpsVerticalLogo} alt='NWPS Logo' className='h-42' />
-				<LoginForm
-					form={form}
-					setForm={setForm}
-					handleSubmit={handleSubmit}
-					loading={loading}
-				/>
+  return (
+    <main className="min-h-screen flex items-center justify-center">
+      <div className="flex flex-col items-center space-y-24">
+        <Image src={nwpsVerticalLogo} alt="NWPS Logo" className="h-42" />
+        <LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
 
-				{/* Error Message */}
-				{error && <span className='text-[red]'>{error}</span>}
-			</div>
-		</main>
-	);
+        {/* Error Message */}
+        {error && <span className="text-[red]">{error}</span>}
+      </div>
+    </main>
+  );
 };

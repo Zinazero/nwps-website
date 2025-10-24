@@ -26,7 +26,6 @@ agreed-upon price. When working on a strict budget, it is imperative that Ska:na
 relationships with trustworthy and dependable vendors and they fit our criteria.
 `;
 
-
 export const chrisZiemskiBlurb = `
 Please accept my positive referral of Mike Hexamer and New World Park Solutions Inc.  They are 
 always very responsive to our needs and concerns and follow up to make sure we are pleased with 

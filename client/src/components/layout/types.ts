@@ -1,5 +1,5 @@
 export type LinkType = {
-	label: string;
-	to: string;
-	isDropdown?: boolean;
+  label: string;
+  to: string;
+  isDropdown?: boolean;
 };

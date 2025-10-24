@@ -17,7 +17,8 @@ export const Image: React.FC<ImageProps> = ({ src, alt, className }) => {
       {!error && (
         <img
           src={src}
-          alt={alt}          className={className}
+          alt={alt}
+          className={className}
           draggable={false}
           style={{ display: loading ? 'none' : 'block' }}
           onLoad={() => setLoading(false)}
@@ -28,4 +29,3 @@ export const Image: React.FC<ImageProps> = ({ src, alt, className }) => {
     </>
   );
 };
-

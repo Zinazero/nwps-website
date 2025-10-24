@@ -3,13 +3,13 @@ import { OurStory } from './sections/OurStory';
 import { OurTeam } from './sections/OurTeam/OurTeam';
 
 export const About = () => {
-	return (
-		<main className=''>
-			<AboutHero />
+  return (
+    <main className="">
+      <AboutHero />
 
-			<OurStory />
+      <OurStory />
 
-			<OurTeam />
-		</main>
-	);
+      <OurTeam />
+    </main>
+  );
 };

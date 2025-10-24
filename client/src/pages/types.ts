@@ -1,31 +1,31 @@
 export type Park = {
-	id: number;
-	title: string;
-	location: string;
-	description: string;
-	blurb: string;
-	slug: string;
+  id: number;
+  title: string;
+  location: string;
+  description: string;
+  blurb: string;
+  slug: string;
 };
 
 export type ProductsCategory = {
-	id: number;
-	title: string;
-	description: string;
-	slug: string;
+  id: number;
+  title: string;
+  description: string;
+  slug: string;
 };
 
 export type Provider = {
-	title: string;
-	blurb?: string;
-	description?: string;
-	externalLink: string;
-	logoSrc: string;
-	slug: string;
+  title: string;
+  blurb?: string;
+  description?: string;
+  externalLink: string;
+  logoSrc: string;
+  slug: string;
 };
 
 export type Testimonial = {
-	title: string;
-	blurb: string;
-	imageSrc: string;
-	skipMask?: boolean;
+  title: string;
+  blurb: string;
+  imageSrc: string;
+  skipMask?: boolean;
 };

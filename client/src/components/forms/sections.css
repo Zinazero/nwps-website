@@ -1,90 +1,90 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-	--color-brand-orange: #f15b31;
-	--color-brand-blue: #00589c;
-	--color-brand-green: #cdda29;
-	--color-brand-red: #ee3972;
-	--color-grey: #6c757d;
+  --color-brand-orange: #f15b31;
+  --color-brand-blue: #00589c;
+  --color-brand-green: #cdda29;
+  --color-brand-red: #ee3972;
+  --color-grey: #6c757d;
 }
 
 #item-form input,
 #item-form .file-input,
 #item-form textarea {
-	@apply bg-transparent border rounded-xl border-dashed;
-	@apply border-brand-orange text-center;
+  @apply bg-transparent border rounded-xl border-dashed;
+  @apply border-brand-orange text-center;
 }
 
 #item-form .file-input {
-	@apply flex items-center justify-center text-4xl text-brand-orange;
-	@apply hover:text-brand-green hover:border-brand-green transition;
-    @apply active:scale-95;
+  @apply flex items-center justify-center text-4xl text-brand-orange;
+  @apply hover:text-brand-green hover:border-brand-green transition;
+  @apply active:scale-95;
 }
 
-#item-form input[type='text'] {
-	@apply font-bold;
+#item-form input[type="text"] {
+  @apply font-bold;
 }
 
 #item-form textarea {
-	@apply text-grey h-50 py-4;
+  @apply text-grey h-50 py-4;
 }
 
 #item-form .text-container {
-	@apply flex flex-col space-y-4;
+  @apply flex flex-col space-y-4;
 }
 
 .hero-section {
-	@apply flex p-6 items-center;
+  @apply flex p-6 items-center;
 }
 
 #park .hero-section {
-	@apply flex-col space-y-12;
+  @apply flex-col space-y-12;
 }
 
 #products .hero-section {
-	@apply space-x-12 border-b-3 border-dashed border-brand-orange pb-16;
+  @apply space-x-12 border-b-3 border-dashed border-brand-orange pb-16;
 }
 
 #park .hero-section .file-input {
-	@apply w-250 h-140;
+  @apply w-250 h-140;
 }
 
 #products .hero-section .file-input {
-	@apply w-100 h-100;
+  @apply w-100 h-100;
 }
 
 .hero-section img {
-    @apply max-w-250;
+  @apply max-w-250;
 }
 
 #park .hero-section .text-container {
-	@apply w-300;
+  @apply w-300;
 }
 
-.hero-section input[type='text'] {
-	@apply text-5xl;
+.hero-section input[type="text"] {
+  @apply text-5xl;
 }
 
 .hero-section textarea {
-	@apply text-xl;
+  @apply text-xl;
 }
 
 .info-section {
-	@apply flex items-center justify-center max-w-300;
+  @apply flex items-center justify-center max-w-300;
 }
 
 .info-section .file-input {
-	@apply mx-12 w-150 h-80;
+  @apply mx-12 w-150 h-80;
 }
 
 .info-section img {
-    @apply mx-12 w-150;
+  @apply mx-12 w-150;
 }
 
-.info-section input[type='text'] {
-	@apply text-3xl;
+.info-section input[type="text"] {
+  @apply text-3xl;
 }
 
 .info-section textarea {
-	@apply text-lg;
+  @apply text-lg;
 }

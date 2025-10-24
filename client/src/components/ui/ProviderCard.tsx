@@ -6,13 +6,9 @@ interface ProviderCardProps {
 }
 
 export const ProviderCard = ({ provider }: ProviderCardProps) => {
-	return (
-		<div className='flex items-center justify-center h-full hover:scale-110 transition'>
-			<Image
-				src={provider.logoSrc}
-				alt={`${provider.title} Logo`}
-				className='object-contain max-w-full'
-			/>
-		</div>
-	);
+  return (
+    <div className="flex items-center justify-center h-full hover:scale-110 transition">
+      <Image src={provider.logoSrc} alt={`${provider.title} Logo`} className="object-contain max-w-full" />
+    </div>
+  );
 };
