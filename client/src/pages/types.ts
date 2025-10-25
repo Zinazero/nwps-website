@@ -33,4 +33,5 @@ export type Testimonial = {
 export type StoreProduct = {
   id: number;
   increment: number;
+  title: string;
 };

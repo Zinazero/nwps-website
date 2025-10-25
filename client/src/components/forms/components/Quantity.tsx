@@ -5,16 +5,18 @@ import type { ProductOrder } from '../types';
 interface QuantityProps {
   product: ProductOrder;
   onChange: (id: number, quantity: number) => void;
+  onRemove: (id: number) => void;
 }
 
-export const Quantity = ({ product, onChange }: QuantityProps) => {
+export const Quantity = ({ product, onChange, onRemove }: QuantityProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(product.id, Number(e.target.value));
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const inc = product.increment;
     const value = Number(e.target.value);
-    const rounded = Math.max(5, Math.round(value / 5) * 5); // round to nearest multiple of 5, min 5
+    const rounded = Math.max(inc, Math.round(value / inc) * inc); // round to nearest multiple of {increment}, min {increment}
     onChange(product.id, rounded);
   };
 
@@ -34,8 +36,16 @@ export const Quantity = ({ product, onChange }: QuantityProps) => {
         onBlur={handleBlur}
         min={product.increment}
         step={product.increment}
+        className="w-full"
         required
       />
+      <button
+        type="button"
+        onClick={() => onRemove(product.id)}
+        className={cn('mx-auto mt-2 text-sm text-red active:scale-95')}
+      >
+        Remove
+      </button>
     </div>
   );
 };

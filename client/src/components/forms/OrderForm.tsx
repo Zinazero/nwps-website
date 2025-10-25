@@ -41,6 +41,7 @@ export const OrderForm = ({ form, setForm, handleSubmit, loading }: OrderFormPro
           className={cn(
             'p-2 bg-brand-orange hover:bg-brand-blue transition',
             'text-light font-bold rounded-lg active:scale-95 cursor-pointer',
+            'w-full',
           )}
         >
           Submit

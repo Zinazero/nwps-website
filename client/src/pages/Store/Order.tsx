@@ -44,10 +44,8 @@ export const Order = ({ cart }: OrderProps) => {
   return (
     <div className="max-w-3xl w-full bg-white shadow-lg rounded-2xl overflow-hidden">
       <div className="p-8 md:p-12">
-        <h1 className="text-4xl font-bold text-brand-orange mb-4 text-center">Swing Seats</h1>
-        <p className="text-center mb-8">
-          Beautifully made, built to last. Submit an order request and we’ll send you an invoice.
-        </p>
+        <h1 className="text-4xl font-bold text-brand-orange mb-4 text-center">Order Form</h1>
+        <p className="text-center mb-8">Submit an order request and we’ll send you an invoice.</p>
 
         {!submitted ? (
           <OrderForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
@@ -56,10 +54,12 @@ export const Order = ({ cart }: OrderProps) => {
         )}
       </div>
 
+      {/* 
       <div className="bg-gray-100 py-6 px-8 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm">Each swing seat is handcrafted from sustainably sourced wood.</p>
-        <span className="font-semibold mt-3 md:mt-0">Starting at $185</span>
+        <p className="text-sm">Placeholder text goes here.</p>
+        <span className="font-semibold mt-3 md:mt-0">Starting at $999</span>
       </div>
+      */}
     </div>
   );
 };
