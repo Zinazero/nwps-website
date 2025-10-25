@@ -6,9 +6,9 @@ import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
 import type { ProductOrder } from '../../components/forms/types';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
+import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { Order } from './Order';
 import { Shop } from './Shop';
-import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 
 export const Store = () => {
   const [cart, setCart] = useState<ProductOrder[]>([]);
