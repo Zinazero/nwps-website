@@ -8,6 +8,7 @@ import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import { Order } from './Order';
 import { Shop } from './Shop';
+import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 
 export const Store = () => {
   const [cart, setCart] = useState<ProductOrder[]>([]);
@@ -47,7 +48,7 @@ export const Store = () => {
                 {cart.length > 0 && (
                   <>
                     <p className="text-lg font-medium">
-                      {totalItems} item{totalItems !== 1 && 's'} in cart
+                      {largeNumberFormatter(totalItems)} item{totalItems !== 1 && 's'} in cart
                     </p>
                     <button
                       type="button"
@@ -86,7 +87,7 @@ export const Store = () => {
                       alt={`Product ${prod.id}`}
                       className="w-full object-cover"
                     />
-                    <ShopLabel text={`${prod.quantity}`} />
+                    <ShopLabel text={`${largeNumberFormatter(prod.quantity)}`} />
                   </div>
                 ))}
               </section>
