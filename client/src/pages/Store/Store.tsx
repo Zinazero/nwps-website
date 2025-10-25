@@ -1,13 +1,13 @@
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
+import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
 import type { ProductOrder } from '../../components/forms/types';
+import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import { Order } from './Order';
 import { Shop } from './Shop';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
-import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
-import { ShopLabel } from '../../components/ui/ShopLabel';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export const Store = () => {
   const [cart, setCart] = useState<ProductOrder[]>([]);

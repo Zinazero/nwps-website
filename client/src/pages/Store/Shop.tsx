@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Quantity } from '../../components/forms/components/Quantity';
 import type { ProductOrder } from '../../components/forms/types';
+import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import type { StoreProduct } from '../types';
-import { ShopLabel } from '../../components/ui/ShopLabel';
 
 interface ShopProps {
   cart: ProductOrder[];
