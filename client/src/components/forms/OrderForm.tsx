@@ -44,7 +44,7 @@ export const OrderForm = ({ form, setForm, handleSubmit, loading }: OrderFormPro
             'w-full',
           )}
         >
-          Submit
+          Request Invoice
         </button>
       )}
     </form>

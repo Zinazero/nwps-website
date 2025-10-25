@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, ProductOrder } from '../../components/forms/types';
 import { OrderThanks } from './components/OrderThanks';
+import api from '../../api/axios';
 
 interface OrderProps {
   cart: ProductOrder[];
@@ -26,19 +27,33 @@ export const Order = ({ cart }: OrderProps) => {
   const [form, setForm] = useState<OrderFormValues>(defaultForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
-    // ENSURE ROUNDED QUANTITY BEFORE SENDING
-    // ENSURE VALID POSTAL CODE BEFORE SENDING
+    const postalCode = form.postalCode.trim().toUpperCase();
+    const canadianPostalCodeRegex = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
 
-    setTimeout(() => {
+    if (!canadianPostalCodeRegex.test(postalCode)) {
+      setError('Invalid Postal Code');
       setLoading(false);
-      setSubmitted(true);
+      return;
+    }
+
+    try {
+      const res = await api.post('/order', form);
+      console.log('Order submission successful. Order Id: ', res.data.id);
       setForm(defaultForm);
-    }, 1200);
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setError('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -48,7 +63,13 @@ export const Order = ({ cart }: OrderProps) => {
         <p className="text-center mb-8">Submit an order request and we’ll send you an invoice.</p>
 
         {!submitted ? (
-          <OrderForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
+          <div className="flex flex-col">
+            {/* Order Form */}
+            <OrderForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
+
+            {/* Error Message */}
+            {error && <span className="text-[red] mx-auto mt-2">{error}</span>}
+          </div>
         ) : (
           <OrderThanks onClick={() => setSubmitted(false)} />
         )}
