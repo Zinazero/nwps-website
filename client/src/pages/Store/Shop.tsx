@@ -1,22 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Quantity } from '../../components/forms/components/Quantity';
-import type { ProductOrder } from '../../components/forms/types';
+import type { OrderItem } from '../../components/forms/types';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
-import type { StoreProduct } from '../types';
+import type { StoreItem } from '../types';
+import api from '../../api/axios';
 
 interface ShopProps {
-  cart: ProductOrder[];
-  setCart: React.Dispatch<React.SetStateAction<ProductOrder[]>>;
+  cart: OrderItem[];
+  setCart: React.Dispatch<React.SetStateAction<OrderItem[]>>;
 }
 
 export const Shop = ({ cart, setCart }: ShopProps) => {
-  const exampleProdList: StoreProduct[] = [
-    { id: 1, increment: 10, title: 'Belt Seat' },
-    { id: 2, increment: 5, title: 'Infant Seat' },
-  ];
-
-  const [productList, setProductList] = useState<StoreProduct[]>(exampleProdList);
+  const [productList, setProductList] = useState<StoreItem[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const containerClasses = cn('cursor-pointer rounded-2xl overflow-hidden', 'shadow-lg h-100 w-100');
 
@@ -27,6 +24,22 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
   const handleRemove = (id: number) => {
     setCart((prev) => prev.filter((prod) => prod.id !== id));
   };
+
+  useEffect(() => {
+    const fetchStoreItems = async () => {
+      setLoading(true);
+      try {
+        const res = await api.get<StoreItem[]>('/store');
+        setProductList(res.data);
+      } catch (err) {
+        console.error('Error fetching store items:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStoreItems();
+  }, []);
 
   return (
     <div className="flex items-center gap-20 h-150">

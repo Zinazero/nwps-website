@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { OrderForm } from '../../components/forms/OrderForm';
-import type { OrderFormValues, ProductOrder } from '../../components/forms/types';
+import type { OrderFormValues, OrderItem } from '../../components/forms/types';
 import { OrderThanks } from './components/OrderThanks';
 import api from '../../api/axios';
 
 interface OrderProps {
-  cart: ProductOrder[];
+  cart: OrderItem[];
 }
 
 export const Order = ({ cart }: OrderProps) => {
@@ -44,7 +44,7 @@ export const Order = ({ cart }: OrderProps) => {
     }
 
     try {
-      const res = await api.post('/order', form);
+      const res = await api.post('/store/orders', form);
       console.log('Order submission successful. Order Id: ', res.data.id);
       setForm(defaultForm);
       setSubmitted(true);

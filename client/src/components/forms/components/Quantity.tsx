@@ -1,9 +1,9 @@
 import { useId } from 'react';
 import { cn } from '../../../utils/cn';
-import type { ProductOrder } from '../types';
+import type { OrderItem } from '../types';
 
 interface QuantityProps {
-  product: ProductOrder;
+  product: OrderItem;
   onChange: (id: number, quantity: number) => void;
   onRemove: (id: number) => void;
 }

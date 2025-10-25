@@ -30,7 +30,7 @@ export type Testimonial = {
   skipMask?: boolean;
 };
 
-export type StoreProduct = {
+export type StoreItem = {
   id: number;
   increment: number;
   title: string;

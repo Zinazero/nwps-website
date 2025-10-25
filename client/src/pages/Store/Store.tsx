@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
-import type { ProductOrder } from '../../components/forms/types';
+import type { OrderItem } from '../../components/forms/types';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
@@ -11,7 +11,7 @@ import { Order } from './Order';
 import { Shop } from './Shop';
 
 export const Store = () => {
-  const [cart, setCart] = useState<ProductOrder[]>([]);
+  const [cart, setCart] = useState<OrderItem[]>([]);
   const [isCheckout, setIsCheckout] = useState(false);
 
   const totalItems = cart.reduce((sum, p) => sum + p.quantity, 0);

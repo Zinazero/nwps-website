@@ -8,6 +8,7 @@ import contactRouter from './routes/contact.routes';
 import parksRouter from './routes/parks.routes';
 import productsRouter from './routes/products.routes';
 import providersRoutes from './routes/providers.routes';
+import storeRoutes from './routes/store.routes';
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/api/providers', providersRoutes);
 app.use('/api/parks', parksRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/store', storeRoutes);
 
 if (env.NODE_ENV === 'production') {
   const clientDistPath = path.join(__dirname, '../../client/dist');
