@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import api from '../../api/axios';
 import { Quantity } from '../../components/forms/components/Quantity';
 import type { OrderItem } from '../../components/forms/types';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
-import api from '../../api/axios';
 
 interface ShopProps {
   cart: OrderItem[];

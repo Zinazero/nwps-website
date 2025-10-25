@@ -78,4 +78,4 @@ export interface OrderItem extends StoreItem {
   quantity: number;
 }
 
-export type OrderInfo = ContactFormValues & ShippingFieldsetValues  ;
+export type OrderInfo = ContactFormValues & ShippingFieldsetValues;

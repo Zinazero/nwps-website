@@ -1,6 +1,6 @@
 import express from 'express';
-import { getAllStoreItems } from '../repositories/storeItems.repository';
 import { postOrder } from '../repositories/orders.repository';
+import { getAllStoreItems } from '../repositories/storeItems.repository';
 
 const router = express.Router();
 
