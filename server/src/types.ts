@@ -80,6 +80,10 @@ export interface OrderItem extends StoreItem {
 
 export type OrderInfo = ContactFormValues & ShippingFieldsetValues;
 
+export interface InvoiceInfo extends OrderInfo {
+  orderNumber: string;
+}
+
 export type Field = {
   label: string;
   info: string;
