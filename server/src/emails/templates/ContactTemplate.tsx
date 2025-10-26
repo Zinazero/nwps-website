@@ -1,11 +1,6 @@
 import { Container, Heading, Hr, Section, Text } from '@react-email/components';
-import { ContactFormValues } from '../../types';
-import CobaltWrapper from '../NWPSWrapper';
-
-interface Field {
-  label: string;
-  info: string;
-}
+import { ContactFormValues, Field } from '../../types';
+import NWPSWrapper from '../NWPSWrapper';
 
 interface ContactTemplateProps {
   form: ContactFormValues;
@@ -14,6 +9,7 @@ interface ContactTemplateProps {
 const ContactTemplate = ({ form }: ContactTemplateProps) => {
   const fields: Field[] = [
     { label: 'Name', info: `${form.firstName} ${form.lastName}` },
+    { label: 'Company', info: form.company || '---' },
     { label: 'Phone', info: form.phone },
     { label: 'Email', info: form.email },
     { label: 'Message', info: form.message },
@@ -23,7 +19,7 @@ const ContactTemplate = ({ form }: ContactTemplateProps) => {
   const otherFields = fields.filter(({ label }) => label !== 'Message');
 
   return (
-    <CobaltWrapper>
+    <NWPSWrapper>
       <Section>
         <Heading className="text-brandorange">Contact Request</Heading>
         <table className="mx-auto text-left w-500" cellPadding={20}>
@@ -49,7 +45,7 @@ const ContactTemplate = ({ form }: ContactTemplateProps) => {
           </Container>
         )}
       </Section>
-    </CobaltWrapper>
+    </NWPSWrapper>
   );
 };
 

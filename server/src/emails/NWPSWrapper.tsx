@@ -2,7 +2,7 @@ import { Body, Container, Head, Html, Img, pixelBasedPreset, Tailwind } from '@r
 import type { ReactNode } from 'react';
 import { getLogoSrc } from './utils/getImageSrc';
 
-const CobaltWrapper = ({ children }: { children: ReactNode }) => (
+const NWPSWrapper = ({ children }: { children: ReactNode }) => (
   <Tailwind
     config={{
       presets: [pixelBasedPreset],
@@ -11,9 +11,10 @@ const CobaltWrapper = ({ children }: { children: ReactNode }) => (
           colors: {
             brandorange: '#f15b31',
             brandblue: '#00589c',
+            brandgreen: '#cdda29',
             light: '#f6f6f6',
             dark: '#282c31',
-            green: '#28a745',
+            white: '#ffffff',
           },
         },
       },
@@ -31,4 +32,4 @@ const CobaltWrapper = ({ children }: { children: ReactNode }) => (
   </Tailwind>
 );
 
-export default CobaltWrapper;
+export default NWPSWrapper;

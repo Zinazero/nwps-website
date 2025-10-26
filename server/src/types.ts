@@ -79,3 +79,8 @@ export interface OrderItem extends StoreItem {
 }
 
 export type OrderInfo = ContactFormValues & ShippingFieldsetValues;
+
+export type Field = {
+  label: string;
+  info: string;
+}

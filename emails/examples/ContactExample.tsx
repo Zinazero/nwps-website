@@ -4,7 +4,8 @@ const ContactExample = () => {
   const form = {
     firstName: 'John',
     lastName: 'Doe',
-    phone: '1234567890',
+    company: '',
+    phone: '(123) 456-7890',
     email: 'johndoe@gmail.com',
     message: 'Test Message',
   };
