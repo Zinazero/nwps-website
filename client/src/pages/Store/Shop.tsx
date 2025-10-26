@@ -5,6 +5,7 @@ import type { OrderItem } from '../../components/forms/types';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
+import { Loading } from '../../components/ui/Loading';
 
 interface ShopProps {
   cart: OrderItem[];
@@ -42,33 +43,39 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
   }, []);
 
   return (
-    <div className="flex items-center gap-20 h-150">
-      {productList.map((prod) => {
-        const activeProduct = cart.find((p) => p.id === prod.id);
-        return activeProduct ? (
-          <div key={activeProduct.id} className="relative scale-105">
-            <img
-              src={`/images/store/store-${prod.id}.jpg`}
-              alt={`Product ${prod.id}`}
-              className={containerClasses}
-            />
-            <div className={cn('mt-4')}>
-              <Quantity product={activeProduct} onChange={handleChange} onRemove={handleRemove} />
-            </div>
-            <ShopLabel text={prod.title} />
-          </div>
-        ) : (
-          <button
-            type="button"
-            key={prod.id}
-            className={cn(containerClasses, 'hover:scale-105 hover:shadow-xl transition relative')}
-            onClick={() => setCart((prev) => [...prev, { ...prod, quantity: prod.increment }])}
-          >
-            <img src={`/images/store/store-${prod.id}.jpg`} alt={`Product ${prod.id}`} />
-            <ShopLabel text={prod.title} />
-          </button>
-        );
-      })}
-    </div>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="flex items-center gap-20 h-150">
+          {productList.map((prod) => {
+            const activeProduct = cart.find((p) => p.id === prod.id);
+            return activeProduct ? (
+              <div key={activeProduct.id} className="relative scale-105">
+                <img
+                  src={`/images/store/store-${prod.id}.jpg`}
+                  alt={`Product ${prod.id}`}
+                  className={containerClasses}
+                />
+                <div className={cn('mt-4')}>
+                  <Quantity product={activeProduct} onChange={handleChange} onRemove={handleRemove} />
+                </div>
+                <ShopLabel text={prod.title} />
+              </div>
+            ) : (
+              <button
+                type="button"
+                key={prod.id}
+                className={cn(containerClasses, 'hover:scale-105 hover:shadow-xl transition relative')}
+                onClick={() => setCart((prev) => [...prev, { ...prod, quantity: prod.increment }])}
+              >
+                <img src={`/images/store/store-${prod.id}.jpg`} alt={`Product ${prod.id}`} />
+                <ShopLabel text={prod.title} />
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
