@@ -8,6 +8,8 @@ interface Env {
   EMAIL_SENDER: string;
   EMAIL_RECEIVER: string;
   RESEND_API_KEY: string;
+  ADMIN_SENDER: string;
+  ADMIN_RECEIVER: string;
   JWT_SECRET: string;
 }
 
@@ -21,6 +23,8 @@ const env: Env = {
   EMAIL_SENDER: process.env.EMAIL_SENDER || '',
   EMAIL_RECEIVER: process.env.EMAIL_RECEIVER || '',
   RESEND_API_KEY: process.env.RESEND_API_KEY || '',
+  ADMIN_SENDER: process.env.ADMIN_SENDER || '',
+  ADMIN_RECEIVER: process.env.ADMIN_RECEIVER || '',
   JWT_SECRET: process.env.JWT_SECRET || '',
 };
 

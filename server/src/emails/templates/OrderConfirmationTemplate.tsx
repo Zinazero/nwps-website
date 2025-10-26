@@ -31,7 +31,9 @@ const OrderConfirmationTemplate = ({ form, cart }: OrderConfirmationTemplateProp
 
       <Section>
         <Text className="text-lg">Thank you for choosing New World Park Solutions!</Text>
-        <Text className="font-semibold">Your order has been received, and a formal invoice will follow shortly.</Text>
+        <Text className="font-semibold">
+          Your order has been received, and a formal invoice will follow shortly.
+        </Text>
       </Section>
 
       <Section>

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, OrderItem } from '../../components/forms/types';
-import { OrderThanks } from './components/OrderThanks';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
+import { OrderThanks } from './components/OrderThanks';
 
 interface OrderProps {
   cart: OrderItem[];

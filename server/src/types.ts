@@ -87,4 +87,4 @@ export interface InvoiceInfo extends OrderInfo {
 export type Field = {
   label: string;
   info: string;
-}
+};

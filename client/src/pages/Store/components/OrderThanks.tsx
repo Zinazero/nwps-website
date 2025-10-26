@@ -15,7 +15,7 @@ export const OrderThanks = ({ orderNumber, onClick }: OrderThanksProps) => (
       We’ve received your order details and will send an invoice to your email soon.
     </p>
 
-    <h3 className='my-10 text-brand-orange font-semibold'>Order #: {orderNumber}</h3>
+    <h3 className="my-10 text-brand-orange font-semibold">Order #: {orderNumber}</h3>
     <button
       type="button"
       onClick={onClick}

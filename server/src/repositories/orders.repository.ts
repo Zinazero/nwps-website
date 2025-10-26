@@ -35,7 +35,20 @@ export const postOrder = async (orderInfo: OrderInfo, cart: OrderItem[]) => {
             (first_name, last_name, company, phone, email, address_1, address_2, city, province, postal_code, message, order_number)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
             RETURNING id`,
-      [firstName, lastName, company, phone, email, address1, address2, city, province, postalCode, message, orderNumber],
+      [
+        firstName,
+        lastName,
+        company,
+        phone,
+        email,
+        address1,
+        address2,
+        city,
+        province,
+        postalCode,
+        message,
+        orderNumber,
+      ],
     );
     const orderId = res.rows[0].id;
 
