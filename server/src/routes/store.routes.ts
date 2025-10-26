@@ -20,8 +20,8 @@ router.post('/orders', async (req, res) => {
   try {
     const { cart, ...orderInfo } = req.body;
 
-    const id = await postOrder(orderInfo, cart);
-    res.status(201).json({ id });
+    const orderNumber = await postOrder(orderInfo, cart);
+    res.status(201).json({ orderNumber });
   } catch (err) {
     console.error(err);
 

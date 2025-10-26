@@ -3,6 +3,7 @@ import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, OrderItem } from '../../components/forms/types';
 import { OrderThanks } from './components/OrderThanks';
+import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 
 interface OrderProps {
   cart: OrderItem[];
@@ -25,6 +26,7 @@ export const Order = ({ cart }: OrderProps) => {
   };
 
   const [form, setForm] = useState<OrderFormValues>(defaultForm);
+  const [orderNumber, setOrderNumber] = useState<string>('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +36,20 @@ export const Order = ({ cart }: OrderProps) => {
     setLoading(true);
     setError(null);
 
-    const postalCode = form.postalCode.trim().toUpperCase();
+    // Trim all string values
+    const trimmedForm = Object.fromEntries(
+      Object.entries(form).map(([key, value]) =>
+        typeof value === 'string' ? [key, value.trim()] : [key, value],
+      ),
+    );
+
+    // Ensure phone number is formatted correctly
+    const formattedPhone = phoneNumberFormatter(trimmedForm.phone);
+
+    // Esnure postal code is capitalized
+    const postalCode = trimmedForm.postalCode.toUpperCase();
+
+    // Validate postal code format
     const canadianPostalCodeRegex = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
 
     if (!canadianPostalCodeRegex.test(postalCode)) {
@@ -44,8 +59,14 @@ export const Order = ({ cart }: OrderProps) => {
     }
 
     try {
-      const res = await api.post('/store/orders', form);
-      console.log('Order submission successful. Order Id: ', res.data.id);
+      const res = await api.post('/store/orders', {
+        ...trimmedForm,
+        phone: formattedPhone,
+        postalCode,
+      });
+
+      console.log('Order submission successful. Order Id:', res.data.orderNumber);
+      setOrderNumber(res.data.orderNumber);
       setForm(defaultForm);
       setSubmitted(true);
     } catch (err) {
@@ -71,7 +92,13 @@ export const Order = ({ cart }: OrderProps) => {
             {error && <span className="text-[red] mx-auto mt-2">{error}</span>}
           </div>
         ) : (
-          <OrderThanks onClick={() => setSubmitted(false)} />
+          <OrderThanks
+            orderNumber={orderNumber}
+            onClick={() => {
+              setOrderNumber('');
+              setSubmitted(false);
+            }}
+          />
         )}
       </div>
 

@@ -88,8 +88,6 @@ export const ContactFieldSet = ({ form, onChange }: ContactFieldsetProps) => {
             value={form.phone}
             onChange={handleChange}
             onBlur={handlePhoneBlur}
-            pattern="\(\d{3}\) \d{3}-\d{4}"
-            title="(123) 456-7890"
             maxLength={14}
             required
           />
