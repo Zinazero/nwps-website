@@ -1,20 +1,21 @@
 import { Container, Heading, Hr, Section, Text } from '@react-email/components';
-import { Field, OrderInfo, OrderItem } from '../../types';
+import { Field, InvoiceInfo, OrderItem } from '../../types';
 import NWPSWrapper from '../NWPSWrapper';
 
 interface InvoiceRequestTemplateProps {
-  form: OrderInfo;
+  form: InvoiceInfo;
   cart: OrderItem[];
 }
 
 const InvoiceRequestTemplate = ({ form, cart }: InvoiceRequestTemplateProps) => {
   const fields: Field[] = [
+    { label: 'Order #', info: form.orderNumber },
     { label: 'Name', info: `${form.firstName} ${form.lastName}` },
     { label: 'Company', info: form.company || '---' },
     { label: 'Phone', info: form.phone },
     { label: 'Email', info: form.email },
     { label: 'Address Line 1', info: form.address1 },
-    { label: 'Address Line 2', info: form.address2 },
+    { label: 'Address Line 2', info: form.address2 || '---' },
     { label: 'City', info: form.city },
     { label: 'Province', info: form.province },
     { label: 'Postal Code', info: form.postalCode },
@@ -26,8 +27,9 @@ const InvoiceRequestTemplate = ({ form, cart }: InvoiceRequestTemplateProps) => 
 
   return (
     <NWPSWrapper>
+      <Heading className="text-brandorange">Invoice Request</Heading>
+
       <Section>
-        <Heading className="text-brandorange">Invoice Request</Heading>
         <table className="mx-auto text-left w-500" cellPadding={20}>
           <tbody>
             {otherFields.map(({ label, info }) => (

@@ -13,6 +13,7 @@ const InvoiceRequestExample = () => {
     province: 'ON',
     postalCode: 'N1N N1N',
     message: 'Test Message',
+    orderNumber: 'NWPS-2025-94651',
   };
 
   const cart = [
