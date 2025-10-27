@@ -1,6 +1,5 @@
 import ContactTemplate from '../emails/templates/ContactTemplate';
 import { ContactFormValues, InvoiceInfo, OrderItem } from '../types';
-import 'web-streams-polyfill/polyfill'; // Required to support Safari and iOS browsers
 import { pretty, render, toPlainText } from '@react-email/render';
 import { Resend } from 'resend';
 import env from '../config/env';
@@ -64,7 +63,7 @@ export const sendOrderConfirmation = async (form: InvoiceInfo, cart: OrderItem[]
     replyTo: env.EMAIL_RECEIVER,
   });
 
-  console.log(`Order Confirmation send to ${email} at ${new Date().toISOString()}`);
+  console.log(`Order Confirmation sent to ${email} at ${new Date().toISOString()}`);
 };
 
 export const sendAdminAlert = async (subject: string, message: string) => {
