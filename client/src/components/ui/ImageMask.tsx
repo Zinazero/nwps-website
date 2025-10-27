@@ -7,9 +7,10 @@ interface ImageMaskProps {
   alt: string;
   maskUrl: string;
   className?: string;
+  priority?: boolean;
 }
 
-export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, maskUrl, className }) => {
+export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, maskUrl, className, priority = false }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [maskSize, setMaskSize] = useState<{
     width: number;
@@ -75,7 +76,12 @@ export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, maskUrl, classNa
         maskMode: 'alpha',
       }}
     >
-      <AppImage src={src} alt={alt} className="w-full h-full object-cover relative z-10" />
+      <AppImage
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover relative z-10"
+        priority={priority}
+      />
     </div>
   );
 };

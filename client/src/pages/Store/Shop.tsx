@@ -6,6 +6,7 @@ import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
 import { Loading } from '../../components/ui/Loading';
+import { Image } from '../../components/ui/Image';
 
 interface ShopProps {
   cart: OrderItem[];
@@ -52,7 +53,7 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
             const activeProduct = cart.find((p) => p.id === prod.id);
             return activeProduct ? (
               <div key={activeProduct.id} className="relative scale-105">
-                <img
+                <Image
                   src={`/images/store/store-${prod.id}.jpg`}
                   alt={`Product ${prod.id}`}
                   className={containerClasses}

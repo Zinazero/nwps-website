@@ -94,6 +94,7 @@ export const Products = () => {
               src={playground}
               alt="Playground with hotspots"
               className="w-full max-w-350 h-full object-cover relative z-10"
+              priority
             />
             <Link to="/products/playgrounds" className={`top-[18%] left-[38%] hotspot ${hotspotClasses}`}>
               <FontAwesomeIcon icon={faInfo} className="text-lg" /> Playgrounds

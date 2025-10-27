@@ -27,6 +27,7 @@ export const AboutHero = () => {
             src={aboutImage}
             alt="Accessible Surfacing Playground"
             maskUrl="/masks/squiggly-mask.svg"
+            priority
           />
         </div>
       </div>
