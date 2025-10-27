@@ -1,10 +1,10 @@
-import ContactTemplate from '../emails/templates/ContactTemplate';
-import { ContactFormValues, InvoiceInfo, OrderItem } from '../types';
 import { pretty, render, toPlainText } from '@react-email/render';
 import { Resend } from 'resend';
 import env from '../config/env';
+import ContactTemplate from '../emails/templates/ContactTemplate';
 import InvoiceRequestTemplate from '../emails/templates/InvoiceRequestTemplate';
 import OrderConfirmationTemplate from '../emails/templates/OrderConfirmationTemplate';
+import { ContactFormValues, InvoiceInfo, OrderItem } from '../types';
 
 const resend = new Resend(env.RESEND_API_KEY);
 

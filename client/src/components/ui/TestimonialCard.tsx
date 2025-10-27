@@ -22,9 +22,14 @@ export const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) =>
         </div>
         <div className="flex justify-center w-1/2">
           {testimonial.skipMask ? (
-            <Image src={testimonial.imageSrc} alt={`Testimonial ${index}`} />
+            <Image src={testimonial.imageSrc} alt={`Testimonial ${index}`} priority={priority} />
           ) : (
-            <ImageMask src={testimonial.imageSrc} alt={`Testimonial ${index}`} maskUrl={maskUrl} />
+            <ImageMask
+              src={testimonial.imageSrc}
+              alt={`Testimonial ${index}`}
+              maskUrl={maskUrl}
+              priority={priority}
+            />
           )}
         </div>
       </div>

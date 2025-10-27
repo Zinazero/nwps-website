@@ -1,13 +1,13 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, OrderItem } from '../../components/forms/types';
+import { ShopLabel } from '../../components/ui/ShopLabel';
+import { cn } from '../../utils/cn';
+import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { OrderThanks } from './components/OrderThanks';
-import { ShopLabel } from '../../components/ui/ShopLabel';
-import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
-import { cn } from '../../utils/cn';
-import { AnimatePresence, motion } from 'framer-motion';
 
 interface OrderProps {
   cart: OrderItem[];
@@ -117,7 +117,6 @@ export const Order = ({ cart }: OrderProps) => {
       <section>
         <div className="max-w-3xl w-full bg-white shadow-lg rounded-2xl overflow-hidden min-w-180">
           <div className="p-8 md:p-12">
-
             {/* Order Form */}
             <AnimatePresence mode="wait">
               {!submitted ? (
@@ -146,7 +145,6 @@ export const Order = ({ cart }: OrderProps) => {
                 />
               )}
             </AnimatePresence>
-
           </div>
 
           {/* 

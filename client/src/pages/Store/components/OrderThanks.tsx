@@ -1,7 +1,7 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { cn } from '../../../utils/cn';
 import { motion } from 'framer-motion';
+import { cn } from '../../../utils/cn';
 
 interface OrderThanksProps {
   orderNumber: string;

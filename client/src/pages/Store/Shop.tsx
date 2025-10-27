@@ -1,13 +1,13 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import api from '../../api/axios';
 import { Quantity } from '../../components/forms/components/Quantity';
 import type { OrderItem } from '../../components/forms/types';
+import { Image } from '../../components/ui/Image';
+import { Loading } from '../../components/ui/Loading';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
-import { Loading } from '../../components/ui/Loading';
-import { Image } from '../../components/ui/Image';
-import { motion } from 'framer-motion';
 
 interface ShopProps {
   cart: OrderItem[];

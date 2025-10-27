@@ -70,7 +70,7 @@ const OrderConfirmationTemplate = ({ form, cart }: OrderConfirmationTemplateProp
                 <td>
                   <strong className="text-brandblue">{label}</strong>
                 </td>
-              <td>{info}</td>
+                <td>{info}</td>
               </tr>
             ))}
           </tbody>

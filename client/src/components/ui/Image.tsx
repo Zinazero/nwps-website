@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { getOptimizedImageUrl } from '../../utils/getOptimizedImageUrl';
 
 interface ImageProps {
