@@ -35,7 +35,7 @@ const ContactTemplate = ({ form }: ContactTemplateProps) => {
           </tbody>
         </table>
 
-        {messageField && (
+        {messageField?.info && (
           <Container className="w-3/4">
             <Text className="text-lg">
               <strong className="text-brandblue">Message</strong>

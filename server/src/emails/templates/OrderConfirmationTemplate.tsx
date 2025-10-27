@@ -70,13 +70,13 @@ const OrderConfirmationTemplate = ({ form, cart }: OrderConfirmationTemplateProp
                 <td>
                   <strong className="text-brandblue">{label}</strong>
                 </td>
-                <td>{info}</td>
+              <td>{info}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        {messageField && (
+        {messageField?.info && (
           <Container className="w-3/4">
             <Text className="text-lg">
               <strong className="text-brandblue">Message</strong>
