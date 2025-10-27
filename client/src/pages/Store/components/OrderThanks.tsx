@@ -1,6 +1,7 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { cn } from '../../../utils/cn';
+import { motion } from 'framer-motion';
 
 interface OrderThanksProps {
   orderNumber: string;
@@ -8,7 +9,13 @@ interface OrderThanksProps {
 }
 
 export const OrderThanks = ({ orderNumber, onClick }: OrderThanksProps) => (
-  <div className="flex flex-col items-center justify-center text-center py-12">
+  <motion.div
+    key="order-thanks"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="flex flex-col items-center justify-center text-center py-12"
+  >
     <FontAwesomeIcon icon={faCheckCircle} className="text-4xl text-brand-green mb-4" />
     <h2 className="text-2xl font-semibold mb-2">Thank you for your request!</h2>
     <p className="text-gray-600 max-w-md">
@@ -26,5 +33,5 @@ export const OrderThanks = ({ orderNumber, onClick }: OrderThanksProps) => (
     >
       Place another order
     </button>
-  </div>
+  </motion.div>
 );

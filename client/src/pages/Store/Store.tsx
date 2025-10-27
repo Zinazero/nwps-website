@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
 import type { OrderItem } from '../../components/forms/types';
-import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { Order } from './Order';
@@ -72,27 +71,6 @@ export const Store = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {/* CART DISPLAY */}
-              <section className="flex flex-col gap-10">
-                {cart.map((prod) => (
-                  <div
-                    key={prod.id}
-                    className={cn(
-                      'flex flex-col items-center bg-white h-[260px] w-[220px] shadow-lg rounded-2xl overflow-hidden',
-                      'border border-gray-100 hover:shadow-xl transition relative',
-                    )}
-                  >
-                    <img
-                      src={`/images/store/store-${prod.id}.jpg`}
-                      alt={`Product ${prod.id}`}
-                      className="w-full object-cover"
-                    />
-                    <ShopLabel text={`${largeNumberFormatter(prod.quantity)}`} />
-                  </div>
-                ))}
-              </section>
-
-              {/* ORDER SUMMARY */}
               <Order cart={cart} />
               <button
                 type="button"

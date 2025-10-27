@@ -70,6 +70,7 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
 
                 {activeProduct ? (
                   <motion.div
+                    key={prod.id}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.2, ease: 'easeOut' }}
