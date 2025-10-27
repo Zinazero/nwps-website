@@ -7,6 +7,7 @@ import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
 import { Loading } from '../../components/ui/Loading';
 import { Image } from '../../components/ui/Image';
+import { motion } from 'framer-motion';
 
 interface ShopProps {
   cart: OrderItem[];
@@ -16,8 +17,6 @@ interface ShopProps {
 export const Shop = ({ cart, setCart }: ShopProps) => {
   const [productList, setProductList] = useState<StoreItem[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const containerClasses = cn('cursor-pointer rounded-2xl overflow-hidden', 'shadow-lg h-100 w-100');
 
   const handleChange = (id: number, quantity: number) => {
     setCart((prev) => prev.map((prod) => (prod.id === id ? { ...prod, quantity } : prod)));
@@ -51,28 +50,43 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
         <div className="flex items-center gap-20 h-150">
           {productList.map((prod) => {
             const activeProduct = cart.find((p) => p.id === prod.id);
-            return activeProduct ? (
-              <div key={activeProduct.id} className="relative scale-105">
+
+            return (
+              <div
+                key={prod.id}
+                className={cn(
+                  'cursor-pointer rounded-2xl relative transition-transform',
+                  'shadow-lg h-100 w-100',
+                  activeProduct
+                    ? 'scale-105 shadow-xl  glow-pulse border-2 border-brand-green'
+                    : 'hover:scale-105 hover:shadow-xl active:scale-102',
+                )}
+              >
                 <Image
                   src={`/images/store/store-${prod.id}.jpg`}
                   alt={`Product ${prod.id}`}
-                  className={containerClasses}
+                  className="rounded-2xl"
                 />
-                <div className={cn('mt-4')}>
-                  <Quantity product={activeProduct} onChange={handleChange} onRemove={handleRemove} />
-                </div>
+
+                {activeProduct ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="mt-4"
+                  >
+                    <Quantity product={activeProduct} onChange={handleChange} onRemove={handleRemove} />
+                  </motion.div>
+                ) : (
+                  <button
+                    type="button"
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    onClick={() => setCart((prev) => [...prev, { ...prod, quantity: prod.increment }])}
+                  />
+                )}
+
                 <ShopLabel text={prod.title} />
               </div>
-            ) : (
-              <button
-                type="button"
-                key={prod.id}
-                className={cn(containerClasses, 'hover:scale-105 hover:shadow-xl transition relative')}
-                onClick={() => setCart((prev) => [...prev, { ...prod, quantity: prod.increment }])}
-              >
-                <img src={`/images/store/store-${prod.id}.jpg`} alt={`Product ${prod.id}`} />
-                <ShopLabel text={prod.title} />
-              </button>
             );
           })}
         </div>
