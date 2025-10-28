@@ -76,11 +76,10 @@ export const ProductsPage = () => {
             {category && (
               <div className="flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16">
                 <div className="flex items-center max-w-450 space-x-30">
-                  {/* src has cache-busting parameter so it changes on update */}
                   <ImageMask
-                    src={`/images/products/${slug}/${slug}-1.jpg?v=${Date.now()}`}
+                    src={`/images/products/${slug}/${slug}-1.jpg`}
                     alt={`${category.title} Image 1`}
-                    maskUrl="/masks/rock-mask.svg"
+                    mask="rock-mask.svg"
                   />
                   <div className="flex flex-col space-y-6 w-150">
                     <h1 className="text-6xl font-bold">{category.title}</h1>
@@ -109,7 +108,7 @@ export const ProductsPage = () => {
                     <>
                       {/* src has cache-busting parameter so it changes on update */}
                       <Image
-                        src={`/images/products/${slug}/${slug}-${index + 2}.jpg?v=${Date.now()}`}
+                        src={`/images/products/${slug}/${slug}-${index + 2}.jpg`}
                         alt={`${section.title} Image`}
                         className="rounded-xl max-w-1/2"
                       />

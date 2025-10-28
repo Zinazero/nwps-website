@@ -55,7 +55,7 @@ export const SectionForm: React.FC<SectionFormProps> = ({
           <div className="relative group">
             {/* Image Preview */}
             {formType === 'products' && index === 0 ? (
-              <ImageMask src={preview} alt="Image Preview" maskUrl="/masks/rock-mask.svg" />
+              <ImageMask src={preview} alt="Image Preview" mask="rock-mask.svg" />
             ) : (
               <Image src={preview} alt="Image Preview" className="w-full rounded-xl" />
             )}

@@ -9,7 +9,7 @@ interface TestimonialCardProps {
 
 export const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
   const maskType = index % 2 === 0 ? 'boomerang' : 'squiggly';
-  const maskUrl = `/masks/${maskType}-mask.svg`;
+  const mask = `${maskType}-mask.svg`;
 
   const priority = index < 2;
 
@@ -27,7 +27,7 @@ export const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) =>
             <ImageMask
               src={testimonial.imageSrc}
               alt={`Testimonial ${index}`}
-              maskUrl={maskUrl}
+              mask={mask}
               priority={priority}
             />
           )}

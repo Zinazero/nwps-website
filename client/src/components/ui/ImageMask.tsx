@@ -1,63 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Image as AppImage } from './Image';
-import { Loading } from './Loading';
+import { Image } from './Image';
+import masks from '../../masks.json';
 
 interface ImageMaskProps {
   src: string;
   alt: string;
-  maskUrl: string;
+  mask: string;
   className?: string;
   priority?: boolean;
 }
 
-export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, maskUrl, className, priority = false }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [maskSize, setMaskSize] = useState<{
-    width: number;
-    height: number;
-  } | null>(null);
+export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, mask, className, priority = false }) => {
+  const maskSize = (masks as Record<string, { width: number; height: number }>)[mask];
 
-  useEffect(() => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = maskUrl;
-
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      ctx.drawImage(img, 0, 0);
-      const imageData = ctx.getImageData(0, 0, img.width, img.height);
-      const data = imageData.data;
-
-      let minX = img.width,
-        minY = img.height,
-        maxX = 0,
-        maxY = 0;
-      for (let y = 0; y < img.height; y++) {
-        for (let x = 0; x < img.width; x++) {
-          const alpha = data[(y * img.width + x) * 4 + 3];
-          if (alpha > 0) {
-            if (x < minX) minX = x;
-            if (y < minY) minY = y;
-            if (x > maxX) maxX = x;
-            if (y > maxY) maxY = y;
-          }
-        }
-      }
-
-      setMaskSize({ width: maxX - minX + 1, height: maxY - minY + 1 });
-    };
-  }, [maskUrl]);
-
-  if (!maskSize) return <Loading />;
+  if (!maskSize) {
+    console.warn('Mask size not found for', mask);
+    return <Image src={src} alt={alt} className={className} priority={priority} />;
+  }
 
   return (
     <div
-      ref={containerRef}
       className={className}
       style={{
         width: maskSize.width,
@@ -65,8 +26,8 @@ export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, maskUrl, classNa
         overflow: 'hidden',
         display: 'inline-block',
         position: 'relative',
-        maskImage: `url(${maskUrl})`,
-        WebkitMaskImage: `url(${maskUrl})`,
+        maskImage: `url(/masks/${mask})`,
+        WebkitMaskImage: `url(/masks/${mask})`,
         maskRepeat: 'no-repeat',
         WebkitMaskRepeat: 'no-repeat',
         maskSize: 'contain',
@@ -76,12 +37,7 @@ export const ImageMask: React.FC<ImageMaskProps> = ({ src, alt, maskUrl, classNa
         maskMode: 'alpha',
       }}
     >
-      <AppImage
-        src={src}
-        alt={alt}
-        className="w-full h-full object-cover relative z-10"
-        priority={priority}
-      />
+      <Image src={src} alt={alt} className="w-full h-full object-cover relative z-10" priority={priority} />
     </div>
   );
 };
