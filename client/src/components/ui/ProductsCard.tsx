@@ -47,7 +47,7 @@ export const ProductsCard = ({
             alt={`${category.title} Image`}
             className="w-54 h-44 rounded-lg object-cover shadow-sm"
           />
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 max-w-1/2">
             <h3 className="text-2xl font-bold text-brand-orange line-clamp-2">{category.title}</h3>
             <p className="text-lg/relaxed line-clamp-4">{category.description}</p>
           </div>

@@ -80,6 +80,7 @@ export const ProductsPage = () => {
                     src={`/images/products/${slug}/${slug}-1.jpg`}
                     alt={`${category.title} Image 1`}
                     mask="rock-mask.svg"
+                    priority
                   />
                   <div className="flex flex-col space-y-6 w-150">
                     <h1 className="text-6xl font-bold">{category.title}</h1>
@@ -99,20 +100,18 @@ export const ProductsPage = () => {
                     index % 2 !== 0 ? 'flex-row-reverse' : '',
                   )}
                 >
-                  <div className="flex flex-col space-y-4 mx-10">
+                  <div className="flex flex-col space-y-4 mx-10 w-1/2">
                     <h2 className="text-4xl font-semibold text-brand-blue">{section.title}</h2>
                     {section.subheading && <h3 className="text-2xl font-semibold">{section.subheading}</h3>}
                     <p className="text-lg/relaxed">{section.description}</p>
                   </div>
                   {category && (
-                    <>
-                      {/* src has cache-busting parameter so it changes on update */}
-                      <Image
-                        src={`/images/products/${slug}/${slug}-${index + 2}.jpg`}
-                        alt={`${section.title} Image`}
-                        className="rounded-xl max-w-1/2"
-                      />
-                    </>
+                    <Image
+                      src={`/images/products/${slug}/${slug}-${index + 2}.jpg`}
+                      alt={`${section.title} Image`}
+                      className="rounded-xl"
+                      priority={index === 0}
+                    />
                   )}
                 </div>
               );

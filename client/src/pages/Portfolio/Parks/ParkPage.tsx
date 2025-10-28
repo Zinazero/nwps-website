@@ -75,6 +75,7 @@ export const ParkPage = () => {
                 src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${Date.now()}`}
                 alt={`${park.title} Image 1`}
                 className="w-full max-w-250 rounded-xl"
+                priority
               />
               <div className="text-center max-w-300 space-y-4">
                 <div>
@@ -102,6 +103,7 @@ export const ParkPage = () => {
                     src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg?v=${Date.now()}`}
                     alt={`${section.title} Image`}
                     className="w-150 rounded-xl"
+                    priority={index === 0}
                   />
                 </>
               )}
