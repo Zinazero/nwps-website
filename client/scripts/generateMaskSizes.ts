@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

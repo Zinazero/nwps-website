@@ -1,5 +1,5 @@
-import { Image } from './Image';
 import masks from '../../masks.json';
+import { Image } from './Image';
 
 interface ImageMaskProps {
   src: string;
