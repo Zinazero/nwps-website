@@ -58,7 +58,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({ formType, form, setForm, han
 
   return (
     <>
-      <form className="flex flex-col items-center space-y-12" onSubmit={handleSubmit}>
+      <form className="item-form flex flex-col items-center space-y-12" onSubmit={handleSubmit}>
         {/* Section Map */}
         {form.map((section, index) => {
           return (

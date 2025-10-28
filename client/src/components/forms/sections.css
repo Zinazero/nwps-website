@@ -8,28 +8,28 @@
   --color-grey: #6c757d;
 }
 
-#item-form input,
-#item-form .file-input,
-#item-form textarea {
+.item-form input,
+.item-form .file-input,
+.item-form textarea {
   @apply bg-transparent border rounded-xl border-dashed;
   @apply border-brand-orange text-center;
 }
 
-#item-form .file-input {
+.item-form .file-input {
   @apply flex items-center justify-center text-4xl text-brand-orange;
   @apply hover:text-brand-green hover:border-brand-green transition;
   @apply active:scale-95;
 }
 
-#item-form input[type="text"] {
+.item-form input[type="text"] {
   @apply font-bold;
 }
 
-#item-form textarea {
+.item-form textarea {
   @apply text-grey h-50 py-4;
 }
 
-#item-form .text-container {
+.item-form .text-container {
   @apply flex flex-col space-y-4;
 }
 
