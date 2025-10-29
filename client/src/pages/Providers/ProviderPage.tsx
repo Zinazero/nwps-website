@@ -40,13 +40,14 @@ export const ProviderPage = () => {
       ) : (
         <div className="flex flex-col p-8 space-y-16 max-w-350">
           {/* Hero */}
-          <div className="flex justify-center space-x-12">
+          <div className="flex justify-between space-x-12">
             <Image
               src={`/images/providers/${slug}/${slug}-1.jpg`}
               alt="Children playing in play structure"
               className="rounded-lg h-120"
+              priority
             />
-            <div className="flex flex-col space-y-24">
+            <div className="flex flex-col space-y-24 max-w-2/5">
               <div className="flex flex-col space-y-2">
                 <span className="text-brand-blue">We can help make your playground dreams a reality.</span>
                 <h1 className="text-6xl font-bold">{provider.title}</h1>
