@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "generate-masks": "ts-node --project tsconfig.node.json scripts/generateMaskSizes.ts",
+    "generate-masks": "ts-node --project tsconfig.scripts.json scripts/generateMaskSizes.ts",
     "build": "npm run generate-masks && tsc -b && vite build",
     "preview": "vite preview"
   },
