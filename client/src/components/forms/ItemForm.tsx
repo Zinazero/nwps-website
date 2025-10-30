@@ -81,7 +81,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({ formType, form, setForm, han
             <button
               type="button"
               onClick={addSection}
-              className="w-full max-w-300 border-1 border-dashed border-brand-orange text-brand-orange hover:border-brand-green hover:text-brand-green active:scale-95 rounded-xl text-2xl transition"
+              className="w-full max-w-300 border border-dashed border-brand-orange text-brand-orange hover:border-brand-green hover:text-brand-green active:scale-95 rounded-xl text-2xl transition"
             >
               +
             </button>
