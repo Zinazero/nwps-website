@@ -1,4 +1,4 @@
-import { CLIENT_BASE, OPTIMIZER_BASE, NODE_ENV } from '../config';
+import { CLIENT_BASE, NODE_ENV, OPTIMIZER_BASE } from '../config';
 
 export const getOptimizedImageUrl = (src: string, width?: number, quality = 80, format = 'webp', dpr = 1) => {
   if (src.endsWith('.svg') || NODE_ENV === 'development') return src;
