@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 import type { LinkType } from '../layout/types';
 import { Loading } from './Loading';
+import { RequestQuoteButton } from './RequestQuoteButton';
 import type { NavbarProps } from './types';
+import { VisitStoreButton } from './VisitStoreButton';
 
 // productsLinks is hardcoded as the only dropdown so additional logic has to be added to accomodate more dropdowns.
 
@@ -78,24 +80,8 @@ export const Navbar = ({ locationPathname, links, productsLinks, loading }: Navb
       )}
 
       <div className={cn('flex gap-6')}>
-        <Link
-          to="/contact"
-          className={cn(
-            'p-4 w-50 text-center rounded-lg cursor-pointer',
-            'bg-brand-orange text-white font-bold hover:bg-brand-blue transition',
-          )}
-        >
-          Request a Quote
-        </Link>
-        <Link
-          to="/store"
-          className={cn(
-            'p-4 w-50 text-center rounded-lg cursor-pointer',
-            'bg-brand-green text-white font-bold hover:bg-brand-blue transition',
-          )}
-        >
-          Visit Store
-        </Link>
+        <RequestQuoteButton className="w-50" />
+        <VisitStoreButton className="w-50" />
       </div>
     </nav>
   );
