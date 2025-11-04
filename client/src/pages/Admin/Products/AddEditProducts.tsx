@@ -80,7 +80,7 @@ export const AddEditProducts = () => {
   };
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center bg-white pt-20">
+    <div className="relative min-h-screen flex flex-col items-center bg-white pt-20">
       <ItemForm
         formType="products"
         form={form}
@@ -95,6 +95,6 @@ export const AddEditProducts = () => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
-    </main>
+    </div>
   );
 };

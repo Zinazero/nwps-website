@@ -82,7 +82,7 @@ export const AddEditPark = () => {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center space-y-12 bg-white p-16 relative">
+    <div className="min-h-screen flex flex-col items-center space-y-12 bg-white p-16 relative">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center space-y-4">
           <div className="flex items-center space-x-4">
@@ -127,6 +127,6 @@ export const AddEditPark = () => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
-    </main>
+    </div>
   );
 };

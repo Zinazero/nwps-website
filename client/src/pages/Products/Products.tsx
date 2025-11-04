@@ -83,7 +83,7 @@ export const Products = () => {
     'absolute z-11 bg-brand-orange hover:bg-white hover:text-brand-orange transition p-2 rounded-4xl text-white';
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-12">
+    <div className="min-h-screen flex flex-col items-center justify-center p-12">
       {loading ? (
         <Loading />
       ) : (
@@ -167,6 +167,6 @@ export const Products = () => {
         onConfirm={handleDelete}
         onCancel={() => setConfirmOpen(false)}
       />
-    </main>
+    </div>
   );
 };

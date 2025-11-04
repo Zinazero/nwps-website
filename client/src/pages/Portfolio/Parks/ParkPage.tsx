@@ -62,7 +62,7 @@ export const ParkPage = () => {
   };
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center space-y-12 bg-white p-16">
+    <div className="relative min-h-screen flex flex-col items-center justify-center space-y-12 bg-white p-16">
       {loading ? (
         <Loading />
       ) : (
@@ -118,6 +118,6 @@ export const ParkPage = () => {
 
       {/* Edit Button */}
       {user && <Pen onClick={handleEditPark} className="absolute top-10 right-10 text-2xl" />}
-    </main>
+    </div>
   );
 };

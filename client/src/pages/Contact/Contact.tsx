@@ -46,7 +46,7 @@ export const Contact = () => {
   };
 
   return (
-    <main className="flex flex-col items-center space-y-12 p-8">
+    <div className="flex flex-col items-center space-y-12 p-8">
       <UnderlineHeader text="Contact" withArrow />
 
       <ContactBanner />
@@ -96,6 +96,6 @@ export const Contact = () => {
 
       {/* Error Message */}
       {error && <span className="text-[red]">{error}</span>}
-    </main>
+    </div>
   );
 };

@@ -89,7 +89,7 @@ export const Portfolio = () => {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center p-6 space-y-16">
+    <div className="min-h-screen flex flex-col items-center p-6 space-y-16">
       {loading ? (
         <Loading />
       ) : (
@@ -138,6 +138,6 @@ export const Portfolio = () => {
         onConfirm={handleDelete}
         onCancel={() => setConfirmOpen(false)}
       />
-    </main>
+    </div>
   );
 };

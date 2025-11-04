@@ -34,7 +34,7 @@ export const ProviderPage = () => {
   }, [slug, provider]);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       {loading ? (
         <Loading />
       ) : (
@@ -79,6 +79,6 @@ export const ProviderPage = () => {
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 };

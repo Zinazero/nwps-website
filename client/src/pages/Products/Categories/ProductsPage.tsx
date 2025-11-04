@@ -66,7 +66,7 @@ export const ProductsPage = () => {
   };
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center bg-white space-y-20 pb-26">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-white space-y-20 pb-26">
       {loading ? (
         <Loading />
       ) : (
@@ -139,6 +139,6 @@ export const ProductsPage = () => {
           {user && <Pen onClick={handleEditCategory} className="absolute top-10 right-10 text-2xl" />}
         </>
       )}
-    </main>
+    </div>
   );
 };

@@ -16,7 +16,7 @@ export const Store = () => {
   const totalItems = cart.reduce((sum, p) => sum + p.quantity, 0);
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-6 py-12 relative">
+    <div className="min-h-screen flex flex-col items-center px-6 py-12 relative">
       <div className="flex flex-col items-center w-full max-w-6xl">
         <AnimatePresence mode={'wait'}>
           {!isCheckout ? (
@@ -86,6 +86,6 @@ export const Store = () => {
           )}
         </AnimatePresence>
       </div>
-    </main>
+    </div>
   );
 };

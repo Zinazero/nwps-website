@@ -62,7 +62,7 @@ export const AddProvider = () => {
   const imageId = useId();
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <form className="flex flex-col items-center space-y-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor={logoId} className="text-lg font-bold">
@@ -106,6 +106,6 @@ export const AddProvider = () => {
           Submit
         </button>
       </form>
-    </main>
+    </div>
   );
 };

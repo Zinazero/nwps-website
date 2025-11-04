@@ -4,12 +4,12 @@ import { OurTeam } from './sections/OurTeam/OurTeam';
 
 export const About = () => {
   return (
-    <main className="">
+    <div className="">
       <AboutHero />
 
       <OurStory />
 
       <OurTeam />
-    </main>
+    </div>
   );
 };

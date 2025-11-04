@@ -39,7 +39,7 @@ export const Login = () => {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center space-y-24">
         <Image src={nwpsVerticalLogo} alt="NWPS Logo" className="h-42" />
         <LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
@@ -47,6 +47,6 @@ export const Login = () => {
         {/* Error Message */}
         {error && <span className="text-[red]">{error}</span>}
       </div>
-    </main>
+    </div>
   );
 };

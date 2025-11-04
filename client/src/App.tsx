@@ -22,41 +22,39 @@ import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
   return (
-    <>
+    <div className="h-screen overflow-auto">
       <GlobalSmartQuotes />
-      <div>
-        <Header />
-        <div className="min-h-screen">
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:park" element={<ParkPage />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:category" element={<ProductsPage />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/providers/:provider" element={<ProviderPage />} />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <Admin />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="add-edit-park" element={<AddEditPark />} />
-              <Route path="add-provider" element={<AddProvider />} />
-              <Route path="add-edit-products" element={<AddEditProducts />} />
-            </Route>
-          </Routes>
-        </div>
-        <Footer />
-      </div>
-    </>
+      <Header />
+      <main className="mt-24">
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/:park" element={<ParkPage />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:category" element={<ProductsPage />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/providers/:provider" element={<ProviderPage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="add-edit-park" element={<AddEditPark />} />
+            <Route path="add-provider" element={<AddProvider />} />
+            <Route path="add-edit-products" element={<AddEditProducts />} />
+          </Route>
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
