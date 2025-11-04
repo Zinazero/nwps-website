@@ -38,7 +38,7 @@ export const Header = () => {
       <div className="flex flex-col w-full">
         <div className={cn('px-4 flex items-center justify-between')}>
           <Link to="/">
-            <Image src={nwpsLogo} alt="NWPS Logo" className={cn('min-w-55 cursor-pointer')} />
+            <Image src={nwpsLogo} alt="NWPS Logo" className={cn('min-w-55 cursor-pointer')} priority />
           </Link>
 
           {isMobile ? (
