@@ -1,5 +1,3 @@
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
@@ -7,7 +5,6 @@ import { useProducts } from '../../contexts/ProductsContext';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
 import { Image } from '../ui/Image';
-import { Loading } from '../ui/Loading';
 import { MenuButton } from '../ui/MenuButton';
 import { MobileNavbar } from '../ui/MobileNavbar';
 import { Navbar } from '../ui/Navbar';
