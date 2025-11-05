@@ -6,8 +6,8 @@ import { useIsMobile } from '../../../utils/useIsMobile';
 import { LogoutButton } from '../LogoutButton';
 import { FooterContact } from './Components/FooterContact';
 import { FooterInfo } from './Components/FooterInfo';
-import { FooterNewsletter } from './Components/FooterNewsletter';
 import { FooterProducts } from './Components/FooterProducts';
+import { FooterRecentProjects } from './Components/FooterRecentProjects';
 
 export const Footer = () => {
   const { user } = useAuth();
@@ -41,7 +41,7 @@ export const Footer = () => {
           <FooterContact />
 
           {/* Section 4 */}
-          <FooterNewsletter />
+          <FooterRecentProjects />
         </div>
 
         {/* Copyright */}
