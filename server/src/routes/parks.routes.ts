@@ -29,9 +29,12 @@ router.get('/', async (_req, res) => {
   }
 });
 
-router.get('/recent', async (_req, res) => {
+router.get('/recent/:quantity', async (req, res) => {
   try {
-    const recentProjects = await getRecentParks();
+    const quantityParam = Number(req.params.quantity);
+    const quantity = !Number.isNaN(quantityParam) && quantityParam > 0 ? quantityParam : 3;
+
+    const recentProjects = await getRecentParks(quantity);
     res.json(recentProjects);
   } catch (err) {
     console.error(err);

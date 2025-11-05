@@ -10,9 +10,10 @@ export const getAllParks = async (): Promise<Park[]> => {
   return res.rows;
 };
 
-export const getRecentParks = async (): Promise<Park[]> => {
+export const getRecentParks = async (quantity: number = 3): Promise<Park[]> => {
   const res: QueryResult<Park> = await pool.query(
-    'SELECT id, title, location, description, blurb, slug FROM parks ORDER BY sort_order ASC LIMIT 3',
+    'SELECT id, title, location, description, blurb, slug FROM parks ORDER BY sort_order ASC LIMIT $1',
+    [quantity]
   );
   return res.rows;
 };
