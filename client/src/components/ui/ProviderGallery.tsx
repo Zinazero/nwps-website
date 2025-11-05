@@ -5,9 +5,12 @@ import { ProviderBubble } from './ProviderBubble';
 import { Link } from 'react-router-dom';
 import { chunkArray } from '../../utils/chunkArray';
 import { cn } from '../../utils/cn';
+import { useIsMobile } from '../../utils/useIsMobile';
 
 export const ProviderGallery = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
+
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -48,12 +51,13 @@ export const ProviderGallery = () => {
     4: 'grid-cols-4',
   };
 
-  const providerRows = chunkArray(providers, 4);
+  const topRowLength = isMobile ? 2 : 4;
+  const providerRows = chunkArray(providers, topRowLength);
 
   return (
-    <div className="space-y-6">
+    <div className="md:space-y-6">
       {providerRows.map((providerRow, i) => (
-        <div key={`${providerRow[0].title} Row`} className={cn('grid', columnKey[providerRow.length], i % 2 === 0 ? 'gap-12' : 'mx-24')}>
+        <div key={`${providerRow[0].title} Row`} className={cn('grid', columnKey[providerRow.length], i % 2 === 0 ? 'md:gap-12' : 'mx-24')}>
           {providerRow.map((provider) =>
             checkDirectLink(provider) ? (
               <a key={provider.title} href={provider.externalLink} target="_blank" rel="noopener noreferrer">
