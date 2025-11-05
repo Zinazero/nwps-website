@@ -9,7 +9,7 @@ const pool: PgPool = new Pool({
   password: env.PG_PASSWORD,
   port: env.PG_PORT,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 10000,
 });
 
 pool
