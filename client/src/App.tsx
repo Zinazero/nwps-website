@@ -22,7 +22,7 @@ import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
   return (
-    <div className="h-screen overflow-auto">
+    <div className="h-screen">
       <GlobalSmartQuotes />
       <Header />
       <main className="mt-24">
