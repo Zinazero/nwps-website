@@ -20,8 +20,8 @@ export const PlaygroundStats = () => {
           <path d="M0 100 C 20 0 50 0 100 100 Z" />
         </svg>
       </div>
-      <div className="flex flex-col items-center justify-center bg-brand-blue-light p-8">
-        <h2 className="text-5xl font-bold text-black mb-16">Unofficial Playground Stats</h2>
+      <div className="flex flex-col items-center justify-center bg-brand-blue-light p-4">
+        <h2 className="text-5xl font-bold text-black mb-16 text-center">Unofficial Playground Stats</h2>
         <div className={cn('flex flex-col gap-8 items-center justify-evenly w-full max-w-350', 'md:flex-row md:gap-0')}>
           <div className="flex flex-col items-center justify-center text-center">
             <Image src={slideIcon} alt="Slide Icon" className="h-40" />
