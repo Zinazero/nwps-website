@@ -8,12 +8,16 @@ import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { OrderThanks } from './components/OrderThanks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 interface OrderProps {
   cart: OrderItem[];
+  setCart: React.Dispatch<React.SetStateAction<OrderItem[]>>;
+  setIsCheckout: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Order = ({ cart }: OrderProps) => {
+export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
   const defaultForm: OrderFormValues = {
     cart,
     firstName: '',
@@ -73,6 +77,7 @@ export const Order = ({ cart }: OrderProps) => {
       setOrderNumber(res.data.orderNumber);
       setForm(defaultForm);
       setSubmitted(true);
+      setCart([]);
     } catch (err) {
       console.error(err);
       setError('Something went wrong');
@@ -134,6 +139,18 @@ export const Order = ({ cart }: OrderProps) => {
 
                   {/* Error Message */}
                   {error && <span className="text-[red] mx-auto mt-2">{error}</span>}
+
+                  {/* Return to Store */}
+                  <button
+                    type="button"
+                    onClick={() => setIsCheckout(false)}
+                    className={cn(
+                      'absolute top-10 left-10 flex items-center gap-2 text-brand-orange',
+                      'font-bold text-lg hover:text-brand-blue active:scale-95 transition',
+                    )}
+                  >
+                    <FontAwesomeIcon icon={faArrowLeftLong} /> Continue Shopping
+                  </button>
                 </motion.div>
               ) : (
                 <OrderThanks
@@ -141,6 +158,7 @@ export const Order = ({ cart }: OrderProps) => {
                   onClick={() => {
                     setOrderNumber('');
                     setSubmitted(false);
+                    setIsCheckout(false);
                   }}
                 />
               )}
