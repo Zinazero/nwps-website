@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Pen } from '../../../components/ui/Pen';
-import { useAuth } from '../../../contexts/AuthContext';
 import { ProviderGallery } from '../../../components/ui/ProviderGallery';
+import { useAuth } from '../../../contexts/AuthContext';
 
 export const AuthorizedDistributor = () => {
   const navigate = useNavigate();

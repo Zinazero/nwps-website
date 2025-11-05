@@ -1,13 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import footerBackground from '@/assets/images/generic/background-playground-icons.png';
 import { useAuth } from '../../../contexts/AuthContext';
-import { LogoutButton } from '../LogoutButton';
 import { cn } from '../../../utils/cn';
-import { FooterInfo } from './Components/FooterInfo';
-import { FooterProducts } from './Components/FooterProducts';
-import { FooterContact } from './Components/FooterContact';
 import { useIsMobile } from '../../../utils/useIsMobile';
+import { LogoutButton } from '../LogoutButton';
+import { FooterContact } from './Components/FooterContact';
+import { FooterInfo } from './Components/FooterInfo';
 import { FooterNewsletter } from './Components/FooterNewsletter';
+import { FooterProducts } from './Components/FooterProducts';
 
 export const Footer = () => {
   const { user } = useAuth();
@@ -45,7 +45,9 @@ export const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <span className="text-brand-orange text-center">© 2025 | New World Park Solutions | All Rights Reserved</span>
+        <span className="text-brand-orange text-center">
+          © 2025 | New World Park Solutions | All Rights Reserved
+        </span>
 
         {/* Admin Login */}
         {!isMobile &&

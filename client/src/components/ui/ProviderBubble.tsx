@@ -12,7 +12,7 @@ export const ProviderBubble = ({ provider }: ProviderBubbleProps) => {
       className={cn(
         'flex items-center justify-center h-full rounded-full overflow-hidden',
         'hover:scale-110 transition shadow-lg w-30! h-30! p-2 mx-auto active:scale-95',
-        'md:w-40! lg:w-50! md:h-40! lg:h-50!'
+        'md:w-40! lg:w-50! md:h-40! lg:h-50!',
       )}
     >
       <Image src={provider.logoSrc} alt={`${provider.title} Logo`} className="object-cover" />

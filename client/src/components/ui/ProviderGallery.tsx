@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import type { Provider } from '../../pages/types';
-import api from '../../api/axios';
-import { ProviderBubble } from './ProviderBubble';
 import { Link } from 'react-router-dom';
+import api from '../../api/axios';
+import type { Provider } from '../../pages/types';
 import { chunkArray } from '../../utils/chunkArray';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
+import { ProviderBubble } from './ProviderBubble';
 
 export const ProviderGallery = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
@@ -57,7 +57,10 @@ export const ProviderGallery = () => {
   return (
     <div className="md:space-y-6">
       {providerRows.map((providerRow, i) => (
-        <div key={`${providerRow[0].title} Row`} className={cn('grid', columnKey[providerRow.length], i % 2 === 0 ? 'md:gap-12' : 'mx-24')}>
+        <div
+          key={`${providerRow[0].title} Row`}
+          className={cn('grid', columnKey[providerRow.length], i % 2 === 0 ? 'md:gap-12' : 'mx-24')}
+        >
           {providerRow.map((provider) =>
             checkDirectLink(provider) ? (
               <a key={provider.title} href={provider.externalLink} target="_blank" rel="noopener noreferrer">

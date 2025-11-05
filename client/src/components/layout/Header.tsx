@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import nwpsLogo from '@/assets/logos/nwps-logo.svg';
 import { useProducts } from '../../contexts/ProductsContext';
 import { cn } from '../../utils/cn';
@@ -8,9 +8,9 @@ import { Image } from '../ui/Image';
 import { MenuButton } from '../ui/MenuButton';
 import { MobileNavbar } from '../ui/MobileNavbar';
 import { Navbar } from '../ui/Navbar';
+import { scrollUp } from '../ui/ScrollToTop';
 import type { NavbarProps } from '../ui/types';
 import type { LinkType } from './types';
-import { scrollUp } from '../ui/ScrollToTop';
 
 export const Header = () => {
   const location = useLocation();

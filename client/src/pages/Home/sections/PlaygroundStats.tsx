@@ -22,7 +22,12 @@ export const PlaygroundStats = () => {
       </div>
       <div className="flex flex-col items-center justify-center bg-brand-blue-light p-4">
         <h2 className="text-5xl font-bold text-black mb-16 text-center">Unofficial Playground Stats</h2>
-        <div className={cn('flex flex-col gap-8 items-center justify-evenly w-full max-w-350', 'md:flex-row md:gap-0')}>
+        <div
+          className={cn(
+            'flex flex-col gap-8 items-center justify-evenly w-full max-w-350',
+            'md:flex-row md:gap-0',
+          )}
+        >
           <div className="flex flex-col items-center justify-center text-center">
             <Image src={slideIcon} alt="Slide Icon" className="h-40" />
             <h4 className="text-4xl mt-6 mb-3">300,000+</h4>

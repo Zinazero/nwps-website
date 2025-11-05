@@ -1,9 +1,9 @@
+import { faFacebookF, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelopeOpen, faLocationArrow, faPhoneFlip } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { cn } from '../../../../utils/cn';
 import { Image } from '../../../ui/Image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 
 export const FooterInfo = () => (
   <div className={cn('flex flex-col items-center px-8 pb-20 space-y-10', 'md:items-start md:w-1/4')}>
