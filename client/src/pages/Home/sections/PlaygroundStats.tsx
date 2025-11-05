@@ -3,6 +3,7 @@ import slideIcon from '@/assets/icons/slide-icon.png';
 import smileIcon from '@/assets/icons/smile-icon.png';
 import swingIcon from '@/assets/icons/swing-icon.png';
 import { Image } from '../../../components/ui/Image';
+import { cn } from '../../../utils/cn';
 
 export const PlaygroundStats = () => {
   return (
@@ -21,7 +22,7 @@ export const PlaygroundStats = () => {
       </div>
       <div className="flex flex-col items-center justify-center bg-brand-blue-light p-8">
         <h2 className="text-5xl font-bold text-black mb-16">Unofficial Playground Stats</h2>
-        <div className="flex items-center justify-evenly w-full max-w-350">
+        <div className={cn('flex flex-col gap-8 items-center justify-evenly w-full max-w-350', 'md:flex-row md:gap-0')}>
           <div className="flex flex-col items-center justify-center text-center">
             <Image src={slideIcon} alt="Slide Icon" className="h-40" />
             <h4 className="text-4xl mt-6 mb-3">300,000+</h4>

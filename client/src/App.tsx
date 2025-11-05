@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { GlobalSmartQuotes } from './components/global/GlobalSmartQuotes';
-import { Footer } from './components/layout/Footer';
+import { Footer } from './components/layout/Footer/Footer';
 import { Header } from './components/layout/Header';
 import { ScrollToTop } from './components/ui/ScrollToTop';
 import { About } from './pages/About/About';
