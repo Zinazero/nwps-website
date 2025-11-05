@@ -22,7 +22,7 @@ export const RecentProjectsProvider = ({ children }: { children: ReactNode }) =>
     try {
       const res = await api.get<Park[]>('/parks/recent/7');
 
-      const parks = res.data.slice(0,3);
+      const parks = res.data.slice(0, 3);
 
       const projectLinksArray: LinkType[] = res.data.map((park) => ({
         label: park.title,

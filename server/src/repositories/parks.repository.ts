@@ -13,7 +13,7 @@ export const getAllParks = async (): Promise<Park[]> => {
 export const getRecentParks = async (quantity: number = 3): Promise<Park[]> => {
   const res: QueryResult<Park> = await pool.query(
     'SELECT id, title, location, description, blurb, slug FROM parks ORDER BY sort_order ASC LIMIT $1',
-    [quantity]
+    [quantity],
   );
   return res.rows;
 };
