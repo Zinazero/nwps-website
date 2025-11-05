@@ -12,7 +12,7 @@ import { VisitStoreButton } from './VisitStoreButton';
 
 export const Navbar = ({ locationPathname, links, productsLinks, loading }: NavbarProps) => {
   return (
-    <nav className={cn('hidden md:flex items-center xl:space-x-20 space-x-10 text-xl font-medium')}>
+    <nav className={cn('flex items-center 2xl:space-x-20 space-x-6 text-xl font-medium')}>
       {links.map((link: LinkType) =>
         link.isDropdown ? (
           <div key={link.label} className={cn('relative group')}>
@@ -80,8 +80,8 @@ export const Navbar = ({ locationPathname, links, productsLinks, loading }: Navb
       )}
 
       <div className={cn('flex gap-6')}>
-        <RequestQuoteButton className="w-50" />
-        <VisitStoreButton className="w-50" />
+        <RequestQuoteButton className="w-30 2xl:w-50" />
+        <VisitStoreButton className="w-30 2xl:w-50" />
       </div>
     </nav>
   );

@@ -2,6 +2,7 @@ import { useId } from 'react';
 import { Link } from 'react-router-dom';
 import playworldImage from '@/assets/images/generic/playworld-image.jpg';
 import playworldLogo from '@/assets/logos/pw-logo.svg';
+import { cn } from '../../utils/cn';
 import { Image } from './Image';
 
 export const PlayworldBanner = () => {
@@ -9,8 +10,15 @@ export const PlayworldBanner = () => {
 
   return (
     <div id={playworldBannerId} className="bg-brand-blue-light shadow-md w-full">
-      <div className="flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 p-10">
-        <div className="w-140 flex flex-col lg:items-start items-center lg:text-left text-center space-y-4 justify-between">
+      <div
+        className={cn('flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 p-10')}
+      >
+        <div
+          className={cn(
+            'w-90 flex flex-col items-center text-center space-y-4 justify-between',
+            'lg:w-140 lg:items-start lg:text-left',
+          )}
+        >
           <Image src={playworldLogo} alt="Playworld Logo" className="w-70" priority />
           <h3 className="text-4xl font-bold">EXCLUSIVE ONTARIO DISTRIBUTOR FOR PLAYWORLD PRODUCTS</h3>
           <Link

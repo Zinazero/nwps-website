@@ -4,6 +4,7 @@ import api from '../../../api/axios';
 import { CallToAction } from '../../../components/ui/CallToAction';
 import { Loading } from '../../../components/ui/Loading';
 import { ParkCard } from '../../../components/ui/ParkCard';
+import { cn } from '../../../utils/cn';
 import type { Park } from '../../types';
 
 export const RecentProjects = () => {
@@ -28,13 +29,23 @@ export const RecentProjects = () => {
   return (
     <section>
       {/* Recent Projects */}
-      <div className="flex flex-col max-w-400 mx-auto px-20 py-14 space-y-10">
+      <div className={cn('flex flex-col max-w-400 mx-auto px-4 py-14 space-y-10', 'md:px-20')}>
         <Link to="/portfolio">
-          <div className="flex items-center w-full group">
-            <h2 className="text-5xl font-bold text-nowrap mr-6 group-hover:translate-x-4 transition">
+          <div className={cn('flex flex-col items-center w-full group', 'md:flex-row')}>
+            <h2
+              className={cn(
+                'text-5xl font-bold text-nowrap mr-0 transition',
+                'md:mr-6 md:group-hover:translate-x-4',
+              )}
+            >
               Recent Projects
             </h2>
-            <hr className="w-full text-brand-orange group-hover:translate-x-4 transition" />
+            <hr
+              className={cn(
+                'w-full text-brand-orange transition mt-4',
+                'md:group-hover:translate-x-4 md:mt-0',
+              )}
+            />
           </div>
         </Link>
         {loading ? (

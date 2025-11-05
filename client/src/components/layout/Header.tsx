@@ -14,7 +14,7 @@ import type { LinkType } from './types';
 export const Header = () => {
   const location = useLocation();
   const { productsLinks, loading } = useProducts();
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1024);
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
