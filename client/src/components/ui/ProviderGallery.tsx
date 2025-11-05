@@ -11,6 +11,7 @@ export const ProviderGallery = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
 
   const isMobile = useIsMobile();
+  const isMidWidth = useIsMobile(1400);
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -49,9 +50,12 @@ export const ProviderGallery = () => {
     2: 'grid-cols-2',
     3: 'grid-cols-3',
     4: 'grid-cols-4',
+    5: 'grid-cols-5',
+    6: 'grid-cols-6',
   };
 
-  const topRowLength = isMobile ? 2 : 4;
+  const topRowLength = isMobile ? 2 : isMidWidth ? 4 : 6;
+
   const providerRows = chunkArray(providers, topRowLength);
 
   return (
