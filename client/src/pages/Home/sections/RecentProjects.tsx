@@ -1,30 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../../api/axios';
 import { CallToAction } from '../../../components/ui/CallToAction';
 import { Loading } from '../../../components/ui/Loading';
 import { ParkCard } from '../../../components/ui/ParkCard';
+import { useRecentProjects } from '../../../contexts/RecentProjectsContext';
 import { cn } from '../../../utils/cn';
-import type { Park } from '../../types';
 
 export const RecentProjects = () => {
-  const [recentProjects, setRecentProjects] = useState<Park[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchRecentParks = async () => {
-      try {
-        const res = await api.get<Park[]>('/parks/recent');
-        setRecentProjects(res.data);
-      } catch (err) {
-        console.error('Error fetching parks:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRecentParks();
-  }, []);
+  const { recentProjects, loading } = useRecentProjects();
 
   return (
     <section>
