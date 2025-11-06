@@ -106,9 +106,9 @@ export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
               <div
                 key={prod.id}
                 className={cn(
-                  'flex flex-col items-center bg-white w-65 shadow-lg rounded-2xl overflow-hidden',
+                  'flex flex-col items-center bg-white w-1/2 shadow-lg rounded-2xl overflow-hidden',
                   'border border-gray-100 hover:shadow-xl transition relative',
-                  'md:h-65',
+                  'md:h-65 md:w-65',
                 )}
               >
                 <Image
