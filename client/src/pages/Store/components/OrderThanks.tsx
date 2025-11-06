@@ -36,7 +36,7 @@ export const OrderThanks = ({ orderNumber, onClick }: OrderThanksProps) => {
           'md:w-1/2',
         )}
       >
-        Place another order
+        Return to Store
       </button>
     </motion.div>
   );

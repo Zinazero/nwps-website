@@ -1,78 +1,66 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
 import type { OrderItem } from '../../components/forms/types';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
-import { Order } from './Order';
 import { Shop } from './Shop';
 
 export const Store = () => {
-  const [cart, setCart] = useState<OrderItem[]>([]);
-  const [isCheckout, setIsCheckout] = useState(false);
+  const [cart, setCart] = useState<OrderItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      localStorage.removeItem('cart');
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const totalItems = cart.reduce((sum, p) => sum + p.quantity, 0);
 
   return (
     <div className="min-h-screen flex flex-col items-center px-6 py-12 relative">
       <div className="flex flex-col items-center w-full max-w-6xl">
-        <AnimatePresence mode="wait">
-          {!isCheckout ? (
-            <motion.div
-              key="shop"
-              className="flex flex-col items-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {/* LOGO */}
-              <img src={nwpsVeritcalLogo} alt="New World Park Solutions Logo" className="w-50 mb-6" />
+        {/* LOGO */}
+        <img src={nwpsVeritcalLogo} alt="New World Park Solutions Logo" className="w-50 mb-6" />
 
-              {/* HEADER */}
-              <header className="text-center mb-10 space-y-3">
-                <h1 className={cn('text-4xl font-extrabold text-brand-orange tracking-tight', 'md:text-5xl')}>
-                  Swing Supply Store
-                </h1>
-                <p className="text-lg text-brand-blue! max-w-md mx-auto">
-                  Get the best deal on swing seats in just a few clicks.
-                </p>
-              </header>
-              {/* SHOP */}
-              <Shop cart={cart} setCart={setCart} />
+        {/* HEADER */}
+        <header className="text-center mb-10 space-y-3">
+          <h1 className={cn('text-4xl font-extrabold text-brand-orange tracking-tight', 'md:text-5xl')}>
+            Swing Supply Store
+          </h1>
+          <p className="text-lg text-brand-blue! max-w-md mx-auto">
+            Get the best deal on swing seats in just a few clicks.
+          </p>
+        </header>
+        {/* SHOP */}
+        <Shop cart={cart} setCart={setCart} />
 
-              {/* FOOTER ACTIONS */}
-              <div className={'mt-10 flex flex-col items-center space-y-6'}>
-                {cart.length > 0 && (
-                  <>
-                    <p className="text-lg font-medium">
-                      {largeNumberFormatter(totalItems)} item{totalItems !== 1 && 's'} in cart
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setIsCheckout(true)}
-                      className={cn(
-                        'px-8 py-3 bg-brand-orange hover:bg-brand-blue transition-all',
-                        'text-white font-semibold rounded-xl shadow-md active:scale-95',
-                      )}
-                    >
-                      Proceed to Checkout
-                    </button>
-                  </>
+        {/* FOOTER ACTIONS */}
+        <div className={'mt-10 flex flex-col items-center space-y-6'}>
+          {cart.length > 0 && (
+            <>
+              <p className="text-lg font-medium">
+                {largeNumberFormatter(totalItems)} item{totalItems !== 1 && 's'} in cart
+              </p>
+              <Link
+                to="checkout"
+                state={{}}
+                className={cn(
+                  'px-8 py-3 bg-brand-orange hover:bg-brand-blue transition-all',
+                  'text-white font-semibold rounded-xl shadow-md active:scale-95',
                 )}
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="checkout"
-              className={cn('flex flex-col mt-8 md:flex-row gap-8 w-full justify-center', 'md:gap-16')}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <Order cart={cart} setCart={setCart} setIsCheckout={setIsCheckout} />
-            </motion.div>
+              >
+                Proceed to Checkout
+              </Link>
+            </>
           )}
-        </AnimatePresence>
+        </div>
       </div>
     </div>
   );

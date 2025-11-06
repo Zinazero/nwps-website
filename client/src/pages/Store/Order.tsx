@@ -2,6 +2,7 @@ import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, OrderItem } from '../../components/forms/types';
@@ -13,13 +14,19 @@ import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { OrderThanks } from './components/OrderThanks';
 
-interface OrderProps {
-  cart: OrderItem[];
-  setCart: React.Dispatch<React.SetStateAction<OrderItem[]>>;
-  setIsCheckout: React.Dispatch<React.SetStateAction<boolean>>;
-}
+export const Order = () => {
+  const [cart, setCart] = useState<OrderItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      localStorage.removeItem('cart');
+      return [];
+    }
+  });
 
-export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
+  const navigate = useNavigate();
+
   const defaultForm: OrderFormValues = {
     cart,
     firstName: '',
@@ -79,6 +86,7 @@ export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
       setOrderNumber(res.data.orderNumber);
       setForm(defaultForm);
       setSubmitted(true);
+      localStorage.removeItem('cart');
       setCart([]);
     } catch (err) {
       console.error(err);
@@ -91,95 +99,108 @@ export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
   scrollUp();
 
   return (
-    <>
-      {/* CART DISPLAY */}
-      <AnimatePresence mode="wait">
-        {!submitted && (
-          <motion.section
-            key="cart-display"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={cn('flex gap-4', 'md:flex-col md:gap-10')}
-          >
-            {cart.map((prod) => (
-              <div
-                key={prod.id}
-                className={cn(
-                  'flex flex-col items-center bg-white w-1/2 shadow-lg rounded-2xl overflow-hidden',
-                  'border border-gray-100 hover:shadow-xl transition relative',
-                  'md:h-65 md:w-65',
-                )}
+    <div className="min-h-screen flex flex-col items-center px-6 py-12 relative">
+      <div className="flex flex-col items-center w-full max-w-6xl">
+        <div className={cn('flex flex-col mt-8 md:flex-row gap-8 w-full justify-center', 'md:gap-16')}>
+          {/* CART DISPLAY */}
+          <AnimatePresence mode="wait">
+            {!submitted && (
+              <motion.section
+                key="cart-display"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className={cn('flex gap-4', 'md:flex-col md:gap-10')}
               >
-                <Image
-                  src={`/images/store/store-${prod.id}.jpg`}
-                  alt={`Product ${prod.id}`}
-                  className="w-full"
-                />
-                <ShopLabel text={`${largeNumberFormatter(prod.quantity)}`} />
-              </div>
-            ))}
-          </motion.section>
-        )}
-      </AnimatePresence>
-
-      {/* ORDER SUMMARY */}
-      <section>
-        <div
-          className={cn('max-w-3xl w-full bg-white shadow-lg rounded-2xl overflow-hidden', 'md:min-w-180')}
-        >
-          <div className={cn('p-8', 'md:p-12')}>
-            {/* Order Form */}
-            <AnimatePresence mode="wait">
-              {!submitted ? (
-                <motion.div
-                  key="order-form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col"
-                >
-                  <h1 className="text-4xl font-bold text-brand-orange mb-4 text-center">Order Form</h1>
-                  <p className="text-center mb-8">Submit an order request and we’ll send you an invoice.</p>
-
-                  <OrderForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
-
-                  {/* Error Message */}
-                  {error && <span className="text-[red] mx-auto mt-2">{error}</span>}
-
-                  {/* Return to Store */}
-                  <button
-                    type="button"
-                    onClick={() => setIsCheckout(false)}
+                {cart.map((prod) => (
+                  <div
+                    key={prod.id}
                     className={cn(
-                      'absolute top-10 left-10 flex items-center gap-2 text-brand-orange',
-                      'font-bold text-lg hover:text-brand-blue active:scale-95 transition',
+                      'flex flex-col items-center bg-white w-1/2 shadow-lg rounded-2xl overflow-hidden',
+                      'border border-gray-100 hover:shadow-xl transition relative',
+                      'md:h-65 md:w-65',
                     )}
                   >
-                    <FontAwesomeIcon icon={faArrowLeftLong} /> Continue Shopping
-                  </button>
-                </motion.div>
-              ) : (
-                <OrderThanks
-                  orderNumber={orderNumber}
-                  onClick={() => {
-                    setOrderNumber('');
-                    setSubmitted(false);
-                    setIsCheckout(false);
-                  }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
+                    <Image
+                      src={`/images/store/store-${prod.id}.jpg`}
+                      alt={`Product ${prod.id}`}
+                      className="w-full"
+                    />
+                    <ShopLabel text={`${largeNumberFormatter(prod.quantity)}`} />
+                  </div>
+                ))}
+              </motion.section>
+            )}
+          </AnimatePresence>
 
-          {/* 
+          {/* ORDER SUMMARY */}
+          <section>
+            <div
+              className={cn(
+                'max-w-3xl w-full bg-white shadow-lg rounded-2xl overflow-hidden',
+                'md:min-w-180',
+              )}
+            >
+              <div className={cn('p-8', 'md:p-12')}>
+                {/* Order Form */}
+                <AnimatePresence mode="wait">
+                  {!submitted ? (
+                    <motion.div
+                      key="order-form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex flex-col"
+                    >
+                      <h1 className="text-4xl font-bold text-brand-orange mb-4 text-center">Order Form</h1>
+                      <p className="text-center mb-8">
+                        Submit an order request and we’ll send you an invoice.
+                      </p>
+
+                      <OrderForm
+                        form={form}
+                        setForm={setForm}
+                        handleSubmit={handleSubmit}
+                        loading={loading}
+                      />
+
+                      {/* Error Message */}
+                      {error && <span className="text-[red] mx-auto mt-2">{error}</span>}
+
+                      {/* Return to Store */}
+                      <Link
+                        to="/store"
+                        className={cn(
+                          'absolute top-10 left-10 flex items-center gap-2 text-brand-orange',
+                          'font-bold text-lg hover:text-brand-blue active:scale-95 transition',
+                        )}
+                      >
+                        <FontAwesomeIcon icon={faArrowLeftLong} /> Continue Shopping
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <OrderThanks
+                      orderNumber={orderNumber}
+                      onClick={() => {
+                        setOrderNumber('');
+                        setSubmitted(false);
+                        navigate('/store');
+                      }}
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* 
           <div className="bg-gray-100 py-6 px-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm">Placeholder text goes here.</p>
           <span className="font-semibold mt-3 md:mt-0">Starting at $999</span>
           </div>
           */}
+            </div>
+          </section>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
