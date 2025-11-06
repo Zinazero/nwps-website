@@ -8,18 +8,19 @@ export const ContactBanner = () => {
   const emailAddress = 'info@nwps.ca';
 
   const bubbleClasses = cn(
-    'rounded-full w-20 h-20 bg-blue-washed flex',
+    'rounded-full w-14 h-14 bg-blue-washed flex',
     'items-center justify-center text-white text-2xl',
+    'md:h-20 md:w-20',
   );
 
   const colClasses = cn(
-    'flex flex-col items-center text-center gap-4',
+    'flex flex-col items-center text-center gap-2',
     '[&:not(:last-child)]:border-r border-dashed border-brand-orange',
   );
 
   const textContainerClasses = cn('space-y-2');
-  const headerClasses = cn('text-white font-bold text-xl');
-  const pClasses = cn('text-light!');
+  const headerClasses = cn('text-white font-bold text-lg', 'md:text-2xl');
+  const pClasses = cn('text-light! text-sm', 'md:text-lg');
 
   return (
     <section className="w-full flex justify-center">

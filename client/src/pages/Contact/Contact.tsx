@@ -46,7 +46,7 @@ export const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-12 p-8">
+    <div className={cn('flex flex-col items-center gap-10 p-4 pb-16', 'md:py-16')}>
       <UnderlineHeader text="Contact" withArrow />
 
       <ContactBanner />
@@ -88,6 +88,7 @@ export const Contact = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
+            className={cn('w-full', 'md:w-auto')}
           >
             <ContactForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
           </motion.div>
