@@ -47,7 +47,7 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex items-center gap-20 h-150">
+        <div className={cn('flex flex-col items-center gap-36 mb-40', 'md:flex-row md:gap-20')}>
           {productList.map((prod) => {
             const activeProduct = cart.find((p) => p.id === prod.id);
 
@@ -56,16 +56,17 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
                 key={prod.id}
                 className={cn(
                   'cursor-pointer rounded-2xl relative transition-transform',
-                  'shadow-lg h-100 w-100',
+                  'shadow-lg h-60 w-60',
+                  'md:h-100 md:w-100',
                   activeProduct
-                    ? 'scale-105 shadow-xl  glow-pulse border-2 border-brand-green'
+                    ? 'scale-105 shadow-xl border-2 border-brand-green'
                     : 'hover:scale-105 hover:shadow-xl active:scale-102',
                 )}
               >
                 <Image
                   src={`/images/store/store-${prod.id}.jpg`}
                   alt={`Product ${prod.id}`}
-                  className="rounded-2xl"
+                  className="rounded-2xl w-full"
                 />
 
                 {activeProduct ? (

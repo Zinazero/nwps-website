@@ -26,13 +26,13 @@ export const ContactFieldSet = ({ form, onChange }: ContactFieldsetProps) => {
   const emailId = useId();
 
   return (
-    <fieldset className={cn('flex flex-col space-y-4')}>
+    <fieldset className={cn('flex flex-col gap-4')}>
       <legend className={cn('sr-only')}>Contact</legend>
 
       {/* Name */}
       <fieldset>
         <legend className={labelClasses}>Name</legend>
-        <div className="flex space-x-6">
+        <div className={cn('flex flex-col gap-6', 'md:flex-row')}>
           <label htmlFor={firstNameId} className="sr-only">
             First Name
           </label>
@@ -75,7 +75,7 @@ export const ContactFieldSet = ({ form, onChange }: ContactFieldsetProps) => {
         />
       </div>
 
-      <div className="flex space-x-6">
+      <div className={cn('flex flex-col gap-6', 'md:flex-row')}>
         {/* Phone */}
         <div className="flex flex-col">
           <label htmlFor={phoneId} className={labelClasses}>

@@ -16,7 +16,7 @@ export const Store = () => {
   return (
     <div className="min-h-screen flex flex-col items-center px-6 py-12 relative">
       <div className="flex flex-col items-center w-full max-w-6xl">
-        <AnimatePresence mode={'wait'}>
+        <AnimatePresence mode="wait">
           {!isCheckout ? (
             <motion.div
               key="shop"
@@ -30,7 +30,7 @@ export const Store = () => {
 
               {/* HEADER */}
               <header className="text-center mb-10 space-y-3">
-                <h1 className="text-5xl font-extrabold text-brand-orange tracking-tight">
+                <h1 className={cn('text-4xl font-extrabold text-brand-orange tracking-tight', 'md:text-5xl')}>
                   Swing Supply Store
                 </h1>
                 <p className="text-lg text-brand-blue! max-w-md mx-auto">
@@ -41,7 +41,7 @@ export const Store = () => {
               <Shop cart={cart} setCart={setCart} />
 
               {/* FOOTER ACTIONS */}
-              <div className="mt-10 flex flex-col items-center space-y-6">
+              <div className={'mt-10 flex flex-col items-center space-y-6'}>
                 {cart.length > 0 && (
                   <>
                     <p className="text-lg font-medium">
@@ -64,7 +64,7 @@ export const Store = () => {
           ) : (
             <motion.div
               key="checkout"
-              className="flex flex-col mt-8 md:flex-row gap-16 w-full justify-center"
+              className={cn('flex flex-col mt-8 md:flex-row gap-8 w-full justify-center', 'md:gap-16')}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

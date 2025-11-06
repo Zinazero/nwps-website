@@ -5,6 +5,8 @@ import { useState } from 'react';
 import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, OrderItem } from '../../components/forms/types';
+import { Image } from '../../components/ui/Image';
+import { scrollUp } from '../../components/ui/ScrollToTop';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
@@ -86,6 +88,8 @@ export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
     }
   };
 
+  scrollUp();
+
   return (
     <>
       {/* CART DISPLAY */}
@@ -96,20 +100,21 @@ export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col gap-10"
+            className={cn('flex gap-4', 'md:flex-col md:gap-10')}
           >
             {cart.map((prod) => (
               <div
                 key={prod.id}
                 className={cn(
-                  'flex flex-col items-center bg-white h-65 w-60 shadow-lg rounded-2xl overflow-hidden',
+                  'flex flex-col items-center bg-white w-65 shadow-lg rounded-2xl overflow-hidden',
                   'border border-gray-100 hover:shadow-xl transition relative',
+                  'md:h-65',
                 )}
               >
-                <img
+                <Image
                   src={`/images/store/store-${prod.id}.jpg`}
                   alt={`Product ${prod.id}`}
-                  className="w-full object-cover"
+                  className="w-full"
                 />
                 <ShopLabel text={`${largeNumberFormatter(prod.quantity)}`} />
               </div>
@@ -120,8 +125,10 @@ export const Order = ({ cart, setCart, setIsCheckout }: OrderProps) => {
 
       {/* ORDER SUMMARY */}
       <section>
-        <div className="max-w-3xl w-full bg-white shadow-lg rounded-2xl overflow-hidden min-w-180">
-          <div className="p-8 md:p-12">
+        <div
+          className={cn('max-w-3xl w-full bg-white shadow-lg rounded-2xl overflow-hidden', 'md:min-w-180')}
+        >
+          <div className={cn('p-8', 'md:p-12')}>
             {/* Order Form */}
             <AnimatePresence mode="wait">
               {!submitted ? (

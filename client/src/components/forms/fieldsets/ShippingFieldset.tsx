@@ -38,7 +38,7 @@ export const ShippingFieldset = ({ form, onChange }: ShippingFieldsetProps) => {
       {/* Address */}
       <fieldset>
         <legend className={labelClasses}>Address</legend>
-        <div className={cn('flex flex-col space-y-2')}>
+        <div className={cn('flex flex-col gap-2', 'md:flex-row')}>
           <label htmlFor={address1Id} className={cn('sr-only')}>
             Address Line 1
           </label>
@@ -66,7 +66,7 @@ export const ShippingFieldset = ({ form, onChange }: ShippingFieldsetProps) => {
         </div>
       </fieldset>
 
-      <div className={cn('flex space-x-6')}>
+      <div className={cn('flex flex-col gap-6', 'md:flex-row')}>
         {/* City*/}
         <div className={cn('flex flex-col')}>
           <label htmlFor={cityId} className={labelClasses}>
