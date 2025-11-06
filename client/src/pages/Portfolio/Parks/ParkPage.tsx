@@ -5,8 +5,8 @@ import { Image } from '../../../components/ui/Image';
 import { Loading } from '../../../components/ui/Loading';
 import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
-import type { Park } from '../../types';
 import { cn } from '../../../utils/cn';
+import type { Park } from '../../types';
 
 interface ParkSection {
   id: number;
