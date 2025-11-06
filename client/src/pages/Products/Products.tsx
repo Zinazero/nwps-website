@@ -79,38 +79,40 @@ export const Products = () => {
 
   return (
     <div className={cn('min-h-screen flex flex-col items-center justify-center py-12 px-4', 'md:px-12')}>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="flex flex-col items-center min-h-screen gap-16">
-          {/* Hotspot Image */}
-          {!isMobile && <HotspotImage />}
+      <div className="flex flex-col items-center min-h-screen gap-16">
+        {/* Hotspot Image */}
+        {!isMobile && <HotspotImage />}
 
-          {/* Blurb */}
-          <div className="lg:mx-40">
-            <p className="text-xl/relaxed text-center">
-              Since 2008, we’ve built playgrounds exemplifying our belief that play is for everyone,
-              regardless of ability. That’s why we make inclusion a priority – not an option.
-            </p>
+        {/* Blurb */}
+        <div className="lg:mx-40">
+          <p className="text-xl/relaxed text-center">
+            Since 2008, we’ve built playgrounds exemplifying our belief that play is for everyone, regardless
+            of ability. That’s why we make inclusion a priority – not an option.
+          </p>
+        </div>
+
+        {/* Headers */}
+        <div className={cn('flex flex-col text-center gap-4', 'md:gap-12')}>
+          <h2 className={cn('text-2xl font-semibold text-brand-orange', 'md:text-4xl')}>
+            Let’s make playing fun!
+          </h2>
+          <div className="flex items-center gap-4">
+            <h1 className={cn('text-4xl font-bold', 'md:text-6xl')}>Product Categories</h1>
+            {user &&
+              (isEditMode ? (
+                <Check onClick={() => setIsEditMode(false)} className="text-xl" />
+              ) : (
+                <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
+              ))}
           </div>
+        </div>
 
-          {/* Headers */}
-          <div className={cn('flex flex-col text-center gap-4', 'md:gap-12')}>
-            <h2 className={cn('text-2xl font-semibold text-brand-orange', 'md:text-4xl')}>
-              Let’s make playing fun!
-            </h2>
-            <div className="flex items-center gap-4">
-              <h1 className={cn('text-4xl font-bold', 'md:text-6xl')}>Product Categories</h1>
-              {user &&
-                (isEditMode ? (
-                  <Check onClick={() => setIsEditMode(false)} className="text-xl" />
-                ) : (
-                  <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
-                ))}
-            </div>
-          </div>
-
-          {/* Categories */}
+        {/* Categories */}
+        {loading ? (
+          <Loading />
+        ) : productsCategories.length < 1 ? (
+          <span className="text-xl text-gray-400">No products available</span>
+        ) : (
           <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
             <SortableContext items={productsCategories.map((c) => c.id)} strategy={rectSortingStrategy}>
               <div className={cn('grid grid-cols-1 gap-y-16 gap-x-32 max-w-350', 'md:grid-cols-2')}>
@@ -135,8 +137,8 @@ export const Products = () => {
               </div>
             </SortableContext>
           </DndContext>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Confirm Modal */}
       <ConfirmModal
