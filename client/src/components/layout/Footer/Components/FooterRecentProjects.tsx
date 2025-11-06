@@ -21,7 +21,7 @@ export const FooterRecentProjects = () => {
         {loading ? (
           <Loading />
         ) : projectLinks.length === 0 ? (
-          <li className="text-xl text-gray-400">No products available</li>
+          <li className="text-xl text-gray-400">No parks available</li>
         ) : (
           projectLinks.map((link) => (
             <li key={link.label} className="text-xl curser-pointer hover:text-brand-green transition">
