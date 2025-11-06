@@ -41,9 +41,7 @@ export const Header = () => {
   };
 
   return (
-    <header className={cn('fixed top-0 z-50 w-full shadow-md bg-white',
-      mobileNavOpen ? 'pt-4' : 'py-4'
-    )}>
+    <header className={cn('fixed top-0 z-50 w-full shadow-md bg-white', mobileNavOpen ? 'pt-4' : 'py-4')}>
       <div className="flex flex-col w-full">
         <div className={cn('px-4 flex items-center justify-between')}>
           <button type="button" onClick={() => (pathname === '/' ? scrollUp() : navigate('/'))}>
