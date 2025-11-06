@@ -10,12 +10,12 @@ export const AboutHero = () => {
 
   return (
     <section>
-      <div className="flex flex-col items-center space-y-12 p-8">
+      <div className={cn('flex flex-col items-center gap-y-12 py-8 px-6', 'md:py-16')}>
         <UnderlineHeader text="About Us" withArrow />
-        <div className="max-w-350 flex items-center space-x-30">
+        <div className="max-w-350 flex items-center gap-30">
           <div
             className={cn(
-              'flex flex-col items-center space-y-6 text-center',
+              'flex flex-col items-center gap-6 text-center',
               'md:items-start md:w-1/2 md:text-left',
             )}
           >
@@ -27,7 +27,10 @@ export const AboutHero = () => {
             </p>
             <Link
               to="/portfolio"
-              className="rounded-lg bg-brand-blue hover:bg-brand-orange transition text-light font-bold w-1/2 p-4 text-center"
+              className={cn(
+                'rounded-lg bg-brand-blue hover:bg-brand-orange transition text-light font-bold p-4 text-center',
+                'md:w-1/2',
+              )}
             >
               Check Out Some of Our Work
             </Link>

@@ -78,7 +78,7 @@ export const Products = () => {
   };
 
   return (
-    <div className={cn('min-h-screen flex flex-col items-center justify-center py-12 px-4', 'md:px-12')}>
+    <div className={cn('min-h-screen flex flex-col items-center justify-center py-8 px-4', 'md:p-12')}>
       <div className="flex flex-col items-center min-h-screen gap-16">
         {/* Hotspot Image */}
         {!isMobile && <HotspotImage />}

@@ -90,9 +90,9 @@ export const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-6 space-y-16">
+    <div className={cn("min-h-screen flex flex-col items-center py-8 gap-16", 'md:py-16')}>
       <UnderlineHeader text="Portfolio" withArrow />
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center gap-4">
         <h2 className="text-4xl font-semibold text-center">
           Designing Playgrounds That Inspire Imagination and Outdoor Play
         </h2>
