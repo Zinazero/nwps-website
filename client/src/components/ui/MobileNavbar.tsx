@@ -6,6 +6,7 @@ import { cn } from '../../utils/cn';
 import type { LinkType } from '../layout/types';
 import { Loading } from './Loading';
 import type { NavbarProps } from './types';
+import { AnimatePresence, motion } from 'framer-motion';
 
 /* 
  productsLinks is hardcoded as the only dropdown so additional logic has to be added to accomodate more dropdowns.
@@ -42,31 +43,40 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
             <hr className="text-transparent-grey" />
 
             {/* Sublinks */}
-            {openDropdown === link.label && (
-              <div className={cn('flex flex-col ')}>
-                {loading ? (
-                  <Loading />
-                ) : productsLinks.length < 1 ? (
-                  <Link to="#">
-                    <div className="pl-8 pr-4 py-4 text-gray-400">No products available</div>
-                    <hr className=" text-transparent-grey" />
-                  </Link>
-                ) : (
-                  productsLinks.map((sublink) => (
-                    <Link to={sublink.to} key={sublink.label}>
-                      <div
-                        className={cn('pl-8 pr-4 py-4', {
-                          'text-brand-orange': locationPathname.includes(sublink.to),
-                        })}
-                      >
-                        {sublink.label}
-                      </div>
-                      <hr className="text-transparent-grey" />
+            <AnimatePresence>
+              {openDropdown === link.label && (
+                <motion.div
+                  key="mobile-nav"
+                  initial={{ height: 0, y: -20 }}
+                  animate={{ height: 'auto', y: 0 }}
+                  exit={{ height: 0, y: -20 }}
+                  transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="flex flex-col overflow-hidden origin-top"
+                >
+                  {loading ? (
+                    <Loading />
+                  ) : productsLinks.length < 1 ? (
+                    <Link to="#">
+                      <div className="pl-8 pr-4 py-4 text-gray-400">No products available</div>
+                      <hr className=" text-transparent-grey" />
                     </Link>
-                  ))
-                )}
-              </div>
-            )}
+                  ) : (
+                    productsLinks.map((sublink) => (
+                      <Link to={sublink.to} key={sublink.label}>
+                        <div
+                          className={cn('pl-8 pr-4 py-4', {
+                            'text-brand-orange': locationPathname.includes(sublink.to),
+                          })}
+                        >
+                          {sublink.label}
+                        </div>
+                        <hr className="text-transparent-grey" />
+                      </Link>
+                    ))
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         ) : (
           <Link key={link.label} to={link.to}>

@@ -11,6 +11,7 @@ import { Navbar } from '../ui/Navbar';
 import { scrollUp } from '../ui/ScrollToTop';
 import type { NavbarProps } from '../ui/types';
 import type { LinkType } from './types';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export const Header = () => {
   const { pathname } = useLocation();
@@ -54,7 +55,20 @@ export const Header = () => {
             <Navbar {...navbarProps} />
           )}
         </div>
-        {isMobile && mobileNavOpen && <MobileNavbar {...navbarProps} />}
+        <AnimatePresence>
+          {isMobile && mobileNavOpen && (
+            <motion.div
+              key="mobile-nav"
+              initial={{ height: 0, y: -20 }}
+              animate={{ height: 'auto', y: 0 }}
+              exit={{ height: 0, y: -20 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+              className="flex flex-col overflow-hidden origin-top"
+            >
+              <MobileNavbar {...navbarProps} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
