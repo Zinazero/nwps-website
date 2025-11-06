@@ -1,4 +1,5 @@
 import innerPageHeaderArrow from '@/assets/icons/inner-page-header-arrow.png';
+import { useIsMobile } from '../../utils/useIsMobile';
 import { Image } from './Image';
 
 interface UnderlineHeaderProps {
@@ -12,6 +13,8 @@ export const UnderlineHeader: React.FC<UnderlineHeaderProps> = ({
   fontColorClass = 'text-dark',
   withArrow = false,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="flex flex-col items-center space-y-12">
       <div className="relative">
@@ -26,7 +29,7 @@ export const UnderlineHeader: React.FC<UnderlineHeaderProps> = ({
           <path d="M8.1,146.2c0,0,240.6-55.6,479-13.8" />
         </svg>
       </div>
-      {withArrow && <Image src={innerPageHeaderArrow} alt="Spiral Arrow" />}
+      {withArrow && !isMobile && <Image src={innerPageHeaderArrow} alt="Spiral Arrow" />}
     </div>
   );
 };

@@ -2,14 +2,23 @@ import { Link } from 'react-router-dom';
 import aboutImage from '@/assets/images/generic/about-image.jpg';
 import { ImageMask } from '../../../components/ui/ImageMask';
 import { UnderlineHeader } from '../../../components/ui/UnderlineHeader';
+import { cn } from '../../../utils/cn';
+import { useIsMobile } from '../../../utils/useIsMobile';
 
 export const AboutHero = () => {
+  const isMobile = useIsMobile();
+
   return (
     <section>
       <div className="flex flex-col items-center space-y-12 p-8">
         <UnderlineHeader text="About Us" withArrow />
         <div className="max-w-350 flex items-center space-x-30">
-          <div className="flex flex-col w-1/2 space-y-6">
+          <div
+            className={cn(
+              'flex flex-col items-center space-y-6 text-center',
+              'md:items-start md:w-1/2 md:text-left',
+            )}
+          >
             <h3 className="text-4xl font-semibold">Our Approach</h3>
             <p className="text-xl/relaxed ">
               New World Park Solutions is a full-service park and playground equipment supplier dedicated to
@@ -23,12 +32,14 @@ export const AboutHero = () => {
               Check Out Some of Our Work
             </Link>
           </div>
-          <ImageMask
-            src={aboutImage}
-            alt="Accessible Surfacing Playground"
-            mask="squiggly-mask.svg"
-            priority
-          />
+          {!isMobile && (
+            <ImageMask
+              src={aboutImage}
+              alt="Accessible Surfacing Playground"
+              mask="squiggly-mask.svg"
+              priority
+            />
+          )}
         </div>
       </div>
     </section>

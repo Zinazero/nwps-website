@@ -4,7 +4,7 @@ import { OurTeam } from './sections/OurTeam/OurTeam';
 
 export const About = () => {
   return (
-    <div className="">
+    <div className="min-h-screen">
       <AboutHero />
 
       <OurStory />
