@@ -6,6 +6,7 @@ import { Loading } from '../../../components/ui/Loading';
 import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
 import type { Park } from '../../types';
+import { cn } from '../../../utils/cn';
 
 interface ParkSection {
   id: number;
@@ -62,14 +63,24 @@ export const ParkPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center space-y-12 bg-white p-16">
+    <div
+      className={cn(
+        'relative min-h-screen flex flex-col items-center justify-center gap-12 bg-white',
+        'md:py-16',
+      )}
+    >
       {loading ? (
         <Loading />
       ) : (
         <>
           {/* Hero */}
           {park && (
-            <div className="p-6 flex flex-col items-center space-y-12 border-b border-transparent-grey pb-8 xl:border-0">
+            <div
+              className={cn(
+                'py-6 px-2 flex flex-col items-center gap-12 border-b border-transparent-grey pb-8',
+                'lg:border-0',
+              )}
+            >
               {/* src has cache-busting parameter so it changes on update */}
               <Image
                 src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${Date.now()}`}
@@ -91,10 +102,12 @@ export const ParkPage = () => {
           {sections.map((section, index) => (
             <div
               key={section.title}
-              className={`
-								flex flex-col xl:flex-row items-center justify-center max-w-400
-								space-y-12 xl:space-y-0 border-b border-transparent-grey pb-8 xl:border-0
-								${index % 2 !== 0 ? 'xl:flex-row-reverse' : ''}`}
+              className={cn(
+                'flex flex-col items-center justify-center max-w-400',
+                'gap-12 border-b border-transparent-grey pb-8 px-2 text-center',
+                'lg:flex-row lg:gap-0 lg:border-0 lg:text-left',
+                index % 2 !== 0 ? 'lg:flex-row-reverse' : '',
+              )}
             >
               {park && (
                 <>
@@ -107,9 +120,9 @@ export const ParkPage = () => {
                   />
                 </>
               )}
-              <div className="flex flex-col space-y-4 max-w-200 mx-12">
+              <div className={cn('flex flex-col gap-4 max-w-200 px-2', 'lg:px-12')}>
                 <h2 className="text-3xl font-bold">{section.title}</h2>
-                <p className="text-lg ">{section.description}</p>
+                <p className="text-lg">{section.description}</p>
               </div>
             </div>
           ))}
