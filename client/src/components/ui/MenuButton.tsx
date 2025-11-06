@@ -6,7 +6,6 @@ interface MenuButtonProps {
 }
 
 export const MenuButton = ({ open, onClick }: MenuButtonProps) => {
-
   const barClasses = 'absolute block h-0.5 w-6 bg-black transition-all duration-300 ease-in-out';
 
   return (

@@ -90,7 +90,7 @@ export const Portfolio = () => {
   };
 
   return (
-    <div className={cn("min-h-screen flex flex-col items-center py-8 gap-16", 'md:py-16')}>
+    <div className={cn('min-h-screen flex flex-col items-center py-8 gap-16', 'md:py-16')}>
       <UnderlineHeader text="Portfolio" withArrow />
       <div className="flex items-center gap-4">
         <h2 className="text-4xl font-semibold text-center">

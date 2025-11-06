@@ -9,7 +9,6 @@ import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
 import { cn } from '../../../utils/cn';
 import type { ProductsCategory } from '../../types';
-import { useIsMobile } from '../../../utils/useIsMobile';
 
 interface ProductsSection {
   id: number;
@@ -28,7 +27,6 @@ export const ProductsPage = () => {
 
   const { category: slug } = useParams<{ category: string }>();
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +67,10 @@ export const ProductsPage = () => {
 
   return (
     <div
-      className={cn('relative min-h-screen flex flex-col items-center justify-center bg-white gap-20 pb-26', 'md:pt-10')}
+      className={cn(
+        'relative min-h-screen flex flex-col items-center justify-center bg-white gap-20 pb-26',
+        'md:pt-10',
+      )}
     >
       {loading ? (
         <Loading />

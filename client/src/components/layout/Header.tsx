@@ -13,7 +13,7 @@ import type { NavbarProps } from '../ui/types';
 import type { LinkType } from './types';
 
 export const Header = () => {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { productsLinks, loading } = useProducts();
   const isMobile = useIsMobile(1024);
