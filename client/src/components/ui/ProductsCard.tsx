@@ -2,6 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Link } from 'react-router-dom';
 import type { ProductsCategory } from '../../pages/types';
+import { cn } from '../../utils/cn';
 import { Image } from './Image';
 import { Trash } from './Trash';
 
@@ -41,13 +42,19 @@ export const ProductsCard = ({
       className={`relative ${isEditMode ? 'draggable' : ''} ${className}`}
     >
       <Link to={`/products/${slug}`} state={{ category }} className={isEditMode ? 'pointer-events-none' : ''}>
-        <div className="flex flex-col lg:flex-row items-center text-center lg:text-left space-x-8 space-y-4 lg:space-y-0 hover:scale-105 transition">
+        <div
+          className={cn(
+            'flex flex-col items-center text-center gap-x-8',
+            'gap-y-4 hover:scale-105 transition',
+            'lg:flex-row lg:text-left lg:gap-y-0',
+          )}
+        >
           <Image
             src={`/images/products/${slug}/${slug}-1.jpg`}
             alt={`${category.title} Image`}
             className="w-54 h-44 rounded-lg object-cover shadow-sm"
           />
-          <div className="flex flex-col space-y-2 max-w-1/2">
+          <div className={cn('flex flex-col gap-2 px-4', 'md:max-w-1/2 md:px-0')}>
             <h3 className="text-2xl font-bold text-brand-orange line-clamp-2">{category.title}</h3>
             <p className="text-lg/relaxed line-clamp-4">{category.description}</p>
           </div>

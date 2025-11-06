@@ -1,9 +1,3 @@
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import playground from '@/assets/images/generic/products-image.jpg';
-import { Image } from '../../components/ui/Image';
-import './hotspots.css';
 import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { useState } from 'react';
@@ -11,11 +5,14 @@ import api from '../../api/axios';
 import { AddCardButton } from '../../components/ui/AddCardButton';
 import { Check } from '../../components/ui/Check';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
+import { HotspotImage } from '../../components/ui/HotspotImage';
 import { Loading } from '../../components/ui/Loading';
 import { Pen } from '../../components/ui/Pen';
 import { ProductsCard } from '../../components/ui/ProductsCard';
 import { useAuth } from '../../contexts/AuthContext';
 import { useProducts } from '../../contexts/ProductsContext';
+import { cn } from '../../utils/cn';
+import { useIsMobile } from '../../utils/useIsMobile';
 import type { ProductsCategory } from '../types';
 
 export const Products = () => {
@@ -24,6 +21,7 @@ export const Products = () => {
   const [deleteCategory, setDeleteCategory] = useState<ProductsCategory | null>(null);
   const { user } = useAuth();
   const { productsCategories, setProductsCategories, loading, fetchProductsCategories } = useProducts();
+  const isMobile = useIsMobile();
 
   const handleDeleteClick = (category: ProductsCategory) => {
     setDeleteCategory(category);
@@ -79,39 +77,17 @@ export const Products = () => {
     });
   };
 
-  const hotspotClasses =
-    'absolute z-11 bg-brand-orange hover:bg-white hover:text-brand-orange transition p-2 rounded-4xl text-white';
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-12">
+    <div className={cn('min-h-screen flex flex-col items-center justify-center py-12 px-4', 'md:px-12')}>
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex flex-col items-center min-h-screen space-y-16">
-          {/* Hero Image */}
-          <div className="relative rounded-xl overflow-hidden shadow-lg">
-            <Image
-              src={playground}
-              alt="Playground with hotspots"
-              className="w-full max-w-350 h-full object-cover relative z-10"
-              priority
-            />
-            <Link to="/products/playgrounds" className={`top-[18%] left-[38%] hotspot ${hotspotClasses}`}>
-              <FontAwesomeIcon icon={faInfo} className="text-lg" /> Playgrounds
-            </Link>
-            <Link
-              to="/products/safety-surfacing"
-              className={`top-[58%] left-[69%] hotspot ${hotspotClasses}`}
-            >
-              <FontAwesomeIcon icon={faInfo} className="text-lg" /> Safety Surfacing
-            </Link>
-            <Link to="/products/park-amenities" className={`top-[89%] left-[30%] hotspot ${hotspotClasses}`}>
-              <FontAwesomeIcon icon={faInfo} className="text-lg" /> Park Amenities
-            </Link>
-          </div>
+        <div className="flex flex-col items-center min-h-screen gap-16">
+          {/* Hotspot Image */}
+          {!isMobile && <HotspotImage />}
 
           {/* Blurb */}
-          <div className="mx-40">
+          <div className="lg:mx-40">
             <p className="text-xl/relaxed text-center">
               Since 2008, we’ve built playgrounds exemplifying our belief that play is for everyone,
               regardless of ability. That’s why we make inclusion a priority – not an option.
@@ -119,10 +95,12 @@ export const Products = () => {
           </div>
 
           {/* Headers */}
-          <div className="flex flex-col text-center space-y-12">
-            <h2 className="text-4xl font-semibold text-brand-orange">Let’s make playing fun!</h2>
-            <div className="flex items-center space-x-4">
-              <h1 className="text-6xl font-bold">Product Categories</h1>
+          <div className={cn('flex flex-col text-center gap-4', 'md:gap-12')}>
+            <h2 className={cn('text-2xl font-semibold text-brand-orange', 'md:text-4xl')}>
+              Let’s make playing fun!
+            </h2>
+            <div className="flex items-center gap-4">
+              <h1 className={cn('text-4xl font-bold', 'md:text-6xl')}>Product Categories</h1>
               {user &&
                 (isEditMode ? (
                   <Check onClick={() => setIsEditMode(false)} className="text-xl" />
@@ -135,7 +113,7 @@ export const Products = () => {
           {/* Categories */}
           <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
             <SortableContext items={productsCategories.map((c) => c.id)} strategy={rectSortingStrategy}>
-              <div className="grid grid-cols-2 gap-y-16 gap-x-32 max-w-350">
+              <div className={cn('grid grid-cols-1 gap-y-16 gap-x-32 max-w-350', 'md:grid-cols-2')}>
                 {/* ADMIN ONLY --- Add Products Page */}
                 {isEditMode && (
                   <AddCardButton
@@ -151,7 +129,7 @@ export const Products = () => {
                     disabled={!isEditMode}
                     isEditMode={isEditMode}
                     deleteItem={handleDeleteClick}
-                    className="last:odd:col-span-2 last:odd:justify-self-center last:odd:w-1/2"
+                    className="md:last:odd:col-span-2 md:last:odd:justify-self-center md:last:odd:w-1/2"
                   />
                 ))}
               </div>
