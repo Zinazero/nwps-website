@@ -17,7 +17,7 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
 
   return (
     <nav className="flex flex-col w-full text-2xl">
-      {links.map((link: LinkType, i) =>
+      {links.map((link: LinkType) =>
         link.isDropdown ? (
           <div key={link.label}>
             {/* Dropdown Link */}
@@ -70,19 +70,19 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
           </div>
         ) : (
           <Link key={link.label} to={link.to}>
-            <div
-              className={cn(
-                'px-4',
-                { 'text-brand-orange': locationPathname === link.to },
-                i !== links.length - 1 ? 'py-4' : 'pt-4',
-              )}
-            >
+            <div className={cn('p-4', { 'text-brand-orange': locationPathname === link.to })}>
               {link.label}
             </div>
-            {i !== links.length - 1 && <hr className="text-transparent-grey" />}
+            <hr className="text-transparent-grey" />
           </Link>
         ),
       )}
+      <Link to="/contact">
+        <div className="p-4 bg-brand-orange text-white">Request a Quote</div>
+      </Link>
+      <Link to="/store">
+        <div className="p-4 bg-brand-green text-white">Visit Store</div>
+      </Link>
     </nav>
   );
 };
