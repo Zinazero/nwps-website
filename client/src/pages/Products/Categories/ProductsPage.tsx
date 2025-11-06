@@ -68,7 +68,9 @@ export const ProductsPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-white gap-20 pb-26">
+    <div
+      className={cn('relative min-h-screen flex flex-col items-center justify-center bg-white gap-20 pb-26', 'md:pt-10')}
+    >
       {loading ? (
         <Loading />
       ) : (
@@ -78,22 +80,14 @@ export const ProductsPage = () => {
             {category && (
               <div className="flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16">
                 <div className={cn('flex flex-col items-center max-w-450 gap-x-30 gap-y-6', 'md:flex-row')}>
-                  {isMobile ? (
-                    <Image
-                      src={`/images/products/${slug}/${slug}-1.jpg`}
-                      alt={`${category.title} Category Photo`}
-                      priority
-                      className="rounded-xl"
-                    />
-                  ) : (
-                    <ImageMask
-                      src={`/images/products/${slug}/${slug}-1.jpg`}
-                      alt={`${category.title} Category Photo`}
-                      mask="rock-mask.svg"
-                      priority
-                    />
-                  )}
-                  <div className={cn('flex flex-col gap-6 text-center', 'md:text-left md:w-150')}>
+                  <ImageMask
+                    src={`/images/products/${slug}/${slug}-1.jpg`}
+                    alt={`${category.title} Category Photo`}
+                    mask="rock-mask.svg"
+                    priority
+                    className="md:w-1/2"
+                  />
+                  <div className={cn('flex flex-col gap-6 text-center', 'md:text-left md:w-1/2')}>
                     <h1 className={cn('text-5xl font-bold', 'md:text-6xl')}>{category.title}</h1>
                     <p className="text-xl/relaxed">{category.description}</p>
                   </div>

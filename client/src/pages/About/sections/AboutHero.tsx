@@ -41,6 +41,7 @@ export const AboutHero = () => {
               alt="Accessible Surfacing Playground"
               mask="squiggly-mask.svg"
               priority
+              className='w-1/2'
             />
           )}
         </div>
