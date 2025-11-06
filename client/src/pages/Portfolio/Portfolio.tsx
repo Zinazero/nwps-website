@@ -10,6 +10,7 @@ import { ParkCard } from '../../components/ui/ParkCard';
 import { Pen } from '../../components/ui/Pen';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import { useAuth } from '../../contexts/AuthContext';
+import { cn } from '../../utils/cn';
 import type { Park } from '../types';
 
 export const Portfolio = () => {
@@ -90,45 +91,45 @@ export const Portfolio = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center p-6 space-y-16">
+      <UnderlineHeader text="Portfolio" withArrow />
+      <div className="flex items-center space-x-4">
+        <h2 className="text-4xl font-semibold text-center">
+          Designing Playgrounds That Inspire Imagination and Outdoor Play
+        </h2>
+        {user &&
+          (isEditMode ? (
+            <Check onClick={() => setIsEditMode(false)} className="text-xl" />
+          ) : (
+            <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
+          ))}
+      </div>
       {loading ? (
         <Loading />
+      ) : parks.length < 1 ? (
+        <span className="text-xl text-gray-400">No parks available</span>
       ) : (
-        <>
-          <UnderlineHeader text="Portfolio" withArrow />
-          <div className="flex items-center space-x-4">
-            <h2 className="text-4xl font-semibold">
-              Designing Playgrounds That Inspire Imagination and Outdoor Play
-            </h2>
-            {user &&
-              (isEditMode ? (
-                <Check onClick={() => setIsEditMode(false)} className="text-xl" />
-              ) : (
-                <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
-              ))}
-          </div>
-          <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-            <SortableContext items={parks.map((p) => p.id)} strategy={rectSortingStrategy}>
-              <div className="grid grid-cols-2 lg:grid-cols-4 max-w-350">
-                {/* ADMIN ONLY --- Add Portfolio Item */}
-                {isEditMode && (
-                  <AddCardButton navigationRoute="/admin/add-edit-park" className="min-w-30 h-50" />
-                )}
+        <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+          <SortableContext items={parks.map((p) => p.id)} strategy={rectSortingStrategy}>
+            <div className={cn('grid grid-cols-1 max-w-350', 'md:grid-cols-2 lg:grid-cols-4')}>
+              {/* ADMIN ONLY --- Add Portfolio Item */}
+              {isEditMode && (
+                <AddCardButton navigationRoute="/admin/add-edit-park" className="min-w-30 h-50" />
+              )}
 
-                {/* Portfolio Items */}
-                {parks.map((park) => (
-                  <ParkCard
-                    key={park.id}
-                    park={park}
-                    disabled={!isEditMode}
-                    isEditMode={isEditMode}
-                    deleteItem={handleDeleteClick}
-                    className="mb-30"
-                  />
-                ))}
-              </div>
-            </SortableContext>
-          </DndContext>
-        </>
+              {/* Portfolio Items */}
+              {parks.map((park) => (
+                <ParkCard
+                  key={park.id}
+                  park={park}
+                  disabled={!isEditMode}
+                  isEditMode={isEditMode}
+                  deleteItem={handleDeleteClick}
+                  className="mb-30"
+                />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
       )}
 
       {/* Confirm Modal */}
