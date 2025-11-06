@@ -40,6 +40,15 @@ export const Header = () => {
     productsLinks,
     loading,
   };
+  
+  useEffect(() => {
+  if (mobileNavOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}, [mobileNavOpen]);
+
 
   return (
     <header className={cn('fixed top-0 z-50 w-full shadow-md bg-white', mobileNavOpen ? 'pt-4' : 'py-4')}>
@@ -63,7 +72,7 @@ export const Header = () => {
               animate={{ height: 'auto', y: 0 }}
               exit={{ height: 0, y: -20 }}
               transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-col overflow-hidden origin-top"
+              className="flex flex-col overflow-y-auto origin-top max-h-[90vh]"
             >
               <MobileNavbar {...navbarProps} />
             </motion.div>
