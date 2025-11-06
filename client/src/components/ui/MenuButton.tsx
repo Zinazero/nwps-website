@@ -1,24 +1,18 @@
-import { useState } from 'react';
 import { cn } from '../../utils/cn';
 
 interface MenuButtonProps {
+  open: boolean;
   onClick?: () => void;
 }
 
-export const MenuButton = ({ onClick }: MenuButtonProps) => {
-  const [open, setOpen] = useState(false);
+export const MenuButton = ({ open, onClick }: MenuButtonProps) => {
 
   const barClasses = 'absolute block h-0.5 w-6 bg-black transition-all duration-300 ease-in-out';
-
-  const buttonClick = () => {
-    if (onClick) onClick();
-    setOpen(!open);
-  };
 
   return (
     <button
       type="button"
-      onClick={buttonClick}
+      onClick={onClick}
       className="relative w-8 h-8 flex flex-col justify-center items-center"
     >
       <span className={cn(barClasses, open ? 'rotate-45 translate-y-0' : '-translate-y-2')} />
