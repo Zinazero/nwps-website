@@ -5,6 +5,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import api from '../../api/axios';
 import { Image } from '../../components/ui/Image';
 import { Loading } from '../../components/ui/Loading';
+import { cn } from '../../utils/cn';
 import type { Provider } from '../types';
 
 export const ProviderPage = () => {
@@ -38,17 +39,17 @@ export const ProviderPage = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex flex-col p-8 space-y-16 max-w-350">
+        <div className="flex flex-col p-8 gap-16 max-w-350">
           {/* Hero */}
-          <div className="flex justify-between space-x-12">
+          <div className={cn('flex flex-col gap-x-12 gap-y-6', 'md:flex-row')}>
             <Image
               src={`/images/providers/${slug}/${slug}-1.jpg`}
               alt="Children playing in play structure"
-              className="rounded-lg h-120"
+              className="rounded-lg w-full"
               priority
             />
-            <div className="flex flex-col space-y-24 max-w-2/5">
-              <div className="flex flex-col space-y-2">
+            <div className={cn('flex flex-col gap-8', 'md:max-w-2/5 md:gap-24')}>
+              <div className={cn('flex flex-col gap-2 text-center', 'md:text-left')}>
                 <span className="text-brand-blue">We can help make your playground dreams a reality.</span>
                 <h1 className="text-6xl font-bold">{provider.title}</h1>
               </div>
@@ -57,24 +58,33 @@ export const ProviderPage = () => {
           </div>
 
           {/* Links */}
-          <div className="flex items-center justify-between space-x-8 text-center">
-            <a href={provider.externalLink} target="_blank" rel="noopener noreferrer" className="w-1/2">
-              <div className="p-6 border rounded-lg space-x-2 text-xl font-semibold hover:scale-105 active:scale-100 transition">
+          <div className={cn('flex flex-col-reverse items-center gap-8 text-center', 'md:flex-row')}>
+            <a href={provider.externalLink} target="_blank" rel="noopener noreferrer" className="md:w-1/2">
+              <div
+                className={cn(
+                  'p-6 border rounded-lg space-x-2 text-xl font-semibold hover:scale-105',
+                  'active:scale-100 transition',
+                )}
+              >
                 <FontAwesomeIcon icon={faUpRightFromSquare} />
                 <span>Visit Website</span>
               </div>
             </a>
             <Link
               to="/contact"
-              className="w-1/2 p-6 bg-brand-blue hover:bg-brand-orange transition text-light rounded-lg text-xl font-semibold"
+              className={cn(
+                'p-6 bg-brand-blue hover:bg-brand-orange transition text-light rounded-lg',
+                'text-xl font-semibold',
+                'md:w-1/2',
+              )}
             >
               I'M INTERESTED IN THIS PRODUCT
             </Link>
           </div>
 
           {/* Blurb */}
-          <div className="flex flex-col space-y-4 mt-30">
-            <h3 className="text-4xl font-bold">{provider.title}</h3>
+          <div className={cn('flex flex-col gap-4', 'md:mt-30')}>
+            <h3 className={cn('text-4xl font-bold hidden', 'md:inline')}>{provider.title}</h3>
             <p className="text-xl/relaxed ">{provider.description}</p>
           </div>
         </div>
