@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
+dotenv.config({
+  path: path.resolve(process.cwd(), process.env.NODE_ENV === 'production' ? '.env.production' : '.env'),
+});
 import { prerender } from 'react-dom/static';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../src/App';
@@ -12,15 +15,6 @@ import { ProductsProvider } from '../src/contexts/ProductsContext';
 import { RecentProjectsProvider } from '../src/contexts/RecentProjectsContext';
 import type { Provider, StoreItem } from '../src/pages/types';
 import type { PrerenderData, PrPark, PrProductsCategory } from './types';
-
-dotenv.config({
-  path: path.resolve(process.cwd(), process.env.NODE_ENV === 'production' ? '.env.production' : '.env'),
-});
-
-export const CLIENT_BASE = process.env.VITE_CLIENT_BASE || 'http://localhost:5173';
-export const SERVER_BASE = process.env.VITE_SERVER_BASE || 'http://localhost:5004';
-export const OPTIMIZER_BASE = process.env.VITE_IMAGE_OPTIMIZER_BASE || 'http://localhost:4000';
-export const NODE_ENV = process.env.VITE_NODE_ENV || 'development';
 
 const staticRoutes = [
   '/',
@@ -42,8 +36,6 @@ interface DynamicData {
 
 const fetchDynamicData = async (): Promise<DynamicData> => {
   try {
-    if (!SERVER_BASE) throw new Error('SERVER_BASE not defined');
-
     // prProducts
     const productsRes = await api.get<PrProductsCategory[]>('/products/prerender');
     const prProducts = productsRes.data;
