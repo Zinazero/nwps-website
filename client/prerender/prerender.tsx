@@ -3,7 +3,7 @@ import path from 'node:path';
 import { prerender } from 'react-dom/static';
 import App from '../src/App';
 import { MemoryRouter } from 'react-router-dom';
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import { AuthProvider } from '../src/contexts/AuthContext';
 import { ProductsProvider } from '../src/contexts/ProductsContext';
 import { RecentProjectsProvider } from '../src/contexts/RecentProjectsContext';
@@ -12,6 +12,10 @@ import type { PrerenderData, PrPark, PrProductsCategory } from './types';
 import type { LinkType } from '../src/components/layout/types';
 import api from '../src/api/axios';
 import type { Provider, StoreItem } from '../src/pages/types';
+
+dotenv.config({
+  path: path.resolve(process.cwd(), process.env.NODE_ENV === 'production' ? '.env.production' : '.env'),
+});
 
 export const CLIENT_BASE = process.env.VITE_CLIENT_BASE || 'http://localhost:5173';
 export const SERVER_BASE = process.env.VITE_SERVER_BASE || 'http://localhost:5004';
