@@ -35,26 +35,20 @@ app.use('/api/contact', contactRouter);
 app.use('/api/store', storeRoutes);
 
 if (env.NODE_ENV === 'production') {
-  const clientDistPath = path.join(__dirname, '../../client/dist');
-  app.use(express.static(clientDistPath));
+const clientDistPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(clientDistPath, { extensions: ['html'] }));
 
-  app.get('*', (req, res) => {
-    const requestedPath = path.join(clientDistPath, req.path);
+// Fallback for SPA routes (all unmatched requests)
+app.get('*', (req, res) => {
+  const indexFile = path.join(clientDistPath, req.path, 'index.html');
+  
+  if (fs.existsSync(indexFile)) {
+    return res.sendFile(indexFile); // prerendered page
+  }
 
-    // Serve prerendered HTML if it exists
-    if (fs.existsSync(requestedPath) && fs.statSync(requestedPath).isFile()) {
-      return res.sendFile(requestedPath);
-    }
+  res.sendFile(path.join(clientDistPath, 'index.html')); // fallback SPA
+});
 
-    const indexHtmlPath = path.join(clientDistPath, req.path, 'index.html');
-    // Serve index.html inside a folder if it exists (prerendered route)
-    if (fs.existsSync(indexHtmlPath)) {
-      return res.sendFile(indexHtmlPath);
-    }
-
-    // Otherwise, fallback to SPA index.html
-    res.sendFile(path.join(clientDistPath, 'index.html'));
-  });
 }
 
 export default app;
