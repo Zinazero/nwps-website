@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import nwpsVeritcalLogo from '../../assets/logos/nwps-vertical-logo.svg';
 import type { OrderItem } from '../../components/forms/types';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
@@ -27,7 +26,7 @@ export const Store = () => {
     <div className="min-h-screen flex flex-col items-center px-6 py-12 relative">
       <div className="flex flex-col items-center w-full max-w-6xl">
         {/* LOGO */}
-        <img src={nwpsVeritcalLogo} alt="New World Park Solutions Logo" className="w-50 mb-6" />
+        <img src="/logos/nwps-vertical-logo.svg" alt="New World Park Solutions Logo" className="w-50 mb-6" />
 
         {/* HEADER */}
         <header className="text-center mb-10 space-y-3">

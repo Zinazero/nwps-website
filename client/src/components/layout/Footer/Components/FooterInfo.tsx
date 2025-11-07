@@ -1,13 +1,12 @@
 import { faFacebookF, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelopeOpen, faLocationArrow, faPhoneFlip } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { cn } from '../../../../utils/cn';
 import { Image } from '../../../ui/Image';
 
 export const FooterInfo = () => (
   <div className={cn('flex flex-col items-center px-8 pb-20 space-y-10', 'md:items-start md:w-1/4')}>
-    <Image src={nwpsVerticalLogo} alt="NWPS Logo" className="h-42" />
+    <Image src='/logos/nwps-vertical-logo.svg' alt="NWPS Logo" className="h-42" />
     <div className={cn('flex flex-col items-center gap-6', 'md:items-start')}>
       <span>
         <FontAwesomeIcon icon={faLocationArrow} /> Brantford, ON

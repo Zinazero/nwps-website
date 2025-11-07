@@ -1,7 +1,3 @@
-import brian from '@/assets/images/team/brian-salter.jpg';
-import mark from '@/assets/images/team/mark-jones.jpg';
-import mike from '@/assets/images/team/mike-hexamer.jpg';
-import wendy from '@/assets/images/team/wendy-hudgins.jpg';
 import { Image } from '../../../../components/ui/Image.tsx';
 import { UnderlineHeader } from '../../../../components/ui/UnderlineHeader.tsx';
 import { cn } from '../../../../utils/cn.ts';
@@ -16,21 +12,21 @@ export const OurTeam = () => {
   }
 
   const profiles: Profile[] = [
-    { image: mike, name: 'Mike Hexamer', title: 'President', blurb: MikeBlurb },
+    { image: '/images/team/mike-hexamer.jpg', name: 'Mike Hexamer', title: 'President', blurb: MikeBlurb },
     {
-      image: brian,
+      image: '/images/team/brian-salter.jpg',
       name: 'Brian Salter',
       title: 'Territory Manager — Niagara, GTA West and Golden Horseshoe',
       blurb: BrianBlurb,
     },
     {
-      image: wendy,
+      image: '/images/team/wendy-hudgins.jpg',
       name: 'Wendy Hudgins',
       title: 'Territory Manager — GTA North and Eastern Ontario',
       blurb: WendyBlurb,
     },
     {
-      image: mark,
+      image: '/images/team/mark-jones.jpg',
       name: 'Mark Jones',
       title: 'Territory Manager — Windsor, South Western Ontario, Northern Ontario',
       blurb: MarkBlurb,

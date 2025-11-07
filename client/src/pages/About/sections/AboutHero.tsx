@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import aboutImage from '@/assets/images/generic/about-image.jpg';
 import { ImageMask } from '../../../components/ui/ImageMask';
 import { UnderlineHeader } from '../../../components/ui/UnderlineHeader';
 import { cn } from '../../../utils/cn';
@@ -37,7 +36,7 @@ export const AboutHero = () => {
           </div>
           {!isMobile && (
             <ImageMask
-              src={aboutImage}
+              src="/images/generic/about-image.jpg"
               alt="Accessible Surfacing Playground"
               mask="squiggly-mask.svg"
               priority

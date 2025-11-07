@@ -1,8 +1,6 @@
-import './hotspots.css';
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import playground from '@/assets/images/generic/products-image.jpg';
 import { cn } from '../../utils/cn';
 import { Image } from './Image';
 
@@ -38,7 +36,7 @@ export const HotspotImage = () => {
   return (
     <div className="relative rounded-xl overflow-hidden shadow-lg">
       <Image
-        src={playground}
+        src="/images/generic/products-image.jpg"
         alt="Playground with hotspots"
         className="w-full max-w-350 h-full object-cover relative z-10"
         priority

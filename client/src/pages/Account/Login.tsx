@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import api from '../../api/axios';
 import { LoginForm } from '../../components/forms/LoginForm';
 import type { LoginFormValues } from '../../components/forms/types';
@@ -41,7 +40,7 @@ export const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center space-y-24">
-        <Image src={nwpsVerticalLogo} alt="NWPS Logo" className="h-42" />
+        <Image src="/logos/nwps-vertical-logo.svg" alt="NWPS Logo" className="h-42" />
         <LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
 
         {/* Error Message */}

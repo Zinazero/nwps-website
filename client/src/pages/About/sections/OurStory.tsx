@@ -1,11 +1,13 @@
-import ourStoryImage from '@/assets/images/generic/our-story-image.jpg';
 import { UnderlineHeader } from '../../../components/ui/UnderlineHeader';
 import { cn } from '../../../utils/cn';
 
 export const OurStory = () => {
   return (
     <section>
-      <div className="relative bg-cover bg-center" style={{ backgroundImage: `url(${ourStoryImage})` }}>
+      <div
+        className="relative bg-cover bg-center"
+        style={{ backgroundImage: 'url(/images/generic/our-story-image.jpg)' }}
+      >
         <div className="text-light bg-black/70 py-10 space-y-12">
           <div className="max-w-350 mx-auto flex flex-col items-center text-center p-10 space-y-12">
             <div className="relative">

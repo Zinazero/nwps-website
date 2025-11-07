@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import nwpsLogo from '@/assets/logos/nwps-logo.svg';
 import { useProducts } from '../../contexts/ProductsContext';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
@@ -40,22 +39,26 @@ export const Header = () => {
     productsLinks,
     loading,
   };
-  
-  useEffect(() => {
-  if (mobileNavOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
-}, [mobileNavOpen]);
 
+  useEffect(() => {
+    if (mobileNavOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [mobileNavOpen]);
 
   return (
     <header className={cn('fixed top-0 z-50 w-full shadow-md bg-white', mobileNavOpen ? 'pt-4' : 'py-4')}>
       <div className="flex flex-col w-full">
         <div className={cn('px-4 flex items-center justify-between')}>
           <button type="button" onClick={() => (pathname === '/' ? scrollUp() : navigate('/'))}>
-            <Image src={nwpsLogo} alt="NWPS Logo" className={cn('min-w-55 cursor-pointer')} priority />
+            <Image
+              src="/logos/nwps-logo.svg"
+              alt="NWPS Logo"
+              className={cn('min-w-55 cursor-pointer')}
+              priority
+            />
           </button>
 
           {isMobile ? (

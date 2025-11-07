@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import footerBackground from '@/assets/images/generic/background-playground-icons.png';
 import { useAuth } from '../../../contexts/AuthContext';
 import { cn } from '../../../utils/cn';
 import { useIsMobile } from '../../../utils/useIsMobile';
@@ -20,7 +19,7 @@ export const Footer = () => {
     <footer className="text-white">
       <div
         className="relative bg-center bg-black/85 p-2 flex flex-col items-center"
-        style={{ backgroundImage: `url(${footerBackground})` }}
+        style={{ backgroundImage: 'url(/images/generic/background-playground-icons.png)' }}
       >
         {/* Top Border */}
         <div className="absolute top-0 left-0 w-full h-2 grid grid-cols-3">

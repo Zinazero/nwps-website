@@ -1,4 +1,3 @@
-import innerPageHeaderArrow from '@/assets/icons/inner-page-header-arrow.png';
 import { useIsMobile } from '../../utils/useIsMobile';
 import { Image } from './Image';
 
@@ -29,7 +28,7 @@ export const UnderlineHeader: React.FC<UnderlineHeaderProps> = ({
           <path d="M8.1,146.2c0,0,240.6-55.6,479-13.8" />
         </svg>
       </div>
-      {withArrow && !isMobile && <Image src={innerPageHeaderArrow} alt="Spiral Arrow" />}
+      {withArrow && !isMobile && <Image src="/icons/inner-page-header-arrow.png" alt="Spiral Arrow" />}
     </div>
   );
 };

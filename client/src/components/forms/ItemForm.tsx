@@ -1,5 +1,4 @@
 import type { Section } from './types';
-import './sections.css';
 import { useState } from 'react';
 import { ConfirmModal } from '../ui/ConfirmModal';
 import { Loading } from '../ui/Loading';

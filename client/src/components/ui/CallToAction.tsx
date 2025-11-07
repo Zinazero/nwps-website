@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-import nwpsVerticalLogo from '@/assets/logos/nwps-vertical-logo.svg';
 import { cn } from '../../utils/cn';
 import { Image } from './Image';
 
@@ -12,7 +11,7 @@ export const CallToAction = () => {
         'lg:mx-auto lg:flex-row lg:gap-0 md:p-12',
       )}
     >
-      <Image src={nwpsVerticalLogo} alt="NWPS Logo" className="h-48" />
+      <Image src="/logos/nwps-vertical-logo.svg" alt="NWPS Logo" className="h-48" />
       <div className="flex-1 flex flex-col items-center gap-6 text-center">
         <p className="text-4xl text-brand-orange">Not sure which product to choose?</p>
         <div className={cn('flex flex-col gap-2 text-4xl font-bold', 'lg:flex-row')}>

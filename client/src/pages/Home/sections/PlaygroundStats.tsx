@@ -1,7 +1,3 @@
-import seesawIcon from '@/assets/icons/seesaw-icon.png';
-import slideIcon from '@/assets/icons/slide-icon.png';
-import smileIcon from '@/assets/icons/smile-icon.png';
-import swingIcon from '@/assets/icons/swing-icon.png';
 import { Image } from '../../../components/ui/Image';
 import { cn } from '../../../utils/cn';
 
@@ -29,22 +25,22 @@ export const PlaygroundStats = () => {
           )}
         >
           <div className="flex flex-col items-center justify-center text-center">
-            <Image src={slideIcon} alt="Slide Icon" className="h-40" />
+            <Image src="/icons/slide-icon.png" alt="Slide Icon" className="h-40" />
             <h4 className="text-4xl mt-6 mb-3">300,000+</h4>
             <span className="text-xl text-gray-600">Slide Rides</span>
           </div>
           <div className="flex flex-col items-center justify-center text-center">
-            <Image src={seesawIcon} alt="Slide Icon" className="h-40" />
+            <Image src="/icons/seesaw-icon.png" alt="Slide Icon" className="h-40" />
             <h4 className="text-4xl mt-6 mb-3">100,000+</h4>
             <span className="text-xl text-gray-600">See-Saws</span>
           </div>
           <div className="flex flex-col items-center justify-center text-center">
-            <Image src={swingIcon} alt="Slide Icon" className="h-40" />
+            <Image src="/icons/swing-icon.png" alt="Slide Icon" className="h-40" />
             <h4 className="text-4xl mt-6 mb-3">500,000+</h4>
             <span className="text-xl text-gray-600">Underducks</span>
           </div>
           <div className="flex flex-col items-center justify-center text-center">
-            <Image src={smileIcon} alt="Slide Icon" className="h-40" />
+            <Image src="/icons/smile-icon.png" alt="Slide Icon" className="h-40" />
             <h4 className="text-4xl mt-6 mb-3">1,000,000+</h4>
             <span className="text-xl text-gray-600">Happy Kids</span>
           </div>

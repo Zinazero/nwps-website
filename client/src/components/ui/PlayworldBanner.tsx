@@ -1,7 +1,5 @@
 import { useId } from 'react';
 import { Link } from 'react-router-dom';
-import playworldImage from '@/assets/images/generic/playworld-image.jpg';
-import playworldLogo from '@/assets/logos/pw-logo.svg';
 import { cn } from '../../utils/cn';
 import { Image } from './Image';
 
@@ -19,7 +17,7 @@ export const PlayworldBanner = () => {
             'lg:w-140 lg:items-start lg:text-left',
           )}
         >
-          <Image src={playworldLogo} alt="Playworld Logo" className="w-70" priority />
+          <Image src="/logos/pw-logo.svg" alt="Playworld Logo" className="w-70" priority />
           <h3 className="text-4xl font-bold">EXCLUSIVE ONTARIO DISTRIBUTOR FOR PLAYWORLD PRODUCTS</h3>
           <Link
             to="/providers/playworld"
@@ -30,7 +28,7 @@ export const PlayworldBanner = () => {
         </div>
         <Image
           className="w-140 rounded-lg shadow-md"
-          src={playworldImage}
+          src="/images/generic/playworld-image.jpg"
           alt="Children on Playground Image"
           priority
         />

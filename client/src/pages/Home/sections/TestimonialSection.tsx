@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import testimonialImage from '@/assets/images/generic/testimonial-image.jpg';
 import { cn } from '../../../utils/cn';
 
 export const TestimonialSection = () => {
@@ -7,7 +6,7 @@ export const TestimonialSection = () => {
     <section className="shadow-md">
       <div
         className="relative bg-cover bg-center px-10"
-        style={{ backgroundImage: `url(${testimonialImage})` }}
+        style={{ backgroundImage: 'url(/images/generic/testimonial-image.jpg)' }}
       >
         <div className="max-w-350 mx-auto">
           <div className={cn('flex flex-col bg-white h-full p-4 py-8 space-y-10', 'md:p-32 md:w-7/12')}>
