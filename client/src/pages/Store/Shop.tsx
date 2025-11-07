@@ -8,6 +8,7 @@ import { Loading } from '../../components/ui/Loading';
 import { ShopLabel } from '../../components/ui/ShopLabel';
 import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
+import { usePrerender } from '../../contexts/PrerenderContext';
 
 interface ShopProps {
   cart: OrderItem[];
@@ -15,8 +16,9 @@ interface ShopProps {
 }
 
 export const Shop = ({ cart, setCart }: ShopProps) => {
-  const [productList, setProductList] = useState<StoreItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  const prerenderData = usePrerender();
+  const [productList, setProductList] = useState<StoreItem[]>(prerenderData?.prStoreItems || []);
+  const [loading, setLoading] = useState(!prerenderData?.prStoreItems);
 
   const handleChange = (id: number, quantity: number) => {
     setCart((prev) => prev.map((prod) => (prod.id === id ? { ...prod, quantity } : prod)));

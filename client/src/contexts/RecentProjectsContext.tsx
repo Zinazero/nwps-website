@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import api from '../api/axios';
 import type { LinkType } from '../components/layout/types';
 import type { Park } from '../pages/types';
+import { usePrerender } from './PrerenderContext';
 
 interface RecentProjectsContextType {
   recentProjects: Park[];
@@ -14,9 +15,10 @@ interface RecentProjectsContextType {
 const RecentProjectsContext = createContext<RecentProjectsContextType | undefined>(undefined);
 
 export const RecentProjectsProvider = ({ children }: { children: ReactNode }) => {
-  const [recentProjects, setRecentProjects] = useState<Park[]>([]);
-  const [projectLinks, setProjectLinks] = useState<LinkType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const prerenderData = usePrerender();
+  const [recentProjects, setRecentProjects] = useState<Park[]>(prerenderData?.prRecentProjects || []);
+  const [projectLinks, setProjectLinks] = useState<LinkType[]>(prerenderData?.prProjectLinks || []);
+  const [loading, setLoading] = useState(!prerenderData?.prRecentProjects);
 
   const fetchRecentProjects = useCallback(async () => {
     try {

@@ -6,22 +6,19 @@ import { Loading } from '../../../components/ui/Loading';
 import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
 import { cn } from '../../../utils/cn';
-import type { Park } from '../../types';
-
-interface ParkSection {
-  id: number;
-  title: string;
-  description: string;
-}
+import type { Park, ParkSection } from '../../types';
+import { usePrerender } from '../../../contexts/PrerenderContext';
 
 export const ParkPage = () => {
   const { user } = useAuth();
   const { state } = useLocation();
-  const [park, setPark] = useState<Park>(state?.park);
-  const [sections, setSections] = useState<ParkSection[]>([]);
-  const [loading, setLoading] = useState(true);
-
+  
   const { park: slug } = useParams<{ park: string }>();
+  const prerenderData = usePrerender();
+  const prPark = prerenderData?.prParks?.find((p) => p.park.slug === slug);
+  const [park, setPark] = useState<Park>(prPark?.park || state?.park);
+  const [sections, setSections] = useState<ParkSection[]>(prPark?.sections || []);
+  const [loading, setLoading] = useState(!prPark);
   const navigate = useNavigate();
 
   useEffect(() => {

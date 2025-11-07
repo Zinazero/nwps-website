@@ -29,6 +29,22 @@ router.get('/', async (_req, res) => {
   }
 });
 
+router.get('/prerender', async (_req, res) => {
+  try {
+    const categories = await getAllProductsCategories();
+    const prProducts = [];
+    for (const category of categories) {
+      const sections = await getProductsSections(category.id);
+      prProducts.push({ category, sections });
+    }
+
+    res.json(prProducts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
 router.get('/slugs', async (_req, res) => {
   try {
     const productSlugs = await getProductSlugs();

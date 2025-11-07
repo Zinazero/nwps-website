@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "generate-masks": "TS_NODE_PROJECT=tsconfig.scripts.json node --loader ts-node/esm scripts/generateMaskSizes.ts",
-    "prerender": "tsx --tsconfig tsconfig.app.json prerender.tsx",
+    "prerender": "tsx --tsconfig tsconfig.app.json prerender/prerender.tsx",
     "build": "npm run generate-masks && tsc -b && vite build",
     "preview": "vite preview"
   },

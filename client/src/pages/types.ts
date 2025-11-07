@@ -7,11 +7,25 @@ export type Park = {
   slug: string;
 };
 
+export type ParkSection = {
+  id: number;
+  title: string;
+  description: string;
+};
+
 export type ProductsCategory = {
   id: number;
   title: string;
   description: string;
   slug: string;
+};
+
+export type ProductsSection = {
+  id: number;
+  title: string;
+  subheading?: string;
+  description: string;
+  externalLink?: string;
 };
 
 export type Provider = {

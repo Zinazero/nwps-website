@@ -12,9 +12,11 @@ import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import { useAuth } from '../../contexts/AuthContext';
 import { cn } from '../../utils/cn';
 import type { Park } from '../types';
+import { usePrerender } from '../../contexts/PrerenderContext';
 
 export const Portfolio = () => {
-  const [parks, setParks] = useState<Park[]>([]);
+  const prerenderData = usePrerender();
+  const [parks, setParks] = useState<Park[]>(prerenderData?.prParks?.map((p) => p.park) || []);
   const [loading, setLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);

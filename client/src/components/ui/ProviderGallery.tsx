@@ -6,9 +6,11 @@ import { chunkArray } from '../../utils/chunkArray';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
 import { ProviderBubble } from './ProviderBubble';
+import { usePrerender } from '../../contexts/PrerenderContext';
 
 export const ProviderGallery = () => {
-  const [providers, setProviders] = useState<Provider[]>([]);
+  const prerenderData = usePrerender();
+  const [providers, setProviders] = useState<Provider[]>(prerenderData?.prProviders || []);
 
   const isMobile = useIsMobile();
   const isMidWidth = useIsMobile(1400);

@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import api from '../api/axios';
 import type { LinkType } from '../components/layout/types';
 import type { ProductsCategory } from '../pages/types';
+import { usePrerender } from './PrerenderContext';
 
 interface ProductsContextType {
   productsCategories: ProductsCategory[];
@@ -15,9 +16,12 @@ interface ProductsContextType {
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
 
 export const ProductsProvider = ({ children }: { children: ReactNode }) => {
-  const [productsCategories, setProductsCategories] = useState<ProductsCategory[]>([]);
+  const prerenderData = usePrerender();
+  const [productsCategories, setProductsCategories] = useState<ProductsCategory[]>(
+    prerenderData?.prProducts?.map((p) => p.category) || [],
+  );
   const [productsLinks, setProductsLinks] = useState<LinkType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!prerenderData?.prProducts);
 
   const fetchProductsCategories = useCallback(async () => {
     try {

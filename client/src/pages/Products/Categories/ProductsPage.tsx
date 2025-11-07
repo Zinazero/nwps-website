@@ -8,24 +8,19 @@ import { Loading } from '../../../components/ui/Loading';
 import { Pen } from '../../../components/ui/Pen';
 import { useAuth } from '../../../contexts/AuthContext';
 import { cn } from '../../../utils/cn';
-import type { ProductsCategory } from '../../types';
-
-interface ProductsSection {
-  id: number;
-  title: string;
-  subheading?: string;
-  description: string;
-  externalLink?: string;
-}
+import type { ProductsCategory, ProductsSection } from '../../types';
+import { usePrerender } from '../../../contexts/PrerenderContext';
 
 export const ProductsPage = () => {
   const { user } = useAuth();
   const { state } = useLocation();
-  const [category, setCategory] = useState<ProductsCategory>(state?.category);
-  const [sections, setSections] = useState<ProductsSection[]>([]);
-  const [loading, setLoading] = useState(true);
-
+  
   const { category: slug } = useParams<{ category: string }>();
+  const prerenderData = usePrerender();
+  const prCategory = prerenderData?.prProducts?.find((p) => p.category.slug === slug);
+  const [category, setCategory] = useState<ProductsCategory>(prCategory?.category || state?.category);
+  const [sections, setSections] = useState<ProductsSection[]>(prCategory?.sections || []);
+  const [loading, setLoading] = useState(!prCategory);
   const navigate = useNavigate();
 
   useEffect(() => {

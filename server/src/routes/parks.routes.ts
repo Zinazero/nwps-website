@@ -30,6 +30,22 @@ router.get('/', async (_req, res) => {
   }
 });
 
+router.get('/prerender', async (_req, res) => {
+  try {
+    const parks = await getAllParks();
+    const prParks = [];
+    for (const park of parks) {
+      const sections = await getParkPortfolio(park.id);
+      prParks.push({ park, sections });
+    }
+
+    res.json(prParks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
 router.get('/slugs', async (_req, res) => {
   try {
     const parkSlugs = await getParkSlugs();
