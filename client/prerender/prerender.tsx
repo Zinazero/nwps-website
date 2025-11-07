@@ -139,9 +139,10 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
 
   const html = await streamToString(prelude);
 
-  const outputDir = path.join(process.cwd(), 'dist', ...route.replace(/^\//, '').split('/'));
+  const outputDir = path.join(process.cwd(), 'dist', 'prerender', ...route.replace(/^\//, '').split('/'));
   fs.mkdirSync(outputDir, { recursive: true });
-  fs.writeFileSync(path.join(outputDir, 'index.html'), html);
+  fs.writeFileSync(path.join(outputDir, 'index.html'), '<!DOCTYPE html>\n' + html);
+
   console.log(`Prerendered ${route}`);
 };
 

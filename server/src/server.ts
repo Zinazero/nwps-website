@@ -35,20 +35,24 @@ app.use('/api/contact', contactRouter);
 app.use('/api/store', storeRoutes);
 
 if (env.NODE_ENV === 'production') {
-const clientDistPath = path.join(__dirname, '../../client/dist');
-app.use(express.static(clientDistPath, { extensions: ['html'] }));
+  const clientDistPath = path.join(__dirname, '../../client/dist');
+  const prerenderPath = path.join(clientDistPath, 'prerender');
 
-// Fallback for SPA routes (all unmatched requests)
-app.get('*', (req, res) => {
-  const indexFile = path.join(clientDistPath, req.path, 'index.html');
-  
-  if (fs.existsSync(indexFile)) {
-    return res.sendFile(indexFile); // prerendered page
-  }
+  // Serve static assets (CSS, JS, images, etc.)
+  app.use(express.static(clientDistPath, { extensions: ['html'] }));
 
-  res.sendFile(path.join(clientDistPath, 'index.html')); // fallback SPA
-});
+  // Fallback for SPA and prerendered routes
+  app.get('*', (req, res) => {
+    const cleanPath = req.path.replace(/\/$/, ''); // Remove trailing slash for consistency
+    const prerenderFile = path.join(prerenderPath, cleanPath, 'index.html');
+    const spaIndex = path.join(clientDistPath, 'index.html');
 
+    if (fs.existsSync(prerenderFile)) {
+      return res.sendFile(prerenderFile);
+    }
+
+    return res.sendFile(spaIndex);
+  });
 }
 
 export default app;
