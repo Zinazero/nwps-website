@@ -6,6 +6,7 @@ import {
   getAllParks,
   getParkById,
   getParkBySlug,
+  getParkSlugs,
   getRecentParks,
   postPark,
   reorderParks,
@@ -23,6 +24,16 @@ router.get('/', async (_req, res) => {
   try {
     const parks = await getAllParks();
     res.json(parks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
+router.get('/slugs', async (_req, res) => {
+  try {
+    const parkSlugs = await getParkSlugs();
+    res.json(parkSlugs);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error.' });

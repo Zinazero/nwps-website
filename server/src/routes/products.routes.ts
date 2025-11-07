@@ -6,6 +6,7 @@ import {
   getAllProductsCategories,
   getProductsCategoryById,
   getProductsCategoryBySlug,
+  getProductSlugs,
   postProductsCategory,
   reorderProducts,
   updateProductsCategory,
@@ -22,6 +23,16 @@ router.get('/', async (_req, res) => {
   try {
     const categories = await getAllProductsCategories();
     res.json(categories);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
+router.get('/slugs', async (_req, res) => {
+  try {
+    const productSlugs = await getProductSlugs();
+    res.json(productSlugs);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error.' });

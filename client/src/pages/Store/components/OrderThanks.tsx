@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import { scrollUp } from '../../../components/ui/ScrollToTop';
 import { cn } from '../../../utils/cn';
+import { useEffect } from 'react';
 
 interface OrderThanksProps {
   orderNumber: string;
@@ -10,7 +11,9 @@ interface OrderThanksProps {
 }
 
 export const OrderThanks = ({ orderNumber, onClick }: OrderThanksProps) => {
-  scrollUp();
+  useEffect(() => {
+    scrollUp();
+  }, []);
 
   return (
     <motion.div

@@ -34,6 +34,11 @@ export const getParkById = async (parkId: number): Promise<Park> => {
   return res.rows[0];
 };
 
+export const getParkSlugs = async (): Promise<string[]> => {
+  const res: QueryResult<{ slug: string }> = await pool.query('SELECT slug FROM parks');
+  return res.rows.map((row) => row.slug);
+};
+
 export const postPark = async (park: Park, sections: PortfolioSection[]) => {
   const { title, location, description, blurb, slug } = park;
 

@@ -1,7 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import express from 'express';
-import { getAllProviders, getProviderBySlug, postProvider } from '../repositories/providers.repository';
+import {
+  getAllProviders,
+  getProviderBySlug,
+  getProviderSlugs,
+  postProvider,
+} from '../repositories/providers.repository';
 import { upload } from '../utils/multer';
 import { titleToSlugConverter } from '../utils/titleToSlugConverter';
 
@@ -12,6 +17,16 @@ router.get('/', async (_req, res) => {
   try {
     const providers = await getAllProviders();
     res.json(providers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
+router.get('/slugs', async (_req, res) => {
+  try {
+    const providerSlugs = await getProviderSlugs();
+    res.json(providerSlugs);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error.' });

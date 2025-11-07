@@ -26,6 +26,11 @@ export const getProductsCategoryById = async (categoryId: number): Promise<Produ
   return res.rows[0];
 };
 
+export const getProductSlugs = async (): Promise<string[]> => {
+  const res: QueryResult<{ slug: string }> = await pool.query('SELECT slug FROM products');
+  return res.rows.map((row) => row.slug);
+};
+
 export const postProductsCategory = async (products: ProductsCategory, sections: ProductsSection[]) => {
   const { title, subheading, description, slug } = products;
 

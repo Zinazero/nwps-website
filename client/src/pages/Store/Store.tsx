@@ -7,6 +7,8 @@ import { Shop } from './Shop';
 
 export const Store = () => {
   const [cart, setCart] = useState<OrderItem[]>(() => {
+    if (typeof window === 'undefined') return [];
+    
     try {
       const saved = localStorage.getItem('cart');
       return saved ? JSON.parse(saved) : [];

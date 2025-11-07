@@ -1,7 +1,7 @@
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
@@ -16,6 +16,8 @@ import { OrderThanks } from './components/OrderThanks';
 
 export const Order = () => {
   const [cart, setCart] = useState<OrderItem[]>(() => {
+    if (typeof window === 'undefined') return [];
+
     try {
       const saved = localStorage.getItem('cart');
       return saved ? JSON.parse(saved) : [];
@@ -96,7 +98,9 @@ export const Order = () => {
     }
   };
 
-  scrollUp();
+  useEffect(() => {
+    scrollUp();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center px-6 py-12 relative">

@@ -32,3 +32,8 @@ export const postProvider = async (provider: Provider) => {
     [title, blurb, description, externalLink, slug],
   );
 };
+
+export const getProviderSlugs = async (): Promise<string[]> => {
+  const res: QueryResult<{ slug: string }> = await pool.query('SELECT slug FROM providers');
+  return res.rows.map((row) => row.slug);
+};
