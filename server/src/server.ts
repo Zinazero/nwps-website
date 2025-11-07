@@ -36,35 +36,39 @@ app.use('/api/store', storeRoutes);
 
 if (env.NODE_ENV === 'production') {
   const clientDist = path.join(__dirname, '../../client/dist');
-  const prerenderPath = path.join(clientDist, 'prerender');
 
-  // Serve static assets (JS, CSS, images)
+  const crawlerUserAgents = [
+    /Googlebot/i,
+    /Bingbot/i,
+    /Slurp/i,
+    /DuckDuckBot/i,
+    /Baiduspider/i,
+    /YandexBot/i,
+  ];
+
+  function isCrawler(userAgent: any) {
+    return crawlerUserAgents.some((crawler) => crawler.test(userAgent));
+  }
+
+  // Only serve JS/CSS/images from clientDist
   app.use(express.static(clientDist, { extensions: ['html'] }));
 
   app.get('*', (req, res) => {
-    const ua = req.headers['user-agent']?.toLowerCase() || '';
+    if (isCrawler(req.headers['user-agent'])) {
+      // map SPA route to prerendered HTML
+      const routePath = req.path.replace(/^\/+/, ''); // removes leading /
+      const prerenderFile = path.join(clientDist, 'prerender', routePath, 'index.html');
 
-    const isCrawler =
-      ua.includes('googlebot') ||
-      ua.includes('bingbot') ||
-      ua.includes('slurp') ||
-      ua.includes('duckduckbot') ||
-      ua.includes('baiduspider') ||
-      ua.includes('yandex') ||
-      ua.includes('sogou');
-
-    // Serve prerendered HTML **only to crawlers**
-    if (isCrawler) {
-      const cleanPath = req.path.replace(/\/$/, '');
-      const prerenderFile = path.join(prerenderPath, ...cleanPath.split('/'), 'index.html');
-
-      if (fs.existsSync(prerenderFile)) {
-        return res.sendFile(prerenderFile);
-      }
+      res.sendFile(prerenderFile, (err) => {
+        if (err) {
+          // fallback to SPA if prerender file doesn't exist
+          res.sendFile(path.join(clientDist, 'index.html'));
+        }
+      });
+    } else {
+      // human user: always serve SPA
+      res.sendFile(path.join(clientDist, 'index.html'));
     }
-
-    // Humans always get SPA index.html
-    res.sendFile(path.join(clientDist, 'index.html'));
   });
 }
 
