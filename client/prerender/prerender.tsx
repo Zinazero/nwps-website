@@ -7,7 +7,6 @@ dotenv.config({
 import { prerender } from 'react-dom/static';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../src/App';
-import api from '../src/api/axios';
 import type { LinkType } from '../src/components/layout/types';
 import { AuthProvider } from '../src/contexts/AuthContext';
 import { PrerenderProvider } from '../src/contexts/PrerenderContext';
@@ -15,8 +14,7 @@ import { ProductsProvider } from '../src/contexts/ProductsContext';
 import { RecentProjectsProvider } from '../src/contexts/RecentProjectsContext';
 import type { Provider, StoreItem } from '../src/pages/types';
 import type { PrerenderData, PrPark, PrProductsCategory } from './types';
-
-console.log('SERVER_BASE:', process.env.VITE_SERVER_BASE);
+import axios from 'axios';
 
 const staticRoutes = [
   '/',
@@ -37,9 +35,14 @@ interface DynamicData {
 }
 
 const fetchDynamicData = async (): Promise<DynamicData> => {
+  const SERVER_BASE = process.env.SERVER_BASE || 'http://localhost:5004';
+
   try {
     // prProducts
-    const productsRes = await api.get<PrProductsCategory[]>('/products/prerender');
+    const productsRes = await axios.get<PrProductsCategory[]>(`${SERVER_BASE}/api/products/prerender`, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     const prProducts = productsRes.data;
 
     // Product slugs
@@ -52,7 +55,10 @@ const fetchDynamicData = async (): Promise<DynamicData> => {
     }));
 
     // prParks
-    const parksRes = await api.get<PrPark[]>('/parks/prerender');
+    const parksRes = await axios.get<PrPark[]>(`${SERVER_BASE}/api/parks/prerender`, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     const prParks = parksRes.data;
 
     // Park slugs
@@ -68,14 +74,20 @@ const fetchDynamicData = async (): Promise<DynamicData> => {
     }));
 
     // prProviders
-    const providersRes = await api.get<Provider[]>('/providers');
+    const providersRes = await axios.get<Provider[]>(`${SERVER_BASE}/api/providers`, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     const prProviders = providersRes.data;
 
     // Provider slugs
     const providerSlugs = prProviders.map((p) => p.slug);
 
     // prStoreItems
-    const storeItemsRes = await api.get<StoreItem[]>('/store');
+    const storeItemsRes = await axios.get<StoreItem[]>(`${SERVER_BASE}/api/store`, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     const prStoreItems = storeItemsRes.data;
 
     const prerenderData: PrerenderData = {
