@@ -38,21 +38,22 @@ if (env.NODE_ENV === 'production') {
   const clientDistPath = path.join(__dirname, '../../client/dist');
   const prerenderPath = path.join(clientDistPath, 'prerender');
 
-  // Serve static assets (CSS, JS, images, etc.)
+  // Serve static assets from the main build
   app.use(express.static(clientDistPath, { extensions: ['html'] }));
 
-  // Fallback for SPA and prerendered routes
-  app.get('*', (req, res) => {
-    const cleanPath = req.path.replace(/\/$/, ''); // Remove trailing slash for consistency
-    const prerenderFile = path.join(prerenderPath, cleanPath, 'index.html');
-    const spaIndex = path.join(clientDistPath, 'index.html');
+  // Serve prerendered routes first
+  app.use(express.static(prerenderPath, { extensions: ['html'] }));
 
+  // Fallback for SPA routes
+  app.get('*', (req, res) => {
+    const prerenderFile = path.join(prerenderPath, req.path, 'index.html');
     if (fs.existsSync(prerenderFile)) {
       return res.sendFile(prerenderFile);
     }
 
-    return res.sendFile(spaIndex);
+    res.sendFile(path.join(clientDistPath, 'index.html'));
   });
 }
+
 
 export default app;

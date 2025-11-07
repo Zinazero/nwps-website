@@ -147,7 +147,10 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
 
   const outputDir = path.join(process.cwd(), 'dist', 'prerender', ...route.replace(/^\//, '').split('/'));
   fs.mkdirSync(outputDir, { recursive: true });
-  fs.writeFileSync(path.join(outputDir, 'index.html'), '<!DOCTYPE html>\n' + html);
+  fs.writeFileSync(
+    path.join(outputDir, 'index.html'),
+    '<!DOCTYPE html>\n' + html.replace(/(href|src)="(\.\/)/g, '$1="/'),
+  );
 
   console.log(`Prerendered ${route}`);
 };
