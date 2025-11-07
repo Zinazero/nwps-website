@@ -4,9 +4,9 @@ import express from 'express';
 import {
   deleteProductsCategory,
   getAllProductsCategories,
+  getProductSlugs,
   getProductsCategoryById,
   getProductsCategoryBySlug,
-  getProductSlugs,
   postProductsCategory,
   reorderProducts,
   updateProductsCategory,

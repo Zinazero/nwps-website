@@ -1,12 +1,12 @@
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 import type { LinkType } from '../layout/types';
 import { Loading } from './Loading';
 import type { NavbarProps } from './types';
-import { AnimatePresence, motion } from 'framer-motion';
 
 /* 
  productsLinks is hardcoded as the only dropdown so additional logic has to be added to accomodate more dropdowns.

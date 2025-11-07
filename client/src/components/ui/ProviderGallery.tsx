@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/axios';
+import { usePrerender } from '../../contexts/PrerenderContext';
 import type { Provider } from '../../pages/types';
 import { chunkArray } from '../../utils/chunkArray';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
 import { ProviderBubble } from './ProviderBubble';
-import { usePrerender } from '../../contexts/PrerenderContext';
 
 export const ProviderGallery = () => {
   const prerenderData = usePrerender();

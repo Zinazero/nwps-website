@@ -5,9 +5,9 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import api from '../../api/axios';
 import { Image } from '../../components/ui/Image';
 import { Loading } from '../../components/ui/Loading';
+import { usePrerender } from '../../contexts/PrerenderContext';
 import { cn } from '../../utils/cn';
 import type { Provider } from '../types';
-import { usePrerender } from '../../contexts/PrerenderContext';
 
 export const ProviderPage = () => {
   const { state } = useLocation();
@@ -17,7 +17,6 @@ export const ProviderPage = () => {
   const prProvider = prerenderData?.prProviders?.find((p) => p.slug === slug);
   const [provider, setProvider] = useState<Provider>(prProvider || state?.provider);
   const [loading, setLoading] = useState(!prProvider);
-
 
   useEffect(() => {
     const fetchProvider = async () => {

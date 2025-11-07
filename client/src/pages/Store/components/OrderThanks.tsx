@@ -1,9 +1,9 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { scrollUp } from '../../../components/ui/ScrollToTop';
 import { cn } from '../../../utils/cn';
-import { useEffect } from 'react';
 
 interface OrderThanksProps {
   orderNumber: string;

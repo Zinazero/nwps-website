@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useProducts } from '../../contexts/ProductsContext';
@@ -10,7 +11,6 @@ import { Navbar } from '../ui/Navbar';
 import { scrollUp } from '../ui/ScrollToTop';
 import type { NavbarProps } from '../ui/types';
 import type { LinkType } from './types';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export const Header = () => {
   const { pathname } = useLocation();

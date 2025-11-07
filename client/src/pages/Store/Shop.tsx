@@ -6,9 +6,9 @@ import type { OrderItem } from '../../components/forms/types';
 import { Image } from '../../components/ui/Image';
 import { Loading } from '../../components/ui/Loading';
 import { ShopLabel } from '../../components/ui/ShopLabel';
+import { usePrerender } from '../../contexts/PrerenderContext';
 import { cn } from '../../utils/cn';
 import type { StoreItem } from '../types';
-import { usePrerender } from '../../contexts/PrerenderContext';
 
 interface ShopProps {
   cart: OrderItem[];

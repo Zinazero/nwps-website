@@ -1,8 +1,8 @@
-import type { Section } from './types';
 import { useState } from 'react';
 import { ConfirmModal } from '../ui/ConfirmModal';
 import { Loading } from '../ui/Loading';
 import { SectionForm } from './SectionForm';
+import type { Section } from './types';
 
 interface ItemFormProps {
   formType: 'park' | 'products';

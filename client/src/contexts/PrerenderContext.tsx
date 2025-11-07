@@ -1,6 +1,13 @@
-import { createContext, useContext, type ReactNode } from 'react';
-import type { Park, ParkSection, ProductsCategory, ProductsSection, Provider, StoreItem } from '../pages/types';
+import { createContext, type ReactNode, useContext } from 'react';
 import type { LinkType } from '../components/layout/types';
+import type {
+  Park,
+  ParkSection,
+  ProductsCategory,
+  ProductsSection,
+  Provider,
+  StoreItem,
+} from '../pages/types';
 
 interface PrProductsCategory {
   category: ProductsCategory;
