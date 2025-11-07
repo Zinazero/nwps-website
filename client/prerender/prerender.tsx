@@ -35,7 +35,7 @@ interface DynamicData {
 }
 
 const fetchDynamicData = async (): Promise<DynamicData> => {
-  const SERVER_BASE = process.env.SERVER_BASE || 'http://localhost:5004';
+  const SERVER_BASE = process.env.VITE_SERVER_BASE;
 
   try {
     // prProducts
