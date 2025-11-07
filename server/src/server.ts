@@ -1,4 +1,5 @@
 import path from 'node:path';
+import fs from 'node:fs';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
@@ -37,7 +38,21 @@ if (env.NODE_ENV === 'production') {
   const clientDistPath = path.join(__dirname, '../../client/dist');
   app.use(express.static(clientDistPath));
 
-  app.get(/^\/(?!api\/).*/, (_req, res) => {
+  app.get('*', (req, res) => {
+    const requestedPath = path.join(clientDistPath, req.path);
+
+    // Serve prerendered HTML if it exists
+    if (fs.existsSync(requestedPath) && fs.statSync(requestedPath).isFile()) {
+      return res.sendFile(requestedPath);
+    }
+
+    const indexHtmlPath = path.join(clientDistPath, req.path, 'index.html');
+    // Serve index.html inside a folder if it exists (prerendered route)
+    if (fs.existsSync(indexHtmlPath)) {
+      return res.sendFile(indexHtmlPath);
+    }
+
+    // Otherwise, fallback to SPA index.html
     res.sendFile(path.join(clientDistPath, 'index.html'));
   });
 }
