@@ -51,7 +51,7 @@ if (env.NODE_ENV === 'production') {
   }
 
   // Only serve JS/CSS/images from clientDist
-  app.use(express.static(clientDist, { extensions: ['html'] }));
+  app.use(express.static(clientDist, { index: false, redirect: false, extensions: ['html'] }));
 
   app.get('*', (req, res) => {
     if (isCrawler(req.headers['user-agent'])) {
