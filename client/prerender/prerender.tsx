@@ -1,9 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
+
 dotenv.config({
   path: path.resolve(process.cwd(), process.env.NODE_ENV === 'production' ? '.env.production' : '.env'),
 });
+
+import axios from 'axios';
 import { prerender } from 'react-dom/static';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../src/App';
@@ -14,7 +17,6 @@ import { ProductsProvider } from '../src/contexts/ProductsContext';
 import { RecentProjectsProvider } from '../src/contexts/RecentProjectsContext';
 import type { Provider, StoreItem } from '../src/pages/types';
 import type { PrerenderData, PrPark, PrProductsCategory } from './types';
-import axios from 'axios';
 
 const staticRoutes = [
   '/',
