@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -46,7 +45,8 @@ if (env.NODE_ENV === 'production') {
     /YandexBot/i,
   ];
 
-  function isCrawler(userAgent: any) {
+  function isCrawler(userAgent?: string) {
+    if (!userAgent) return false;
     return crawlerUserAgents.some((crawler) => crawler.test(userAgent));
   }
 
