@@ -16,6 +16,8 @@ import { RecentProjectsProvider } from '../src/contexts/RecentProjectsContext';
 import type { Provider, StoreItem } from '../src/pages/types';
 import type { PrerenderData, PrPark, PrProductsCategory } from './types';
 
+console.log('SERVER_BASE:', process.env.VITE_SERVER_BASE);
+
 const staticRoutes = [
   '/',
   '/about',
