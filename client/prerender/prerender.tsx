@@ -3,7 +3,7 @@ import path from 'node:path';
 import dotenv from 'dotenv';
 
 dotenv.config({
-  path: path.resolve(process.cwd(), process.env.NODE_ENV === 'production' ? '.env.production' : '.env'),
+  path: path.resolve(process.cwd(), process.env.VITE_NODE_ENV === 'production' ? '.env.production' : '.env'),
 });
 
 import axios from 'axios';
