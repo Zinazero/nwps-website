@@ -6,6 +6,7 @@ import type { ContactFormValues } from '../../components/forms/types';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import { cn } from '../../utils/cn';
 import { ContactBanner } from './sections/ContactBanner';
+import { SEO } from '../../components/seo/SEO';
 
 export const Contact = () => {
   const defaultForm: ContactFormValues = {
@@ -45,58 +46,68 @@ export const Contact = () => {
     }
   };
 
+  const metadata = {
+    title: 'Contact Us - New World Park Solutions',
+    description:
+      'Contact New World Park Solutions to discuss your park projects, request a quote or connect with our expert team.',
+    pathname: '/contact',
+  };
+
   return (
-    <div className={cn('flex flex-col items-center gap-10 p-4 pb-16', 'md:py-16')}>
-      <UnderlineHeader text="Contact" level={1} withArrow />
+    <>
+      <SEO {...metadata} />
+      <div className={cn('flex flex-col items-center gap-10 p-4 pb-16', 'md:py-16')}>
+        <UnderlineHeader text="Contact" level={1} withArrow />
 
-      <ContactBanner />
+        <ContactBanner />
 
-      <AnimatePresence mode="wait">
-        {isContactSent ? (
-          <>
-            {/* Contact Sent */}
+        <AnimatePresence mode="wait">
+          {isContactSent ? (
+            <>
+              {/* Contact Sent */}
+              <motion.div
+                key="contact-sent-div"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col items-center space-y-10 mt-40"
+              >
+                <div className="flex flex-col text-center space-y-2">
+                  <span className="text-2xl font-bold text-brand-orange">Thanks for reaching out!</span>
+                  <p className="text-lg">
+                    Your message has been received and a member of our team will respond shortly.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsContactSent(false)}
+                  className={cn(
+                    'p-2 w-1/2 bg-brand-orange hover:bg-brand-blue transition',
+                    'text-light font-bold rounded-lg active:scale-95 cursor-pointer',
+                  )}
+                >
+                  Return
+                </button>
+              </motion.div>
+            </>
+          ) : (
             <motion.div
-              key="contact-sent-div"
+              key="contact-form-div"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col items-center space-y-10 mt-40"
+              className={cn('w-full', 'md:w-auto')}
             >
-              <div className="flex flex-col text-center space-y-2">
-                <span className="text-2xl font-bold text-brand-orange">Thanks for reaching out!</span>
-                <p className="text-lg">
-                  Your message has been received and a member of our team will respond shortly.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsContactSent(false)}
-                className={cn(
-                  'p-2 w-1/2 bg-brand-orange hover:bg-brand-blue transition',
-                  'text-light font-bold rounded-lg active:scale-95 cursor-pointer',
-                )}
-              >
-                Return
-              </button>
+              <ContactForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
             </motion.div>
-          </>
-        ) : (
-          <motion.div
-            key="contact-form-div"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className={cn('w-full', 'md:w-auto')}
-          >
-            <ContactForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
 
-      {/* Error Message */}
-      {error && <span className="text-[red]">{error}</span>}
-    </div>
+        {/* Error Message */}
+        {error && <span className="text-[red]">{error}</span>}
+      </div>
+    </>
   );
 };

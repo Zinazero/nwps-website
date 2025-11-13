@@ -13,6 +13,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePrerender } from '../../contexts/PrerenderContext';
 import { cn } from '../../utils/cn';
 import type { Park } from '../types';
+import { SEO } from '../../components/seo/SEO';
 
 export const Portfolio = () => {
   const prerenderData = usePrerender();
@@ -91,56 +92,66 @@ export const Portfolio = () => {
     });
   };
 
+  const metadata = {
+    title: 'Parks Portfolio - New World Park Solutions',
+    description:
+      'Explore our portfolio of parks and playgrounds across Ontario. See how New World Park Solutions brings safe, fun and engaging outdoor spaces to communities.',
+    pathname: '/portfolio',
+  };
+
   return (
-    <div className={cn('min-h-screen flex flex-col items-center py-8 gap-16', 'md:py-16')}>
-      <UnderlineHeader text="Portfolio" level={1} withArrow />
-      <div className="flex items-center gap-4">
-        <h2 className="text-4xl font-semibold text-center">
-          Designing Playgrounds That Inspire Imagination and Outdoor Play
-        </h2>
-        {user &&
-          (isEditMode ? (
-            <Check onClick={() => setIsEditMode(false)} className="text-xl" />
-          ) : (
-            <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
-          ))}
+    <>
+      <SEO {...metadata} />
+      <div className={cn('min-h-screen flex flex-col items-center py-8 gap-16', 'md:py-16')}>
+        <UnderlineHeader text="Portfolio" level={1} withArrow />
+        <div className="flex items-center gap-4">
+          <h2 className="text-4xl font-semibold text-center">
+            Designing Playgrounds That Inspire Imagination and Outdoor Play
+          </h2>
+          {user &&
+            (isEditMode ? (
+              <Check onClick={() => setIsEditMode(false)} className="text-xl" />
+            ) : (
+              <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
+            ))}
+        </div>
+        {loading ? (
+          <Loading />
+        ) : parks.length < 1 ? (
+          <span className="text-xl text-gray-400">No parks available</span>
+        ) : (
+          <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+            <SortableContext items={parks.map((p) => p.id)} strategy={rectSortingStrategy}>
+              <div className={cn('grid grid-cols-1 max-w-350', 'md:grid-cols-2 lg:grid-cols-4')}>
+                {/* ADMIN ONLY --- Add Portfolio Item */}
+                {isEditMode && (
+                  <AddCardButton navigationRoute="/admin/add-edit-park" className="min-w-30 h-50" />
+                )}
+
+                {/* Portfolio Items */}
+                {parks.map((park) => (
+                  <ParkCard
+                    key={park.id}
+                    park={park}
+                    disabled={!isEditMode}
+                    isEditMode={isEditMode}
+                    deleteItem={handleDeleteClick}
+                    className="mb-30"
+                  />
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
+        )}
+
+        {/* Confirm Modal */}
+        <ConfirmModal
+          isOpen={confirmOpen}
+          message={`Are you sure you want to delete ${deletePark?.title}?`}
+          onConfirm={handleDelete}
+          onCancel={() => setConfirmOpen(false)}
+        />
       </div>
-      {loading ? (
-        <Loading />
-      ) : parks.length < 1 ? (
-        <span className="text-xl text-gray-400">No parks available</span>
-      ) : (
-        <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-          <SortableContext items={parks.map((p) => p.id)} strategy={rectSortingStrategy}>
-            <div className={cn('grid grid-cols-1 max-w-350', 'md:grid-cols-2 lg:grid-cols-4')}>
-              {/* ADMIN ONLY --- Add Portfolio Item */}
-              {isEditMode && (
-                <AddCardButton navigationRoute="/admin/add-edit-park" className="min-w-30 h-50" />
-              )}
-
-              {/* Portfolio Items */}
-              {parks.map((park) => (
-                <ParkCard
-                  key={park.id}
-                  park={park}
-                  disabled={!isEditMode}
-                  isEditMode={isEditMode}
-                  deleteItem={handleDeleteClick}
-                  className="mb-30"
-                />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-      )}
-
-      {/* Confirm Modal */}
-      <ConfirmModal
-        isOpen={confirmOpen}
-        message={`Are you sure you want to delete ${deletePark?.title}?`}
-        onConfirm={handleDelete}
-        onCancel={() => setConfirmOpen(false)}
-      />
-    </div>
+    </>
   );
 };

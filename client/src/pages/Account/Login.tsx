@@ -38,14 +38,17 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center space-y-24">
-        <Image src="/logos/nwps-vertical-logo.svg" alt="NWPS Logo" className="h-42" />
-        <LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
+    <>
+      <meta name="robots" content="noindex, nofollow" />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-24">
+          <Image src="/logos/nwps-vertical-logo.svg" alt="NWPS Logo" className="h-42" />
+          <LoginForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
 
-        {/* Error Message */}
-        {error && <span className="text-[red]">{error}</span>}
+          {/* Error Message */}
+          {error && <span className="text-[red]">{error}</span>}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

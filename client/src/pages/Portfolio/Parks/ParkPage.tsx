@@ -8,6 +8,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { usePrerender } from '../../../contexts/PrerenderContext';
 import { cn } from '../../../utils/cn';
 import type { Park, ParkSection } from '../../types';
+import { SEO } from '../../../components/seo/SEO';
 
 export const ParkPage = () => {
   const { user } = useAuth();
@@ -59,75 +60,85 @@ export const ParkPage = () => {
     });
   };
 
+  const metadata = {
+    title: `${park?.title} - New World Park Solutions`,
+    description: `${park?.title} by New World Park Solutions. Explore playground features, design and completed park projects across Ontario.`,
+    pathname: `/portfolio/${park?.slug}`,
+    image: `/images/playgrounds/${park?.slug}/${park?.slug}-1.jpg`,
+  };
+
   return (
-    <div
-      className={cn(
-        'relative min-h-screen flex flex-col items-center justify-center gap-12 bg-white',
-        'md:py-16',
-      )}
-    >
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          {/* Hero */}
-          {park && (
-            <div
-              className={cn(
-                'py-6 px-2 flex flex-col items-center gap-12 border-b border-transparent-grey pb-8',
-                'lg:border-0',
-              )}
-            >
-              {/* src has cache-busting parameter so it changes on update */}
-              <Image
-                src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${Date.now()}`}
-                alt={`${park.title} Image 1`}
-                className="w-full max-w-250 rounded-xl"
-                priority
-              />
-              <div className="text-center max-w-300 space-y-4">
-                <div>
-                  <h1 className="text-5xl font-bold">{park.title}</h1>
-                  <h2 className="text-lg text-grey">{park.location}</h2>
+    <>
+      <SEO {...metadata} />
+      <div
+        className={cn(
+          'relative min-h-screen flex flex-col items-center justify-center gap-12 bg-white',
+          'md:py-16',
+        )}
+      >
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            {/* Hero */}
+            {park && (
+              <div
+                className={cn(
+                  'py-6 px-2 flex flex-col items-center gap-12 border-b border-transparent-grey pb-8',
+                  'lg:border-0',
+                )}
+              >
+                {/* src has cache-busting parameter so it changes on update */}
+                <Image
+                  src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${Date.now()}`}
+                  alt={`${park.title} Image 1`}
+                  className="w-full max-w-250 rounded-xl"
+                  priority
+                />
+                <div className="text-center max-w-300 space-y-4">
+                  <div>
+                    <h1 className="text-5xl font-bold">{park.title}</h1>
+                    <h2 className="text-lg text-grey">{park.location}</h2>
+                  </div>
+                  <p className="text-xl ">{park.description}</p>
                 </div>
-                <p className="text-xl ">{park.description}</p>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Other Sections */}
-          {sections.map((section, index) => (
-            <div
-              key={section.title}
-              className={cn(
-                'flex flex-col items-center justify-center max-w-400',
-                'gap-12 border-b border-transparent-grey pb-8 px-2 text-center',
-                'lg:flex-row lg:gap-0 lg:border-0 lg:text-left',
-                index % 2 !== 0 ? 'lg:flex-row-reverse' : '',
-              )}
-            >
-              {park && (
-                <>
-                  {/* src has cache-busting parameter so it changes on update */}
-                  <Image
-                    src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg?v=${Date.now()}`}
-                    alt={`${section.title} Image`}
-                    className="w-150 rounded-xl"
-                    priority={index === 0}
-                  />
-                </>
-              )}
-              <div className={cn('flex flex-col gap-4 max-w-200 px-2', 'lg:px-12')}>
-                <h3 className="text-3xl font-bold">{section.title}</h3>
-                <p className="text-lg">{section.description}</p>
+            {/* Other Sections */}
+            {sections.map((section, index) => (
+              <div
+                key={section.title}
+                className={cn(
+                  'flex flex-col items-center justify-center max-w-400',
+                  'gap-12 border-b border-transparent-grey pb-8 px-2 text-center',
+                  'lg:flex-row lg:gap-0 lg:border-0 lg:text-left',
+                  index % 2 !== 0 ? 'lg:flex-row-reverse' : '',
+                )}
+              >
+                {park && (
+                  <>
+                    {/* src has cache-busting parameter so it changes on update */}
+                    <Image
+                      src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg?v=${Date.now()}`}
+                      alt={`${section.title} Image`}
+                      className="w-150 rounded-xl"
+                      priority={index === 0}
+                    />
+                  </>
+                )}
+                <div className={cn('flex flex-col gap-4 max-w-200 px-2', 'lg:px-12')}>
+                  <h3 className="text-3xl font-bold">{section.title}</h3>
+                  <p className="text-lg">{section.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </>
-      )}
+            ))}
+          </>
+        )}
 
-      {/* Edit Button */}
-      {user && <Pen onClick={handleEditPark} className="absolute top-10 right-10 text-2xl" />}
-    </div>
+        {/* Edit Button */}
+        {user && <Pen onClick={handleEditPark} className="absolute top-10 right-10 text-2xl" />}
+      </div>
+    </>
   );
 };

@@ -8,6 +8,7 @@ import { Loading } from '../../components/ui/Loading';
 import { usePrerender } from '../../contexts/PrerenderContext';
 import { cn } from '../../utils/cn';
 import type { Provider } from '../types';
+import { SEO } from '../../components/seo/SEO';
 
 export const ProviderPage = () => {
   const { state } = useLocation();
@@ -37,67 +38,76 @@ export const ProviderPage = () => {
     }
   }, [slug, provider]);
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="flex flex-col p-8 gap-16 max-w-350">
-          {/* Hero */}
-          <div className={cn('flex flex-col gap-x-12 gap-y-6', 'md:flex-row')}>
-            <Image
-              src={`/images/providers/${slug}/${slug}-1.jpg`}
-              alt="Children playing in play structure"
-              className="rounded-lg w-full"
-              priority
-            />
-            <div className={cn('flex flex-col gap-8', 'md:max-w-2/5 md:gap-24')}>
-              <div className={cn('flex flex-col-reverse gap-2 text-center', 'md:text-left')}>
-                <h1 className="text-6xl font-bold">{provider.title}</h1>
-                <h2 className="text-brand-blue">We can help make your playground dreams a reality.</h2>
-              </div>
-              <p className="text-2xl ">{provider.blurb}</p>
-            </div>
-          </div>
+  const metadata = {
+    title: `${provider?.title} - New World Park Solutions`,
+    description: `Learn about ${provider?.title}, a trusted provider of playground and park solutions featured by New World Park Solutions in Ontario.`,
+    pathname: `/providers/${provider?.slug}`,
+  };
 
-          {/* Links */}
-          <div className={cn('flex flex-col-reverse items-center gap-8 text-center', 'md:flex-row')}>
-            <a
-              href={provider.externalLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="md:w-1/2"
-              aria-label={`Visit ${provider.title}'s Website`}
-            >
-              <div
+  return (
+    <>
+      <SEO {...metadata} />
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="flex flex-col p-8 gap-16 max-w-350">
+            {/* Hero */}
+            <div className={cn('flex flex-col gap-x-12 gap-y-6', 'md:flex-row')}>
+              <Image
+                src={`/images/providers/${slug}/${slug}-1.jpg`}
+                alt="Children playing in play structure"
+                className="rounded-lg w-full"
+                priority
+              />
+              <div className={cn('flex flex-col gap-8', 'md:max-w-2/5 md:gap-24')}>
+                <div className={cn('flex flex-col-reverse gap-2 text-center', 'md:text-left')}>
+                  <h1 className="text-6xl font-bold">{provider.title}</h1>
+                  <h2 className="text-brand-blue">We can help make your playground dreams a reality.</h2>
+                </div>
+                <p className="text-2xl ">{provider.blurb}</p>
+              </div>
+            </div>
+
+            {/* Links */}
+            <div className={cn('flex flex-col-reverse items-center gap-8 text-center', 'md:flex-row')}>
+              <a
+                href={provider.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="md:w-1/2"
+                aria-label={`Visit ${provider.title}'s Website`}
+              >
+                <div
+                  className={cn(
+                    'p-6 border rounded-lg space-x-2 text-xl font-semibold hover:scale-105',
+                    'active:scale-100 transition',
+                  )}
+                >
+                  <FontAwesomeIcon icon={faUpRightFromSquare} />
+                  <span>Visit Website</span>
+                </div>
+              </a>
+              <Link
+                to="/contact"
                 className={cn(
-                  'p-6 border rounded-lg space-x-2 text-xl font-semibold hover:scale-105',
-                  'active:scale-100 transition',
+                  'p-6 bg-brand-blue hover:bg-brand-orange transition text-light rounded-lg',
+                  'text-xl font-semibold',
+                  'md:w-1/2',
                 )}
               >
-                <FontAwesomeIcon icon={faUpRightFromSquare} />
-                <span>Visit Website</span>
-              </div>
-            </a>
-            <Link
-              to="/contact"
-              className={cn(
-                'p-6 bg-brand-blue hover:bg-brand-orange transition text-light rounded-lg',
-                'text-xl font-semibold',
-                'md:w-1/2',
-              )}
-            >
-              I'M INTERESTED IN THIS PRODUCT
-            </Link>
-          </div>
+                I'M INTERESTED IN THIS PRODUCT
+              </Link>
+            </div>
 
-          {/* Blurb */}
-          <div className={cn('flex flex-col gap-4', 'md:mt-30')}>
-            <h3 className={cn('text-4xl font-bold hidden', 'md:inline')}>{provider.title}</h3>
-            <p className="text-xl/relaxed ">{provider.description}</p>
+            {/* Blurb */}
+            <div className={cn('flex flex-col gap-4', 'md:mt-30')}>
+              <h3 className={cn('text-4xl font-bold hidden', 'md:inline')}>{provider.title}</h3>
+              <p className="text-xl/relaxed ">{provider.description}</p>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
