@@ -17,7 +17,7 @@ export const Hero = () => {
         <div className="flex flex-col items-center justify-evenly h-full text-center">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl font-bold text-brand-orange">{title}</h1>
-            <h4 className="text-2xl text-gray-400">{subtitle}</h4>
+            <h2 className="text-2xl text-gray-400">{subtitle}</h2>
           </div>
 
           {/* Buttons */}

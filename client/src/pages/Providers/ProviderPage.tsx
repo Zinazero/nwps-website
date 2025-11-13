@@ -52,9 +52,9 @@ export const ProviderPage = () => {
               priority
             />
             <div className={cn('flex flex-col gap-8', 'md:max-w-2/5 md:gap-24')}>
-              <div className={cn('flex flex-col gap-2 text-center', 'md:text-left')}>
-                <span className="text-brand-blue">We can help make your playground dreams a reality.</span>
+              <div className={cn('flex flex-col-reverse gap-2 text-center', 'md:text-left')}>
                 <h1 className="text-6xl font-bold">{provider.title}</h1>
+                <h2 className="text-brand-blue">We can help make your playground dreams a reality.</h2>
               </div>
               <p className="text-2xl ">{provider.blurb}</p>
             </div>
@@ -62,7 +62,13 @@ export const ProviderPage = () => {
 
           {/* Links */}
           <div className={cn('flex flex-col-reverse items-center gap-8 text-center', 'md:flex-row')}>
-            <a href={provider.externalLink} target="_blank" rel="noopener noreferrer" className="md:w-1/2">
+            <a
+              href={provider.externalLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="md:w-1/2"
+              aria-label={`Visit ${provider.title}'s Website`}
+            >
               <div
                 className={cn(
                   'p-6 border rounded-lg space-x-2 text-xl font-semibold hover:scale-105',

@@ -92,10 +92,7 @@ export const Products = () => {
         </div>
 
         {/* Headers */}
-        <div className={cn('flex flex-col text-center gap-4', 'md:gap-12')}>
-          <h2 className={cn('text-2xl font-semibold text-brand-orange', 'md:text-4xl')}>
-            Let’s make playing fun!
-          </h2>
+        <div className={cn('flex flex-col-reverse text-center gap-4', 'md:gap-12')}>
           <div className="flex items-center gap-4">
             <h1 className={cn('text-4xl font-bold', 'md:text-6xl')}>Product Categories</h1>
             {user &&
@@ -105,6 +102,9 @@ export const Products = () => {
                 <Pen onClick={() => setIsEditMode(true)} className="text-xl" />
               ))}
           </div>
+          <h2 className={cn('text-2xl font-semibold text-brand-orange', 'md:text-4xl')}>
+            Let’s make playing fun!
+          </h2>
         </div>
 
         {/* Categories */}

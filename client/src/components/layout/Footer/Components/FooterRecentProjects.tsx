@@ -14,7 +14,7 @@ export const FooterRecentProjects = () => {
       )}
     >
       <div className={cn('flex flex-col items-center', 'md:inline')}>
-        <h5 className="text-2xl font-semibold">PORTFOLIO</h5>
+        <h4 className="text-2xl font-semibold">PORTFOLIO</h4>
         <div className="w-10 border-b-2 border-brand-orange border-dotted mt-3"></div>
       </div>
       <ul className={cn('text-center space-y-4', 'md:text-left')}>

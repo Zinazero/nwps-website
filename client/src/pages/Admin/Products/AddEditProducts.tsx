@@ -92,6 +92,7 @@ export const AddEditProducts = () => {
       <Link
         to="/products"
         className="absolute top-10 left-10 text-3xl text-brand-orange hover:scale-110 active:scale-100 transition"
+        aria-label="Back to products"
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>

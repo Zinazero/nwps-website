@@ -10,7 +10,9 @@ export const AboutHero = () => {
   return (
     <section>
       <div className={cn('flex flex-col items-center gap-y-12 py-8 px-6', 'md:py-16')}>
-        <UnderlineHeader text="About Us" withArrow />
+        <h1>
+          <UnderlineHeader text="About Us" level={1} withArrow />
+        </h1>
         <div className="max-w-350 flex items-center gap-30">
           <div
             className={cn(
@@ -18,7 +20,7 @@ export const AboutHero = () => {
               'md:items-start md:w-1/2 md:text-left',
             )}
           >
-            <h3 className="text-4xl font-semibold">Our Approach</h3>
+            <h2 className="text-4xl font-semibold">Our Approach</h2>
             <p className="text-xl/relaxed ">
               New World Park Solutions is a full-service park and playground equipment supplier dedicated to
               consistently providing high customer satisfaction through excellent service, unique high quality

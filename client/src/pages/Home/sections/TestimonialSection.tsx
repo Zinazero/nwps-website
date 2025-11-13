@@ -10,7 +10,7 @@ export const TestimonialSection = () => {
       >
         <div className="max-w-350 mx-auto">
           <div className={cn('flex flex-col bg-white h-full p-4 py-8 space-y-10', 'md:p-32 md:w-7/12')}>
-            <h2 className="text-5xl font-bold">What Our Clients Have To Say</h2>
+            <h3 className="text-5xl font-bold">What Our Clients Have To Say</h3>
             <h4 className="text-xl font-semibold">
               {'Faith Hale, Executive Director (Ska:na Family Learning Centre, Windsor)'}
             </h4>

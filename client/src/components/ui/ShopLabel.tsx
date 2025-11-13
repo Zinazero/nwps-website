@@ -11,6 +11,6 @@ export const ShopLabel = ({ text }: ShopLabelProps) => (
       'flex items-center justify-center text-brand-blue text-lg',
     )}
   >
-    {text}
+    <h3>{text}</h3>
   </div>
 );

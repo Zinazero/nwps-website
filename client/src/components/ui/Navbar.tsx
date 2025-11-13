@@ -40,9 +40,9 @@ export const Navbar = ({ locationPathname, links, productsLinks, loading }: Navb
               {loading ? (
                 <Loading />
               ) : productsLinks.length < 1 ? (
-                <Link to="#" className={cn('px-4 py-2 text-gray-400')}>
+                <div className={cn('px-4 py-2 text-gray-400')}>
                   No products available
-                </Link>
+                </div>
               ) : (
                 productsLinks.map((sublink) => (
                   <Link

@@ -17,7 +17,7 @@ export const PlaygroundStats = () => {
         </svg>
       </div>
       <div className="flex flex-col items-center justify-center bg-brand-blue-light p-4">
-        <h2 className="text-5xl font-bold text-black mb-16 text-center">Unofficial Playground Stats</h2>
+        <h3 className="text-5xl font-bold text-black mb-16 text-center">Unofficial Playground Stats</h3>
         <div
           className={cn(
             'flex flex-col gap-8 items-center justify-evenly w-full max-w-350',

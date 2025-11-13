@@ -37,7 +37,7 @@ export const OurTeam = () => {
     <section>
       <div className="flex flex-col items-center p-6">
         <div className="pt-4 pb-20">
-          <UnderlineHeader text="Our Team" />
+          <UnderlineHeader text="Our Team" level={3} />
         </div>
         <div className={cn('grid grid-cols-1', 'md:grid-cols-2')}>
           {profiles.map((profile, i) => (

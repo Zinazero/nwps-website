@@ -13,6 +13,7 @@ export const MenuButton = ({ open, onClick }: MenuButtonProps) => {
       type="button"
       onClick={onClick}
       className="relative w-8 h-8 flex flex-col justify-center items-center"
+      aria-label="Open Navigation Menu"
     >
       <span className={cn(barClasses, open ? 'rotate-45 translate-y-0' : '-translate-y-2')} />
       <span className={cn(barClasses, open ? 'opacity-0' : 'opacity-100')} />

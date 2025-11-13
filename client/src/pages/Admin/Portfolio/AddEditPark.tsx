@@ -124,6 +124,7 @@ export const AddEditPark = () => {
       <Link
         to="/portfolio"
         className="absolute top-10 left-10 text-3xl text-brand-orange hover:scale-110 active:scale-100 transition"
+        aria-label="Back to portfolio"
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>

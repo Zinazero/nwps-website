@@ -10,7 +10,7 @@ export const FooterContact = () => (
     )}
   >
     <div className={cn('flex flex-col items-center', 'md:inline')}>
-      <h5 className="text-2xl font-semibold">CONTACT US</h5>
+      <h4 className="text-2xl font-semibold">CONTACT US</h4>
       <div className="w-10 border-b-2 border-brand-orange border-dotted mt-3"></div>
     </div>
     <div className="flex flex-col gap-4">

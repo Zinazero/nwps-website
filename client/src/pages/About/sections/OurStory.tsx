@@ -11,7 +11,7 @@ export const OurStory = () => {
         <div className="text-light bg-black/70 py-10 space-y-12">
           <div className="max-w-350 mx-auto flex flex-col items-center text-center p-10 space-y-12">
             <div className="relative">
-              <UnderlineHeader text="Our Story" fontColorClass="text-light" />
+              <UnderlineHeader text="Our Story" level={3} fontColorClass="text-light" />
             </div>
             <p className={cn('text-xl/loose text-light!', 'md:w-2/3')}>
               {`New World Park Solutions is in our 18th year of business (est. 2008) 

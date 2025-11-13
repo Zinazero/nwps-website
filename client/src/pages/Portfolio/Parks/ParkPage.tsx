@@ -88,7 +88,7 @@ export const ParkPage = () => {
               <div className="text-center max-w-300 space-y-4">
                 <div>
                   <h1 className="text-5xl font-bold">{park.title}</h1>
-                  <h3 className="text-lg text-grey">{park.location}</h3>
+                  <h2 className="text-lg text-grey">{park.location}</h2>
                 </div>
                 <p className="text-xl ">{park.description}</p>
               </div>
@@ -118,7 +118,7 @@ export const ParkPage = () => {
                 </>
               )}
               <div className={cn('flex flex-col gap-4 max-w-200 px-2', 'lg:px-12')}>
-                <h2 className="text-3xl font-bold">{section.title}</h2>
+                <h3 className="text-3xl font-bold">{section.title}</h3>
                 <p className="text-lg">{section.description}</p>
               </div>
             </div>

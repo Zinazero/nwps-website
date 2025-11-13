@@ -1,23 +1,27 @@
 import { useIsMobile } from '../../utils/useIsMobile';
 import { Image } from './Image';
+import type { JSX, FC } from 'react';
 
 interface UnderlineHeaderProps {
   text: string;
+  level: 1 | 2 | 3 | 4 | 5 | 6;
   fontColorClass?: string;
   withArrow?: boolean;
 }
 
-export const UnderlineHeader: React.FC<UnderlineHeaderProps> = ({
+export const UnderlineHeader: FC<UnderlineHeaderProps> = ({
   text,
+  level,
   fontColorClass = 'text-dark',
   withArrow = false,
 }) => {
   const isMobile = useIsMobile();
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
   return (
     <div className="flex flex-col items-center space-y-12">
       <div className="relative">
-        <h1 className={`underline-header text-5xl font-bold ${fontColorClass}`}>{text}</h1>
+        <Tag className={`underline-header text-5xl font-bold ${fontColorClass}`}>{text}</Tag>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 500 150"

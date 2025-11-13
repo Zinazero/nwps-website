@@ -56,13 +56,13 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
                   {loading ? (
                     <Loading />
                   ) : productsLinks.length < 1 ? (
-                    <Link to="#">
+                    <div>
                       <div className="pl-8 pr-4 py-4 text-gray-400">No products available</div>
                       <hr className=" text-transparent-grey" />
-                    </Link>
+                    </div>
                   ) : (
                     productsLinks.map((sublink) => (
-                      <Link to={sublink.to} key={sublink.label}>
+                      <Link to={sublink.to} key={sublink.label} aria-label={sublink.label}>
                         <div
                           className={cn('pl-8 pr-4 py-4', {
                             'text-brand-orange': locationPathname.includes(sublink.to),
@@ -79,7 +79,7 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
             </AnimatePresence>
           </div>
         ) : (
-          <Link key={link.label} to={link.to}>
+          <Link key={link.label} to={link.to} aria-label={link.label}>
             <div className={cn('p-4', { 'text-brand-orange': locationPathname === link.to })}>
               {link.label}
             </div>
@@ -87,11 +87,11 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
           </Link>
         ),
       )}
-      <Link to="/contact">
-        <div className="p-4 bg-brand-orange text-white">Request a Quote</div>
+      <Link to="/contact" className="p-4 bg-brand-orange text-white">
+        Request a Quote
       </Link>
-      <Link to="/store">
-        <div className="p-4 bg-brand-green text-white">Visit Store</div>
+      <Link to="/store" className="p-4 bg-brand-green text-white">
+        Visit Store
       </Link>
     </nav>
   );

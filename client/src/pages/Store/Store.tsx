@@ -35,9 +35,9 @@ export const Store = () => {
           <h1 className={cn('text-4xl font-extrabold text-brand-orange tracking-tight', 'md:text-5xl')}>
             Swing Supply Store
           </h1>
-          <p className="text-lg text-brand-blue! max-w-md mx-auto">
+          <h2 className="text-lg text-brand-blue! max-w-md mx-auto">
             Get the best deal on swing seats in just a few clicks.
-          </p>
+          </h2>
         </header>
         {/* SHOP */}
         <Shop cart={cart} setCart={setCart} />

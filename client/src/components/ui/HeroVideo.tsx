@@ -26,6 +26,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({
         className="absolute top-0 left-0 w-full h-full object-cover"
         src={videoSrc}
         poster={poster}
+        aria-hidden
       />
 
       {/* Dark overlay for contrast */}
@@ -34,7 +35,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 text-white">
         <h1 className="text-5xl font-bold text-brand-orange">{title}</h1>
-        {subtitle && <h4 className="mt-2 text-2xl text-gray-300">{subtitle}</h4>}
+        {subtitle && <h2 className="mt-2 text-2xl text-gray-300">{subtitle}</h2>}
         {ctaText && (
           <button
             type="button"

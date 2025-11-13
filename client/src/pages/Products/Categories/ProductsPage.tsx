@@ -125,6 +125,7 @@ export const ProductsPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:scale-105 transition"
+                  aria-label={`More info on ${section.title}`}
                 >
                   {SectionContent}
                 </a>

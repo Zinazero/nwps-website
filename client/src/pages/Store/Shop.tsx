@@ -86,6 +86,7 @@ export const Shop = ({ cart, setCart }: ShopProps) => {
                     type="button"
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     onClick={() => setCart((prev) => [...prev, { ...prod, quantity: prod.increment }])}
+                    aria-label={prod.title}
                   />
                 )}
 

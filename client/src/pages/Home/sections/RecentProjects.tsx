@@ -15,14 +15,14 @@ export const RecentProjects = () => {
         <div className={cn('flex flex-col max-w-400 mx-auto px-4 py-14 space-y-10', 'md:px-20')}>
           <Link to="/portfolio">
             <div className={cn('flex flex-col items-center w-full group', 'md:flex-row')}>
-              <h2
+              <h3
                 className={cn(
                   'text-5xl font-bold text-nowrap mr-0 transition',
                   'md:mr-6 md:group-hover:translate-x-4',
                 )}
               >
                 Recent Projects
-              </h2>
+              </h3>
               <hr
                 className={cn(
                   'w-full text-brand-orange transition mt-4',

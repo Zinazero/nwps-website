@@ -11,7 +11,7 @@ export const AuthorizedDistributor = () => {
     <section>
       <div className="flex flex-col items-center justify-center bg-white mt-10 p-8 gap-8">
         <div className="flex items-center space-x-4">
-          <h2 className="text-5xl font-bold text-center text-brand-orange">Authorized Distributor</h2>
+          <h3 className="text-5xl font-bold text-center text-brand-orange">Authorized Distributor</h3>
           {user?.isSu && <Pen onClick={() => navigate('/admin/add-provider')} />}
         </div>
         <ProviderGallery />

@@ -69,11 +69,22 @@ export const ProviderGallery = () => {
         >
           {providerRow.map((provider) =>
             checkDirectLink(provider) ? (
-              <a key={provider.title} href={provider.externalLink} target="_blank" rel="noopener noreferrer">
+              <a
+                key={provider.title}
+                href={provider.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit ${provider.title}'s Website`}
+              >
                 <ProviderBubble provider={provider} />
               </a>
             ) : (
-              <Link key={provider.title} to={`/providers/${provider.slug}`} state={{ provider }}>
+              <Link
+                key={provider.title}
+                to={`/providers/${provider.slug}`}
+                state={{ provider }}
+                aria-label={`More info on ${provider.title}`}
+              >
                 <ProviderBubble provider={provider} />
               </Link>
             ),
