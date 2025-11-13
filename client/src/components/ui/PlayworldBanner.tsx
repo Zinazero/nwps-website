@@ -7,7 +7,7 @@ export const PlayworldBanner = () => {
   const playworldBannerId = useId();
 
   return (
-    <div id={playworldBannerId} className="bg-brand-blue-light shadow-md w-full">
+    <article id={playworldBannerId} className="bg-brand-blue-light shadow-md w-full">
       <div
         className={cn('flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 p-10')}
       >
@@ -24,6 +24,7 @@ export const PlayworldBanner = () => {
             className="rounded-lg p-2 bg-brand-orange text-light font-semibold text-center hover:bg-brand-blue transition"
           >
             Learn More
+            <span className="sr-only"> About Playworld</span>
           </Link>
         </div>
         <Image
@@ -33,6 +34,6 @@ export const PlayworldBanner = () => {
           priority
         />
       </div>
-    </div>
+    </article>
   );
 };

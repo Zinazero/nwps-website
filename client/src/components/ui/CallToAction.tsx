@@ -4,7 +4,7 @@ import { Image } from './Image';
 
 export const CallToAction = () => {
   return (
-    <div
+    <article
       className={cn(
         'max-w-300 mx-4 rounded-2xl shadow-xl bg-brand-blue-light',
         'p-8 flex flex-col items-center gap-6',
@@ -23,6 +23,6 @@ export const CallToAction = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 };

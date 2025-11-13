@@ -9,7 +9,7 @@ export const TestimonialSection = () => {
         style={{ backgroundImage: 'url(/images/generic/testimonial-image.jpg)' }}
       >
         <div className="max-w-350 mx-auto">
-          <div className={cn('flex flex-col bg-white h-full p-4 py-8 space-y-10', 'md:p-32 md:w-7/12')}>
+          <div className={cn('flex flex-col bg-white h-full p-4 py-8 space-y-10 rounded-4xl', 'lg:p-32 lg:w-7/12 lg:rounded-none')}>
             <h3 className="text-5xl font-bold">What Our Clients Have To Say</h3>
             <h4 className="text-xl font-semibold">
               {'Faith Hale, Executive Director (Ska:na Family Learning Centre, Windsor)'}
@@ -25,6 +25,7 @@ export const TestimonialSection = () => {
               className="rounded-lg p-2 bg-brand-blue text-light font-semibold text-center hover:bg-brand-orange transition"
             >
               Read More
+              <span className="sr-only"> Testimonials</span>
             </Link>
           </div>
         </div>
