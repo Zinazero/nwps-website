@@ -23,9 +23,9 @@ export const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) =>
         )}
       >
         <div className={cn('flex flex-col gap-6', 'md:w-1/2 md:gap-14')}>
-          <h3 className={cn('text-2xl text-center font-bold text-brand-blue', 'md:text-left')}>
+          <h2 className={cn('text-2xl text-center font-bold text-brand-blue', 'md:text-left')}>
             {testimonial.title}
-          </h3>
+          </h2>
           <p className="text-lg">{testimonial.blurb}</p>
         </div>
         <div className="flex justify-center w-1/2">

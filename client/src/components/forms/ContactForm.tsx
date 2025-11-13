@@ -18,6 +18,8 @@ export const ContactForm = ({ form, setForm, handleSubmit, loading }: ContactFor
 
   return (
     <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+      <h3 className="sr-only">Contact Form</h3>
+
       {/* Contact Info */}
       <ContactFieldSet form={form} onChange={handleChange} />
 

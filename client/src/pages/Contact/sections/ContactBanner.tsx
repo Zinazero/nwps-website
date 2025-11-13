@@ -32,7 +32,7 @@ export const ContactBanner = () => {
           </div>
 
           <div className={textContainerClasses}>
-            <h3 className={headerClasses}>Reach Us</h3>
+            <h2 className={headerClasses}>Reach Us</h2>
             <p className={pClasses}>{address}</p>
           </div>
         </div>
@@ -44,7 +44,7 @@ export const ContactBanner = () => {
           </div>
 
           <div className={textContainerClasses}>
-            <h3 className={headerClasses}>Call Us</h3>
+            <h2 className={headerClasses}>Call Us</h2>
             <p className={pClasses}>{phoneNumber}</p>
           </div>
         </div>
@@ -56,7 +56,7 @@ export const ContactBanner = () => {
           </div>
 
           <div className={textContainerClasses}>
-            <h3 className={headerClasses}>Email Us</h3>
+            <h2 className={headerClasses}>Email Us</h2>
             <p className={pClasses}>{emailAddress}</p>
           </div>
         </div>

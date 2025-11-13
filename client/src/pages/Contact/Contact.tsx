@@ -47,7 +47,7 @@ export const Contact = () => {
 
   return (
     <div className={cn('flex flex-col items-center gap-10 p-4 pb-16', 'md:py-16')}>
-      <UnderlineHeader text="Contact" withArrow />
+      <UnderlineHeader text="Contact" level={1} withArrow />
 
       <ContactBanner />
 
