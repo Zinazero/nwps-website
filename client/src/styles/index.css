@@ -50,6 +50,7 @@ html {
 
 img {
 	user-select: none;
+	overflow-clip-margin: unset;
 }
 
 p {
@@ -72,7 +73,7 @@ select {
 
 input,
 textarea {
-	@apply focus:scale-105
+	@apply focus:scale-105;
 }
 
 .underline-header + svg path {
