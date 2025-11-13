@@ -1,6 +1,6 @@
 import type { QueryResult } from 'pg';
 import pool from '../db';
-import { ProductOrder, ProductsCategory, ProductsSection } from '../types';
+import { ProductOrder, ProductsCategory, ProductsSection, Route } from '../types';
 import { postProductsSections } from './productsSections.repository';
 
 export const getAllProductsCategories = async (): Promise<ProductsCategory[]> => {
@@ -26,9 +26,14 @@ export const getProductsCategoryById = async (categoryId: number): Promise<Produ
   return res.rows[0];
 };
 
-export const getProductSlugs = async (): Promise<string[]> => {
-  const res: QueryResult<{ slug: string }> = await pool.query('SELECT slug FROM products');
-  return res.rows.map((row) => row.slug);
+export const getProductRoutes = async (): Promise<Route[]> => {
+  const res: QueryResult<{ slug: string, updated_at: string }> = await pool.query('SELECT slug, updated_at FROM products');
+    const routes = res.rows.map((row) => ({
+    url: `/products/${row.slug}`,
+    lastmod: row.updated_at ? new Date(row.updated_at).toISOString() : new Date().toISOString(),
+  }));
+
+  return routes;
 };
 
 export const postProductsCategory = async (products: ProductsCategory, sections: ProductsSection[]) => {

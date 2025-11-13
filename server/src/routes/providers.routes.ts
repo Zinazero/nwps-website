@@ -23,10 +23,10 @@ router.get('/', async (_req, res) => {
   }
 });
 
-router.get('/slugs', async (_req, res) => {
+router.get('/sitemap', async (_req, res) => {
   try {
-    const providerSlugs = await getProviderSlugs();
-    res.json(providerSlugs);
+    const providerRoutes = await getProviderSlugs();
+    res.json(providerRoutes);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error.' });

@@ -1,6 +1,6 @@
 import type { QueryResult } from 'pg';
 import pool from '../db';
-import { DbError, Park, ParkOrder, PortfolioSection } from '../types';
+import { DbError, Park, ParkOrder, PortfolioSection, Route } from '../types';
 import { postPortfolioSections } from './portfolioSections.repository';
 
 export const getAllParks = async (): Promise<Park[]> => {
@@ -34,9 +34,17 @@ export const getParkById = async (parkId: number): Promise<Park> => {
   return res.rows[0];
 };
 
-export const getParkSlugs = async (): Promise<string[]> => {
-  const res: QueryResult<{ slug: string }> = await pool.query('SELECT slug FROM parks');
-  return res.rows.map((row) => row.slug);
+export const getParkRoutes = async (): Promise<Route[]> => {
+  const res: QueryResult<{ slug: string; updated_at: string }> = await pool.query(
+    'SELECT slug, updated_at FROM parks',
+  );
+
+  const routes = res.rows.map((row) => ({
+    url: `/portfolio/${row.slug}`,
+    lastmod: row.updated_at ? new Date(row.updated_at).toISOString() : new Date().toISOString(),
+  }));
+
+  return routes;
 };
 
 export const postPark = async (park: Park, sections: PortfolioSection[]) => {

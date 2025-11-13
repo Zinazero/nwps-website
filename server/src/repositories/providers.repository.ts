@@ -1,5 +1,6 @@
 import { QueryResult } from 'pg';
 import pool from '../db';
+import { Route } from '../types';
 
 interface Provider {
   title: string;
@@ -33,7 +34,15 @@ export const postProvider = async (provider: Provider) => {
   );
 };
 
-export const getProviderSlugs = async (): Promise<string[]> => {
-  const res: QueryResult<{ slug: string }> = await pool.query('SELECT slug FROM providers');
-  return res.rows.map((row) => row.slug);
+export const getProviderSlugs = async (): Promise<Route[]> => {
+  const res: QueryResult<{ slug: string; updated_at: string }> = await pool.query(
+    'SELECT slug, updated_at FROM providers',
+  );
+
+  const routes = res.rows.map((row) => ({
+    url: `/proviers/${row.slug}`,
+    lastmod: row.updated_at ? new Date(row.updated_at).toISOString() : new Date().toISOString(),
+  }));
+
+  return routes;
 };

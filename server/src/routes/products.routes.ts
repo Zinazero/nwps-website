@@ -4,7 +4,7 @@ import express from 'express';
 import {
   deleteProductsCategory,
   getAllProductsCategories,
-  getProductSlugs,
+  getProductRoutes,
   getProductsCategoryById,
   getProductsCategoryBySlug,
   postProductsCategory,
@@ -45,10 +45,10 @@ router.get('/prerender', async (_req, res) => {
   }
 });
 
-router.get('/slugs', async (_req, res) => {
+router.get('/sitemap', async (_req, res) => {
   try {
-    const productSlugs = await getProductSlugs();
-    res.json(productSlugs);
+    const productRoutes = await getProductRoutes();
+    res.json(productRoutes);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error.' });

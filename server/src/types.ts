@@ -88,3 +88,8 @@ export type Field = {
   label: string;
   info: string;
 };
+
+export type Route = {
+  url: string;
+  lastmod: string;
+}
