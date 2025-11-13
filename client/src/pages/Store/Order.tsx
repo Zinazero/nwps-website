@@ -157,9 +157,9 @@ export const Order = () => {
                       className="flex flex-col"
                     >
                       <h1 className="text-4xl font-bold text-brand-orange mb-4 text-center">Order Form</h1>
-                      <p className="text-center mb-8">
+                      <h2 className="text-center mb-8">
                         Submit an order request and we’ll send you an invoice.
-                      </p>
+                      </h2>
 
                       <OrderForm
                         form={form}

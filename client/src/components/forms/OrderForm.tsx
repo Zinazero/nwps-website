@@ -20,6 +20,8 @@ export const OrderForm = ({ form, setForm, handleSubmit, loading }: OrderFormPro
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <h3 className="sr-only">Order Fields</h3>
+
       {/* Contact Info */}
       <ContactFieldSet form={form} onChange={handleChange} />
 
