@@ -59,7 +59,7 @@ export const ProductsCard = ({
         />
         <div className={cn('flex flex-col gap-2 px-4', 'md:max-w-1/2 md:px-0')}>
           <h3 className="text-2xl font-bold text-brand-orange line-clamp-3">{category.title}</h3>
-          <p className={cn('text-lg/relaxed line-clamp-4 hidden', 'lg:inline')}>{category.description}</p>
+          <p className={cn('text-lg/relaxed hidden', 'lg:inline lg:line-clamp-4!')}>{category.description}</p>
         </div>
       </Link>
 
