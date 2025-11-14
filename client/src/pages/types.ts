@@ -5,6 +5,7 @@ export type Park = {
   description: string;
   blurb: string;
   slug: string;
+  imageVersion: number;
 };
 
 export type ParkSection = {
@@ -18,6 +19,7 @@ export type ProductsCategory = {
   title: string;
   description: string;
   slug: string;
+  imageVersion: number;
 };
 
 export type ProductsSection = {

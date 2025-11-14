@@ -10,6 +10,7 @@ export type Park = {
   description: string;
   blurb: string;
   slug: string;
+  imageVersion: number;
 };
 
 export type ParkOrder = {
@@ -30,6 +31,7 @@ export type ProductsCategory = {
   subheading?: string;
   description: string;
   slug: string;
+  imageVersion: number;
 };
 
 export type ProductOrder = {

@@ -53,7 +53,7 @@ export const ProductsCard = ({
         )}
       >
         <Image
-          src={`/images/products/${slug}/${slug}-1.jpg`}
+          src={`/images/products/${slug}/${slug}-1.jpg?v=${category.imageVersion}`}
           alt={`${category.title} Image`}
           className="w-54 h-44 rounded-lg object-cover shadow-sm"
         />

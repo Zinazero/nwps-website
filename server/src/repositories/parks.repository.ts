@@ -5,14 +5,14 @@ import { postPortfolioSections } from './portfolioSections.repository';
 
 export const getAllParks = async (): Promise<Park[]> => {
   const res: QueryResult<Park> = await pool.query(
-    'SELECT id, title, location, description, blurb, slug FROM parks ORDER BY sort_order ASC',
+    'SELECT id, title, location, description, blurb, slug, image_version AS "imageVersion"  FROM parks ORDER BY sort_order ASC',
   );
   return res.rows;
 };
 
 export const getRecentParks = async (quantity: number = 3): Promise<Park[]> => {
   const res: QueryResult<Park> = await pool.query(
-    'SELECT id, title, location, description, blurb, slug FROM parks ORDER BY sort_order ASC LIMIT $1',
+    'SELECT id, title, location, description, blurb, slug, image_version AS "imageVersion" FROM parks ORDER BY sort_order ASC LIMIT $1',
     [quantity],
   );
   return res.rows;
@@ -90,7 +90,7 @@ export const updatePark = async (park: Park, sections: PortfolioSection[]) => {
     await client.query('BEGIN');
 
     await client.query(
-      'UPDATE parks SET title = $1, location = $2, description = $3, blurb = $4 WHERE id = $5',
+      'UPDATE parks SET title = $1, location = $2, description = $3, blurb = $4, image_version = image_version + 1 WHERE id = $5',
       [title, location, description, blurb, id],
     );
 

@@ -53,7 +53,7 @@ export const ProductsPage = () => {
     const categoryId = category.id;
     const categorySections = [category, ...sections].map((section, index) => ({
       ...section,
-      image: `/images/products/${slug}/${slug}-${index + 1}.jpg`,
+      image: `/images/products/${slug}/${slug}-${index + 1}.jpg?v=${category?.imageVersion}`,
     }));
 
     navigate('/admin/add-edit-products', {
@@ -65,7 +65,7 @@ export const ProductsPage = () => {
     title: `${category?.title} - New World Park Solutions`,
     description: `Explore ${category?.title} from New World Park Solutions. High-quality playground products designed for fun, safety and durability.`,
     pathname: `/products/${category?.slug}`,
-    image: `/images/products/${category?.slug}/${category?.slug}`,
+    image: `/images/products/${category?.slug}/${category?.slug}.jpg?v=${category?.imageVersion}`,
   };
 
   return (
@@ -87,7 +87,7 @@ export const ProductsPage = () => {
                 <div className="flex w-full items-center justify-center border-b-3 border-dashed border-brand-orange pb-16">
                   <div className={cn('flex flex-col items-center max-w-450 gap-x-30 gap-y-6', 'md:flex-row')}>
                     <ImageMask
-                      src={`/images/products/${slug}/${slug}-1.jpg`}
+                      src={`/images/products/${slug}/${slug}-1.jpg?v=${category.imageVersion}`}
                       alt={`${category.title} Category Photo`}
                       mask="rock-mask.svg"
                       priority
@@ -119,7 +119,7 @@ export const ProductsPage = () => {
                     </div>
                     {category && (
                       <Image
-                        src={`/images/products/${slug}/${slug}-${index + 2}.jpg`}
+                        src={`/images/products/${slug}/${slug}-${index + 2}.jpg?v=${category.imageVersion}`}
                         alt={`${section.title} Image`}
                         className="rounded-xl"
                         priority={index === 0}

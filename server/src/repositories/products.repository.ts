@@ -5,7 +5,7 @@ import { postProductsSections } from './productsSections.repository';
 
 export const getAllProductsCategories = async (): Promise<ProductsCategory[]> => {
   const res: QueryResult<ProductsCategory> = await pool.query(
-    'SELECT id, title, description, slug FROM products ORDER BY sort_order ASC',
+    'SELECT id, title, description, slug, image_version AS "imageVersion" FROM products ORDER BY sort_order ASC',
   );
   return res.rows;
 };

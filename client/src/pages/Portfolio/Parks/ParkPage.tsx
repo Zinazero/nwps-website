@@ -53,7 +53,7 @@ export const ParkPage = () => {
     const parkBlurb = park.blurb;
     const parkSections = [park, ...sections].map((section, index) => ({
       ...section,
-      image: `/images/playgrounds/${slug}/${slug}-${index + 1}.jpg`,
+      image: `/images/playgrounds/${slug}/${slug}-${index + 1}.jpg?v=${park?.imageVersion}`,
     }));
     navigate('/admin/add-edit-park', {
       state: { parkId, parkCity, parkBlurb, parkSections },
@@ -64,7 +64,7 @@ export const ParkPage = () => {
     title: `${park?.title} - New World Park Solutions`,
     description: `${park?.title} by New World Park Solutions. Explore playground features, design and completed park projects across Ontario.`,
     pathname: `/portfolio/${park?.slug}`,
-    image: `/images/playgrounds/${park?.slug}/${park?.slug}-1.jpg`,
+    image: `/images/playgrounds/${park?.slug}/${park?.slug}-1.jpg?v=${park?.imageVersion}`,
   };
 
   return (
@@ -88,9 +88,8 @@ export const ParkPage = () => {
                   'lg:border-0',
                 )}
               >
-                {/* src has cache-busting parameter so it changes on update */}
                 <Image
-                  src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${Date.now()}`}
+                  src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${park.imageVersion}`}
                   alt={`${park.title} Image 1`}
                   className="w-full max-w-250 rounded-xl"
                   priority
@@ -117,15 +116,12 @@ export const ParkPage = () => {
                 )}
               >
                 {park && (
-                  <>
-                    {/* src has cache-busting parameter so it changes on update */}
-                    <Image
-                      src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg?v=${Date.now()}`}
-                      alt={`${section.title} Image`}
-                      className="w-150 rounded-xl"
-                      priority={index === 0}
-                    />
-                  </>
+                  <Image
+                    src={`/images/playgrounds/${slug}/${slug}-${index + 2}.jpg?v=${park.imageVersion}`}
+                    alt={`${section.title} Image`}
+                    className="w-150 rounded-xl"
+                    priority={index === 0}
+                  />
                 )}
                 <div className={cn('flex flex-col gap-4 max-w-200 px-2', 'lg:px-12')}>
                   <h3 className="text-3xl font-bold">{section.title}</h3>
