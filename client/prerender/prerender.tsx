@@ -8,7 +8,7 @@ dotenv.config({
 
 import axios from 'axios';
 import { prerender } from 'react-dom/static';
-import { MemoryRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
 import App from '../src/App';
 import type { LinkType } from '../src/components/layout/types';
 import { AuthProvider } from '../src/contexts/AuthContext';
@@ -132,7 +132,7 @@ const streamToString = async (stream: ReadableStream<Uint8Array>) => {
 
 const prerenderPage = async (route: string, prData?: PrerenderData) => {
   const { prelude } = await prerender(
-    <MemoryRouter initialEntries={[route]}>
+    <StaticRouter location={route}>
       <PrerenderProvider data={prData || {}}>
         <AuthProvider>
           <ProductsProvider>
@@ -142,7 +142,7 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
           </ProductsProvider>
         </AuthProvider>
       </PrerenderProvider>
-    </MemoryRouter>,
+    </StaticRouter>,
   );
 
   const html = await streamToString(prelude);
@@ -151,9 +151,53 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
   fs.mkdirSync(outputDir, { recursive: true });
   fs.writeFileSync(
     path.join(outputDir, 'index.html'),
-    `<!DOCTYPE html> ${html.replace(/(href|src)="(\.\/)/g, '$1="/')}`,
+    `<!DOCTYPE html>
+     <html lang="en">
+     <head>
+       <meta charset="UTF-8" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/nwps-32x32.png" />
+		<link rel="icon" type="image/png" sizes="64x64" href="/nwps-64x64.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="192x192"
+			href="/nwps-192x192.png"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>New World Park Solutions</title>
+		<meta
+			name="description"
+			content="Explore New World Park Solutions products, parks and playgrounds. Exclusive Ontario distributor for Playworld products."
+		/>
+		<meta property="og:title" content="New World Park Solutions" />
+		<meta
+			property="og:description"
+			content="Explore New World Park Solutions products, parks and playgrounds. Exclusive Ontario distributor for Playworld products."
+		/>
+		<meta property="og:image" content="/social/nwps-logo-social.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://www.newworldparksolutions.ca" />
+		<meta property="og:site_name" content="New World Park Solutions" />
+		<meta property="og:locale" content="en_CA" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="New World Park Solutions" />
+		<meta
+			name="twitter:description"
+			content="Explore New World Park Solutions products, parks and playgrounds. Exclusive Ontario distributor for Playworld products."
+		/>
+		<meta name="twitter:image" content="/social/nwps-logo-social.png" />
+		<meta name="twitter:image:alt" content="New World Park Solutions Logo" />
+     <body>
+       <div id="root">${html}</div>
+       <script>
+         window.__PRERENDER_DATA__ = ${JSON.stringify(prData || {})};
+       </script>
+       <script type="module" src="/assets/main.js"></script>
+     </body>
+     </html>`,
   );
-
   console.log(`Prerendered ${route}`);
 };
 

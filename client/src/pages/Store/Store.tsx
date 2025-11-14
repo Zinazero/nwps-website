@@ -7,17 +7,18 @@ import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { Shop } from './Shop';
 
 export const Store = () => {
-  const [cart, setCart] = useState<OrderItem[]>(() => {
-    if (typeof window === 'undefined') return [];
+  const [cart, setCart] = useState<OrderItem[]>([]);
 
+  useEffect(() => {
     try {
       const saved = localStorage.getItem('cart');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        setCart(JSON.parse(saved));
+      }
     } catch {
       localStorage.removeItem('cart');
-      return [];
     }
-  });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));

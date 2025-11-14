@@ -9,6 +9,7 @@ import parksRouter from './routes/parks.routes';
 import productsRouter from './routes/products.routes';
 import providersRoutes from './routes/providers.routes';
 import storeRoutes from './routes/store.routes';
+import fs from 'node:fs';
 
 const app = express();
 
@@ -51,24 +52,22 @@ if (env.NODE_ENV === 'production') {
   }
 
   // Only serve JS/CSS/images from clientDist
-  app.use(express.static(clientDist, { index: false, redirect: false, extensions: ['html'] }));
+  const prerenderPath = path.join(clientDist, 'prerender');
 
   app.get('*', (req, res) => {
-    if (isCrawler(req.headers['user-agent'])) {
-      // map SPA route to prerendered HTML
-      const routePath = req.path.replace(/^\/+/, ''); // removes leading /
-      const prerenderFile = path.join(clientDist, 'prerender', routePath, 'index.html');
+    const routePath = req.path.replace(/^\/+/, ''); // remove leading slash
+    const prerenderFile = path.join(prerenderPath, routePath, 'index.html');
 
-      res.sendFile(prerenderFile, (err) => {
-        if (err) {
-          // fallback to SPA if prerender file doesn't exist
-          res.sendFile(path.join(clientDist, 'index.html'));
-        }
-      });
-    } else {
-      // human user: always serve SPA
-      res.sendFile(path.join(clientDist, 'index.html'));
-    }
+    // Check if prerendered file exists
+    fs.access(prerenderFile, fs.constants.F_OK, (err) => {
+      if (!err) {
+        // Serve prerendered HTML to everyone (or optionally only crawlers)
+        res.sendFile(prerenderFile);
+      } else {
+        // Fallback: serve SPA index.html with embedded __PRERENDER_DATA__
+        res.sendFile(path.join(clientDist, 'index.html'));
+      }
+    });
   });
 }
 

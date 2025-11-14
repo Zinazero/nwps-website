@@ -9,6 +9,7 @@
     "prerender": "tsx --tsconfig tsconfig.app.json prerender/prerender.tsx",
     "sitemap": "tsx --tsconfig tsconfig.app.json scripts/generateSitemap.ts",
     "build": "npm run generate-masks && npm run sitemap && tsc -b && vite build",
+    "dev:build": "tsc -b && vite build",
     "postbuild": "cross-env NODE_ENV=production npm run prerender",
     "preview": "vite preview"
   },

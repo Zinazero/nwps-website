@@ -8,6 +8,7 @@ import App from './App.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';
 import { ProductsProvider } from './contexts/ProductsContext.tsx';
 import { RecentProjectsProvider } from './contexts/RecentProjectsContext.tsx';
+import { PrerenderProvider } from './contexts/PrerenderContext.tsx';
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
@@ -15,13 +16,15 @@ if (rootElement) {
     rootElement,
     <StrictMode>
       <BrowserRouter>
-        <AuthProvider>
-          <ProductsProvider>
-            <RecentProjectsProvider>
-              <App />
-            </RecentProjectsProvider>
-          </ProductsProvider>
-        </AuthProvider>
+        <PrerenderProvider data={window.__PRERENDER_DATA__ || {}}>
+          <AuthProvider>
+            <ProductsProvider>
+              <RecentProjectsProvider>
+                <App />
+              </RecentProjectsProvider>
+            </ProductsProvider>
+          </AuthProvider>
+        </PrerenderProvider>
       </BrowserRouter>
     </StrictMode>,
   );
