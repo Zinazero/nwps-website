@@ -147,6 +147,13 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
 
   const html = await streamToString(prelude);
 
+  const distDir = path.join(process.cwd(), 'dist');
+  const manifestPath = path.join(distDir, 'manifest.json');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+
+  const mainJs = manifest['src/main.tsx'].file;
+  const mainCss = manifest['src/main.tsx'].css?.[0];
+
   const outputDir = path.join(process.cwd(), 'dist', 'prerender', ...route.replace(/^\//, '').split('/'));
   fs.mkdirSync(outputDir, { recursive: true });
   fs.writeFileSync(
@@ -155,6 +162,7 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
      <html lang="en">
      <head>
        <meta charset="UTF-8" />
+       ${mainCss ? `<link rel="stylesheet" href="/${mainCss}" />` : ''}
 		<link rel="icon" type="image/png" sizes="32x32" href="/nwps-32x32.png" />
 		<link rel="icon" type="image/png" sizes="64x64" href="/nwps-64x64.png" />
 		<link
@@ -189,12 +197,13 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
 		/>
 		<meta name="twitter:image" content="/social/nwps-logo-social.png" />
 		<meta name="twitter:image:alt" content="New World Park Solutions Logo" />
+    </head>
      <body>
        <div id="root">${html}</div>
        <script>
          window.__PRERENDER_DATA__ = ${JSON.stringify(prData || {})};
        </script>
-       <script type="module" src="/assets/main.js"></script>
+         <script type="module" src="/${mainJs}"></script>
      </body>
      </html>`,
   );
