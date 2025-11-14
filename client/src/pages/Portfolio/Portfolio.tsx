@@ -2,6 +2,7 @@ import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } f
 import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { useEffect, useState } from 'react';
 import api from '../../api/axios';
+import { SEO } from '../../components/seo/SEO';
 import { AddCardButton } from '../../components/ui/AddCardButton';
 import { Check } from '../../components/ui/Check';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
@@ -13,7 +14,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePrerender } from '../../contexts/PrerenderContext';
 import { cn } from '../../utils/cn';
 import type { Park } from '../types';
-import { SEO } from '../../components/seo/SEO';
 
 export const Portfolio = () => {
   const prerenderData = usePrerender();

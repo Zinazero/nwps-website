@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import { OrderForm } from '../../components/forms/OrderForm';
 import type { OrderFormValues, OrderItem } from '../../components/forms/types';
+import { SEO } from '../../components/seo/SEO';
 import { Image } from '../../components/ui/Image';
 import { scrollUp } from '../../components/ui/ScrollToTop';
 import { ShopLabel } from '../../components/ui/ShopLabel';
@@ -13,7 +14,6 @@ import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { OrderThanks } from './components/OrderThanks';
-import { SEO } from '../../components/seo/SEO';
 
 export const Order = () => {
   const [cart, setCart] = useState<OrderItem[]>(() => {

@@ -94,4 +94,4 @@ export type Field = {
 export type Route = {
   url: string;
   lastmod: string;
-}
+};

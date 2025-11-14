@@ -1,14 +1,15 @@
 import path from 'node:path';
 import dotenv from 'dotenv';
+
 dotenv.config({
   path: path.resolve(process.cwd(), process.env.VITE_NODE_ENV === 'production' ? '.env.production' : '.env'),
 });
 
+import { writeFileSync } from 'node:fs';
+import { SitemapStream, streamToPromise } from 'sitemap';
+import { Route } from './types';
 import { createSitemapEntries } from './utils/createSitemapEntries';
 import { fetchDynamicRoutes } from './utils/fetchDynamicRoutes';
-import { SitemapStream, streamToPromise } from 'sitemap';
-import { writeFileSync } from 'node:fs';
-import { Route } from './types';
 
 const websiteUrl = process.env.VITE_CLIENT_BASE;
 

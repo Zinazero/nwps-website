@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import api from '../../../api/axios';
+import { SEO } from '../../../components/seo/SEO';
 import { Image } from '../../../components/ui/Image';
 import { Loading } from '../../../components/ui/Loading';
 import { Pen } from '../../../components/ui/Pen';
@@ -8,7 +9,6 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { usePrerender } from '../../../contexts/PrerenderContext';
 import { cn } from '../../../utils/cn';
 import type { Park, ParkSection } from '../../types';
-import { SEO } from '../../../components/seo/SEO';
 
 export const ParkPage = () => {
   const { user } = useAuth();

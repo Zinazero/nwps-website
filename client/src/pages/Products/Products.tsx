@@ -2,6 +2,7 @@ import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } f
 import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { useState } from 'react';
 import api from '../../api/axios';
+import { SEO } from '../../components/seo/SEO';
 import { AddCardButton } from '../../components/ui/AddCardButton';
 import { Check } from '../../components/ui/Check';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
@@ -14,7 +15,6 @@ import { useProducts } from '../../contexts/ProductsContext';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
 import type { ProductsCategory } from '../types';
-import { SEO } from '../../components/seo/SEO';
 
 export const Products = () => {
   const [isEditMode, setIsEditMode] = useState(false);

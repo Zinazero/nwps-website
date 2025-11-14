@@ -19,7 +19,12 @@ export const FooterInfo = () => (
       </span>
       <div className="flex items-center text-lg space-x-2">
         <div className="relative group space-y-3">
-          <a href="https://www.facebook.com/newworldparksolutions/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
+          <a
+            href="https://www.facebook.com/newworldparksolutions/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit our Facebook page"
+          >
             <div className="rounded-lg bg-grey/30 p-1 hover:bg-brand-blue transition cursor-pointer">
               <FontAwesomeIcon icon={faFacebookF} className="" />
             </div>

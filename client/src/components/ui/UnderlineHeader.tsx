@@ -1,6 +1,6 @@
+import type { FC, JSX } from 'react';
 import { useIsMobile } from '../../utils/useIsMobile';
 import { Image } from './Image';
-import type { JSX, FC } from 'react';
 
 interface UnderlineHeaderProps {
   text: string;

@@ -27,8 +27,10 @@ export const getProductsCategoryById = async (categoryId: number): Promise<Produ
 };
 
 export const getProductRoutes = async (): Promise<Route[]> => {
-  const res: QueryResult<{ slug: string, updated_at: string }> = await pool.query('SELECT slug, updated_at FROM products');
-    const routes = res.rows.map((row) => ({
+  const res: QueryResult<{ slug: string; updated_at: string }> = await pool.query(
+    'SELECT slug, updated_at FROM products',
+  );
+  const routes = res.rows.map((row) => ({
     url: `/products/${row.slug}`,
     lastmod: row.updated_at ? new Date(row.updated_at).toISOString() : new Date().toISOString(),
   }));

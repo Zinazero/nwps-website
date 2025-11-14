@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { OrderItem } from '../../components/forms/types';
+import { SEO } from '../../components/seo/SEO';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { Shop } from './Shop';
-import { SEO } from '../../components/seo/SEO';
 
 export const Store = () => {
   const [cart, setCart] = useState<OrderItem[]>(() => {

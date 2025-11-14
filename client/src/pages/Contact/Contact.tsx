@@ -3,10 +3,10 @@ import { useState } from 'react';
 import api from '../../api/axios';
 import { ContactForm } from '../../components/forms/ContactForm';
 import type { ContactFormValues } from '../../components/forms/types';
+import { SEO } from '../../components/seo/SEO';
 import { UnderlineHeader } from '../../components/ui/UnderlineHeader';
 import { cn } from '../../utils/cn';
 import { ContactBanner } from './sections/ContactBanner';
-import { SEO } from '../../components/seo/SEO';
 
 export const Contact = () => {
   const defaultForm: ContactFormValues = {

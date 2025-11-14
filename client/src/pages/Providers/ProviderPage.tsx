@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import api from '../../api/axios';
+import { SEO } from '../../components/seo/SEO';
 import { Image } from '../../components/ui/Image';
 import { Loading } from '../../components/ui/Loading';
 import { usePrerender } from '../../contexts/PrerenderContext';
 import { cn } from '../../utils/cn';
 import type { Provider } from '../types';
-import { SEO } from '../../components/seo/SEO';
 
 export const ProviderPage = () => {
   const { state } = useLocation();

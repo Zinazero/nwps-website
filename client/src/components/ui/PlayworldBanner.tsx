@@ -8,9 +8,7 @@ export const PlayworldBanner = () => {
 
   return (
     <article id={playworldBannerId} className="bg-brand-blue-light shadow-md w-full">
-      <div
-        className={cn('flex flex-col lg:flex-row items-center justify-center gap-10 p-10')}
-      >
+      <div className={cn('flex flex-col lg:flex-row items-center justify-center gap-10 p-10')}>
         {/* Text */}
         <div
           className={cn(

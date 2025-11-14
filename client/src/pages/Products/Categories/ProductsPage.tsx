@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import api from '../../../api/axios';
+import { SEO } from '../../../components/seo/SEO';
 import { CallToAction } from '../../../components/ui/CallToAction';
 import { Image } from '../../../components/ui/Image';
 import { ImageMask } from '../../../components/ui/ImageMask';
@@ -10,7 +11,6 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { usePrerender } from '../../../contexts/PrerenderContext';
 import { cn } from '../../../utils/cn';
 import type { ProductsCategory, ProductsSection } from '../../types';
-import { SEO } from '../../../components/seo/SEO';
 
 export const ProductsPage = () => {
   const { user } = useAuth();

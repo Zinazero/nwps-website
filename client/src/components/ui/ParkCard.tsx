@@ -32,7 +32,12 @@ export const ParkCard = ({ park, disabled, isEditMode, deleteItem, className }: 
       className={`relative ${isEditMode ? 'draggable' : ''}`}
     >
       {/* Item Card */}
-      <Link to={`/portfolio/${slug}`} state={{ park }} className={isEditMode ? 'pointer-events-none' : ''} aria-label={park.title}>
+      <Link
+        to={`/portfolio/${slug}`}
+        state={{ park }}
+        className={isEditMode ? 'pointer-events-none' : ''}
+        aria-label={park.title}
+      >
         <div className={`${className} mx-5 relative h-50 hover:scale-105 active:scale-100 transition`}>
           <Image
             src={`/images/playgrounds/${slug}/${slug}-1.jpg?v=${park.imageVersion}`}
