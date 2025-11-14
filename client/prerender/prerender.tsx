@@ -147,8 +147,7 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
 
   const html = await streamToString(prelude);
 
-  const distDir = path.join(process.cwd(), 'dist');
-  const manifestPath = path.join(distDir, 'manifest.json');
+  const manifestPath = path.join(process.cwd(), '.vite', 'manifest.json');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 
   const mainJs = manifest['src/main.tsx'].file;

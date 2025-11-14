@@ -13,7 +13,7 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    manifest: true, // <--- this enables manifest.json
+    manifest: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'src/main.tsx'),
     },
