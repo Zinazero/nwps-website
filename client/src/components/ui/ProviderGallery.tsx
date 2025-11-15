@@ -7,16 +7,21 @@ import { chunkArray } from '../../utils/chunkArray';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
 import { ProviderBubble } from './ProviderBubble';
+import { Loading } from './Loading';
+import { Image } from './Image';
 
 export const ProviderGallery = () => {
   const prerenderData = usePrerender();
   const [providers, setProviders] = useState<Provider[]>(prerenderData?.prProviders || []);
+  const [loading, setLoading] = useState(false);
 
   const isMobile = useIsMobile();
   const isMidWidth = useIsMobile(1400);
 
   useEffect(() => {
     const fetchProviders = async () => {
+      setLoading(true);
+
       try {
         const res = await api.get<Provider[]>('/providers');
 
@@ -33,6 +38,8 @@ export const ProviderGallery = () => {
         setProviders(providerArray);
       } catch (err) {
         console.error('Error fetching providers:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -62,35 +69,41 @@ export const ProviderGallery = () => {
 
   return (
     <div className="md:space-y-6">
-      {providerRows.map((providerRow, i) => (
-        <div
-          key={`${providerRow[0].title} Row`}
-          className={cn('grid', columnKey[providerRow.length], i % 2 === 0 ? 'md:gap-12' : 'mx-24')}
-        >
-          {providerRow.map((provider) =>
-            checkDirectLink(provider) ? (
-              <a
-                key={provider.title}
-                href={provider.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit ${provider.title}'s Website`}
-              >
-                <ProviderBubble provider={provider} />
-              </a>
-            ) : (
-              <Link
-                key={provider.title}
-                to={`/providers/${provider.slug}`}
-                state={{ provider }}
-                aria-label={`More info on ${provider.title}`}
-              >
-                <ProviderBubble provider={provider} />
-              </Link>
-            ),
-          )}
-        </div>
-      ))}
+      {loading ? (
+        <Loading />
+      ) : providerRows.length < 1 ? (
+        <Image src="/logos/pw-logo.svg" alt="Playworld Logo" className="w-70" />
+      ) : (
+        providerRows.map((providerRow, i) => (
+          <div
+            key={`${providerRow[0].title} Row`}
+            className={cn('grid', columnKey[providerRow.length], i % 2 === 0 ? 'md:gap-12' : 'mx-24')}
+          >
+            {providerRow.map((provider) =>
+              checkDirectLink(provider) ? (
+                <a
+                  key={provider.title}
+                  href={provider.externalLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${provider.title}'s Website`}
+                >
+                  <ProviderBubble provider={provider} />
+                </a>
+              ) : (
+                <Link
+                  key={provider.title}
+                  to={`/providers/${provider.slug}`}
+                  state={{ provider }}
+                  aria-label={`More info on ${provider.title}`}
+                >
+                  <ProviderBubble provider={provider} />
+                </Link>
+              ),
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };

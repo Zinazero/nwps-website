@@ -38,13 +38,24 @@ export const ProviderPage = () => {
     }
   }, [slug, provider]);
 
+  useEffect(() => {
+    if (!provider && !loading && slug === 'playworld') {
+      window.location.replace('https://playworld.com/');
+    }
+  }, [provider, loading, slug]);
+
   const metadata = {
     title: `${provider?.title} - New World Park Solutions`,
     description: `Learn about ${provider?.title}, a trusted provider of playground and park solutions featured by New World Park Solutions in Ontario.`,
     pathname: `/providers/${provider?.slug}`,
   };
 
-  return (
+
+  return !provider && !loading ? (
+    <div className="h-120 flex items-center justify-center text-transparent-grey">
+      Provider Page Not Found
+    </div>
+  ) : (
     <>
       <SEO {...metadata} />
       <div className="min-h-screen flex flex-col items-center justify-center">
