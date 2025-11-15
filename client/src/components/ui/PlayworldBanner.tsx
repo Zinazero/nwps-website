@@ -12,8 +12,8 @@ export const PlayworldBanner = () => {
         {/* Text */}
         <div
           className={cn(
-            'w-160 flex flex-col items-center text-center gap-4 justify-between',
-            'lg:items-start lg:text-left',
+            'w-90 flex flex-col items-center text-center gap-4 justify-between',
+            'lg:items-start lg:text-left md:w-160',
           )}
         >
           <Image src="/logos/pw-logo.svg" alt="Playworld Logo" className="w-70" priority />

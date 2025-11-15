@@ -30,7 +30,7 @@ function App() {
     <div className="h-screen">
       <GlobalSmartQuotes />
       <Header />
-      <main className="mt-24">
+      <main className="mt-24 overflow-hidden">
         <ScrollToTop />
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
