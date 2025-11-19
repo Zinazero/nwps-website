@@ -14,8 +14,11 @@ import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { OrderThanks } from './components/OrderThanks';
+import { STORE_ENABLED } from '../../config';
 
 export const Order = () => {
+  const navigate = useNavigate();
+
   const [cart, setCart] = useState<OrderItem[]>(() => {
     if (typeof window === 'undefined') return [];
 
@@ -27,8 +30,6 @@ export const Order = () => {
       return [];
     }
   });
-
-  const navigate = useNavigate();
 
   const defaultForm: OrderFormValues = {
     cart,
@@ -98,6 +99,12 @@ export const Order = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!STORE_ENABLED) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     scrollUp();

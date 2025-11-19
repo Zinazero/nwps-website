@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { OrderItem } from '../../components/forms/types';
 import { SEO } from '../../components/seo/SEO';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { Shop } from './Shop';
+import { STORE_ENABLED } from '../../config';
 
 export const Store = () => {
+  const navigate = useNavigate();
+
   const [cart, setCart] = useState<OrderItem[]>(() => {
     if (typeof window === 'undefined') return [];
 
@@ -24,6 +27,12 @@ export const Store = () => {
   }, [cart]);
 
   const totalItems = cart.reduce((sum, p) => sum + p.quantity, 0);
+
+  useEffect(() => {
+    if (!STORE_ENABLED) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const metadata = {
     title: 'Store - New World Park Solutions',
