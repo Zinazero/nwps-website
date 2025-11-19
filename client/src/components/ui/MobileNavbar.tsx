@@ -7,6 +7,7 @@ import { cn } from '../../utils/cn';
 import type { LinkType } from '../layout/types';
 import { Loading } from './Loading';
 import type { NavbarProps } from './types';
+import { STORE_ENABLED } from '../../config';
 
 /* 
  productsLinks is hardcoded as the only dropdown so additional logic has to be added to accomodate more dropdowns.
@@ -90,9 +91,11 @@ export const MobileNavbar = ({ locationPathname, links, productsLinks, loading }
       <Link to="/contact" className="p-4 bg-brand-orange text-white">
         Request a Quote
       </Link>
-      <Link to="/store" className="p-4 bg-brand-green text-white">
-        Visit Store
-      </Link>
+      {STORE_ENABLED && (
+        <Link to="/store" className="p-4 bg-brand-green text-white">
+          Visit Store
+        </Link>
+      )}
     </nav>
   );
 };
