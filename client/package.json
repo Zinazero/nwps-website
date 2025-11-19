@@ -8,8 +8,8 @@
     "generate-masks": "TS_NODE_PROJECT=tsconfig.scripts.json node --loader ts-node/esm scripts/generateMaskSizes.ts",
     "prerender": "tsx --tsconfig tsconfig.app.json prerender/prerender.tsx",
     "sitemap": "tsx --tsconfig tsconfig.app.json scripts/generateSitemap.ts",
-    "build": "npm run generate-masks && npm run sitemap && tsc -b && vite build",
-    "postbuild": "cross-env NODE_ENV=production npm run prerender",
+    "build": "cross-env NODE_ENV=production npm run generate-masks && npm run sitemap && tsc -b && vite build",
+    "postbuild": "npm run prerender",
     "preview": "vite preview"
   },
   "dependencies": {
