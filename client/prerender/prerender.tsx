@@ -8,7 +8,7 @@ dotenv.config({
 
 import axios from 'axios';
 import { prerender } from 'react-dom/static';
-import { MemoryRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
 import App from '../src/App';
 import type { LinkType } from '../src/components/layout/types';
 import { AuthProvider } from '../src/contexts/AuthContext';
@@ -111,28 +111,19 @@ const fetchDynamicData = async (): Promise<DynamicData> => {
 
 const streamToString = async (stream: ReadableStream<Uint8Array>) => {
   const reader = stream.getReader();
-  const chunks: Uint8Array[] = [];
-
+  let content = '';
   while (true) {
     const { done, value } = await reader.read();
-    if (done) break;
-    if (value) chunks.push(value);
+    if (done) {
+      return content;
+    }
+    content += Buffer.from(value).toString('utf8');
   }
-
-  const totalLength = chunks.reduce((sum, c) => sum + c.length, 0);
-  const result = new Uint8Array(totalLength);
-  let offset = 0;
-  for (const chunk of chunks) {
-    result.set(chunk, offset);
-    offset += chunk.length;
-  }
-
-  return new TextDecoder().decode(result);
 };
 
 const prerenderPage = async (route: string, prData?: PrerenderData) => {
   const { prelude } = await prerender(
-    <MemoryRouter initialEntries={[route]}>
+    <StaticRouter location={route}>
       <PrerenderProvider data={prData || {}}>
         <AuthProvider>
           <ProductsProvider>
@@ -142,7 +133,7 @@ const prerenderPage = async (route: string, prData?: PrerenderData) => {
           </ProductsProvider>
         </AuthProvider>
       </PrerenderProvider>
-    </MemoryRouter>,
+    </StaticRouter>,
   );
 
   const html = await streamToString(prelude);

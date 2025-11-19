@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { hydrateRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import './styles/index.css';
 import './styles/sections.css';
 import './styles/hotspots.css';
@@ -10,9 +10,8 @@ import { ProductsProvider } from './contexts/ProductsContext.tsx';
 import { RecentProjectsProvider } from './contexts/RecentProjectsContext.tsx';
 
 const rootElement = document.getElementById('root');
-if (rootElement) {
-  hydrateRoot(
-    rootElement,
+if (rootElement)
+  createRoot(rootElement).render(
     <StrictMode>
       <BrowserRouter>
         <AuthProvider>
@@ -25,4 +24,3 @@ if (rootElement) {
       </BrowserRouter>
     </StrictMode>,
   );
-}
