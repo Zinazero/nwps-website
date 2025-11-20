@@ -4,7 +4,7 @@ export const findUserByUsername = async (
   username: string,
 ): Promise<{ id: number; username: string; level: number; password_hash: string }> => {
   const result = await pool.query(
-    `SELECT u.id, u.username, r.level, user.password_hash
+    `SELECT u.id, u.username, r.level, u.password_hash
       FROM users u
       JOIN roles r ON u.role_id = r.id
       WHERE u.username = $1`,
