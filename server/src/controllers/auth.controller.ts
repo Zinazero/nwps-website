@@ -1,16 +1,16 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import env from '../config/env';
-import { createUser, findUserByUsername } from '../repositories/users.repository';
-import { DbError } from '../types';
-import { signToken, verifyToken } from '../utils/jwt';
-import crypto from 'crypto';
 import {
   checkRegistrationToken,
   createRegistrationToken,
   useRegistrationToken,
 } from '../repositories/registrationTokens.repository';
+import { createUser, findUserByUsername } from '../repositories/users.repository';
 import { sendRegistrationEmail } from '../services/email.services';
+import { DbError } from '../types';
+import { signToken, verifyToken } from '../utils/jwt';
 
 export const checkAuth = (req: Request, res: Response) => {
   const token = req.cookies.sessionToken;

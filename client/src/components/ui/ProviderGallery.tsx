@@ -6,9 +6,9 @@ import type { Provider } from '../../pages/types';
 import { chunkArray } from '../../utils/chunkArray';
 import { cn } from '../../utils/cn';
 import { useIsMobile } from '../../utils/useIsMobile';
-import { ProviderBubble } from './ProviderBubble';
-import { Loading } from './Loading';
 import { Image } from './Image';
+import { Loading } from './Loading';
+import { ProviderBubble } from './ProviderBubble';
 
 export const ProviderGallery = () => {
   const prerenderData = usePrerender();

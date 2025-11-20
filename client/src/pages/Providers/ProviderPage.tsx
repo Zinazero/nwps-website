@@ -50,7 +50,6 @@ export const ProviderPage = () => {
     pathname: `/providers/${provider?.slug}`,
   };
 
-
   return !provider && !loading ? (
     <div className="h-120 flex items-center justify-center text-transparent-grey">
       Provider Page Not Found

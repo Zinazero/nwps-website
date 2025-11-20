@@ -10,11 +10,11 @@ import { SEO } from '../../components/seo/SEO';
 import { Image } from '../../components/ui/Image';
 import { scrollUp } from '../../components/ui/ScrollToTop';
 import { ShopLabel } from '../../components/ui/ShopLabel';
+import { STORE_ENABLED } from '../../config';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { phoneNumberFormatter } from '../../utils/phoneNumberFormatter';
 import { OrderThanks } from './components/OrderThanks';
-import { STORE_ENABLED } from '../../config';
 
 export const Order = () => {
   const navigate = useNavigate();

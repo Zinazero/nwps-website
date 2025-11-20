@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { STORE_ENABLED } from '../../config';
 import { cn } from '../../utils/cn';
 import type { LinkType } from '../layout/types';
 import { Loading } from './Loading';
 import type { NavbarProps } from './types';
-import { STORE_ENABLED } from '../../config';
 
 /* 
  productsLinks is hardcoded as the only dropdown so additional logic has to be added to accomodate more dropdowns.

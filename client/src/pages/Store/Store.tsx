@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { OrderItem } from '../../components/forms/types';
 import { SEO } from '../../components/seo/SEO';
+import { STORE_ENABLED } from '../../config';
 import { cn } from '../../utils/cn';
 import { largeNumberFormatter } from '../../utils/largeNumberFormatter';
 import { Shop } from './Shop';
-import { STORE_ENABLED } from '../../config';
 
 export const Store = () => {
   const navigate = useNavigate();

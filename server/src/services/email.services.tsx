@@ -4,8 +4,8 @@ import env from '../config/env';
 import ContactTemplate from '../emails/templates/ContactTemplate';
 import InvoiceRequestTemplate from '../emails/templates/InvoiceRequestTemplate';
 import OrderConfirmationTemplate from '../emails/templates/OrderConfirmationTemplate';
-import { ContactFormValues, InvoiceInfo, OrderItem } from '../types';
 import RegistrationTemplate from '../emails/templates/RegistrationTemplate';
+import { ContactFormValues, InvoiceInfo, OrderItem } from '../types';
 
 const resend = new Resend(env.RESEND_API_KEY);
 

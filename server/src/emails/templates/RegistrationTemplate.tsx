@@ -15,7 +15,9 @@ const RegistrationTemplate = ({ link }: RegistrationTemplateProps) => {
       </Section>
 
       <Section>
-        <Button href={link} className="bg-brandblue text-lg text-white p-4 rounded-2xl w-2/3">Register</Button>
+        <Button href={link} className="bg-brandblue text-lg text-white p-4 rounded-2xl w-2/3">
+          Register
+        </Button>
       </Section>
     </NWPSWrapper>
   );

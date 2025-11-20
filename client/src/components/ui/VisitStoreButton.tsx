@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { cn } from '../../utils/cn';
 import { STORE_ENABLED } from '../../config';
+import { cn } from '../../utils/cn';
 
 export const VisitStoreButton = ({ className }: { className?: string }) => {
   if (STORE_ENABLED)
