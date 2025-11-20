@@ -6,7 +6,7 @@ const JWT_SECRET = env.JWT_SECRET;
 interface UserToken {
   userId: number;
   username: string;
-  isSu: boolean;
+  roleLevel: number;
 }
 
 export const signToken = (payload: UserToken) => jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });

@@ -23,7 +23,7 @@ export const checkAuth = (req: Request, res: Response) => {
     authenticated: true,
     userId: decoded.userId,
     username: decoded.username,
-    isSu: decoded.isSu,
+    roleLevel: decoded.level,
   });
 };
 
@@ -55,7 +55,7 @@ export const login = async (req: Request, res: Response) => {
     const token = signToken({
       userId: user.id,
       username: user.username,
-      isSu: user.is_su,
+      roleLevel: user.level,
     });
 
     res
@@ -65,7 +65,7 @@ export const login = async (req: Request, res: Response) => {
         sameSite: 'lax',
         maxAge: 60 * 60 * 1000, // 1 hour
       })
-      .json({ username: user.username, isSu: user.is_su });
+      .json({ username: user.username, roleLevel: user.level });
   } catch {
     res.status(500).json({ error: 'Server error' });
   }

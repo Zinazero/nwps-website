@@ -3,8 +3,8 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import api from '../api/axios';
 
 interface AuthContextType {
-  user: { username: string; isSu: boolean } | null;
-  login: (usename: string, isSu: boolean) => void;
+  user: { username: string; roleLevel: number } | null;
+  login: (usename: string, roleLevel: number) => void;
   logout: () => void;
   loading: boolean;
 }
@@ -12,7 +12,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<{ username: string; isSu: boolean } | null>(null);
+  const [user, setUser] = useState<{ username: string; roleLevel: number } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const res = await api.get('/auth/check-auth');
         if (res.data.authenticated) {
-          setUser({ username: res.data.username, isSu: res.data.isSu });
+          setUser({ username: res.data.username, roleLevel: res.data.roleLevel });
         }
       } catch {
         setUser(null);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     checkAuth();
   }, []);
 
-  const login = (username: string, isSu: boolean) => setUser({ username, isSu });
+  const login = (username: string, roleLevel: number) => setUser({ username, roleLevel });
   const logout = () => setUser(null);
 
   return <AuthContext.Provider value={{ user, login, logout, loading }}>{children}</AuthContext.Provider>;

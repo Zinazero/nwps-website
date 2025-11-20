@@ -27,7 +27,7 @@ export const Login = () => {
       const res = await api.post('/auth/login', form);
       console.log('Login successful', res.data.username);
 
-      login(res.data.username, res.data.isSu);
+      login(res.data.username, res.data.roleLevel);
       navigate(from, { replace: true });
     } catch (err) {
       console.error(err);
