@@ -80,7 +80,7 @@ export const sendRegistrationInvite = async (req: Request, res: Response) => {
 
   try {
     const token = crypto.randomBytes(32).toString('hex');
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24 hours
 
     createRegistrationToken(email, token, expiresAt);
 
