@@ -22,6 +22,7 @@ import { Order } from './pages/Store/Order';
 import { Store } from './pages/Store/Store';
 import { Testimonials } from './pages/Testimonials/Testimonials';
 import { ProtectedRoute } from './routes/ProtectedRoute';
+import { SendInvite } from './pages/SendInvite/SendInvite';
 
 function App() {
   const location = useLocation();
@@ -141,6 +142,7 @@ function App() {
               <Route path="add-edit-park" element={<AddEditPark />} />
               <Route path="add-provider" element={<AddProvider />} />
               <Route path="add-edit-products" element={<AddEditProducts />} />
+              <Route path="send-invite" element={<SendInvite />} />
             </Route>
           </Routes>
         </AnimatePresence>

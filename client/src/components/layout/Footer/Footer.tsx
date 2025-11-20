@@ -13,7 +13,7 @@ export const Footer = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
 
-  const adminButtonClasses = 'text-sm text-transparent-grey hover:text-brand-green transition cursor-pointer';
+  const adminButtonClasses = 'text-sm text-transparent-grey hover:text-brand-green transition cursor-pointer min-w-18';
 
   return (
     <footer className="text-white">
@@ -51,7 +51,13 @@ export const Footer = () => {
         {/* Admin Login */}
         {!isMobile &&
           (user ? (
-            <LogoutButton classes={adminButtonClasses} />
+            <div className="flex items-center">
+              <Link to='/admin/send-invite' className={adminButtonClasses}>
+                Invite Staff
+              </Link>
+              <span className="mx-10">|</span>
+              <LogoutButton classes={adminButtonClasses} />
+            </div>
           ) : (
             <Link to="/login" state={{ from: location }} replace className={adminButtonClasses}>
               Admin Login
