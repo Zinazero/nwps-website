@@ -6,3 +6,19 @@ export const createRegistrationToken = async (email: string, token: string, expi
     [email, token, expiresAt],
   );
 };
+
+export const checkRegistrationToken = async (token: string): Promise<{ valid: boolean; email?: string }> => {
+  const res = await pool.query(
+    'SELECT email, expires_at FROM registration_tokens WHERE token = $1 AND used = false',
+    [token],
+  );
+  const row = res.rows[0];
+
+  if (!row) return { valid: false };
+
+  if (row.expires_at < new Date()) {
+    return { valid: false };
+  }
+
+  return { valid: true, email: row.email };
+};

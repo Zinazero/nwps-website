@@ -5,7 +5,10 @@ import { createUser, findUserByUsername } from '../repositories/users.repository
 import { DbError } from '../types';
 import { signToken, verifyToken } from '../utils/jwt';
 import crypto from 'crypto';
-import { createRegistrationToken } from '../repositories/registrationTokens.repository';
+import {
+  checkRegistrationToken,
+  createRegistrationToken,
+} from '../repositories/registrationTokens.repository';
 import { sendRegistrationEmail } from '../services/email.services';
 
 export const checkAuth = (req: Request, res: Response) => {
@@ -21,6 +24,16 @@ export const checkAuth = (req: Request, res: Response) => {
     username: decoded.username,
     isSu: decoded.isSu,
   });
+};
+
+export const validateRegistrationToken = async (req: Request, res: Response) => {
+  const { token } = req.query;
+  if (!token || Array.isArray(token) || typeof token !== 'string') {
+    return res.status(400).json({ valid: false });
+  }
+
+  const result = await checkRegistrationToken(token);
+  res.json(result);
 };
 
 export const login = async (req: Request, res: Response) => {
