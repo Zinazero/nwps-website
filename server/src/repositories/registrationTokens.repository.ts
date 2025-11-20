@@ -22,3 +22,7 @@ export const checkRegistrationToken = async (token: string): Promise<{ valid: bo
 
   return { valid: true, email: row.email };
 };
+
+export const useRegistrationToken = async (token: string) => {
+  await pool.query('UPDATE registration_tokens SET used = true WHERE token = $1', [token]);
+};

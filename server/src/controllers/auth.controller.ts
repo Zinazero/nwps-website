@@ -8,6 +8,7 @@ import crypto from 'crypto';
 import {
   checkRegistrationToken,
   createRegistrationToken,
+  useRegistrationToken,
 } from '../repositories/registrationTokens.repository';
 import { sendRegistrationEmail } from '../services/email.services';
 
@@ -29,11 +30,16 @@ export const checkAuth = (req: Request, res: Response) => {
 export const validateRegistrationToken = async (req: Request, res: Response) => {
   const { token } = req.query;
   if (!token || Array.isArray(token) || typeof token !== 'string') {
-    return res.status(400).json({ valid: false });
+    return res.status(400).json({ error: 'Invalid request query' });
   }
 
-  const result = await checkRegistrationToken(token);
-  res.json(result);
+  const reg = await checkRegistrationToken(token);
+
+  if (!reg.valid) {
+    return res.status(400).json({ error: 'Invalid or expired token' });
+  }
+
+  res.json(reg);
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -72,26 +78,39 @@ export const logout = (_req: Request, res: Response) => {
 export const sendRegistrationInvite = async (req: Request, res: Response) => {
   const { email } = req.body;
 
-  const token = crypto.randomBytes(32).toString('hex');
-  const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
+  try {
+    const token = crypto.randomBytes(32).toString('hex');
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
 
-  createRegistrationToken(email, token, expiresAt);
+    createRegistrationToken(email, token, expiresAt);
 
-  const link = `${env.CLIENT_BASE}/register?token=${token}`;
+    const link = `${env.CLIENT_BASE}/register?token=${token}`;
 
-  await sendRegistrationEmail(email, link);
+    await sendRegistrationEmail(email, link);
 
-  res.json({ success: true });
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 };
 
 export const register = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { token, username, password } = req.body;
 
   try {
+    const reg = await checkRegistrationToken(token);
+
+    if (!reg.valid) {
+      return res.status(400).json({ error: 'Invalid or expired token' });
+    }
+
     const hashed = await bcrypt.hash(password, 10);
     const newUser = await createUser(username, hashed);
 
-    res.json(newUser);
+    await useRegistrationToken(token);
+
+    res.json({ success: true, user: newUser });
   } catch (err: unknown) {
     const error = err as DbError;
     if (error.code === '23505') {
