@@ -11,6 +11,7 @@ interface Env {
   ADMIN_SENDER: string;
   ADMIN_RECEIVER: string;
   JWT_SECRET: string;
+  CLIENT_BASE: string;
 }
 
 const env: Env = {
@@ -26,6 +27,7 @@ const env: Env = {
   ADMIN_SENDER: process.env.ADMIN_SENDER || '',
   ADMIN_RECEIVER: process.env.ADMIN_RECEIVER || '',
   JWT_SECRET: process.env.JWT_SECRET || '',
+  CLIENT_BASE: process.env.CLIENT_BASE || '',
 };
 
 for (const [key, value] of Object.entries(env)) {

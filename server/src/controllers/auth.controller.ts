@@ -4,22 +4,23 @@ import env from '../config/env';
 import { createUser, findUserByUsername } from '../repositories/users.repository';
 import { DbError } from '../types';
 import { signToken, verifyToken } from '../utils/jwt';
+import crypto from 'crypto';
+import { createRegistrationToken } from '../repositories/registrationTokens.repository';
+import { sendRegistrationEmail } from '../services/email.services';
 
-export const register = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+export const checkAuth = (req: Request, res: Response) => {
+  const token = req.cookies.sessionToken;
+  if (!token) return res.status(401).json({ authenticated: false });
 
-  try {
-    const hashed = await bcrypt.hash(password, 10);
-    const newUser = await createUser(username, hashed);
+  const decoded = verifyToken(token);
+  if (!decoded) return res.status(401).json({ authenticated: false });
 
-    res.json(newUser);
-  } catch (err: unknown) {
-    const error = err as DbError;
-    if (error.code === '23505') {
-      return res.status(400).json({ error: 'Username already exists' });
-    }
-    res.status(500).json({ error: 'Server error' });
-  }
+  res.json({
+    authenticated: true,
+    userId: decoded.userId,
+    username: decoded.username,
+    isSu: decoded.isSu,
+  });
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -51,21 +52,38 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const checkAuth = (req: Request, res: Response) => {
-  const token = req.cookies.sessionToken;
-  if (!token) return res.status(401).json({ authenticated: false });
-
-  const decoded = verifyToken(token);
-  if (!decoded) return res.status(401).json({ authenticated: false });
-
-  res.json({
-    authenticated: true,
-    userId: decoded.userId,
-    username: decoded.username,
-    isSu: decoded.isSu,
-  });
-};
-
 export const logout = (_req: Request, res: Response) => {
   res.clearCookie('sessionToken').json({ message: 'Logged out' });
+};
+
+export const sendRegistrationInvite = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  const token = crypto.randomBytes(32).toString('hex');
+  const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
+
+  createRegistrationToken(email, token, expiresAt);
+
+  const link = `${env.CLIENT_BASE}/register?token=${token}`;
+
+  await sendRegistrationEmail(email, link);
+
+  res.json({ success: true });
+};
+
+export const register = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  try {
+    const hashed = await bcrypt.hash(password, 10);
+    const newUser = await createUser(username, hashed);
+
+    res.json(newUser);
+  } catch (err: unknown) {
+    const error = err as DbError;
+    if (error.code === '23505') {
+      return res.status(400).json({ error: 'Username already exists' });
+    }
+    res.status(500).json({ error: 'Server error' });
+  }
 };

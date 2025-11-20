@@ -5,6 +5,7 @@ import ContactTemplate from '../emails/templates/ContactTemplate';
 import InvoiceRequestTemplate from '../emails/templates/InvoiceRequestTemplate';
 import OrderConfirmationTemplate from '../emails/templates/OrderConfirmationTemplate';
 import { ContactFormValues, InvoiceInfo, OrderItem } from '../types';
+import RegistrationTemplate from '../emails/templates/RegistrationTemplate';
 
 const resend = new Resend(env.RESEND_API_KEY);
 
@@ -66,6 +67,19 @@ export const sendOrderConfirmation = async (form: InvoiceInfo, cart: OrderItem[]
   console.log(`Order Confirmation sent to ${email} at ${new Date().toISOString()}`);
 };
 
+export const sendRegistrationEmail = async (email: string, link: string) => {
+  const html = await pretty(await render(<RegistrationTemplate link={link} />));
+  const text = toPlainText(html);
+
+  await resend.emails.send({
+    from: `NWPS Register <${env.EMAIL_SENDER}>`,
+    to: email,
+    subject: 'Your Registration Link',
+    html,
+    text,
+  });
+};
+
 export const sendAdminAlert = async (subject: string, message: string) => {
   try {
     await resend.emails.send({
@@ -75,6 +89,6 @@ export const sendAdminAlert = async (subject: string, message: string) => {
       text: message,
     });
   } catch (err) {
-    console.error('Failed to send adnim alert email:', err);
+    console.error('Failed to send admin alert email:', err);
   }
 };
