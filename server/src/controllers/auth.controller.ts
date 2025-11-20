@@ -66,7 +66,8 @@ export const login = async (req: Request, res: Response) => {
         maxAge: 60 * 60 * 1000, // 1 hour
       })
       .json({ username: user.username, roleLevel: user.level });
-  } catch {
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 };
