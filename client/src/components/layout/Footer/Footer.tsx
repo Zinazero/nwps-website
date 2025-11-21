@@ -53,7 +53,7 @@ export const Footer = () => {
         {!isMobile &&
           (user ? (
             <div className="flex items-center">
-              {user.roleLevel === 0 && (
+              {user.roleLevel <= 1 && (
                 <>
                   <Link to="/admin/send-invite" className={adminButtonClasses}>
                     Invite Staff
