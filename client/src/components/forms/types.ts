@@ -37,6 +37,10 @@ export type LoginFormValues = {
   password: string;
 };
 
+export interface RegistrationFormValues extends LoginFormValues {
+  confirmPassword: string;
+}
+
 export type ContactFieldsetValues = {
   firstName: string;
   lastName: string;

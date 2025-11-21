@@ -14,9 +14,9 @@ export const findUserByUsername = async (
 };
 
 export const createUser = async (username: string, passwordHash: string) => {
-  const result = await pool.query('INSERT INTO users (username, password_hash) VALUES ($1, $2) username', [
-    username,
-    passwordHash,
-  ]);
-  return result.rows[0];
+  const result = await pool.query(
+    'INSERT INTO users (username, password_hash) VALUES ($1, $2) returning username',
+    [username, passwordHash],
+  );
+  return result.rows[0].username;
 };

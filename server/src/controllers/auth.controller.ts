@@ -101,22 +101,38 @@ export const register = async (req: Request, res: Response) => {
 
   try {
     const reg = await checkRegistrationToken(token);
-
     if (!reg.valid) {
+      console.error('Invalid registration token', token);
       return res.status(400).json({ error: 'Invalid or expired token' });
     }
 
     const hashed = await bcrypt.hash(password, 10);
-    const newUser = await createUser(username, hashed);
-
+    await createUser(username, hashed);
     await useRegistrationToken(token);
 
-    res.json({ success: true, user: newUser });
+    const user = await findUserByUsername(username);
+
+    const jwt = signToken({
+      userId: user.id,
+      username: user.username,
+      roleLevel: user.level,
+    });
+
+    return res
+      .cookie('sessionToken', jwt, {
+        httpOnly: true,
+        secure: env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 1000,
+      })
+      .json({ username: user.username, roleLevel: user.level });
   } catch (err: unknown) {
     const error = err as DbError;
     if (error.code === '23505') {
-      return res.status(400).json({ error: 'Username already exists' });
+      console.error('Username already exists.');
+      return res.status(400).json({ error: 'Username already exists.' });
     }
+    console.error(error.message);
     res.status(500).json({ error: 'Server error' });
   }
 };

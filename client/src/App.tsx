@@ -23,6 +23,7 @@ import { Store } from './pages/Store/Store';
 import { Testimonials } from './pages/Testimonials/Testimonials';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { SendInvite } from './pages/SendInvite/SendInvite';
+import { Register } from './pages/Register/Register';
 
 function App() {
   const location = useLocation();
@@ -139,11 +140,48 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path="add-edit-park" element={<AddEditPark />} />
-              <Route path="add-provider" element={<AddProvider />} />
-              <Route path="add-edit-products" element={<AddEditProducts />} />
-              <Route path="send-invite" element={<SendInvite />} />
+              <Route
+                path="add-edit-park"
+                element={
+                  <PageTransition>
+                    <AddEditPark />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="add-provider"
+                element={
+                  <PageTransition>
+                    <AddProvider />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="add-edit-products"
+                element={
+                  <PageTransition>
+                    <AddEditProducts />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="send-invite"
+                element={
+                  <PageTransition>
+                    <SendInvite />
+                  </PageTransition>
+                }
+              />
             </Route>
+
+            <Route
+              path="/register"
+              element={
+                <PageTransition>
+                  <Register />
+                </PageTransition>
+              }
+            />
           </Routes>
         </AnimatePresence>
       </main>
