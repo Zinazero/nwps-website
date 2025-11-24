@@ -2,15 +2,17 @@ import { useId, type Dispatch, type FormEvent, type SetStateAction } from 'react
 import type { RegistrationFormValues } from './types';
 import { Loading } from '../ui/Loading';
 import { cn } from '../../utils/cn';
+import { PasswordInput } from '../ui/PasswordInput';
 
 interface RegistrationFormProps {
   form: RegistrationFormValues;
   setForm: Dispatch<SetStateAction<RegistrationFormValues>>;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
   loading: boolean;
+  error: string | null;
 }
 
-export const RegistrationForm = ({ form, setForm, handleSubmit, loading }: RegistrationFormProps) => {
+export const RegistrationForm = ({ form, setForm, handleSubmit, loading, error = null }: RegistrationFormProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -23,9 +25,10 @@ export const RegistrationForm = ({ form, setForm, handleSubmit, loading }: Regis
 
   return (
     <form className="flex flex-col space-y-4 w-80" onSubmit={handleSubmit}>
-
       {/* Username */}
-      <label htmlFor={usernameId} className={labelClasses}>Username</label>
+      <label htmlFor={usernameId} className={labelClasses}>
+        Username
+      </label>
       <input
         id={usernameId}
         type="email"
@@ -37,26 +40,24 @@ export const RegistrationForm = ({ form, setForm, handleSubmit, loading }: Regis
       />
 
       {/* Password */}
-      <label htmlFor={passwordId} className={labelClasses}>Password</label>
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={(e) => handleChange(e)}
-        required
-      />
+      <label htmlFor={passwordId} className={labelClasses}>
+        Password
+      </label>
+      <PasswordInput inputId={passwordId} value={form.password} onChange={handleChange} errorCondition={error === 'Passwords do not match.'} />
 
       {/* Confirm Password */}
-      <label htmlFor={confirmPasswordId} className={labelClasses}>Confirm Password</label>
-      <input
-        type="password"
+      <label htmlFor={confirmPasswordId} className={labelClasses}>
+        Confirm Password
+      </label>
+      <PasswordInput
+        inputId={confirmPasswordId}
+        value={form.confirmPassword}
+        onChange={handleChange}
         name="confirmPassword"
         placeholder="Confirm Password"
-        value={form.confirmPassword}
-        onChange={(e) => handleChange(e)}
-        required
+        errorCondition={error === 'Passwords do not match.'}
       />
+
       {loading ? (
         <Loading />
       ) : (
@@ -65,7 +66,7 @@ export const RegistrationForm = ({ form, setForm, handleSubmit, loading }: Regis
           className={cn(
             'p-2 bg-brand-orange hover:bg-brand-blue transition',
             'text-light font-bold rounded-lg active:scale-95 cursor-pointer',
-            'mt-24'
+            'mt-24',
           )}
         >
           Register

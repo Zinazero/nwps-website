@@ -105,7 +105,7 @@ export const Register = () => {
         </div>
       ) : validated ? (
         <div className="flex flex-col items-center gap-4">
-          <RegistrationForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} />
+          <RegistrationForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} error={error} />
           {error && <span className="text-[red]">{error}</span>}
         </div>
       ) : (

@@ -1,6 +1,7 @@
 import { cn } from '../../utils/cn';
 import { Loading } from '../ui/Loading';
 import type { LoginFormValues } from './types';
+import { PasswordInput } from '../ui/PasswordInput';
 
 interface LoginFormProps {
   form: LoginFormValues;
@@ -24,14 +25,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ form, setForm, handleSubmi
         onChange={(e) => handleChange(e)}
         required
       />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={(e) => handleChange(e)}
-        required
-      />
+      <PasswordInput value={form.password} onChange={handleChange} />
       {loading ? (
         <Loading />
       ) : (
