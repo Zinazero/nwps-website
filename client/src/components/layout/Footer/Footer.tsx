@@ -46,7 +46,7 @@ export const Footer = () => {
 
         {/* Copyright */}
         <span className="text-brand-orange text-center">
-          © 2025 | New World Park Solutions | All Rights Reserved
+          © 2026 | New World Park Solutions | All Rights Reserved
         </span>
 
         {/* Admin Login */}
