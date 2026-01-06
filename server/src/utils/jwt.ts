@@ -1,13 +1,8 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import env from '../config/env';
+import { UserToken } from '../types';
 
 const JWT_SECRET = env.JWT_SECRET;
-
-interface UserToken {
-  userId: number;
-  username: string;
-  roleLevel: number;
-}
 
 export const signToken = (payload: UserToken) => jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 

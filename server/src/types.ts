@@ -95,3 +95,9 @@ export type Route = {
   url: string;
   lastmod: string;
 };
+
+export type UserToken = {
+  userId: number;
+  username: string;
+  roleLevel: number;
+};

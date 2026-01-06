@@ -9,21 +9,22 @@ import {
 } from '../repositories/registrationTokens.repository';
 import { createUser, findUserByUsername } from '../repositories/users.repository';
 import { sendRegistrationEmail } from '../services/email.services';
-import { DbError } from '../types';
+import { DbError, UserToken } from '../types';
 import { signToken, verifyToken } from '../utils/jwt';
 
 export const checkAuth = (req: Request, res: Response) => {
   const token = req.cookies.sessionToken;
   if (!token) return res.status(401).json({ authenticated: false });
 
-  const decoded = verifyToken(token);
+  const decoded: UserToken | null = verifyToken(token);
   if (!decoded) return res.status(401).json({ authenticated: false });
+  console.log(decoded)
 
   res.json({
     authenticated: true,
     userId: decoded.userId,
     username: decoded.username,
-    roleLevel: decoded.level,
+    roleLevel: decoded.roleLevel,
   });
 };
 
