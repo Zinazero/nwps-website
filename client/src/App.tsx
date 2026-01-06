@@ -18,12 +18,12 @@ import { Portfolio } from './pages/Portfolio/Portfolio';
 import { ProductsPage } from './pages/Products/Categories/ProductsPage';
 import { Products } from './pages/Products/Products';
 import { ProviderPage } from './pages/Providers/ProviderPage';
+import { Register } from './pages/Register/Register';
+import { SendInvite } from './pages/SendInvite/SendInvite';
 import { Order } from './pages/Store/Order';
 import { Store } from './pages/Store/Store';
 import { Testimonials } from './pages/Testimonials/Testimonials';
 import { ProtectedRoute } from './routes/ProtectedRoute';
-import { SendInvite } from './pages/SendInvite/SendInvite';
-import { Register } from './pages/Register/Register';
 
 function App() {
   const location = useLocation();

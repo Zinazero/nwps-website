@@ -1,8 +1,8 @@
-import { useId, type Dispatch, type FormEvent, type SetStateAction } from 'react';
-import type { RegistrationFormValues } from './types';
-import { Loading } from '../ui/Loading';
+import { type Dispatch, type FormEvent, type SetStateAction, useId } from 'react';
 import { cn } from '../../utils/cn';
+import { Loading } from '../ui/Loading';
 import { PasswordInput } from '../ui/PasswordInput';
+import type { RegistrationFormValues } from './types';
 
 interface RegistrationFormProps {
   form: RegistrationFormValues;
@@ -12,7 +12,13 @@ interface RegistrationFormProps {
   error: string | null;
 }
 
-export const RegistrationForm = ({ form, setForm, handleSubmit, loading, error = null }: RegistrationFormProps) => {
+export const RegistrationForm = ({
+  form,
+  setForm,
+  handleSubmit,
+  loading,
+  error = null,
+}: RegistrationFormProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -43,7 +49,12 @@ export const RegistrationForm = ({ form, setForm, handleSubmit, loading, error =
       <label htmlFor={passwordId} className={labelClasses}>
         Password
       </label>
-      <PasswordInput inputId={passwordId} value={form.password} onChange={handleChange} errorCondition={error === 'Passwords do not match.'} />
+      <PasswordInput
+        inputId={passwordId}
+        value={form.password}
+        onChange={handleChange}
+        errorCondition={error === 'Passwords do not match.'}
+      />
 
       {/* Confirm Password */}
       <label htmlFor={confirmPasswordId} className={labelClasses}>

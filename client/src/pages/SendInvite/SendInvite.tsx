@@ -1,9 +1,9 @@
-import { useState, type FormEvent } from 'react';
-import { Image } from '../../components/ui/Image';
+import { AnimatePresence, motion } from 'framer-motion';
+import { type FormEvent, useState } from 'react';
 import api from '../../api/axios';
+import { Image } from '../../components/ui/Image';
 import { Loading } from '../../components/ui/Loading';
 import { cn } from '../../utils/cn';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export const SendInvite = () => {
   const [email, setEmail] = useState<string>('');

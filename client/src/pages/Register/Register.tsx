@@ -1,13 +1,13 @@
-import { useEffect, useState, type FormEvent } from 'react';
-import { Loading } from '../../components/ui/Loading';
+import type { AxiosError } from 'axios';
+import { type FormEvent, useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
-import type { RegistrationFormValues } from '../../components/forms/types';
 import { RegistrationForm } from '../../components/forms/RegistrationForm';
-import { cn } from '../../utils/cn';
+import type { RegistrationFormValues } from '../../components/forms/types';
 import { Image } from '../../components/ui/Image';
+import { Loading } from '../../components/ui/Loading';
 import { useAuth } from '../../contexts/AuthContext';
-import type { AxiosError } from 'axios';
+import { cn } from '../../utils/cn';
 
 export const Register = () => {
   const [validating, setValidating] = useState(true);
@@ -105,7 +105,13 @@ export const Register = () => {
         </div>
       ) : validated ? (
         <div className="flex flex-col items-center gap-4">
-          <RegistrationForm form={form} setForm={setForm} handleSubmit={handleSubmit} loading={loading} error={error} />
+          <RegistrationForm
+            form={form}
+            setForm={setForm}
+            handleSubmit={handleSubmit}
+            loading={loading}
+            error={error}
+          />
           {error && <span className="text-[red]">{error}</span>}
         </div>
       ) : (

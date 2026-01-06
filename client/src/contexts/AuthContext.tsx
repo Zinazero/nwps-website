@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const res = await api.get('/auth/check-auth');
         if (res.data.authenticated) {
-          console.log(res.data)
           setUser({ username: res.data.username, roleLevel: res.data.roleLevel });
         }
       } catch {

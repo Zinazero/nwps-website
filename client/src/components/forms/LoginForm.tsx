@@ -1,7 +1,7 @@
 import { cn } from '../../utils/cn';
 import { Loading } from '../ui/Loading';
-import type { LoginFormValues } from './types';
 import { PasswordInput } from '../ui/PasswordInput';
+import type { LoginFormValues } from './types';
 
 interface LoginFormProps {
   form: LoginFormValues;

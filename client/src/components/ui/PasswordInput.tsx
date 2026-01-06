@@ -1,6 +1,6 @@
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState, type ChangeEvent } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { cn } from '../../utils/cn';
 
 interface PasswordInputProps {
@@ -8,11 +8,18 @@ interface PasswordInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputId?: string;
   name?: string;
-  placeholder? : string;
+  placeholder?: string;
   errorCondition?: boolean;
 }
 
-export const PasswordInput = ({ value, onChange, inputId, name, placeholder, errorCondition }: PasswordInputProps) => {
+export const PasswordInput = ({
+  value,
+  onChange,
+  inputId,
+  name,
+  placeholder,
+  errorCondition,
+}: PasswordInputProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (

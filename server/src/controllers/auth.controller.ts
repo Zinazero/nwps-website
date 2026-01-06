@@ -18,7 +18,6 @@ export const checkAuth = (req: Request, res: Response) => {
 
   const decoded: UserToken | null = verifyToken(token);
   if (!decoded) return res.status(401).json({ authenticated: false });
-  console.log(decoded)
 
   res.json({
     authenticated: true,
