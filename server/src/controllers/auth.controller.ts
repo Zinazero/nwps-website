@@ -118,7 +118,7 @@ export const register = async (req: Request, res: Response) => {
       roleLevel: user.level,
     });
 
-    return res
+    res
       .cookie('sessionToken', jwt, {
         httpOnly: true,
         secure: env.NODE_ENV === 'production',

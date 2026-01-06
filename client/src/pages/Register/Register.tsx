@@ -14,6 +14,7 @@ export const Register = () => {
   const [validated, setValidated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [logoutFired, setLogoutFired] = useState(false);
   const [form, setForm] = useState<RegistrationFormValues>({
     username: '',
     password: '',
@@ -31,10 +32,11 @@ export const Register = () => {
     const logoutActiveUser = async () => {
       await api.post('/auth/logout');
       logout();
+      setLogoutFired(true);
     };
 
-    if (token && user) logoutActiveUser();
-  }, [user, logout, token]);
+    if (token && user && !logoutFired) logoutActiveUser();
+  }, [user, logout, token, logoutFired]);
 
   useEffect(() => {
     if (!token) return;
